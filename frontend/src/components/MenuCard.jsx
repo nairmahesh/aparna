@@ -4,7 +4,7 @@ import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { ShoppingCart, Star } from 'lucide-react';
 
-const MenuCard = ({ item, onAddToCart }) => {
+const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-orange-50 to-amber-50 border-orange-200 hover:border-orange-300">
       <CardHeader className="pb-3">
