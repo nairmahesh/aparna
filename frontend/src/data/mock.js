@@ -268,7 +268,7 @@ export const menuCategories = [
             customerName: 'Nisha P.',
             rating: 4,
             comment: 'Good quality and fresh. Ordered during last Diwali and it was good.',
-            date: '2025-10-07'
+            date: '2025-10-02'
           }
         ],
         image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop'
@@ -341,7 +341,7 @@ export const menuCategories = [
             customerName: 'Deepa T.',
             rating: 4,
             comment: 'Nice crispy texture. Could be a bit more spicy but overall good.',
-            date: '2025-10-07'
+            date: '2025-10-02'
           }
         ],
         images: [
@@ -466,7 +466,7 @@ export const menuCategories = [
             customerName: 'Jayshree P.',
             rating: 5,
             comment: 'Perfect crispiness! Great for Diwali gifting. Kids love it.',
-            date: '2025-10-07'
+            date: '2025-10-02'
           }
         ],
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
@@ -565,7 +565,7 @@ export const menuCategories = [
             customerName: 'Sangeeta M.',
             rating: 5,
             comment: 'Amazing crispy mathri! Great for serving guests during Diwali.',
-            date: '2025-10-07'
+            date: '2025-10-02'
           }
         ],
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
@@ -664,7 +664,7 @@ export const menuCategories = [
             customerName: 'Leela P.',
             rating: 5,
             comment: 'Excellent quality! Fresh and tasty. Best gujjia for Diwali celebrations.',
-            date: '2025-10-07'
+            date: '2025-10-02'
           },
           {
             id: 4,
@@ -792,7 +792,7 @@ export const menuCategories = [
             customerName: 'Poonam R.',
             rating: 5,
             comment: 'Excellent rava-besan combination! Fresh and tasty.',
-            date: '2025-10-07'
+            date: '2025-10-02'
           }
         ],
         image: 'https://images.pexels.com/photos/8887021/pexels-photo-8887021.jpeg?w=400&h=300&fit=crop'
