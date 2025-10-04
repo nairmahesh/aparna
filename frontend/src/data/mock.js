@@ -228,7 +228,7 @@ export const menuCategories = [
             customerName: 'Kavita S.',
             rating: 4,
             comment: 'High quality product. Ordered last Diwali and it was fresh and tasty.',
-            date: '2025-10-06'
+            date: '2025-10-05'
           },
           {
             id: 3,
