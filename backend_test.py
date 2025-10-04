@@ -604,16 +604,14 @@ class AdminPanelTester:
 
         # Test 5: POST /admin/track/visitor-event (order complete)
         try:
-            order_complete_data = {
+            order_complete_params = {
                 "session_id": session_id,
                 "event_type": "order_complete",
                 "page_url": "/order-confirmation",
-                "product_id": None,
-                "product_name": None,
                 "cart_value": 1250.0,
                 "order_id": str(uuid.uuid4())
             }
-            response = self.session.post(f"{API_BASE}/track/visitor-event", json=order_complete_data)
+            response = self.session.post(f"{API_BASE}/track/visitor-event", params=order_complete_params)
             if response.status_code == 200:
                 order_response = response.json()
                 if order_response.get("status") == "tracked":
