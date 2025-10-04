@@ -26,6 +26,8 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('name');
   const [showReviews, setShowReviews] = useState(false);
   const [selectedReviewItem, setSelectedReviewItem] = useState(null);
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [selectedShareItem, setSelectedShareItem] = useState(null);
   const { toast } = useToast();
 
   const handleAddToCart = (item) => {
