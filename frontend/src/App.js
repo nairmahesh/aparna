@@ -186,22 +186,22 @@ const Home = () => {
                   </div>
                 </div>
                 
-                <div className="flex flex-wrap justify-center gap-4">
+                <div className="flex flex-wrap justify-center gap-3 md:gap-4 w-full max-w-md md:max-w-full mx-auto">
                   <Button 
                     size="lg" 
-                    className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-8 py-6 text-lg font-medium rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                    className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-4 py-4 md:px-8 md:py-6 text-sm md:text-lg font-medium rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex-1 md:flex-none"
                     onClick={() => document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })}
                   >
-                    <ShoppingBag className="w-5 h-5 mr-2" />
+                    <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                     Explore Our Menu
                   </Button>
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="border-orange-300 text-orange-600 hover:bg-orange-50 px-8 py-6 text-lg font-medium rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                    className="border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white px-4 py-4 md:px-8 md:py-6 text-sm md:text-lg font-medium rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex-1 md:flex-none"
                     onClick={() => setCurrentView('greetings')}
                   >
-                    <Gift className="w-5 h-5 mr-2" />
+                    <Gift className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                     Send Greetings
                   </Button>
                 </div>
