@@ -250,7 +250,12 @@ const OrderForm = ({ cart, onUpdateCart, onRemoveItem, onClearCart }) => {
                   <p className="text-sm font-semibold text-gray-700 mb-2">Alternative Payment Methods:</p>
                   <div className="space-y-2">
                     <p className="text-sm text-gray-600">
-                      📱 <strong>GPay/PhonePe/Paytm:</strong> {shopInfo.contact.phone}
+                      📱 <strong>GPay/PhonePe/Paytm:</strong> <a 
+                        href={`tel:${shopInfo.contact.phone}`}
+                        className="text-orange-600 hover:text-orange-700 transition-colors cursor-pointer"
+                      >
+                        {shopInfo.contact.phone}
+                      </a>
                     </p>
                     <p className="text-xs text-gray-500">
                       You can also send payment directly to this number
