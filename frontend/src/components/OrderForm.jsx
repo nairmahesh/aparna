@@ -235,16 +235,29 @@ const OrderForm = ({ cart, onUpdateCart, onRemoveItem, onClearCart }) => {
           <CardContent className="text-center space-y-6">
             <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-8 rounded-lg">
               <h3 className="text-xl font-semibold mb-4">Scan QR Code to Pay</h3>
-              <div className="w-64 h-64 mx-auto bg-white border-4 border-orange-200 rounded-lg flex items-center justify-center mb-4">
-                <div className="text-center">
-                  <QrCode className="w-32 h-32 mx-auto text-orange-400 mb-2" />
-                  <p className="text-sm text-gray-600">QR Code for Payment</p>
-                  <p className="text-xs text-gray-500 mt-1">Google Pay / PhonePe / Paytm</p>
+              <div className="w-80 h-80 mx-auto bg-white border-4 border-orange-200 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_festival-bites/artifacts/f4rxj1dy_WhatsApp%20Image%202025-10-04%20at%204.16.27%20PM.jpeg"
+                  alt="Aparna's Payment QR Code"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="text-center mb-4">
+                <Badge className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-amber-500 text-white px-6 py-2 mb-3">
+                  ₹{totalAmount}
+                </Badge>
+                <div className="bg-white/80 rounded-lg p-4 mt-4">
+                  <p className="text-sm font-semibold text-gray-700 mb-2">Alternative Payment Methods:</p>
+                  <div className="space-y-2">
+                    <p className="text-sm text-gray-600">
+                      📱 <strong>GPay/PhonePe/Paytm:</strong> {shopInfo.contact.phone}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      You can also send payment directly to this number
+                    </p>
+                  </div>
                 </div>
               </div>
-              <Badge className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-amber-500 text-white px-6 py-2">
-                ₹{totalAmount}
-              </Badge>
             </div>
             
             <div className="space-y-4">
