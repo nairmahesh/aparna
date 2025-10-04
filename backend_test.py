@@ -1064,11 +1064,13 @@ class AdminPanelTester:
         order_tests = [t for t in self.test_results if "orders" in t["test"].lower()]
         analytics_tests = [t for t in self.test_results if "analytics" in t["test"].lower()]
         tracking_tests = [t for t in self.test_results if "track" in t["test"].lower()]
+        review_tests = [t for t in self.test_results if "review" in t["test"].lower()]
         auth_tests = [t for t in self.test_results if "authentication" in t["test"].lower() or "error handling" in t["test"].lower()]
         
         print(f"  📋 Order Management: {len([t for t in order_tests if t['success']])}/{len(order_tests)} passed")
         print(f"  📊 Analytics: {len([t for t in analytics_tests if t['success']])}/{len(analytics_tests)} passed")
         print(f"  🔍 Visitor Tracking: {len([t for t in tracking_tests if t['success']])}/{len(tracking_tests)} passed")
+        print(f"  ⭐ Review Management: {len([t for t in review_tests if t['success']])}/{len(review_tests)} passed")
         print(f"  🔐 Auth & Error Handling: {len([t for t in auth_tests if t['success']])}/{len(auth_tests)} passed")
         
         return {
