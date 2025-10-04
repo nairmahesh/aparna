@@ -238,7 +238,7 @@ export const menuCategories = [
             date: '2025-10-01'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&h=300&fit=crop'
+        image: 'https://customer-assets.emergentagent.com/job_diwali-delights-3/artifacts/4aj2b7tm_image.png'
       },
       {
         id: 'kurmura-chivda',
