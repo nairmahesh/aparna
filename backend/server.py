@@ -65,6 +65,10 @@ app.include_router(api_router)
 from routes.admin_routes import router as admin_router
 app.include_router(admin_router)
 
+# Include review routes
+from routes.review_routes import router as review_router
+app.include_router(review_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
