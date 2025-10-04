@@ -36,11 +36,11 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
       </div>
 
       {/* Main Header */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-2 md:py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg cursor-pointer"
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <div className="flex items-center space-x-2 md:space-x-3">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center text-white text-lg md:text-xl font-bold shadow-lg cursor-pointer"
                    onClick={() => {
                      onViewChange('menu');
                      window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -48,14 +48,14 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
                 🪔
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent cursor-pointer"
+                <h1 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent cursor-pointer"
                     onClick={() => {
                       onViewChange('menu');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}>
                   {shopInfo.name}
                 </h1>
-                <p className="text-sm text-gray-600">{shopInfo.tagline}</p>
+                <p className="text-xs md:text-sm text-gray-600 hidden sm:block">{shopInfo.tagline}</p>
               </div>
             </div>
           </div>
