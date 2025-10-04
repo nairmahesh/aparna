@@ -259,6 +259,72 @@ const AdminPanel = () => {
     }
   };
 
+  const loadReviewData = async () => {
+    try {
+      await Promise.all([
+        loadReviewSummary(),
+        loadReviewRequests(),
+        loadReviewStats()
+      ]);
+    } catch (error) {
+      console.error('Error loading review data:', error);
+    }
+  };
+
+  const loadReviewSummary = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/admin/reviews/summary?admin_key=${ADMIN_KEY}`);
+      setReviewSummary(response.data);
+    } catch (error) {
+      console.error('Error loading review summary:', error);
+    }
+  };
+
+  const loadReviewRequests = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/admin/reviews/requests?admin_key=${ADMIN_KEY}&limit=50`);
+      setReviewRequests(response.data);
+    } catch (error) {
+      console.error('Error loading review requests:', error);
+    }
+  };
+
+  const loadReviewStats = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/admin/reviews/stats?admin_key=${ADMIN_KEY}`);
+      setReviewStats(response.data);
+    } catch (error) {
+      console.error('Error loading review stats:', error);
+    }
+  };
+
+  const sendReviewRequests = async () => {
+    if (selectedOrders.length === 0) {
+      toast({ title: 'Please select orders to send review requests', variant: 'destructive' });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await axios.post(`${BACKEND_URL}/admin/reviews/send-requests?admin_key=${ADMIN_KEY}`, {
+        order_ids: selectedOrders,
+        request_method: reviewRequestMethod
+      });
+      
+      toast({ 
+        title: `Review requests sent successfully!`,
+        description: `${response.data.requests_sent} requests sent via ${reviewRequestMethod}`
+      });
+      
+      setSelectedOrders([]);
+      await loadReviewData();
+    } catch (error) {
+      toast({ title: 'Error sending review requests', variant: 'destructive' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const updateOrderStatus = async (orderId, updates) => {
     try {
       setLoading(true);
