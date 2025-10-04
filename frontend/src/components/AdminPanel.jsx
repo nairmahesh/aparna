@@ -90,7 +90,10 @@ const AdminPanel = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showAnalyticsModal, setShowAnalyticsModal] = useState(false);
   const [selectedProductAnalytics, setSelectedProductAnalytics] = useState(null);
-  const [hiddenProducts, setHiddenProducts] = useState(new Set());
+  const [hiddenProducts, setHiddenProducts] = useState(() => {
+    const saved = localStorage.getItem('hiddenProducts');
+    return new Set(saved ? JSON.parse(saved) : []);
+  });
 
   const categories = [
     { value: 'chivda', label: 'Chivda Collection' },
