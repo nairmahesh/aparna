@@ -36,12 +36,18 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg cursor-pointer"
-                   onClick={() => onViewChange('menu')}>
+                   onClick={() => {
+                     onViewChange('menu');
+                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                   }}>
                 🪔
               </div>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent cursor-pointer"
-                    onClick={() => onViewChange('menu')}>
+                    onClick={() => {
+                      onViewChange('menu');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}>
                   {shopInfo.name}
                 </h1>
                 <p className="text-sm text-gray-600">{shopInfo.tagline}</p>
