@@ -261,7 +261,7 @@ const OrderForm = ({ cart, onUpdateCart, onRemoveItem, onClearCart }) => {
             </div>
             
             <div className="space-y-4">
-              <div className="text-left bg-orange-50 p-4 rounded-lg">
+              <div className="text-left bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg">
                 <h4 className="font-semibold mb-2">Order Details:</h4>
                 <p><strong>Customer:</strong> {customerInfo.name}</p>
                 <p><strong>Phone:</strong> {customerInfo.phone}</p>
