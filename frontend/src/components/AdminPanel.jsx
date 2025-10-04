@@ -479,6 +479,11 @@ const AdminPanel = () => {
           description: "Product is now hidden from customers.",
         });
       }
+      
+      // Save to localStorage so frontend can access it
+      const hiddenArray = Array.from(newHidden);
+      localStorage.setItem('hiddenProducts', JSON.stringify(hiddenArray));
+      
       return newHidden;
     });
   };
