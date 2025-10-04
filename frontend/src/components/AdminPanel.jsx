@@ -1537,6 +1537,7 @@ const AdminPanel = () => {
                     <thead>
                       <tr className="border-b">
                         <th className="text-left py-3 px-2">Product</th>
+                        <th className="text-left py-3 px-2">Images</th>
                         <th className="text-left py-3 px-2">Category</th>
                         <th className="text-left py-3 px-2">Price</th>
                         <th className="text-left py-3 px-2">Rating</th>
