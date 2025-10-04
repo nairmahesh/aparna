@@ -377,9 +377,12 @@ const AdminPanel = () => {
         abandoned_carts: 156,
         new_visitors: 1823,
         returning_visitors: 1024,
-        avg_session_duration: 4.2,
+        avg_session_duration: 252, // 4 minutes 12 seconds
+        pages_per_session: 3.2,
         bounce_rate: 32.8,
         peak_hour: '19:00-20:00',
+        total_revenue: 99110,
+        avg_order_value: 2359.29,
         top_pages: [
           { path: '/', views: 1245, bounce_rate: 25.4 },
           { path: '/products', views: 892, bounce_rate: 18.7 },
