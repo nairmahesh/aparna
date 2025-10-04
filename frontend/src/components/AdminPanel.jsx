@@ -2391,6 +2391,203 @@ const AdminPanel = () => {
             </Card>
           </TabsContent>
         </Tabs>
+
+        {/* Add Product Modal */}
+        {showAddProduct && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Add New Product</h3>
+                <Button variant="ghost" size="sm" onClick={() => setShowAddProduct(false)}>
+                  ×
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="name">Product Name</Label>
+                    <Input
+                      id="name"
+                      value={newProduct.name}
+                      onChange={(e) => setNewProduct(prev => ({ ...prev, name: e.target.value }))}
+                      placeholder="e.g., Special Besan Laddu"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="category">Category</Label>
+                    <Select
+                      value={newProduct.category}
+                      onValueChange={(value) => setNewProduct(prev => ({ ...prev, category: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categories.map(cat => (
+                          <SelectItem key={cat.value} value={cat.value}>{cat.label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="description">Description</Label>
+                  <Textarea
+                    id="description"
+                    value={newProduct.description}
+                    onChange={(e) => setNewProduct(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder="Describe your delicious product..."
+                    className="min-h-20"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="note">Personal Note from Aparna</Label>
+                  <Textarea
+                    id="note"
+                    value={newProduct.note_from_aparna}
+                    onChange={(e) => setNewProduct(prev => ({ ...prev, note_from_aparna: e.target.value }))}
+                    placeholder="Add a personal touch..."
+                    className="min-h-16"
+                  />
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <Label htmlFor="base_price">Base Price (₹)</Label>
+                    <Input
+                      id="base_price"
+                      type="number"
+                      value={newProduct.base_price}
+                      onChange={(e) => setNewProduct(prev => ({ ...prev, base_price: parseFloat(e.target.value) || 0 }))}
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="discount">Discount (%)</Label>
+                    <Input
+                      id="discount"
+                      type="number"
+                      max="100"
+                      value={newProduct.discount_percentage}
+                      onChange={(e) => setNewProduct(prev => ({ ...prev, discount_percentage: parseFloat(e.target.value) || 0 }))}
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <Label>Offer Price (₹)</Label>
+                    <Input
+                      value={calculateOfferPrice()}
+                      disabled
+                      className="bg-gray-50"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="unit">Unit</Label>
+                    <Select
+                      value={newProduct.unit}
+                      onValueChange={(value) => setNewProduct(prev => ({ ...prev, unit: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="per kg">per kg</SelectItem>
+                        <SelectItem value="per piece">per piece</SelectItem>
+                        <SelectItem value="per box">per box</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label htmlFor="status">Status</Label>
+                    <Select
+                      value={newProduct.status}
+                      onValueChange={(value) => setNewProduct(prev => ({ ...prev, status: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="active">Active</SelectItem>
+                        <SelectItem value="inactive">Inactive</SelectItem>
+                        <SelectItem value="out_of_stock">Out of Stock</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div>
+                  <Label>Product Images</Label>
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={(e) => {
+                        Array.from(e.target.files).forEach(file => {
+                          handleImageUpload(file);
+                        });
+                      }}
+                      className="hidden"
+                      id="product-images"
+                    />
+                    <label htmlFor="product-images" className="cursor-pointer">
+                      <div className="text-center">
+                        <Upload className="mx-auto h-12 w-12 text-gray-400" />
+                        <p className="text-sm text-gray-600 mt-2">Click to upload images</p>
+                      </div>
+                    </label>
+                    
+                    {/* Display uploaded images */}
+                    {newProduct.images && newProduct.images.length > 0 && (
+                      <div className="mt-4 grid grid-cols-3 gap-2">
+                        {newProduct.images.map((image, index) => (
+                          <div key={index} className="relative">
+                            <img src={image} alt={`Product ${index + 1}`} className="w-full h-16 object-cover rounded" />
+                            <button
+                              onClick={() => {
+                                setNewProduct(prev => ({
+                                  ...prev,
+                                  images: prev.images.filter((_, i) => i !== index)
+                                }));
+                              }}
+                              className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex space-x-2 pt-4">
+                  <Button 
+                    onClick={handleCreateProduct}
+                    disabled={loading}
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Create Product
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowAddProduct(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
