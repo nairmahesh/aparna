@@ -134,7 +134,6 @@ export const menuCategories = [
     id: 'savory',
     name: 'Savory Delights',
     description: 'Assorted crispy and flavorful traditional snacks',
-    icon: '🥨',
     items: [
       {
         id: 'farsi-puri',
