@@ -183,6 +183,86 @@ const AdminPanel = () => {
     }
   };
 
+  // Handle contact search and filtering
+  const handleContactSearch = (query) => {
+    setContactSearchQuery(query);
+    
+    if (query.trim() === '') {
+      setFilteredContacts([]);
+      setShowContactSuggestions(false);
+      setShowAddContactOption(false);
+      setSelectedContact('');
+      return;
+    }
+    
+    // Filter existing contacts
+    const matches = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(query.toLowerCase()) ||
+      contact.phone.includes(query)
+    );
+    
+    setFilteredContacts(matches);
+    setShowContactSuggestions(matches.length > 0);
+    
+    // Show "Add new contact" option if no exact match found
+    const exactMatch = contacts.find(contact => 
+      contact.name.toLowerCase() === query.toLowerCase()
+    );
+    setShowAddContactOption(!exactMatch && query.trim().length > 2);
+  };
+
+  const handleSelectContact = (contact) => {
+    setSelectedContact(contact.id);
+    setContactSearchQuery(contact.name);
+    setShowContactSuggestions(false);
+    setShowAddContactOption(false);
+  };
+
+  const handleQuickAddContact = async (name) => {
+    try {
+      setLoading(true);
+      
+      // Simple contact creation with just name (phone will be required)
+      const phoneNumber = prompt(`Please enter phone number for ${name}:`);
+      if (!phoneNumber) {
+        setLoading(false);
+        return;
+      }
+      
+      const newContactData = {
+        name: name.trim(),
+        phone: phoneNumber.trim(),
+        email: '',
+        relationship: 'customer',
+        notes: 'Added via personalized link creation'
+      };
+      
+      const response = await axios.post(
+        `${BACKEND_URL}/admin/contacts?admin_key=${ADMIN_KEY}`,
+        newContactData
+      );
+      
+      // Update contacts list
+      const updatedContacts = [...contacts, response.data];
+      setContacts(updatedContacts);
+      
+      // Select the newly created contact
+      setSelectedContact(response.data.id);
+      setContactSearchQuery(response.data.name);
+      setShowAddContactOption(false);
+      
+      toast({ 
+        title: 'Contact added successfully!', 
+        description: `${response.data.name} has been added to your contacts` 
+      });
+      
+    } catch (error) {
+      toast({ title: 'Error adding contact', variant: 'destructive' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSendPersonalizedMessage = async () => {
     try {
       setLoading(true);
@@ -205,6 +285,7 @@ const AdminPanel = () => {
       // Add to personalized links
       setPersonalizedLinks([...personalizedLinks, response.data]);
       setSelectedContact('');
+      setContactSearchQuery('');
       setMessageTemplate('');
       loadAnalytics(); // Refresh analytics
       
