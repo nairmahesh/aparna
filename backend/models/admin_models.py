@@ -202,7 +202,6 @@ class OrderEnhanced(BaseModel):
     items: List[OrderItem]
     total_amount: float
     delivery_cost: float = 0.0
-    final_amount: float = Field(computed=True)
     
     # Dates
     delivery_date: datetime
