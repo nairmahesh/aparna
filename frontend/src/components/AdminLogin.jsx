@@ -20,7 +20,7 @@ const AdminLogin = ({ onLogin }) => {
     setLoading(true);
     
     // Simple admin login - in production, use proper authentication
-    if (credentials.username === 'aparna' && credentials.password === 'diwali2024') {
+    if (credentials.username === 'aparna' && credentials.password === 'diwali2025') {
       toast({ title: 'Welcome back, Aparna!', description: 'Successfully logged into admin panel' });
       onLogin(true);
     } else {
