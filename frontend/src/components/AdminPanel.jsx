@@ -2631,281 +2631,185 @@ const AdminPanel = () => {
               </Button>
             </div>
 
-            {/* Review Statistics */}
-            {reviewStats && (
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Requests Sent</p>
-                        <p className="text-2xl font-bold text-blue-600">{reviewStats.total_requests_sent}</p>
-                      </div>
-                      <Send className="w-8 h-8 text-blue-400" />
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Pending Reviews</p>
-                        <p className="text-2xl font-bold text-yellow-600">{reviewStats.pending_reviews}</p>
-                      </div>
-                      <Clock className="w-8 h-8 text-yellow-400" />
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Completed Reviews</p>
-                        <p className="text-2xl font-bold text-green-600">{reviewStats.completed_reviews}</p>
-                      </div>
-                      <CheckCircle className="w-8 h-8 text-green-400" />
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Response Rate</p>
-                        <p className="text-2xl font-bold text-purple-600">{reviewStats.review_response_rate}%</p>
-                        <p className="text-xs text-gray-500">Avg Rating: {reviewStats.average_overall_rating}★</p>
-                      </div>
-                      <TrendingUp className="w-8 h-8 text-purple-400" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            )}
-
-            {/* Send Review Requests Section */}
-            {reviewSummary && (
-              <Card className="mb-6">
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <MessageSquare className="w-5 h-5" />
-                    <span>Send Review Requests</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Reviews Statistics */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
                     <div>
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="bg-blue-50 p-4 rounded-lg">
-                          <p className="text-sm text-blue-600">Total Orders (30 days)</p>
-                          <p className="text-2xl font-bold text-blue-700">{reviewSummary.total_orders}</p>
-                        </div>
-                        <div className="bg-green-50 p-4 rounded-lg">
-                          <p className="text-sm text-green-600">Requests Sent</p>
-                          <p className="text-2xl font-bold text-green-700">{reviewSummary.orders_with_requests_sent}</p>
-                        </div>
-                        <div className="bg-orange-50 p-4 rounded-lg">
-                          <p className="text-sm text-orange-600">Pending Requests</p>
-                          <p className="text-2xl font-bold text-orange-700">{reviewSummary.orders_pending_requests}</p>
-                        </div>
-                        <div className="bg-purple-50 p-4 rounded-lg">
-                          <p className="text-sm text-purple-600">Reviews Received</p>
-                          <p className="text-2xl font-bold text-purple-700">{reviewSummary.total_reviews_received}</p>
-                        </div>
-                      </div>
-
-                      <div className="space-y-3">
-                        <Label>Select Request Method</Label>
-                        <Select value={reviewRequestMethod} onValueChange={setReviewRequestMethod}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="whatsapp">WhatsApp</SelectItem>
-                            <SelectItem value="sms">SMS</SelectItem>
-                            <SelectItem value="email">Email</SelectItem>
-                          </SelectContent>
-                        </Select>
-
-                        {/* Conditional Contact Fields */}
-                        {reviewRequestMethod === 'whatsapp' && (
-                          <div className="space-y-2">
-                            <Label htmlFor="whatsapp_number">WhatsApp Number (Optional)</Label>
-                            <Input
-                              id="whatsapp_number"
-                              placeholder="e.g., +91 9876543210"
-                              value={customContactInfo.whatsapp_number}
-                              onChange={(e) => setCustomContactInfo(prev => ({
-                                ...prev,
-                                whatsapp_number: e.target.value
-                              }))}
-                              className="border-orange-200 focus:border-orange-400"
-                            />
-                            <p className="text-xs text-gray-500">
-                              Leave empty to use phone number from order
-                            </p>
-                          </div>
-                        )}
-
-                        {reviewRequestMethod === 'email' && (
-                          <div className="space-y-2">
-                            <Label htmlFor="email_id">Email ID *</Label>
-                            <Input
-                              id="email_id"
-                              type="email"
-                              placeholder="customer@example.com"
-                              value={customContactInfo.email_id}
-                              onChange={(e) => setCustomContactInfo(prev => ({
-                                ...prev,
-                                email_id: e.target.value
-                              }))}
-                              className="border-orange-200 focus:border-orange-400"
-                              required
-                            />
-                            <p className="text-xs text-gray-500">
-                              Email ID is required for email reviews
-                            </p>
-                          </div>
-                        )}
-
-                        {reviewRequestMethod === 'sms' && (
-                          <div className="space-y-2">
-                            <Label htmlFor="mobile_number">Mobile Number (Optional)</Label>
-                            <Input
-                              id="mobile_number"
-                              placeholder="e.g., +91 9876543210"
-                              value={customContactInfo.mobile_number}
-                              onChange={(e) => setCustomContactInfo(prev => ({
-                                ...prev,
-                                mobile_number: e.target.value
-                              }))}
-                              className="border-orange-200 focus:border-orange-400"
-                            />
-                            <p className="text-xs text-gray-500">
-                              Leave empty to use phone number from order
-                            </p>
-                          </div>
-                        )}
-
-                        <Button 
-                          onClick={sendReviewRequests} 
-                          disabled={loading || selectedOrders.length === 0}
-                          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
-                        >
-                          <Send className="w-4 h-4 mr-2" />
-                          Send Requests ({selectedOrders.length} selected)
-                        </Button>
-                      </div>
+                      <p className="text-sm font-medium text-gray-600">Total Reviews</p>
+                      <p className="text-2xl font-bold text-blue-600">{allProductReviews.length}</p>
                     </div>
-
-                    <div>
-                      <Label className="mb-3 block">Orders Eligible for Review Requests</Label>
-                      <div className="max-h-64 overflow-y-auto space-y-2">
-                        {reviewSummary.orders_eligible_for_requests.map((order) => (
-                          <div 
-                            key={order.order_id} 
-                            className={`p-3 border rounded-lg cursor-pointer transition-colors ${
-                              selectedOrders.includes(order.order_id)
-                                ? 'bg-orange-50 border-orange-300'
-                                : 'bg-gray-50 hover:bg-gray-100'
-                            }`}
-                            onClick={() => {
-                              setSelectedOrders(prev => 
-                                prev.includes(order.order_id)
-                                  ? prev.filter(id => id !== order.order_id)
-                                  : [...prev, order.order_id]
-                              );
-                            }}
-                          >
-                            <div className="flex justify-between items-start">
-                              <div>
-                                <p className="font-medium text-sm">{order.customer_name}</p>
-                                <p className="text-xs text-gray-600">{order.customer_phone}</p>
-                                <p className="text-xs text-gray-500">
-                                  {new Date(order.order_date).toLocaleDateString()}
-                                </p>
-                              </div>
-                              <div className="text-right">
-                                <p className="text-sm font-medium text-green-600">
-                                  ₹{order.total_amount}
-                                </p>
-                                <p className="text-xs text-gray-500">
-                                  {order.items.length} item(s)
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                        
-                        {reviewSummary.orders_eligible_for_requests.length === 0 && (
-                          <div className="text-center py-8 text-gray-500">
-                            <MessageCircle className="w-12 h-12 mx-auto mb-2 opacity-30" />
-                            <p>No orders eligible for review requests</p>
-                            <p className="text-xs">All recent orders already have requests sent</p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                    <MessageSquare className="w-8 h-8 text-blue-400" />
                   </div>
                 </CardContent>
               </Card>
-            )}
 
-            {/* Review Requests History */}
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Visible Reviews</p>
+                      <p className="text-2xl font-bold text-green-600">
+                        {allProductReviews.filter(review => !hiddenReviews.has(`${review.productId}-${review.id}`)).length}
+                      </p>
+                    </div>
+                    <Eye className="w-8 h-8 text-green-400" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Hidden Reviews</p>
+                      <p className="text-2xl font-bold text-yellow-600">{hiddenReviews.size}</p>
+                    </div>
+                    <AlertCircle className="w-8 h-8 text-yellow-400" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Average Rating</p>
+                      <p className="text-2xl font-bold text-purple-600">
+                        {allProductReviews.length > 0 ? 
+                          (allProductReviews.reduce((sum, r) => sum + r.rating, 0) / allProductReviews.length).toFixed(1) : '0'
+                        }⭐
+                      </p>
+                    </div>
+                    <TrendingUp className="w-8 h-8 text-purple-400" />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Product Review Requests - New Section */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <Send className="w-5 h-5" />
+                  <span>Send Product Review Requests</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                  {products.slice(0, 9).map((product) => (
+                    <div key={product.id} className="border rounded-lg p-4 hover:bg-gray-50">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <h4 className="font-medium text-sm">{product.name}</h4>
+                          <p className="text-xs text-gray-500">{product.category}</p>
+                          <p className="text-xs text-orange-600">₹{product.final_price} {product.unit}</p>
+                        </div>
+                        <Badge variant="outline" className="text-xs">
+                          {product.rating || 'New'}⭐
+                        </Badge>
+                      </div>
+                      <Button
+                        onClick={() => handleSendProductReviewRequest(product)}
+                        size="sm"
+                        className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-xs"
+                      >
+                        <Send className="w-3 h-3 mr-1" />
+                        Send Review Request
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-4 text-center">
+                  <p className="text-xs text-gray-500">Click on any product to generate review request links</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* All Product Reviews */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <span className="flex items-center space-x-2">
-                    <Clock className="w-5 h-5" />
-                    <span>Review Requests History</span>
+                    <MessageSquare className="w-5 h-5" />
+                    <span>All Product Reviews</span>
                   </span>
-                  <Badge variant="secondary">{reviewRequests.length} requests</Badge>
+                  <Badge variant="secondary">{allProductReviews.length} reviews</Badge>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {reviewRequests.map((request) => (
-                    <div key={request.id} className="border rounded-lg p-4">
-                      <div className="flex justify-between items-start mb-3">
-                        <div>
-                          <p className="font-medium">{request.customer_name}</p>
-                          <p className="text-sm text-gray-600">{request.customer_phone}</p>
-                          <p className="text-xs text-gray-500">Order: {request.order_id}</p>
-                        </div>
-                        <div className="text-right">
-                          <Badge 
-                            className={`mb-2 ${
-                              request.status === 'sent' ? 'bg-blue-100 text-blue-800' :
-                              request.status === 'reviewed' ? 'bg-green-100 text-green-800' :
-                              request.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                              'bg-red-100 text-red-800'
-                            }`}
-                          >
-                            {request.status}
-                          </Badge>
-                          <p className="text-xs text-gray-500">
-                            via {request.request_method}
-                          </p>
+                <div className="space-y-4 max-h-96 overflow-y-auto">
+                  {allProductReviews.map((review) => {
+                    const reviewKey = `${review.productId}-${review.id}`;
+                    const isHidden = hiddenReviews.has(reviewKey);
+                    
+                    return (
+                      <div key={reviewKey} className={`border rounded-lg p-4 ${isHidden ? 'bg-gray-50 opacity-60' : 'bg-white'}`}>
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-1">
+                              <h4 className="font-medium text-sm">{review.productName}</h4>
+                              <Badge variant="outline" className="text-xs">
+                                {review.categoryName}
+                              </Badge>
+                              <div className="flex">
+                                {[...Array(5)].map((_, i) => (
+                                  <span key={i} className={`text-xs ${
+                                    i < review.rating ? 'text-amber-400' : 'text-gray-300'
+                                  }`}>★</span>
+                                ))}
+                              </div>
+                            </div>
+                            <p className="font-medium text-sm text-gray-700">{review.customerName}</p>
+                            <p className="text-xs text-gray-500 mb-2">{new Date(review.date).toLocaleDateString()}</p>
+                            <p className="text-sm text-gray-700 italic">"{review.comment}"</p>
+                            {isHidden && (
+                              <p className="text-xs text-red-600 mt-2 font-medium">⚠️ Hidden from customers</p>
+                            )}
+                          </div>
+                          
+                          <div className="flex flex-col space-y-2">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleToggleReviewVisibility(review.id, review.productId)}
+                              className={`text-xs ${isHidden ? 'text-green-600 hover:text-green-700' : 'text-yellow-600 hover:text-yellow-700'}`}
+                            >
+                              {isHidden ? (
+                                <>
+                                  <Eye className="w-3 h-3 mr-1" />
+                                  Show
+                                </>
+                              ) : (
+                                <>
+                                  <AlertCircle className="w-3 h-3 mr-1" />
+                                  Hide
+                                </>
+                              )}
+                            </Button>
+                            
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleDeleteReview(review.id, review.productId, review.productName)}
+                              className="text-xs text-red-600 hover:text-red-700"
+                            >
+                              <Trash2 className="w-3 h-3 mr-1" />
+                              Delete
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="text-sm text-gray-600">
-                        <p><strong>Products:</strong> {request.products_ordered.join(', ')}</p>
-                        <p><strong>Request Sent:</strong> {request.request_sent_date ? new Date(request.request_sent_date).toLocaleDateString() : 'Not sent'}</p>
-                        {request.review_submitted && (
-                          <p><strong>Review Submitted:</strong> {new Date(request.review_submitted_date).toLocaleDateString()}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
 
-                  {reviewRequests.length === 0 && (
+                  {allProductReviews.length === 0 && (
                     <div className="text-center py-8 text-gray-500">
                       <MessageSquare className="w-12 h-12 mx-auto mb-2 opacity-30" />
-                      <p>No review requests sent yet</p>
-                      <p className="text-xs">Start by sending requests to recent customers</p>
+                      <p>No reviews found</p>
+                      <p className="text-xs">Reviews will appear here as customers leave feedback</p>
                     </div>
                   )}
                 </div>
