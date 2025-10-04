@@ -11,6 +11,37 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { relationshipTypes, greetingMessages } from '../data/mock';
 import { useToast } from '../hooks/use-toast';
 
+const greetingTemplates = [
+  {
+    id: 1,
+    name: 'Classic Elegance',
+    description: 'Traditional layout with elegant styling',
+    preview: 'https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?w=300&h=200&fit=crop',
+    layout: 'classic'
+  },
+  {
+    id: 2,
+    name: 'Modern Festive',
+    description: 'Contemporary design with vibrant colors',
+    preview: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop',
+    layout: 'modern'
+  },
+  {
+    id: 3,
+    name: 'Traditional Heritage',
+    description: 'Ancient motifs with cultural elements',
+    preview: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=300&h=200&fit=crop',
+    layout: 'traditional'
+  },
+  {
+    id: 4,
+    name: 'Minimalist Chic',
+    description: 'Clean and simple design',
+    preview: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop',
+    layout: 'minimalist'
+  }
+];
+
 const greetingBackgrounds = [
   {
     id: 1,
