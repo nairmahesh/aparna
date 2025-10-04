@@ -114,6 +114,24 @@ const AdminPanel = () => {
   const [selectedImageProduct, setSelectedImageProduct] = useState(null);
   const [showImageModal, setShowImageModal] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
+  
+  // Website Settings State
+  const [websiteSettings, setWebsiteSettings] = useState(() => {
+    const saved = localStorage.getItem('websiteSettings');
+    return saved ? JSON.parse(saved) : {
+      name: "Aparna's Diwali Delights",
+      tagline: 'Traditional Sweets & Snacks for Your Festival Celebrations',
+      description: 'Authentic homemade delicacies crafted with love by Aparna for your Diwali festivities',
+      heroTitle: 'Welcome to Festival of Flavors',
+      heroSubtitle: 'Discover authentic Diwali sweets and snacks made with traditional recipes',
+      contact: {
+        phone: '+91 9920632654',
+        email: 'aparna.delights@gmail.com',
+        address: 'Borivali (W), Mumbai, Maharashtra',
+        fssai: '21521058000362'
+      }
+    };
+  });
 
   // Open image modal when product is selected
   useEffect(() => {
