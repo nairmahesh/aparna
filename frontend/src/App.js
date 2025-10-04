@@ -243,7 +243,7 @@ const Home = () => {
                               : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                           }`}
                         >
-                          {category.icon} {category.name.replace(' Collection', '').replace(' Varieties', '').replace(' Delights', '')} ({category.items.length})
+                          {category.name.replace(' Collection', '').replace(' Varieties', '').replace(' Delights', '')} ({category.items.length})
                         </button>
                       ))}
                     </div>
