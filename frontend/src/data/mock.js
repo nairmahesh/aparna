@@ -12,7 +12,11 @@ export const menuCategories = [
         description: 'Traditional flattened rice mixture with spices and peanuts',
         price: 600,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop'
+        images: [
+          'https://images.unsplash.com/photo-1633975573517-653b02dcae4f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBzbmFjayUyMG1peHxlbnwwfHx8fDE3NTk1ODA4MTJ8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1575526854473-e85fdba07b7a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxpbmRpYW4lMjBzbmFjayUyMG1peHxlbnwwfHx8fDE3NTk1ODA4MTJ8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1589786742305-f24d19eedbe5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBzbmFja3N8ZW58MHx8fHwxNzU5NTgwOTA2fDA&ixlib=rb-4.1.0&q=85'
+        ]
       },
       {
         id: 'corn-chivda-plain',
@@ -20,7 +24,11 @@ export const menuCategories = [
         description: 'Crunchy corn flakes seasoned with aromatic spices',
         price: 650,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&h=300&fit=crop'
+        images: [
+          'https://images.unsplash.com/photo-1575526854473-e85fdba07b7a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxpbmRpYW4lMjBzbmFjayUyMG1peHxlbnwwfHx8fDE3NTk1ODA4MTJ8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1589556165541-4254aa9cfb39?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjBzbmFjayUyMG1peHxlbnwwfHx8fDE3NTk1ODA4MTJ8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.pexels.com/photos/5835026/pexels-photo-5835026.jpeg'
+        ]
       },
       {
         id: 'corn-chivda-dry-fruits',
@@ -28,7 +36,11 @@ export const menuCategories = [
         description: 'Premium corn chivda enriched with almonds, cashews and raisins',
         price: 750,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop'
+        images: [
+          'https://images.unsplash.com/photo-1633975573517-653b02dcae4f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBzbmFjayUyMG1peHxlbnwwfHx8fDE3NTk1ODA4MTJ8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1589786742305-f24d19eedbe5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBzbmFja3N8ZW58MHx8fHwxNzU5NTgwOTA2fDA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1613764816537-a43baeb559c1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjBzbmFja3N8ZW58MHx8fHwxNzU5NTgwOTA2fDA&ixlib=rb-4.1.0&q=85'
+        ]
       },
       {
         id: 'farali-chivda',
@@ -36,7 +48,11 @@ export const menuCategories = [
         description: 'Special fasting-friendly mixture with sabudana and peanuts',
         price: 760,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop'
+        images: [
+          'https://images.unsplash.com/photo-1627035537702-ddca174d7987?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxzYWJ1ZGFuYXxlbnwwfHx8fDE3NTk1ODA4Mjl8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1627035537727-96e5d592bbb6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxzYWJ1ZGFuYXxlbnwwfHx8fDE3NTk1ODA4Mjl8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1603554593710-89285666b691?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxzYWJ1ZGFuYXxlbnwwfHx8fDE3NTk1ODA4Mjl8MA&ixlib=rb-4.1.0&q=85'
+        ]
       },
       {
         id: 'makhana-chivda-masala',
