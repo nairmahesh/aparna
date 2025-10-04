@@ -102,12 +102,62 @@ const AdminPanel = () => {
     }
   ];
 
+  // Order filters
+  const [orderFilters, setOrderFilters] = useState({
+    status: '',
+    delivery_status: '',
+    date_from: '',
+    date_to: ''
+  });
+
+  const orderStatuses = [
+    { value: 'pending', label: 'Pending', color: 'bg-yellow-100 text-yellow-800' },
+    { value: 'confirmed', label: 'Confirmed', color: 'bg-blue-100 text-blue-800' },
+    { value: 'preparing', label: 'Preparing', color: 'bg-orange-100 text-orange-800' },
+    { value: 'ready', label: 'Ready', color: 'bg-purple-100 text-purple-800' },
+    { value: 'delivered', label: 'Delivered', color: 'bg-green-100 text-green-800' },
+    { value: 'cancelled', label: 'Cancelled', color: 'bg-red-100 text-red-800' }
+  ];
+
+  const deliveryStatuses = [
+    { value: 'pending', label: 'Pending', color: 'bg-gray-100 text-gray-800' },
+    { value: 'dispatched', label: 'Dispatched', color: 'bg-blue-100 text-blue-800' },
+    { value: 'out_for_delivery', label: 'Out for Delivery', color: 'bg-orange-100 text-orange-800' },
+    { value: 'delivered', label: 'Delivered', color: 'bg-green-100 text-green-800' },
+    { value: 'failed', label: 'Failed', color: 'bg-red-100 text-red-800' }
+  ];
+
+  const paymentStatuses = [
+    { value: 'pending', label: 'Pending', color: 'bg-yellow-100 text-yellow-800' },
+    { value: 'paid', label: 'Paid', color: 'bg-green-100 text-green-800' },
+    { value: 'failed', label: 'Failed', color: 'bg-red-100 text-red-800' },
+    { value: 'refunded', label: 'Refunded', color: 'bg-purple-100 text-purple-800' }
+  ];
+
   // Load data on component mount
   useEffect(() => {
-    loadProducts();
-    loadContacts();
-    loadAnalytics();
+    loadDashboardData();
   }, []);
+
+  const loadDashboardData = async () => {
+    setLoading(true);
+    try {
+      await Promise.all([
+        loadProducts(),
+        loadContacts(),
+        loadAnalytics(),
+        loadOrders(),
+        loadVisitorAnalytics(),
+        loadCustomerAnalytics(),
+        loadCartAbandonments(),
+        loadRevenueReport()
+      ]);
+    } catch (error) {
+      toast({ title: 'Error loading dashboard data', variant: 'destructive' });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const loadProducts = async () => {
     try {
