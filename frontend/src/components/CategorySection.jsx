@@ -88,7 +88,10 @@ const CategorySection = ({ category, onAddToCart }) => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div 
+        id={`${category.id}-grid`}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 transition-all duration-500 rounded-lg p-4"
+      >
         {category.items.map((item, index) => {
           // Add special highlighting for certain items
           const isPopular = index === 0; // First item in each category
@@ -114,6 +117,15 @@ const CategorySection = ({ category, onAddToCart }) => {
             </div>
           );
         })}
+      </div>
+      
+      {/* Show count after viewing */}
+      <div className="text-center mt-6">
+        <div className="inline-block bg-orange-50 border border-orange-200 px-4 py-2 rounded-full">
+          <span className="text-orange-600 text-sm font-medium">
+            ✨ Showing all {category.items.length} {category.name.toLowerCase()} varieties ✨
+          </span>
+        </div>
       </div>
       
       {/* Category-specific call-to-action */}
