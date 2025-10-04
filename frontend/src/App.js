@@ -5,9 +5,11 @@ import Header from './components/Header';
 import CategorySection from './components/CategorySection';
 import OrderForm from './components/OrderForm';
 import GreetingsForm from './components/GreetingsForm';
+import AdminLogin from './components/AdminLogin';
+import AdminPanel from './components/AdminPanel';
 import { menuCategories, shopInfo } from './data/mock';
 import { Button } from './components/ui/button';
-import { Sparkles, Star, Heart, Gift, ShoppingBag } from 'lucide-react';
+import { Sparkles, Star, Heart, Gift, ShoppingBag, Settings } from 'lucide-react';
 import { useToast } from './hooks/use-toast';
 import { Toaster } from './components/ui/toaster';
 
