@@ -2604,6 +2604,142 @@ const AdminPanel = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          {/* Categories Management */}
+          <TabsContent value="categories" className="space-y-6">
+            {/* Header with Add Category Button */}
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-800">Categories Management</h2>
+              <Button 
+                onClick={() => setShowAddCategory(true)}
+                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add New Category
+              </Button>
+            </div>
+
+            {/* Categories Overview Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Total Categories</p>
+                      <p className="text-2xl font-bold text-blue-600">{managedCategories.length}</p>
+                    </div>
+                    <Package className="w-8 h-8 text-blue-400" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Total Products</p>
+                      <p className="text-2xl font-bold text-green-600">
+                        {managedCategories.reduce((sum, cat) => sum + (cat.items?.length || 0), 0)}
+                      </p>
+                    </div>
+                    <BarChart3 className="w-8 h-8 text-green-400" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Avg Products/Category</p>
+                      <p className="text-2xl font-bold text-purple-600">
+                        {Math.round(managedCategories.reduce((sum, cat) => sum + (cat.items?.length || 0), 0) / managedCategories.length || 0)}
+                      </p>
+                    </div>
+                    <TrendingUp className="w-8 h-8 text-purple-400" />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Categories List */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span>Categories Overview</span>
+                  <Badge variant="secondary">{managedCategories.length} categories</Badge>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {managedCategories.map((category) => (
+                    <div key={category.id} className="border rounded-lg p-4 hover:bg-gray-50">
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-gray-900">{category.name}</h3>
+                          <p className="text-sm text-gray-600 mt-1">{category.description}</p>
+                          <div className="flex items-center space-x-4 mt-3">
+                            <Badge variant="outline" className="text-xs">
+                              ID: {category.id}
+                            </Badge>
+                            <Badge className="bg-blue-100 text-blue-800 text-xs">
+                              {category.items?.length || 0} products
+                            </Badge>
+                          </div>
+                        </div>
+                        <div className="flex space-x-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleEditCategory(category)}
+                            title="Edit Category"
+                          >
+                            <Edit className="w-4 h-4 text-gray-600" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDeleteCategory(category.id, category.name)}
+                            title="Delete Category"
+                            className="text-red-600 hover:text-red-700"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      {/* Show some products from this category */}
+                      {category.items && category.items.length > 0 && (
+                        <div className="mt-4 pt-4 border-t border-gray-100">
+                          <p className="text-xs font-medium text-gray-500 mb-2">Sample Products:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {category.items.slice(0, 3).map((item) => (
+                              <Badge key={item.id} variant="secondary" className="text-xs">
+                                {item.name}
+                              </Badge>
+                            ))}
+                            {category.items.length > 3 && (
+                              <Badge variant="secondary" className="text-xs">
+                                +{category.items.length - 3} more
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+
+                  {managedCategories.length === 0 && (
+                    <div className="text-center py-8 text-gray-500">
+                      <Package className="w-12 h-12 mx-auto mb-2 opacity-30" />
+                      <p>No categories found</p>
+                      <p className="text-xs">Add your first category to get started</p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
 
         {/* Add Product Modal */}
