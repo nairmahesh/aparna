@@ -16,7 +16,7 @@ import { useToast } from '../hooks/use-toast';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const ADMIN_KEY = 'aparna_admin_2024';
+const ADMIN_KEY = 'aparna_admin_2025';
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState('products');
