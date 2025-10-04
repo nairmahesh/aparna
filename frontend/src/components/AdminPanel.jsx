@@ -1265,233 +1265,259 @@ const AdminPanel = () => {
 
           {/* Products Tab */}
           <TabsContent value="products" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Add New Product */}
+            {/* Header with Add Product Button */}
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-800">Products Analytics & Management</h2>
+              <Button 
+                onClick={() => setShowAddProduct(true)}
+                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add New Product
+              </Button>
+            </div>
+
+            {/* Products Overview Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Plus className="w-5 h-5" />
-                    <span>Add New Product</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
                     <div>
-                      <Label htmlFor="name">Product Name</Label>
-                      <Input
-                        id="name"
-                        value={newProduct.name}
-                        onChange={(e) => setNewProduct(prev => ({ ...prev, name: e.target.value }))}
-                        placeholder="e.g., Special Besan Laddu"
-                      />
+                      <p className="text-sm font-medium text-gray-600">Total Products</p>
+                      <p className="text-2xl font-bold text-blue-600">{products.length}</p>
                     </div>
-                    <div>
-                      <Label htmlFor="category">Category</Label>
-                      <Select
-                        value={newProduct.category}
-                        onValueChange={(value) => setNewProduct(prev => ({ ...prev, category: value }))}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {categories.map(cat => (
-                            <SelectItem key={cat.value} value={cat.value}>{cat.label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                    <Package className="w-8 h-8 text-blue-400" />
                   </div>
-
-                  <div>
-                    <Label htmlFor="description">Description</Label>
-                    <Textarea
-                      id="description"
-                      value={newProduct.description}
-                      onChange={(e) => setNewProduct(prev => ({ ...prev, description: e.target.value }))}
-                      placeholder="Describe your delicious product..."
-                      className="min-h-20"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="note">Personal Note from Aparna</Label>
-                    <Textarea
-                      id="note"
-                      value={newProduct.note_from_aparna}
-                      onChange={(e) => setNewProduct(prev => ({ ...prev, note_from_aparna: e.target.value }))}
-                      placeholder="Add a personal touch..."
-                      className="min-h-16"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <Label htmlFor="price">Base Price (₹)</Label>
-                      <Input
-                        id="price"
-                        type="number"
-                        value={newProduct.base_price}
-                        onChange={(e) => setNewProduct(prev => ({ ...prev, base_price: parseFloat(e.target.value) || 0 }))}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="discount">Discount (%)</Label>
-                      <Input
-                        id="discount"
-                        type="number"
-                        value={newProduct.discount_percentage || ''}
-                        onChange={(e) => setNewProduct(prev => ({ ...prev, discount_percentage: e.target.value ? parseFloat(e.target.value) : null }))}
-                        placeholder="Optional"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="offer">Offer Price (₹)</Label>
-                      <Input
-                        id="offer"
-                        type="number"
-                        value={newProduct.offer_price || ''}
-                        onChange={(e) => setNewProduct(prev => ({ ...prev, offer_price: e.target.value ? parseFloat(e.target.value) : null }))}
-                        placeholder="Optional"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="unit">Unit</Label>
-                      <Select
-                        value={newProduct.unit}
-                        onValueChange={(value) => setNewProduct(prev => ({ ...prev, unit: value }))}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="per kg">per kg</SelectItem>
-                          <SelectItem value="per piece">per piece</SelectItem>
-                          <SelectItem value="per box">per box</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor="status">Status</Label>
-                      <Select
-                        value={newProduct.status}
-                        onValueChange={(value) => setNewProduct(prev => ({ ...prev, status: value }))}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="active">Active</SelectItem>
-                          <SelectItem value="inactive">Inactive</SelectItem>
-                          <SelectItem value="out_of_stock">Out of Stock</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label>Product Images</Label>
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        multiple
-                        onChange={(e) => {
-                          Array.from(e.target.files).forEach(file => {
-                            handleImageUpload(file);
-                          });
-                        }}
-                        className="hidden"
-                        id="image-upload"
-                      />
-                      <label htmlFor="image-upload" className="cursor-pointer flex items-center justify-center space-x-2">
-                        <Upload className="w-5 h-5" />
-                        <span>Upload Images</span>
-                      </label>
-                      
-                      {newProduct.images.length > 0 && (
-                        <div className="mt-4 grid grid-cols-3 gap-2">
-                          {newProduct.images.map((img, idx) => (
-                            <div key={idx} className="relative">
-                              <img src={`${BACKEND_URL}${img}`} alt={`Product ${idx + 1}`} className="w-full h-20 object-cover rounded" />
-                              <button
-                                onClick={() => setNewProduct(prev => ({
-                                  ...prev,
-                                  images: prev.images.filter((_, i) => i !== idx)
-                                }))}
-                                className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                              >
-                                ×
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <Button
-                    onClick={handleCreateProduct}
-                    disabled={loading || !newProduct.name || !newProduct.base_price}
-                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
-                  >
-                    <Plus className="w-4 h-4 mr-2" />
-                    {loading ? 'Creating...' : 'Add Product'}
-                  </Button>
                 </CardContent>
               </Card>
 
-              {/* Existing Products */}
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Categories</p>
+                      <p className="text-2xl font-bold text-green-600">{new Set(products.map(p => p.category)).size}</p>
+                    </div>
+                    <BarChart3 className="w-8 h-8 text-green-400" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Avg Rating</p>
+                      <p className="text-2xl font-bold text-amber-600">
+                        {(products.filter(p => p.rating > 0).reduce((acc, p) => acc + p.rating, 0) / products.filter(p => p.rating > 0).length || 0).toFixed(1)}⭐
+                      </p>
+                    </div>
+                    <MessageSquare className="w-8 h-8 text-amber-400" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Est. Revenue</p>
+                      <p className="text-2xl font-bold text-purple-600">
+                        ₹{Math.round(products.reduce((acc, p) => acc + (p.final_price * (p.total_reviews * 0.8)), 0)).toLocaleString()}
+                      </p>
+                    </div>
+                    <TrendingUp className="w-8 h-8 text-purple-400" />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Product Analytics Table */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span>Product Performance Analytics</span>
+                  <Button onClick={loadProducts} variant="outline" size="sm">
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    Refresh
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left py-3 px-2">Product</th>
+                        <th className="text-left py-3 px-2">Category</th>
+                        <th className="text-left py-3 px-2">Price</th>
+                        <th className="text-left py-3 px-2">Rating</th>
+                        <th className="text-left py-3 px-2">Orders</th>
+                        <th className="text-left py-3 px-2">Revenue</th>
+                        <th className="text-left py-3 px-2">Status</th>
+                        <th className="text-left py-3 px-2">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {products.map((product) => {
+                        const estimatedOrders = product.total_reviews * 0.8; // Estimate orders from reviews
+                        const estimatedRevenue = product.final_price * estimatedOrders;
+                        
+                        return (
+                          <tr key={product.id} className="border-b hover:bg-gray-50">
+                            <td className="py-3 px-2">
+                              <div>
+                                <p className="font-medium text-gray-900">{product.name}</p>
+                                <p className="text-xs text-gray-500">{product.unit}</p>
+                                {product.note_from_aparna && (
+                                  <p className="text-xs text-orange-600 italic mt-1">⭐ Aparna's Pick</p>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-3 px-2">
+                              <Badge variant="outline" className="text-xs">
+                                {product.category}
+                              </Badge>
+                            </td>
+                            <td className="py-3 px-2">
+                              <div>
+                                <p className="font-semibold text-gray-900">₹{product.final_price}</p>
+                                {product.has_offer && (
+                                  <Badge className="bg-green-100 text-green-700 text-xs mt-1">
+                                    OFFER
+                                  </Badge>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-3 px-2">
+                              <div className="flex items-center space-x-1">
+                                <span className="font-medium">{product.rating || 'New'}</span>
+                                {product.rating && (
+                                  <>
+                                    <span className="text-amber-400">★</span>
+                                    <span className="text-xs text-gray-500">({product.total_reviews})</span>
+                                  </>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-3 px-2">
+                              <div>
+                                <p className="font-medium">{Math.round(estimatedOrders)}</p>
+                                <p className="text-xs text-gray-500">Est. orders</p>
+                              </div>
+                            </td>
+                            <td className="py-3 px-2">
+                              <div>
+                                <p className="font-semibold text-green-600">₹{Math.round(estimatedRevenue).toLocaleString()}</p>
+                                <p className="text-xs text-gray-500">Est. revenue</p>
+                              </div>
+                            </td>
+                            <td className="py-3 px-2">
+                              <Badge 
+                                className={
+                                  product.status === 'active' ? 'bg-green-100 text-green-800' :
+                                  product.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
+                                  'bg-red-100 text-red-800'
+                                }
+                              >
+                                {product.status}
+                              </Badge>
+                            </td>
+                            <td className="py-3 px-2">
+                              <div className="flex space-x-1">
+                                <Button variant="ghost" size="sm" title="View Analytics">
+                                  <BarChart3 className="w-4 h-4 text-blue-600" />
+                                </Button>
+                                <Button variant="ghost" size="sm" title="Edit Product">
+                                  <Edit className="w-4 h-4 text-gray-600" />
+                                </Button>
+                                <Button variant="ghost" size="sm" title="Delete Product">
+                                  <Trash2 className="w-4 h-4 text-red-600" />
+                                </Button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+
+                {products.length === 0 && (
+                  <div className="text-center py-8 text-gray-500">
+                    <Package className="w-12 h-12 mx-auto mb-2 opacity-30" />
+                    <p>No products found</p>
+                    <p className="text-xs">Add your first product to get started</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Top Performing Products */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    <span>Current Products ({products.length})</span>
-                    <Button variant="outline" onClick={loadProducts}>
-                      Refresh
-                    </Button>
+                  <CardTitle className="flex items-center space-x-2">
+                    <TrendingUp className="w-5 h-5" />
+                    <span>Top Revenue Generators</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3 max-h-96 overflow-y-auto">
-                    {products.map((product) => (
-                      <div key={product.id} className="border rounded-lg p-3">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <h4 className="font-semibold">{product.name}</h4>
-                            <p className="text-sm text-gray-600">{product.category}</p>
-                            <div className="flex items-center space-x-2 mt-1">
-                              <span className="font-bold text-orange-600">₹{product.final_price}</span>
-                              <span className="text-sm text-gray-500">{product.unit}</span>
-                              {product.has_offer && (
-                                <Badge variant="secondary" className="bg-green-100 text-green-700">
-                                  OFFER
-                                </Badge>
-                              )}
-                              <Badge variant={product.status === 'active' ? 'default' : 'secondary'}>
-                                {product.status}
-                              </Badge>
+                  <div className="space-y-4">
+                    {products
+                      .sort((a, b) => ((b.final_price * (b.total_reviews * 0.8)) - (a.final_price * (a.total_reviews * 0.8))))
+                      .slice(0, 5)
+                      .map((product, index) => (
+                        <div key={product.id} className="flex items-center justify-between p-3 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              {index + 1}
+                            </div>
+                            <div>
+                              <p className="font-medium">{product.name}</p>
+                              <p className="text-xs text-gray-600">{product.category}</p>
                             </div>
                           </div>
-                          <div className="flex space-x-1">
-                            <Button variant="ghost" size="sm">
-                              <Edit className="w-4 h-4" />
-                            </Button>
-                            <Button variant="ghost" size="sm" className="text-red-500">
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
+                          <div className="text-right">
+                            <p className="font-semibold text-green-600">₹{Math.round(product.final_price * (product.total_reviews * 0.8)).toLocaleString()}</p>
+                            <p className="text-xs text-gray-500">{product.rating}⭐ ({product.total_reviews} orders)</p>
                           </div>
                         </div>
-                        
-                        {product.note_from_aparna && (
-                          <div className="mt-2 p-2 bg-orange-50 rounded text-sm italic">
-                            "{product.note_from_aparna}" - Aparna
+                      ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <MessageSquare className="w-5 h-5" />
+                    <span>Highest Rated Products</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {products
+                      .filter(p => p.rating > 0)
+                      .sort((a, b) => b.rating - a.rating)
+                      .slice(0, 5)
+                      .map((product, index) => (
+                        <div key={product.id} className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              {index + 1}
+                            </div>
+                            <div>
+                              <p className="font-medium">{product.name}</p>
+                              <p className="text-xs text-gray-600">{product.category}</p>
+                            </div>
                           </div>
-                        )}
-                      </div>
-                    ))}
+                          <div className="text-right">
+                            <p className="font-semibold text-amber-600">{product.rating}⭐</p>
+                            <p className="text-xs text-gray-500">({product.total_reviews} reviews)</p>
+                          </div>
+                        </div>
+                      ))}
                   </div>
                 </CardContent>
               </Card>
