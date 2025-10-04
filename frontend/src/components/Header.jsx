@@ -57,9 +57,9 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange, websiteSett
                       onViewChange('menu');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}>
-                  {shopInfo.name}
+                  {settings.name}
                 </h1>
-                <p className="text-xs md:text-sm text-gray-600 hidden sm:block">{shopInfo.tagline}</p>
+                <p className="text-xs md:text-sm text-gray-600 hidden sm:block">{settings.tagline}</p>
               </div>
             </div>
           </div>
