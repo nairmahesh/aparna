@@ -289,7 +289,12 @@ const OrderForm = ({ cart, onUpdateCart, onRemoveItem, onClearCart }) => {
                     <p className="font-medium text-orange-700 mb-1">Option 2: Direct UPI Payment</p>
                     <ul className="list-disc list-inside space-y-1 ml-4">
                       <li>Open GPay/PhonePe/Paytm</li>
-                      <li>Send ₹{totalAmount} to: {shopInfo.contact.phone}</li>
+                      <li>Send ₹{totalAmount} to: <a 
+                        href={`tel:${shopInfo.contact.phone}`}
+                        className="text-orange-600 hover:text-orange-700 transition-colors cursor-pointer font-medium"
+                      >
+                        {shopInfo.contact.phone}
+                      </a></li>
                       <li>Add note: "Diwali Order - [Your Name]"</li>
                     </ul>
                   </div>
