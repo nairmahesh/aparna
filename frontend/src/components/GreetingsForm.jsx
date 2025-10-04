@@ -224,7 +224,7 @@ const GreetingsForm = () => {
             <div className="flex-1 flex flex-col justify-center">
               <div className="bg-gradient-to-br from-orange-50/95 to-amber-50/95 backdrop-blur-sm rounded-lg p-6 border-4 border-double border-orange-300 shadow-2xl">
                 <div className="text-center mb-4">
-                  <div className="inline-block bg-orange-200 px-4 py-2 rounded-full">
+                  <div className="inline-block bg-gradient-to-r from-orange-200 to-amber-200 px-4 py-2 rounded-full">
                     <span className="text-orange-800 font-bold font-serif">
                       प्रिय {greetingData.recipientName || 'मित्र'}
                     </span>
