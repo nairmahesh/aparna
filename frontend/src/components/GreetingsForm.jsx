@@ -117,9 +117,9 @@ const GreetingsForm = () => {
     relationship: '',
     selectedMessage: '',
     customMessage: '',
-    selectedBackground: greetingBackgrounds[0],
-    selectedTemplate: greetingTemplates[0]
+    selectedArtwork: greetingArtworks[0]
   });
+  const [showMoreArtworks, setShowMoreArtworks] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const { toast } = useToast();
 
