@@ -527,6 +527,10 @@ const AdminPanel = () => {
               <Package className="w-4 h-4" />
               <span>Products</span>
             </TabsTrigger>
+            <TabsTrigger value="reviews" className="flex items-center space-x-2">
+              <MessageSquare className="w-4 h-4" />
+              <span>Reviews</span>
+            </TabsTrigger>
           </TabsList>
 
           {/* Dashboard Overview */}
