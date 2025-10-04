@@ -115,6 +115,13 @@ const AdminPanel = () => {
   const [showImageModal, setShowImageModal] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
 
+  // Open image modal when product is selected
+  useEffect(() => {
+    if (selectedImageProduct) {
+      setShowImageModal(true);
+    }
+  }, [selectedImageProduct]);
+
   const categories = [
     { value: 'chivda', label: 'Chivda Collection' },
     { value: 'chakli', label: 'Chakli Varieties' },
