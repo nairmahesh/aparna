@@ -52,6 +52,10 @@ const AdminPanel = () => {
 
   // Personalized Link State
   const [selectedContact, setSelectedContact] = useState('');
+  const [contactSearchQuery, setContactSearchQuery] = useState('');
+  const [filteredContacts, setFilteredContacts] = useState([]);
+  const [showContactSuggestions, setShowContactSuggestions] = useState(false);
+  const [showAddContactOption, setShowAddContactOption] = useState(false);
   const [messageTemplate, setMessageTemplate] = useState('');
   const [personalizedLinks, setPersonalizedLinks] = useState([]);
 
