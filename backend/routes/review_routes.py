@@ -39,7 +39,7 @@ async def get_review_summary(admin_key: str = Depends(verify_admin_key)):
         
         # Get recent orders
         orders_cursor = db.orders.find({
-            "order_date": {"$gte": thirty_days_ago},
+            "created_at": {"$gte": thirty_days_ago},
             "status": {"$in": ["confirmed", "delivered"]}
         })
         orders = await orders_cursor.to_list(length=None)
