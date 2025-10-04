@@ -790,6 +790,10 @@ const AdminPanel = () => {
               <MessageSquare className="w-4 h-4" />
               <span>Reviews</span>
             </TabsTrigger>
+            <TabsTrigger value="categories" className="flex items-center space-x-2">
+              <Package className="w-4 h-4" />
+              <span>Categories</span>
+            </TabsTrigger>
           </TabsList>
 
           {/* Dashboard Overview */}
