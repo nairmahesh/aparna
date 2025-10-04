@@ -89,8 +89,14 @@ const Home = () => {
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  // Get managed categories from localStorage, fallback to menuCategories
+  const getManagedCategories = () => {
+    const saved = localStorage.getItem('managedCategories');
+    return saved ? JSON.parse(saved) : menuCategories;
+  };
+
   // Get all items from all categories
-  const allItems = menuCategories.flatMap(category => 
+  const allItems = getManagedCategories().flatMap(category => 
     category.items.map(item => ({ ...item, categoryId: category.id, categoryName: category.name }))
   );
 
