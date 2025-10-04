@@ -174,82 +174,48 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Aparna's Specials - Featured Items */}
+              {/* Quick Category Overview */}
               <section className="mb-16">
                 <div className="text-center mb-8">
-                  <div className="inline-block bg-gradient-to-r from-pink-100 to-rose-100 px-6 py-3 rounded-full border-2 border-pink-200 mb-4">
-                    <h3 className="text-2xl font-bold text-pink-700 flex items-center justify-center space-x-2">
-                      <span>💝</span>
-                      <span>Aparna's Personal Favorites</span>
-                      <span>💝</span>
-                    </h3>
+                  <h3 className="text-3xl font-bold text-gray-800 mb-6">Browse Our Complete Collection</h3>
+                  <p className="text-gray-600 mb-8">Click on any category to see all available varieties</p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-6xl mx-auto">
+                    {menuCategories.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => {
+                          document.getElementById(category.id).scrollIntoView({ behavior: 'smooth' });
+                          // Trigger the category grid highlight
+                          setTimeout(() => {
+                            const categoryGrid = document.getElementById(`${category.id}-grid`);
+                            if (categoryGrid) {
+                              categoryGrid.classList.add('ring-4', 'ring-orange-300', 'ring-opacity-50');
+                              setTimeout(() => {
+                                categoryGrid.classList.remove('ring-4', 'ring-orange-300', 'ring-opacity-50');
+                              }, 2000);
+                            }
+                          }, 500);
+                        }}
+                        className="bg-gradient-to-br from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 p-6 rounded-xl border-2 border-orange-200 hover:border-orange-300 transition-all transform hover:scale-105 group"
+                      >
+                        <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{category.icon}</div>
+                        <h4 className="font-bold text-orange-700 mb-2">{category.name}</h4>
+                        <p className="text-sm text-gray-600 mb-3 leading-relaxed">{category.description}</p>
+                        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                          View All {category.items.length} Items →
+                        </div>
+                      </button>
+                    ))}
                   </div>
-                  <p className="text-gray-600 italic">"These are the recipes I'm most proud of - perfect for gifting!"</p>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                  {/* Featured Items from different categories */}
-                  <div className="relative group">
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-full text-sm font-bold z-10">
-                      Aparna's #1 Pick! ⭐
-                    </div>
-                    <MenuCard 
-                      item={{
-                        id: 'besan-laddu',
-                        name: 'Premium Besan Laddu',
-                        description: 'My grandmother\'s secret recipe with pure ghee and love. The texture is perfectly crumbly!',
-                        price: 1050,
-                        unit: 'per kg',
-                        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
-                      }}
-                      onAddToCart={handleAddToCart}
-                      isSpecial={true}
-                    />
-                  </div>
-
-                  <div className="relative group">
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-1 rounded-full text-sm font-bold z-10">
-                      Most Popular! 🔥
-                    </div>
-                    <MenuCard 
-                      item={{
-                        id: 'corn-chivda-dry-fruits',
-                        name: 'Special Corn Chivda',
-                        description: 'Crunchy corn with premium dry fruits - our customers\' absolute favorite for gifting!',
-                        price: 750,
-                        unit: 'per kg',
-                        image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop'
-                      }}
-                      onAddToCart={handleAddToCart}
-                      isSpecial={true}
-                    />
-                  </div>
-
-                  <div className="relative group">
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold z-10">
-                      Festive Special! ✨
-                    </div>
-                    <MenuCard 
-                      item={{
-                        id: 'gujjia',
-                        name: 'Fresh Gujjia',
-                        description: 'Made fresh this morning! Flaky pastry with rich khoya filling - pure Diwali magic!',
-                        price: 35,
-                        unit: 'per piece',
-                        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
-                      }}
-                      onAddToCart={handleAddToCart}
-                      isSpecial={true}
-                    />
-                  </div>
-                </div>
-
                 <div className="text-center">
-                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-2xl border-2 border-orange-200">
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-2xl border-2 border-orange-200 max-w-2xl mx-auto">
                     <p className="text-lg font-medium text-gray-700 mb-2">
-                      🎁 <span className="text-orange-600">Perfect Diwali Gift Combo:</span> Order all 3 favorites together!
+                      🎁 <span className="text-orange-600">Perfect for Diwali:</span> Mix & match from different categories!
                     </p>
-                    <p className="text-sm text-gray-600">Mix & match any items above for the perfect festival hamper</p>
+                    <p className="text-sm text-gray-600">Create your own custom hamper with varieties from each section</p>
                   </div>
                 </div>
               </section>
