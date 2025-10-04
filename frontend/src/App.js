@@ -79,6 +79,55 @@ const Home = () => {
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  // Get all items from all categories
+  const allItems = menuCategories.flatMap(category => 
+    category.items.map(item => ({ ...item, categoryId: category.id, categoryName: category.name }))
+  );
+
+  // Filter and sort items
+  const getFilteredItems = () => {
+    let filtered = allItems;
+
+    // Category filter
+    if (activeFilter !== 'all') {
+      filtered = filtered.filter(item => item.categoryId === activeFilter);
+    }
+
+    // Price filter
+    if (priceFilter !== 'all') {
+      filtered = filtered.filter(item => {
+        switch (priceFilter) {
+          case 'under500':
+            return item.price < 500;
+          case '500to1000':
+            return item.price >= 500 && item.price <= 1000;
+          case 'above1000':
+            return item.price > 1000;
+          default:
+            return true;
+        }
+      });
+    }
+
+    // Sort items
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'price-low':
+          return a.price - b.price;
+        case 'price-high':
+          return b.price - a.price;
+        case 'popular':
+          // Simple popularity based on category order and item order
+          return a.id.localeCompare(b.id);
+        case 'name':
+        default:
+          return a.name.localeCompare(b.name);
+      }
+    });
+
+    return filtered;
+  };
+
   const renderContent = () => {
     switch (currentView) {
       case 'order':
