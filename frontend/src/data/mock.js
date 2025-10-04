@@ -81,8 +81,8 @@ export const menuCategories = [
           }
         ],
         images: [
-          'https://images.unsplash.com/photo-1575526854473-e85fdba07b7a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxpbmRpYW4lMjBzbmFjayUyMG1peHxlbnwwfHx8fDE3NTk1ODA4MTJ8MA&ixlib=rb-4.1.0&q=85',
-          'https://images.unsplash.com/photo-1589556165541-4254aa9cfb39?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjBzbmFjayUyMG1peHxlbnwwfHx8fDE3NTk1ODA4MTJ8MA&ixlib=rb-4.1.0&q=85',
+          'https://picsum.photos/400/300?random=4',
+          'https://picsum.photos/400/300?random=5',
           'https://images.pexels.com/photos/5835026/pexels-photo-5835026.jpeg'
         ]
       },
