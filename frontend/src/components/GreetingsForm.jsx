@@ -198,7 +198,7 @@ const GreetingsForm = () => {
           <CardHeader>
             <CardTitle className="text-2xl text-orange-700 flex items-center space-x-2">
               <Heart className="w-6 h-6" />
-              <span>Create Your Greeting</span>
+              <span>Personalize Your Greeting</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
