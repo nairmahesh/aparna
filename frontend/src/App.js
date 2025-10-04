@@ -177,7 +177,7 @@ const Home = () => {
                     <span className="text-gray-700 font-medium">Premium Quality</span>
                   </div>
                   <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-sm">
-                    <Heart className="w-5 h-5 text-red-500 fill-current" />
+                    <Heart className="w-5 h-5 text-orange-500 fill-current" />
                     <span className="text-gray-700 font-medium">Made with Love</span>
                   </div>
                   <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-sm">
