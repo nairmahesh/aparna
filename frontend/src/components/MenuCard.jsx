@@ -46,23 +46,34 @@ const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
         
         {/* Rating Section */}
         {item.rating && (
-          <div className="flex items-center space-x-2 mb-3">
-            <div className="flex items-center space-x-1">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-4 h-4 ${
-                    i < Math.floor(item.rating)
-                      ? 'text-yellow-400 fill-current'
-                      : i < item.rating
-                      ? 'text-yellow-400 fill-current opacity-50'
-                      : 'text-gray-300'
-                  }`}
-                />
-              ))}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < Math.floor(item.rating)
+                        ? 'text-yellow-400 fill-current'
+                        : i < item.rating
+                        ? 'text-yellow-400 fill-current opacity-50'
+                        : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-sm font-medium text-gray-700">{item.rating}</span>
+              <span className="text-xs text-gray-500">({item.totalReviews})</span>
             </div>
-            <span className="text-sm font-medium text-gray-700">{item.rating}</span>
-            <span className="text-xs text-gray-500">({item.totalReviews} reviews)</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowReviews(true)}
+              className="text-xs text-orange-600 hover:bg-orange-50 hover:text-orange-700 p-1 h-auto"
+            >
+              <MessageSquare className="w-3 h-3 mr-1" />
+              Reviews
+            </Button>
           </div>
         )}
 
