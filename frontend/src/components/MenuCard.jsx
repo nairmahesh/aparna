@@ -6,16 +6,29 @@ import { ShoppingCart, Star } from 'lucide-react';
 
 const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-orange-50 to-amber-50 border-orange-200 hover:border-orange-300">
+    <Card className={`group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${
+      isSpecial 
+        ? 'bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-200 hover:border-rose-300 shadow-lg' 
+        : 'bg-gradient-to-br from-orange-50 to-amber-50 border-orange-200 hover:border-orange-300'
+    }`}>
       <CardHeader className="pb-3">
-        <div className="aspect-square rounded-lg overflow-hidden mb-3 bg-gradient-to-br from-orange-100 to-amber-100">
+        <div className={`aspect-square rounded-lg overflow-hidden mb-3 ${
+          isSpecial 
+            ? 'bg-gradient-to-br from-rose-100 to-pink-100 ring-2 ring-rose-200' 
+            : 'bg-gradient-to-br from-orange-100 to-amber-100'
+        }`}>
           <img 
             src={item.image} 
             alt={item.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
           />
+          {isSpecial && (
+            <div className="absolute inset-0 bg-gradient-to-t from-rose-500/20 to-transparent"></div>
+          )}
         </div>
-        <CardTitle className="text-lg text-gray-800 group-hover:text-orange-700 transition-colors">
+        <CardTitle className={`text-lg group-hover:text-orange-700 transition-colors ${
+          isSpecial ? 'text-rose-800 font-bold' : 'text-gray-800'
+        }`}>
           {item.name}
         </CardTitle>
       </CardHeader>
