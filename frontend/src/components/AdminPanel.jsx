@@ -1511,15 +1511,41 @@ const AdminPanel = () => {
                               </Badge>
                             </td>
                             <td className="py-3 px-2">
-                              <div className="flex space-x-1">
-                                <Button variant="ghost" size="sm" title="View Analytics">
-                                  <BarChart3 className="w-4 h-4 text-blue-600" />
-                                </Button>
-                                <Button variant="ghost" size="sm" title="Edit Product">
-                                  <Edit className="w-4 h-4 text-gray-600" />
-                                </Button>
-                                <Button variant="ghost" size="sm" title="Delete Product">
-                                  <Trash2 className="w-4 h-4 text-red-600" />
+                              <div className="flex flex-col space-y-1">
+                                <div className="flex space-x-1">
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm" 
+                                    title="View Analytics"
+                                    onClick={() => handleShowAnalytics(product)}
+                                  >
+                                    <BarChart3 className="w-4 h-4 text-blue-600" />
+                                  </Button>
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm" 
+                                    title="Edit Product"
+                                    onClick={() => handleEditProduct(product)}
+                                  >
+                                    <Edit className="w-4 h-4 text-gray-600" />
+                                  </Button>
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm" 
+                                    title="Delete Product"
+                                    onClick={() => handleDeleteProduct(product.id, product.name)}
+                                  >
+                                    <Trash2 className="w-4 h-4 text-red-600" />
+                                  </Button>
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className={`text-xs ${hiddenProducts.has(product.id) ? 'text-red-600' : 'text-green-600'}`}
+                                  onClick={() => handleToggleProductVisibility(product.id)}
+                                  title={hiddenProducts.has(product.id) ? "Show Product" : "Hide Product"}
+                                >
+                                  {hiddenProducts.has(product.id) ? '👁️‍🗨️ Show' : '🔍 Hide'}
                                 </Button>
                               </div>
                             </td>
