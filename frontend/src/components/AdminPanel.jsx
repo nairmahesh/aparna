@@ -33,6 +33,13 @@ const AdminPanel = () => {
   const [cartAbandonments, setCartAbandonments] = useState([]);
   const [revenueReport, setRevenueReport] = useState(null);
   const [loading, setLoading] = useState(false);
+  
+  // Review Management State
+  const [reviewSummary, setReviewSummary] = useState(null);
+  const [reviewRequests, setReviewRequests] = useState([]);
+  const [reviewStats, setReviewStats] = useState(null);
+  const [selectedOrders, setSelectedOrders] = useState([]);
+  const [reviewRequestMethod, setReviewRequestMethod] = useState('whatsapp');
   const [dateRange, setDateRange] = useState({
     from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     to: new Date().toISOString().split('T')[0]
