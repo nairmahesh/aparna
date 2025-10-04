@@ -254,30 +254,72 @@ const GreetingsForm = () => {
       ) : (
         <div className="space-y-6">
           {/* Greeting Preview */}
-          <Card className="border-4 border-gradient-to-r from-orange-400 to-amber-400">
+          <Card className="border-4 border-gradient-to-r from-orange-400 to-amber-400 overflow-hidden">
             <CardContent className="p-0">
-              <div className="bg-gradient-to-br from-orange-500 via-amber-400 to-yellow-400 p-1 rounded-lg">
-                <div className="bg-white rounded-md p-8 text-center space-y-6">
-                  <div className="text-6xl mb-4">🪔</div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-4">
-                    Happy Diwali!
-                  </h2>
-                  <div className="max-w-2xl mx-auto">
-                    <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
-                      {getFinalMessage()}
-                    </p>
+              <div className="relative h-96 md:h-[500px]">
+                {/* Background Image */}
+                <img 
+                  src={greetingData.selectedBackground.url} 
+                  alt="Diwali Background" 
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Overlay for better text readability */}
+                <div className={`absolute inset-0 ${greetingData.selectedBackground.overlayColor}`}></div>
+                
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex flex-col justify-between p-8">
+                  {/* Header */}
+                  <div className="text-center">
+                    <div className="text-5xl md:text-6xl mb-4">🪔</div>
+                    <h2 className={`text-3xl md:text-4xl font-bold ${greetingData.selectedBackground.textColor} mb-2 drop-shadow-lg`}>
+                      Happy Diwali!
+                    </h2>
+                    <div className="flex justify-center space-x-3 mb-6">
+                      <span className="text-2xl">✨</span>
+                      <span className="text-2xl">🎆</span>
+                      <span className="text-2xl">🎇</span>
+                      <span className="text-2xl">✨</span>
+                    </div>
                   </div>
-                  <div className="flex justify-center space-x-4 mt-8">
-                    <div className="text-2xl">✨</div>
-                    <div className="text-2xl">🎆</div>
-                    <div className="text-2xl">🪔</div>
-                    <div className="text-2xl">🎇</div>
-                    <div className="text-2xl">✨</div>
+
+                  {/* Main Content */}
+                  <div className="flex-1 flex flex-col justify-center">
+                    {/* To Section */}
+                    <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 mb-4 shadow-lg">
+                      <div className="mb-4">
+                        <p className="text-sm font-semibold text-orange-600 mb-1">TO:</p>
+                        <p className="text-xl font-bold text-gray-800">
+                          {greetingData.recipientName || '[Recipient Name]'}
+                        </p>
+                      </div>
+                      
+                      {/* Message */}
+                      <div className="mb-4">
+                        <p className="text-gray-700 leading-relaxed whitespace-pre-line text-center italic">
+                          "{getFinalMessage()}"
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* From Section */}
+                    <div className="text-right">
+                      <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 inline-block shadow-lg">
+                        <p className="text-sm font-semibold text-orange-600 mb-1">FROM:</p>
+                        <p className="text-lg font-bold text-gray-800">
+                          {greetingData.senderName || '[Your Name]'}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-right mt-8">
-                    <p className="text-lg font-semibold text-orange-600">
-                      From: {greetingData.senderName}
-                    </p>
+
+                  {/* Footer Decoration */}
+                  <div className="text-center">
+                    <div className="flex justify-center space-x-4">
+                      <span className="text-2xl">🎊</span>
+                      <span className="text-2xl">🪔</span>
+                      <span className="text-2xl">🎊</span>
+                    </div>
                   </div>
                 </div>
               </div>
