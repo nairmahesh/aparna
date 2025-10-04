@@ -431,7 +431,10 @@ const Home = () => {
                               {/* Rating Section */}
                               <div className="mb-4">
                                 {item.rating && (
-                                  <div className="flex items-center justify-center space-x-2">
+                                  <div 
+                                    className="flex items-center justify-center space-x-2 cursor-pointer hover:bg-orange-50 rounded-lg py-2 px-3 transition-colors"
+                                    onClick={() => handleShowReviews(item)}
+                                  >
                                     <div className="flex space-x-0.5">
                                       {[...Array(5)].map((_, i) => (
                                         <span key={i} className={`text-sm ${
@@ -440,7 +443,7 @@ const Home = () => {
                                       ))}
                                     </div>
                                     <span className="text-sm font-medium text-gray-700">{item.rating}</span>
-                                    <span className="text-xs text-gray-500">({item.totalReviews} reviews)</span>
+                                    <span className="text-xs text-orange-600 hover:text-orange-700 font-medium">({item.totalReviews} reviews)</span>
                                   </div>
                                 )}
                                 {!item.rating && (
