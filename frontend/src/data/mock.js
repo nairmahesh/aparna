@@ -187,9 +187,8 @@ export const menuCategories = [
   },
   {
     id: 'sweets',
-    name: 'Festival Sweets',
+    name: 'Karanji',
     description: 'Traditional sweets to make your Diwali celebrations memorable',
-    icon: '🍰',
     items: [
       {
         id: 'gujjia',
