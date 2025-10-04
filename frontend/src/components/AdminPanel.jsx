@@ -824,20 +824,34 @@ const AdminPanel = () => {
                   </div>
 
                   {selectedContact && (
-                    <div className="p-3 bg-orange-50 rounded-lg border border-orange-200">
+                    <div className="p-4 bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg border-2 border-orange-200 shadow-sm">
                       {(() => {
                         const contact = contacts.find(c => c.id === selectedContact);
                         return contact ? (
                           <div>
-                            <p className="font-medium text-orange-700">Sending to:</p>
-                            <p className="text-lg font-semibold">{contact.name}</p>
-                            <p className="text-sm text-gray-600 flex items-center">
-                              <Phone className="w-3 h-3 mr-1" />
-                              {contact.phone}
-                            </p>
-                            <Badge className="mt-1 bg-orange-200 text-orange-700">
-                              {relationships.find(r => r.value === contact.relationship)?.label}
-                            </Badge>
+                            <div className="flex items-center space-x-2 mb-2">
+                              <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full flex items-center justify-center">
+                                <User className="w-4 h-4 text-white" />
+                              </div>
+                              <p className="font-medium text-orange-700">Ready to send to:</p>
+                            </div>
+                            <div className="ml-10">
+                              <p className="text-xl font-bold text-gray-800">{contact.name}</p>
+                              <p className="text-sm text-gray-600 flex items-center mb-2">
+                                <Phone className="w-3 h-3 mr-1" />
+                                {contact.phone}
+                              </p>
+                              <div className="flex items-center space-x-2">
+                                <Badge className="bg-orange-200 text-orange-700">
+                                  {relationships.find(r => r.value === contact.relationship)?.label}
+                                </Badge>
+                                {contact.last_contacted && (
+                                  <Badge variant="outline" className="text-xs">
+                                    Last contacted: {new Date(contact.last_contacted).toLocaleDateString()}
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
                           </div>
                         ) : null;
                       })()}
