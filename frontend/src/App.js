@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import CategorySection from './components/CategorySection';
+import MenuCard from './components/MenuCard';
 import OrderForm from './components/OrderForm';
 import GreetingsForm from './components/GreetingsForm';
 import AdminLogin from './components/AdminLogin';
