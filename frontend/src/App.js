@@ -220,50 +220,6 @@ const Home = () => {
                 </div>
               </section>
 
-              {/* Quick Browse by Mood */}
-              <section className="mb-16">
-                <div className="text-center mb-8">
-                  <h3 className="text-3xl font-bold text-gray-800 mb-4">What are you in the mood for?</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                    <button 
-                      onClick={() => document.getElementById('chivda').scrollIntoView({ behavior: 'smooth' })}
-                      className="bg-gradient-to-br from-yellow-100 to-orange-100 hover:from-yellow-200 hover:to-orange-200 p-6 rounded-xl border-2 border-yellow-200 hover:border-yellow-300 transition-all group"
-                    >
-                      <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🍿</div>
-                      <p className="font-semibold text-orange-700">Crunchy Snacks</p>
-                      <p className="text-xs text-gray-600">Chivda & More</p>
-                    </button>
-                    
-                    <button 
-                      onClick={() => document.getElementById('sweets').scrollIntoView({ behavior: 'smooth' })}
-                      className="bg-gradient-to-br from-pink-100 to-rose-100 hover:from-pink-200 hover:to-rose-200 p-6 rounded-xl border-2 border-pink-200 hover:border-pink-300 transition-all group"
-                    >
-                      <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🍬</div>
-                      <p className="font-semibold text-pink-700">Sweet Treats</p>
-                      <p className="text-xs text-gray-600">Laddus & Sweets</p>
-                    </button>
-                    
-                    <button 
-                      onClick={() => document.getElementById('chakli').scrollIntoView({ behavior: 'smooth' })}
-                      className="bg-gradient-to-br from-green-100 to-emerald-100 hover:from-green-200 hover:to-emerald-200 p-6 rounded-xl border-2 border-green-200 hover:border-green-300 transition-all group"
-                    >
-                      <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌀</div>
-                      <p className="font-semibold text-green-700">Traditional</p>
-                      <p className="text-xs text-gray-600">Chakli Varieties</p>
-                    </button>
-                    
-                    <button 
-                      onClick={() => document.getElementById('savory').scrollIntoView({ behavior: 'smooth' })}
-                      className="bg-gradient-to-br from-purple-100 to-indigo-100 hover:from-purple-200 hover:to-indigo-200 p-6 rounded-xl border-2 border-purple-200 hover:border-purple-300 transition-all group"
-                    >
-                      <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🥨</div>
-                      <p className="font-semibold text-purple-700">Savory Mix</p>
-                      <p className="text-xs text-gray-600">Mathri & More</p>
-                    </button>
-                  </div>
-                </div>
-              </section>
-
               {/* Full Menu Categories with better spacing and cross-selling */}
               {menuCategories.map((category, index) => (
                 <div key={category.id} id={category.id}>
