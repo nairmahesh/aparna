@@ -84,6 +84,31 @@ export const menuCategories = [
         description: 'Roasted lotus seeds with aromatic spices and herbs',
         price: 1600,
         unit: 'per kg',
+        rating: 4.8,
+        totalReviews: 41,
+        reviews: [
+          {
+            id: 1,
+            customerName: 'Sunita D.',
+            rating: 5,
+            comment: 'Premium quality makhana! Perfect seasoning and very fresh. Worth the price.',
+            date: '2024-10-03'
+          },
+          {
+            id: 2,
+            customerName: 'Vikram P.',
+            rating: 5,
+            comment: 'Best makhana chivda I have ever tasted. Crispy and flavorful.',
+            date: '2024-09-30'
+          },
+          {
+            id: 3,
+            customerName: 'Meera J.',
+            rating: 4,
+            comment: 'Good quality and taste. Packaging was excellent. Recommended!',
+            date: '2024-09-27'
+          }
+        ],
         image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&h=300&fit=crop'
       },
       {
