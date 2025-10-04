@@ -433,58 +433,102 @@ const GreetingsForm = () => {
         </p>
       </div>
 
-      {/* Template Selection */}
+      {/* Artwork Selection */}
       <Card className="border-orange-200 mb-8">
         <CardHeader>
           <CardTitle className="text-2xl text-center text-orange-700 flex items-center justify-center space-x-2">
             <Sparkles className="w-6 h-6" />
-            <span>Choose Your Template</span>
+            <span>Select Artwork</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {greetingTemplates.map((template) => (
+          {/* Show first 4 artworks */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            {greetingArtworks.slice(0, 4).map((artwork) => (
               <Card 
-                key={template.id} 
+                key={artwork.id} 
                 className={`cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 ${
-                  greetingData.selectedTemplate.id === template.id 
+                  greetingData.selectedArtwork.id === artwork.id 
                     ? 'border-orange-500 ring-4 ring-orange-200 shadow-2xl scale-105' 
                     : 'border-gray-200 hover:border-orange-300'
                 }`}
-                onClick={() => setGreetingData(prev => ({ ...prev, selectedTemplate: template }))}
+                onClick={() => setGreetingData(prev => ({ ...prev, selectedArtwork: artwork }))}
               >
-                <CardContent className="p-3">
-                  <div className="relative h-32 rounded-lg overflow-hidden group mb-3">
+                <CardContent className="p-2">
+                  <div className="relative h-24 md:h-32 rounded-lg overflow-hidden group">
                     <img 
-                      src={template.preview} 
-                      alt={template.name} 
+                      src={artwork.url} 
+                      alt={artwork.name} 
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                      <div className="text-center">
-                        {greetingData.selectedTemplate.id === template.id && (
-                          <div className="bg-white/90 rounded-full px-3 py-1">
-                            <span className="text-orange-600 text-xs font-bold">✓ Selected</span>
+                    <div className={`absolute inset-0 ${artwork.overlayColor} flex items-center justify-center`}>
+                      {greetingData.selectedArtwork.id === artwork.id && (
+                        <div className="absolute top-1 right-1">
+                          <div className="w-5 h-5 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center">
+                            <span className="text-white text-xs">✓</span>
                           </div>
-                        )}
-                      </div>
-                    </div>
-                    {greetingData.selectedTemplate.id === template.id && (
-                      <div className="absolute top-2 right-2">
-                        <div className="w-6 h-6 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center">
-                          <span className="text-white text-xs">✓</span>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <h4 className="font-bold text-gray-800 text-sm">{template.name}</h4>
-                    <p className="text-xs text-gray-600 mt-1">{template.description}</p>
+                  <div className="text-center mt-2">
+                    <h4 className="font-medium text-gray-800 text-xs">{artwork.name}</h4>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
+
+          {/* Show More/Less Button */}
+          <div className="text-center">
+            <Button
+              onClick={() => setShowMoreArtworks(!showMoreArtworks)}
+              variant="outline"
+              className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50"
+            >
+              {showMoreArtworks ? 'Show Less' : 'Show More Artworks'}
+              <span className="ml-1">{showMoreArtworks ? '↑' : '↓'}</span>
+            </Button>
+          </div>
+
+          {/* Additional artworks - collapsible */}
+          {showMoreArtworks && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 animate-in slide-in-from-top duration-300">
+              {greetingArtworks.slice(4).map((artwork) => (
+                <Card 
+                  key={artwork.id} 
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+                    greetingData.selectedArtwork.id === artwork.id 
+                      ? 'border-orange-500 ring-4 ring-orange-200 shadow-2xl scale-105' 
+                      : 'border-gray-200 hover:border-orange-300'
+                  }`}
+                  onClick={() => setGreetingData(prev => ({ ...prev, selectedArtwork: artwork }))}
+                >
+                  <CardContent className="p-2">
+                    <div className="relative h-24 md:h-32 rounded-lg overflow-hidden group">
+                      <img 
+                        src={artwork.url} 
+                        alt={artwork.name} 
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                      <div className={`absolute inset-0 ${artwork.overlayColor} flex items-center justify-center`}>
+                        {greetingData.selectedArtwork.id === artwork.id && (
+                          <div className="absolute top-1 right-1">
+                            <div className="w-5 h-5 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center">
+                              <span className="text-white text-xs">✓</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="text-center mt-2">
+                      <h4 className="font-medium text-gray-800 text-xs">{artwork.name}</h4>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
 
