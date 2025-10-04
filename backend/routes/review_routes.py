@@ -108,9 +108,26 @@ async def send_review_requests(
                 # Extract product names
                 product_names = [item['product_name'] for item in order['items']]
                 
+                # Determine contact info based on method and custom contact
+                contact_phone = order['customer_phone']
+                contact_email = order.get('customer_email', '')
+                
+                if request_data.custom_contact:
+                    if request_data.request_method == 'whatsapp' and request_data.custom_contact.whatsapp_number:
+                        contact_phone = request_data.custom_contact.whatsapp_number
+                    elif request_data.request_method == 'sms' and request_data.custom_contact.mobile_number:
+                        contact_phone = request_data.custom_contact.mobile_number
+                    elif request_data.request_method == 'email' and request_data.custom_contact.email_id:
+                        contact_email = request_data.custom_contact.email_id
+                
+                # Validate contact info based on method
+                if request_data.request_method == 'email' and not contact_email:
+                    failed_orders.append({"order_id": order_id, "reason": "Email ID required for email method"})
+                    continue
+                
                 # Create review request
                 review_request = ReviewRequest(
-                    customer_phone=order['customer_phone'],
+                    customer_phone=contact_phone,
                     customer_name=order['customer_name'],
                     order_id=order_id,
                     order_date=order['created_at'],
