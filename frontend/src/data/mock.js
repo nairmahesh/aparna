@@ -185,6 +185,31 @@ export const menuCategories = [
         description: 'Traditional Maharashtrian chakli with mixed lentil flour',
         price: 700,
         unit: 'per kg',
+        rating: 4.6,
+        totalReviews: 29,
+        reviews: [
+          {
+            id: 1,
+            customerName: 'Vandana M.',
+            rating: 5,
+            comment: 'Authentic Maharashtrian taste! Just like Aaji used to make. Perfect texture and flavor.',
+            date: '2024-10-05'
+          },
+          {
+            id: 2,
+            customerName: 'Sachin P.',
+            rating: 4,
+            comment: 'Great traditional chakli. Good quality ingredients and fresh preparation.',
+            date: '2024-10-02'
+          },
+          {
+            id: 3,
+            customerName: 'Manisha K.',
+            rating: 5,
+            comment: 'Excellent bhajni chakli! Crispy and well-spiced. Highly recommended.',
+            date: '2024-09-30'
+          }
+        ],
         images: [
           'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg',
           'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
