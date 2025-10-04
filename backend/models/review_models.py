@@ -40,10 +40,16 @@ class ReviewRequestCreate(BaseModel):
     products_ordered: List[str]
     request_method: Literal["whatsapp", "sms", "email"]
 
+class CustomContactInfo(BaseModel):
+    whatsapp_number: Optional[str] = None
+    email_id: Optional[str] = None  
+    mobile_number: Optional[str] = None
+
 class ReviewRequestBatch(BaseModel):
     order_ids: List[str]
     request_method: Literal["whatsapp", "sms", "email"]
     message_template: Optional[str] = None
+    custom_contact: Optional[CustomContactInfo] = None
 
 class ReviewStats(BaseModel):
     total_requests_sent: int
