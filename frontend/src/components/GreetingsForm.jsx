@@ -410,59 +410,92 @@ const GreetingsForm = () => {
                   <div className={`absolute inset-0 ${greetingData.selectedArtwork.overlayColor}`}></div>
                   
                   {/* Content Overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-                    {/* Header */}
-                    <div className="text-center">
-                      <div className="text-4xl md:text-5xl mb-3">🪔</div>
-                      <h2 className={`text-2xl md:text-3xl font-bold ${greetingData.selectedArtwork.textColor} mb-4 drop-shadow-2xl font-serif`}>
-                        Happy Diwali!
-                      </h2>
-                    </div>
+                  {greetingData.selectedArtwork.isTemplate ? (
+                    // Template-specific layout for built-in placeholders
+                    <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+                      {/* Empty top space for built-in "Happy Diwali" */}
+                      <div className="h-1/3"></div>
 
-                    {/* Main Content */}
-                    <div className="flex-1 flex flex-col justify-center space-y-4">
-                      {/* To Section */}
-                      <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg">
-                        <div className="mb-3">
-                          <p className="text-orange-600 text-sm font-medium mb-1">To,</p>
-                          <p className="text-lg md:text-xl font-bold text-gray-800 font-serif">
+                      {/* Middle section - To and From */}
+                      <div className="flex-1 flex flex-col justify-start space-y-6 pt-8">
+                        {/* To Section - positioned for template */}
+                        <div className="pl-8 md:pl-12">
+                          <p className={`text-base md:text-lg font-bold ${greetingData.selectedArtwork.textColor} font-serif`}>
                             {greetingData.recipientName || '[Recipient Name]'}
                           </p>
                         </div>
-                        
-                        {/* Message */}
-                        <div className="border-l-3 border-orange-400 pl-4">
-                          <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm md:text-base italic">
-                            {getFinalMessage()}
-                          </p>
-                        </div>
-                      </div>
 
-                      {/* From Section */}
-                      <div className="text-right">
-                        <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 md:p-4 inline-block shadow-lg">
-                          <p className="text-orange-600 text-sm font-medium mb-1">From,</p>
-                          <p className="text-base md:text-lg font-bold text-gray-800 font-serif">
+                        {/* From Section - positioned for template */}
+                        <div className="pl-8 md:pl-12">
+                          <p className={`text-base md:text-lg font-bold ${greetingData.selectedArtwork.textColor} font-serif`}>
                             {greetingData.senderName || '[Your Name]'}
                           </p>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Footer */}
-                    <div className="text-center">
-                      <div className="flex justify-center space-x-4 md:space-x-6 mb-3">
-                        <span className="text-xl md:text-2xl">🎊</span>
-                        <span className="text-xl md:text-2xl">🪔</span>
-                        <span className="text-xl md:text-2xl">🎊</span>
-                      </div>
-                      <div className="inline-block bg-gradient-to-r from-orange-400/80 to-amber-400/80 px-3 py-1 md:px-4 md:py-2 rounded-full">
-                        <span className={`text-xs md:text-sm font-semibold ${greetingData.selectedArtwork.textColor} drop-shadow-lg`}>
-                          Wishing you joy & prosperity! ✨
-                        </span>
+                      {/* Bottom section - Message */}
+                      <div className="text-center pb-8">
+                        <p className={`text-sm md:text-base ${greetingData.selectedArtwork.textColor} font-medium leading-relaxed max-w-lg mx-auto`}>
+                          {getFinalMessage()}
+                        </p>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    // Regular layout for other artworks
+                    <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+                      {/* Header */}
+                      <div className="text-center">
+                        <div className="text-4xl md:text-5xl mb-3">🪔</div>
+                        <h2 className={`text-2xl md:text-3xl font-bold ${greetingData.selectedArtwork.textColor} mb-4 drop-shadow-2xl font-serif`}>
+                          Happy Diwali!
+                        </h2>
+                      </div>
+
+                      {/* Main Content */}
+                      <div className="flex-1 flex flex-col justify-center space-y-4">
+                        {/* To Section */}
+                        <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg">
+                          <div className="mb-3">
+                            <p className="text-orange-600 text-sm font-medium mb-1">To,</p>
+                            <p className="text-lg md:text-xl font-bold text-gray-800 font-serif">
+                              {greetingData.recipientName || '[Recipient Name]'}
+                            </p>
+                          </div>
+                          
+                          {/* Message */}
+                          <div className="border-l-3 border-orange-400 pl-4">
+                            <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm md:text-base italic">
+                              {getFinalMessage()}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* From Section */}
+                        <div className="text-right">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 md:p-4 inline-block shadow-lg">
+                            <p className="text-orange-600 text-sm font-medium mb-1">From,</p>
+                            <p className="text-base md:text-lg font-bold text-gray-800 font-serif">
+                              {greetingData.senderName || '[Your Name]'}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Footer */}
+                      <div className="text-center">
+                        <div className="flex justify-center space-x-4 md:space-x-6 mb-3">
+                          <span className="text-xl md:text-2xl">🎊</span>
+                          <span className="text-xl md:text-2xl">🪔</span>
+                          <span className="text-xl md:text-2xl">🎊</span>
+                        </div>
+                        <div className="inline-block bg-gradient-to-r from-orange-400/80 to-amber-400/80 px-3 py-1 md:px-4 md:py-2 rounded-full">
+                          <span className={`text-xs md:text-sm font-semibold ${greetingData.selectedArtwork.textColor} drop-shadow-lg`}>
+                            Wishing you joy & prosperity! ✨
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
