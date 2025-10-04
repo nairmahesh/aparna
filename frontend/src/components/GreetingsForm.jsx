@@ -120,77 +120,109 @@ const GreetingsForm = () => {
       </div>
 
       {/* Greeting Card Preview - Always Visible */}
-      <Card className="border-4 border-gradient-to-r from-orange-400 to-amber-400 overflow-hidden">
-        <CardContent className="p-0">
-          <div className="relative h-96 md:h-[500px]">
-            {/* Background Image */}
-            <img 
-              src={greetingData.selectedBackground.url} 
-              alt="Diwali Background" 
-              className="w-full h-full object-cover"
-            />
-            
-            {/* Overlay for better text readability */}
-            <div className={`absolute inset-0 ${greetingData.selectedBackground.overlayColor}`}></div>
-            
-            {/* Content Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-between p-8">
-              {/* Header */}
-              <div className="text-center">
-                <div className="text-5xl md:text-6xl mb-4">🪔</div>
-                <h2 className={`text-3xl md:text-4xl font-bold ${greetingData.selectedBackground.textColor} mb-2 drop-shadow-lg`}>
-                  Happy Diwali!
-                </h2>
-                <div className="flex justify-center space-x-3 mb-6">
-                  <span className="text-2xl">✨</span>
-                  <span className="text-2xl">🎆</span>
-                  <span className="text-2xl">🎇</span>
-                  <span className="text-2xl">✨</span>
-                </div>
-              </div>
-
-              {/* Main Content */}
-              <div className="flex-1 flex flex-col justify-center">
-                {/* To Section */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 mb-4 shadow-lg">
-                  <div className="mb-4">
-                    <p className="text-sm font-semibold text-orange-600 mb-1">TO:</p>
-                    <p className="text-xl font-bold text-gray-800">
-                      {greetingData.recipientName || '[Recipient Name]'}
-                    </p>
+      <div className="relative">
+        {/* Decorative elements around the card */}
+        <div className="absolute -top-4 -left-4 text-4xl animate-pulse">✨</div>
+        <div className="absolute -top-4 -right-4 text-4xl animate-pulse">🪔</div>
+        <div className="absolute -bottom-4 -left-4 text-4xl animate-pulse">🎊</div>
+        <div className="absolute -bottom-4 -right-4 text-4xl animate-pulse">🎆</div>
+        
+        <Card className="border-4 border-gradient-to-r from-orange-400 to-amber-400 overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-all duration-300">
+          <CardContent className="p-0">
+            <div className="relative h-96 md:h-[500px]">
+              {/* Background Image */}
+              <img 
+                src={greetingData.selectedBackground.url} 
+                alt="Diwali Background" 
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Decorative border overlay */}
+              <div className="absolute inset-0 border-8 border-gradient-to-r from-orange-300/30 to-amber-300/30 rounded-lg"></div>
+              
+              {/* Overlay for better text readability */}
+              <div className={`absolute inset-0 ${greetingData.selectedBackground.overlayColor}`}></div>
+              
+              {/* Content Overlay */}
+              <div className="absolute inset-0 flex flex-col justify-between p-8">
+                {/* Header with enhanced styling */}
+                <div className="text-center">
+                  <div className="relative mb-4">
+                    <div className="text-5xl md:text-6xl mb-4 animate-bounce">🪔</div>
+                    <div className="absolute -top-2 -left-8 text-2xl animate-pulse">✨</div>
+                    <div className="absolute -top-2 -right-8 text-2xl animate-pulse">✨</div>
                   </div>
-                  
-                  {/* Message */}
-                  <div className="mb-4">
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line text-center italic">
-                      "{getFinalMessage()}"
-                    </p>
+                  <h2 className={`text-3xl md:text-4xl font-bold ${greetingData.selectedBackground.textColor} mb-2 drop-shadow-2xl font-serif`}>
+                    🌟 Happy Diwali! 🌟
+                  </h2>
+                  <div className="flex justify-center space-x-3 mb-6">
+                    <span className="text-2xl animate-pulse">✨</span>
+                    <span className="text-2xl animate-pulse">🎆</span>
+                    <span className="text-2xl animate-pulse">🎇</span>
+                    <span className="text-2xl animate-pulse">✨</span>
                   </div>
                 </div>
 
-                {/* From Section */}
-                <div className="text-right">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 inline-block shadow-lg">
-                    <p className="text-sm font-semibold text-orange-600 mb-1">FROM:</p>
-                    <p className="text-lg font-bold text-gray-800">
-                      {greetingData.senderName || '[Your Name]'}
-                    </p>
+                {/* Main Content with enhanced design */}
+                <div className="flex-1 flex flex-col justify-center">
+                  {/* To Section */}
+                  <div className="bg-gradient-to-br from-white/95 to-orange-50/95 backdrop-blur-sm rounded-2xl p-6 mb-4 shadow-2xl border-2 border-orange-200/50">
+                    <div className="mb-4">
+                      <div className="flex items-center mb-2">
+                        <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white text-sm font-bold">TO</span>
+                        </div>
+                        <p className="text-xl font-bold text-gray-800 font-serif">
+                          {greetingData.recipientName || '[Recipient Name]'}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Message with enhanced styling */}
+                    <div className="mb-4 relative">
+                      <div className="absolute -left-2 -top-2 text-orange-400 text-2xl">"</div>
+                      <p className="text-gray-700 leading-relaxed whitespace-pre-line text-center italic font-medium px-4">
+                        {getFinalMessage()}
+                      </p>
+                      <div className="absolute -right-2 -bottom-2 text-orange-400 text-2xl">"</div>
+                    </div>
+                  </div>
+
+                  {/* From Section with enhanced design */}
+                  <div className="text-right">
+                    <div className="bg-gradient-to-br from-amber-50/95 to-orange-50/95 backdrop-blur-sm rounded-2xl p-4 inline-block shadow-2xl border-2 border-amber-200/50">
+                      <div className="flex items-center justify-end">
+                        <p className="text-lg font-bold text-gray-800 mr-3 font-serif">
+                          {greetingData.senderName || '[Your Name]'}
+                        </p>
+                        <div className="w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">FROM</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Footer Decoration */}
-              <div className="text-center">
-                <div className="flex justify-center space-x-4">
-                  <span className="text-2xl">🎊</span>
-                  <span className="text-2xl">🪔</span>
-                  <span className="text-2xl">🎊</span>
+                {/* Footer Decoration with enhanced effects */}
+                <div className="text-center">
+                  <div className="flex justify-center space-x-6">
+                    <span className="text-3xl animate-pulse">🎊</span>
+                    <span className="text-3xl animate-bounce">🪔</span>
+                    <span className="text-3xl animate-pulse">🎊</span>
+                  </div>
+                  <div className="mt-4 text-center">
+                    <div className="inline-block bg-gradient-to-r from-orange-400/80 to-amber-400/80 px-4 py-2 rounded-full">
+                      <span className={`text-sm font-semibold ${greetingData.selectedBackground.textColor} drop-shadow-lg`}>
+                        Wishing you joy, prosperity & happiness! ✨
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Personalization Options */}
       {!showPreview ? (
