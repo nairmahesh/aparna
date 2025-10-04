@@ -93,3 +93,23 @@ code {
     overflow: hidden;
   }
 }
+
+/* Enhanced card animations and effects */
+@layer components {
+  .food-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .food-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(251, 146, 60, 0.25);
+  }
+  
+  .food-image {
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .food-card:hover .food-image {
+    transform: scale(1.1) rotate(1deg);
+  }
+}
