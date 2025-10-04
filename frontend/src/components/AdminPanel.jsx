@@ -418,6 +418,13 @@ const AdminPanel = () => {
     return new Date(dateString).toLocaleString('en-IN');
   };
 
+  const calculateOfferPrice = () => {
+    if (newProduct.discount_percentage && newProduct.base_price) {
+      return Math.round(newProduct.base_price * (1 - newProduct.discount_percentage / 100));
+    }
+    return newProduct.offer_price || newProduct.base_price || 0;
+  };
+
   const getStatusBadge = (status, type = 'order') => {
     const statusConfig = type === 'order' ? orderStatuses : 
                        type === 'delivery' ? deliveryStatuses : paymentStatuses;
