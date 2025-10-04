@@ -65,7 +65,7 @@ async def get_review_summary(admin_key: str = Depends(verify_admin_key)):
                     'order_id': order['id'],
                     'customer_name': order['customer_name'],
                     'customer_phone': order['customer_phone'],
-                    'order_date': order['order_date'],
+                    'order_date': order['created_at'],
                     'total_amount': order['total_amount'],
                     'items': order['items']
                 })
