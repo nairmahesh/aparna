@@ -347,7 +347,7 @@ export const menuCategories = [
         images: [
           'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
           'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg',
-          'https://images.unsplash.com/photo-1621245725986-d794ddc5da5a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxjaGFrbGklMjBzcGlyYWx8ZW58MHx8fHwxNzU5NTgwODE2fDA&ixlib=rb-4.1.0&q=85'
+          'https://picsum.photos/400/300?random=14'
         ]
       },
       {
@@ -426,7 +426,7 @@ export const menuCategories = [
           }
         ],
         images: [
-          'https://images.unsplash.com/photo-1621245725986-d794ddc5da5a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxjaGFrbGklMjBzcGlyYWx8ZW58MHx8fHwxNzU5NTgwODE2fDA&ixlib=rb-4.1.0&q=85',
+          'https://picsum.photos/400/300?random=14',
           'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
           'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg'
         ]
