@@ -114,7 +114,7 @@ const GreetingsForm = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
+    <div className="max-w-7xl mx-auto space-y-8">
       <div className="text-center mb-12">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-4">
           Create Diwali Greetings
@@ -124,7 +124,10 @@ const GreetingsForm = () => {
         </p>
       </div>
 
-      {/* Greeting Card Preview - Always Visible */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Live Preview - Left Side */}
+        <div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Live Preview</h3>
       <div className="relative">
         {/* Decorative elements around the card */}
         <div className="absolute -top-4 -left-4 text-4xl animate-pulse">✨</div>
