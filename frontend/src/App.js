@@ -158,15 +158,15 @@ const Home = () => {
             <section className="relative py-20 px-4 text-center overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400/10 to-amber-400/10"></div>
               <div className="relative container mx-auto max-w-4xl">
-                <div className="mb-8">
-                  <h1 className="text-6xl md:text-7xl font-bold mb-6">
+                <div className="mb-4 md:mb-8">
+                  <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-3 md:mb-6">
                     <span className="bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
                       Festival of
                     </span>
                     <br />
                     <span className="text-gray-800">Lights & Flavors</span>
                   </h1>
-                  <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed max-w-3xl mx-auto">
+                  <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-700 mb-4 md:mb-8 leading-relaxed max-w-3xl mx-auto">
                     {shopInfo.description}
                   </p>
                 </div>
