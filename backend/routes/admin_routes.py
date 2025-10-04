@@ -163,7 +163,9 @@ async def create_personalized_link(
     result = await db.personalized_links.insert_one(link_data)
     if result.inserted_id:
         # Generate the personalized URL
-        personalized_url = f"https://your-domain.com/?ref={link_data['link_token']}"
+        domain = os.environ.get('APP_DOMAIN', 'localhost:3000')
+        protocol = 'https' if 'localhost' not in domain else 'http'
+        personalized_url = f"{protocol}://{domain}/?ref={link_data['link_token']}"
         
         return {
             "link_id": link_data["id"],
