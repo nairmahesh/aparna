@@ -294,7 +294,7 @@ export const menuCategories = [
             customerName: 'Priyanka D.',
             rating: 5,
             comment: 'Crispy and well-fried. Perfect seasoning. Will order again this year.',
-            date: '2025-10-06'
+            date: '2025-10-05'
           },
           {
             id: 3,
@@ -415,7 +415,7 @@ export const menuCategories = [
             customerName: 'Suresh M.',
             rating: 4,
             comment: 'Nice jowari chakli. Different but good. Ordered last Diwali for health-conscious relatives.',
-            date: '2025-10-06'
+            date: '2025-10-05'
           },
           {
             id: 3,
@@ -492,7 +492,7 @@ export const menuCategories = [
             customerName: 'Smita D.',
             rating: 4,
             comment: 'Crunchy and well-made. Good for tea-time and festivals.',
-            date: '2025-10-06'
+            date: '2025-10-05'
           },
           {
             id: 3,
@@ -591,7 +591,7 @@ export const menuCategories = [
             customerName: 'Kalpana S.',
             rating: 4,
             comment: 'Crispy and well-made. Good for festivals and gifting.',
-            date: '2025-10-06'
+            date: '2025-10-05'
           }
         ],
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
@@ -708,7 +708,7 @@ export const menuCategories = [
             customerName: 'Vidya T.',
             rating: 5,
             comment: 'Excellent quality karanji! Fresh ingredients and perfect sweetness level.',
-            date: '2025-10-06'
+            date: '2025-10-05'
           }
         ],
         images: [
@@ -752,7 +752,7 @@ export const menuCategories = [
             customerName: 'Laxmi G.',
             rating: 4,
             comment: 'Very good quality and authentic taste. Fresh and well-made. Will order again.',
-            date: '2025-10-06'
+            date: '2025-10-05'
           },
           {
             id: 4,
