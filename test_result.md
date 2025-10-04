@@ -234,7 +234,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Greeting Card Layout Redesign"
+    - "Comprehensive Product Reviews and Ratings System"
+    - "Admin Review Request Management System" 
+    - "Review Management Backend System"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
