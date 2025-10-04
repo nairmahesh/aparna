@@ -165,7 +165,7 @@ export const menuCategories = [
             customerName: 'Mahesh L.',
             rating: 4,
             comment: 'Traditional taste. Good for festivals and gifting. Had ordered during last Diwali.',
-            date: '2025-10-08'
+            date: '2025-10-03'
           }
         ],
         images: [
