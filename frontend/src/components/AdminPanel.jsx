@@ -1628,7 +1628,7 @@ const AdminPanel = () => {
                             key={idx}
                             variant="outline"
                             onClick={() => setMessageTemplate(template.message)}
-                            className="text-left h-auto p-3 border-orange-200 hover:bg-orange-50"
+                            className="text-left h-auto p-3 border-orange-200 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50"
                           >
                             <div>
                               <p className="font-medium text-sm">{template.name}</p>
