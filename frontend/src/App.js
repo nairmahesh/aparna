@@ -296,7 +296,7 @@ const Home = () => {
 
                     <hr className="my-6" />
                     
-                    <div className="bg-orange-50 p-4 rounded-lg">
+                    <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg">
                       <p className="text-sm font-medium text-orange-700 mb-1">✓ Fresh Daily</p>
                       <p className="text-sm font-medium text-orange-700 mb-1">✓ Free Delivery ₹500+</p>
                       <p className="text-sm font-medium text-orange-700">✓ Family Recipes</p>
