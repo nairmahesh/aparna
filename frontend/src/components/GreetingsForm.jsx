@@ -592,7 +592,7 @@ const GreetingsForm = () => {
                         key={index} 
                         className={`cursor-pointer transition-all hover:border-orange-300 ${
                           greetingData.selectedMessage === message 
-                            ? 'border-orange-500 bg-orange-50' 
+                            ? 'border-orange-500 bg-gradient-to-br from-orange-50 to-amber-50' 
                             : 'border-gray-200'
                         }`}
                         onClick={() => handleMessageSelect(message)}
