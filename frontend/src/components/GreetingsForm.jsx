@@ -22,11 +22,11 @@ const greetingArtworks = [
   },
   {
     id: 2,
-    name: 'Colorful String Lights',
-    url: 'https://images.unsplash.com/photo-1557932541-016894d7b7f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
+    name: 'Sparkling Diwali',
+    url: 'https://customer-assets.emergentagent.com/job_visual-preview-10/artifacts/7rgp6pgp_image.png',
     textColor: 'text-white',
-    overlayColor: 'bg-black/40',
-    category: 'modern'
+    overlayColor: 'bg-black/20',
+    category: 'traditional'
   },
   {
     id: 3,
