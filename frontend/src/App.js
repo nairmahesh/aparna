@@ -88,6 +88,12 @@ const Home = () => {
         );
       case 'greetings':
         return <GreetingsForm />;
+      case 'admin':
+        return isAdminLoggedIn ? (
+          <AdminPanel />
+        ) : (
+          <AdminLogin onLogin={setIsAdminLoggedIn} />
+        );
       default:
         return (
           <>
