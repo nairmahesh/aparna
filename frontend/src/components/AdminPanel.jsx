@@ -1603,7 +1603,7 @@ const AdminPanel = () => {
                                 {contact.phone}
                               </p>
                               <div className="flex items-center space-x-2">
-                                <Badge className="bg-orange-200 text-orange-700">
+                                <Badge className="bg-gradient-to-r from-orange-200 to-amber-200 text-orange-700">
                                   {relationships.find(r => r.value === contact.relationship)?.label}
                                 </Badge>
                                 {contact.last_contacted && (
