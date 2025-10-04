@@ -202,7 +202,7 @@ async def generate_review_links(
     """Generate WhatsApp, SMS, and email links for manual review requests"""
     try:
         # Get order details
-        order = await db.orders.find_one({"_id": order_id})
+        order = await db.orders.find_one({"id": order_id})
         if not order:
             raise HTTPException(status_code=404, detail="Order not found")
         
