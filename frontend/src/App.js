@@ -422,14 +422,23 @@ const Home = () => {
                                 
                                 {/* Rating Stars */}
                                 <div className="text-right">
-                                  <div className="flex items-center space-x-1 mb-1">
-                                    <div className="flex space-x-0.5">
-                                      {[...Array(5)].map((_, i) => (
-                                        <span key={i} className="text-amber-400 text-sm">★</span>
-                                      ))}
-                                    </div>
-                                  </div>
-                                  <p className="text-xs text-gray-500">4.8 (120+ reviews)</p>
+                                  {item.rating && (
+                                    <>
+                                      <div className="flex items-center space-x-1 mb-1 justify-end">
+                                        <div className="flex space-x-0.5">
+                                          {[...Array(5)].map((_, i) => (
+                                            <span key={i} className={`text-sm ${
+                                              i < Math.floor(item.rating) ? 'text-amber-400' : 'text-gray-300'
+                                            }`}>★</span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                      <p className="text-xs text-gray-500">{item.rating} ({item.totalReviews}+ reviews)</p>
+                                    </>
+                                  )}
+                                  {!item.rating && (
+                                    <p className="text-xs text-gray-400">New Product</p>
+                                  )}
                                 </div>
                               </div>
                               
