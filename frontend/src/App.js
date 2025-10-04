@@ -329,7 +329,7 @@ const Home = () => {
                               : 'bg-gray-100 text-gray-700'
                           }`}
                         >
-                          {category.icon} {category.name.split(' ')[0]}
+                          {category.name.split(' ')[0]}
                         </button>
                       ))}
                     </div>
