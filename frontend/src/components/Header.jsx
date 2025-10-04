@@ -104,7 +104,7 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
             <Button 
               onClick={onCartClick}
               variant="outline" 
-              className="relative border-orange-200 hover:border-orange-300 hover:bg-orange-50"
+              className="relative border-orange-200 hover:border-orange-300 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50"
             >
               <ShoppingCart className="w-5 h-5 mr-2 text-orange-600" />
               <span className="text-orange-600">Cart</span>
