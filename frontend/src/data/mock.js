@@ -469,7 +469,7 @@ export const menuCategories = [
             date: '2025-10-02'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=15'
       },
       {
         id: 'ribbon-pakoda',
@@ -502,7 +502,7 @@ export const menuCategories = [
             date: '2025-10-03'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=15'
       },
       {
         id: 'thika-sev',
@@ -535,7 +535,7 @@ export const menuCategories = [
             date: '2025-10-04'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=15'
       },
       {
         id: 'mathri',
@@ -568,7 +568,7 @@ export const menuCategories = [
             date: '2025-10-02'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=15'
       },
       {
         id: 'thika-shankarpala',
@@ -594,7 +594,7 @@ export const menuCategories = [
             date: '2025-10-05'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=15'
       },
       {
         id: 'sweet-shankarpala',
