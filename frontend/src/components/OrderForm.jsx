@@ -329,7 +329,12 @@ const OrderForm = ({ cart, onUpdateCart, onRemoveItem, onClearCart }) => {
           <div className="text-center space-y-2">
             <h3 className="text-xl font-bold">{shopInfo.name}</h3>
             <p>{shopInfo.contact.address}</p>
-            <p>📞 {shopInfo.contact.phone}</p>
+            <p>📞 <a 
+              href={`tel:${shopInfo.contact.phone}`}
+              className="hover:text-orange-200 transition-colors cursor-pointer"
+            >
+              {shopInfo.contact.phone}
+            </a></p>
             <p className="text-sm">FSSAI License: {shopInfo.contact.fssai}</p>
             <div className="flex justify-center space-x-4 text-sm mt-4">
               <Badge className="bg-white/20 text-white">Fresh Daily</Badge>
