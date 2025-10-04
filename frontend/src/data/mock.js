@@ -169,9 +169,9 @@ export const menuCategories = [
           }
         ],
         images: [
-          'https://images.unsplash.com/photo-1627035537702-ddca174d7987?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxzYWJ1ZGFuYXxlbnwwfHx8fDE3NTk1ODA4Mjl8MA&ixlib=rb-4.1.0&q=85',
-          'https://images.unsplash.com/photo-1627035537727-96e5d592bbb6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxzYWJ1ZGFuYXxlbnwwfHx8fDE3NTk1ODA4Mjl8MA&ixlib=rb-4.1.0&q=85',
-          'https://images.unsplash.com/photo-1603554593710-89285666b691?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxzYWJ1ZGFuYXxlbnwwfHx8fDE3NTk1ODA4Mjl8MA&ixlib=rb-4.1.0&q=85'
+          'https://picsum.photos/400/300?random=9',
+          'https://picsum.photos/400/300?random=10',
+          'https://picsum.photos/400/300?random=11'
         ]
       },
       {
