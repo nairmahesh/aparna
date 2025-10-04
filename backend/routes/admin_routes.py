@@ -352,3 +352,346 @@ async def get_message_templates(admin_key: str = Depends(verify_admin)):
     """Get all message templates"""
     templates = await db.message_templates.find().to_list(100)
     return [MessageTemplate(**template) for template in templates]
+
+# ENHANCED ORDER MANAGEMENT ENDPOINTS
+
+@router.get("/orders", response_model=List[OrderEnhanced])
+async def get_all_orders(
+    status: Optional[str] = None,
+    delivery_status: Optional[str] = None,
+    date_from: Optional[str] = None,
+    date_to: Optional[str] = None,
+    limit: Optional[int] = 100,
+    admin_key: str = Depends(verify_admin)
+):
+    """Get all orders with advanced filtering"""
+    query = {}
+    
+    if status:
+        query["status"] = status
+    if delivery_status:
+        query["delivery_status"] = delivery_status
+    if date_from and date_to:
+        query["created_at"] = {
+            "$gte": datetime.fromisoformat(date_from),
+            "$lte": datetime.fromisoformat(date_to)
+        }
+    
+    orders = await db.orders.find(query).limit(limit).sort("created_at", -1).to_list(limit)
+    return [OrderEnhanced(**order) for order in orders]
+
+@router.get("/orders/{order_id}", response_model=OrderEnhanced)
+async def get_order(order_id: str, admin_key: str = Depends(verify_admin)):
+    """Get single order details"""
+    order = await db.orders.find_one({"id": order_id})
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return OrderEnhanced(**order)
+
+@router.put("/orders/{order_id}", response_model=OrderEnhanced)
+async def update_order(
+    order_id: str, 
+    updates: OrderUpdate, 
+    admin_key: str = Depends(verify_admin)
+):
+    """Update order status, delivery details, etc."""
+    update_dict = {k: v for k, v in updates.dict().items() if v is not None}
+    update_dict["updated_at"] = datetime.utcnow()
+    
+    # Auto-set delivery date when dispatched
+    if updates.delivery_status == DeliveryStatus.DISPATCHED and not updates.dispatched_date:
+        update_dict["dispatched_date"] = datetime.utcnow()
+    
+    result = await db.orders.update_one(
+        {"id": order_id},
+        {"$set": update_dict}
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    order = await db.orders.find_one({"id": order_id})
+    return OrderEnhanced(**order)
+
+@router.get("/orders/customer/{phone}")
+async def get_customer_orders(phone: str, admin_key: str = Depends(verify_admin)):
+    """Get all orders for a specific customer by phone number"""
+    orders = await db.orders.find({"customer_phone": phone}).sort("created_at", -1).to_list(100)
+    return [OrderEnhanced(**order) for order in orders]
+
+# VISITOR ANALYTICS ENDPOINTS
+
+@router.get("/analytics/visitors")
+async def get_visitor_analytics(
+    date_from: Optional[str] = None,
+    date_to: Optional[str] = None,
+    admin_key: str = Depends(verify_admin)
+):
+    """Get comprehensive visitor analytics"""
+    # Set default date range (last 30 days)
+    if not date_from or not date_to:
+        date_to_dt = datetime.utcnow()
+        date_from_dt = date_to_dt - timedelta(days=30)
+    else:
+        date_from_dt = datetime.fromisoformat(date_from)
+        date_to_dt = datetime.fromisoformat(date_to)
+    
+    # Get visitor sessions in date range
+    sessions = await db.visitor_sessions.find({
+        "first_visit": {"$gte": date_from_dt, "$lte": date_to_dt}
+    }).to_list(1000)
+    
+    # Calculate metrics
+    total_sessions = len(sessions)
+    unique_visitors = len(set(s.get("session_id") for s in sessions))
+    returning_visitors = len([s for s in sessions if s.get("visitor_type") == "customer"])
+    new_visitors = total_sessions - returning_visitors
+    
+    # Engagement metrics
+    total_time = sum(s.get("total_time_spent", 0) for s in sessions)
+    avg_session_duration = total_time / total_sessions if total_sessions > 0 else 0
+    
+    total_page_views = sum(s.get("total_page_views", 0) for s in sessions)
+    pages_per_session = total_page_views / total_sessions if total_sessions > 0 else 0
+    
+    # E-commerce metrics
+    orders = await db.orders.find({
+        "created_at": {"$gte": date_from_dt, "$lte": date_to_dt}
+    }).to_list(1000)
+    
+    total_orders = len(orders)
+    total_revenue = sum(order.get("final_amount", 0) for order in orders)
+    avg_order_value = total_revenue / total_orders if total_orders > 0 else 0
+    conversion_rate = (total_orders / total_sessions * 100) if total_sessions > 0 else 0
+    
+    # Cart abandonment
+    abandoned_carts = await db.cart_abandonments.count_documents({
+        "abandoned_at": {"$gte": date_from_dt, "$lte": date_to_dt}
+    })
+    
+    return DashboardAnalytics(
+        date_range=f"{date_from_dt.strftime('%Y-%m-%d')} to {date_to_dt.strftime('%Y-%m-%d')}",
+        total_visitors=total_sessions,
+        unique_visitors=unique_visitors,
+        returning_visitors=returning_visitors,
+        new_visitors=new_visitors,
+        avg_session_duration=avg_session_duration,
+        pages_per_session=pages_per_session,
+        total_orders=total_orders,
+        total_revenue=total_revenue,
+        avg_order_value=avg_order_value,
+        conversion_rate=conversion_rate,
+        abandoned_carts=abandoned_carts
+    )
+
+@router.get("/analytics/customers")
+async def get_customer_analytics(admin_key: str = Depends(verify_admin)):
+    """Get detailed customer analytics"""
+    # Aggregate customer data
+    pipeline = [
+        {
+            "$group": {
+                "_id": "$customer_phone",
+                "customer_name": {"$first": "$customer_name"},
+                "customer_phone": {"$first": "$customer_phone"},
+                "total_orders": {"$sum": 1},
+                "total_spent": {"$sum": "$final_amount"},
+                "first_order_date": {"$min": "$created_at"},
+                "last_order_date": {"$max": "$created_at"},
+                "orders": {"$push": "$$ROOT"}
+            }
+        }
+    ]
+    
+    customer_data = await db.orders.aggregate(pipeline).to_list(1000)
+    
+    analytics = []
+    for customer in customer_data:
+        avg_order_value = customer["total_spent"] / customer["total_orders"]
+        
+        # Calculate days between first and last order
+        if customer["total_orders"] > 1:
+            days_diff = (customer["last_order_date"] - customer["first_order_date"]).days
+            avg_time_between_orders = days_diff / (customer["total_orders"] - 1)
+        else:
+            avg_time_between_orders = None
+        
+        # Determine customer type
+        customer_type = CustomerType.RETURNING if customer["total_orders"] > 1 else CustomerType.NEW
+        
+        analytics.append(CustomerAnalytics(
+            customer_id=customer["_id"],
+            customer_name=customer["customer_name"],
+            customer_phone=customer["customer_phone"],
+            customer_type=customer_type,
+            total_orders=customer["total_orders"],
+            total_spent=customer["total_spent"],
+            avg_order_value=avg_order_value,
+            first_order_date=customer["first_order_date"],
+            last_order_date=customer["last_order_date"],
+            avg_time_between_orders=avg_time_between_orders
+        ))
+    
+    return sorted(analytics, key=lambda x: x.total_spent, reverse=True)
+
+@router.get("/analytics/cart-abandonment")
+async def get_cart_abandonment_analytics(admin_key: str = Depends(verify_admin)):
+    """Get cart abandonment analytics and recovery opportunities"""
+    # Get recent cart abandonments (last 7 days)
+    seven_days_ago = datetime.utcnow() - timedelta(days=7)
+    
+    abandoned_carts = await db.cart_abandonments.find({
+        "abandoned_at": {"$gte": seven_days_ago},
+        "recovered": False
+    }).sort("abandoned_at", -1).to_list(100)
+    
+    return [CartAbandonmentSession(**cart) for cart in abandoned_carts]
+
+@router.get("/analytics/revenue-report")
+async def get_revenue_report(
+    date_from: Optional[str] = None,
+    date_to: Optional[str] = None,
+    admin_key: str = Depends(verify_admin)
+):
+    """Get detailed revenue report with delivery costs breakdown"""
+    # Set default date range (last 30 days)
+    if not date_from or not date_to:
+        date_to_dt = datetime.utcnow()
+        date_from_dt = date_to_dt - timedelta(days=30)
+    else:
+        date_from_dt = datetime.fromisoformat(date_from)
+        date_to_dt = datetime.fromisoformat(date_to)
+    
+    # Revenue aggregation pipeline
+    pipeline = [
+        {
+            "$match": {
+                "created_at": {"$gte": date_from_dt, "$lte": date_to_dt},
+                "status": {"$ne": "cancelled"}
+            }
+        },
+        {
+            "$group": {
+                "_id": {
+                    "date": {"$dateToString": {"format": "%Y-%m-%d", "date": "$created_at"}},
+                    "status": "$delivery_status"
+                },
+                "total_orders": {"$sum": 1},
+                "total_revenue": {"$sum": "$total_amount"},
+                "total_delivery_cost": {"$sum": "$delivery_cost"},
+                "final_amount": {"$sum": "$final_amount"}
+            }
+        },
+        {"$sort": {"_id.date": -1}}
+    ]
+    
+    revenue_data = await db.orders.aggregate(pipeline).to_list(1000)
+    
+    return {
+        "date_range": f"{date_from_dt.strftime('%Y-%m-%d')} to {date_to_dt.strftime('%Y-%m-%d')}",
+        "daily_breakdown": revenue_data,
+        "summary": {
+            "total_orders": sum(item["total_orders"] for item in revenue_data),
+            "total_revenue": sum(item["total_revenue"] for item in revenue_data),
+            "total_delivery_revenue": sum(item["total_delivery_cost"] for item in revenue_data),
+            "grand_total": sum(item["final_amount"] for item in revenue_data)
+        }
+    }
+
+# VISITOR TRACKING ENDPOINTS (for frontend integration)
+
+@router.post("/track/visitor-session")
+async def track_visitor_session(
+    session_id: str,
+    visitor_type: Optional[str] = "anonymous",
+    referral_link_token: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    user_agent: Optional[str] = None
+):
+    """Track visitor session (no admin auth required)"""
+    session_data = {
+        "session_id": session_id,
+        "visitor_type": visitor_type,
+        "referral_link_token": referral_link_token,
+        "ip_address": ip_address,
+        "user_agent": user_agent,
+        "first_visit": datetime.utcnow(),
+        "last_activity": datetime.utcnow()
+    }
+    
+    # Check if session already exists
+    existing_session = await db.visitor_sessions.find_one({"session_id": session_id})
+    
+    if existing_session:
+        await db.visitor_sessions.update_one(
+            {"session_id": session_id},
+            {"$set": {"last_activity": datetime.utcnow()}}
+        )
+    else:
+        await db.visitor_sessions.insert_one(session_data)
+    
+    return {"status": "tracked"}
+
+@router.post("/track/visitor-event")
+async def track_visitor_event(
+    session_id: str,
+    event_type: str,
+    page_url: Optional[str] = None,
+    product_id: Optional[str] = None,
+    product_name: Optional[str] = None,
+    cart_value: Optional[float] = None,
+    order_id: Optional[str] = None
+):
+    """Track visitor events (no admin auth required)"""
+    event_data = {
+        "id": str(uuid.uuid4()),
+        "session_id": session_id,
+        "event_type": event_type,
+        "page_url": page_url,
+        "product_id": product_id,
+        "product_name": product_name,
+        "cart_value": cart_value,
+        "order_id": order_id,
+        "timestamp": datetime.utcnow()
+    }
+    
+    await db.visitor_events.insert_one(event_data)
+    
+    # Update visitor session based on event type
+    if event_type == "page_view":
+        await db.visitor_sessions.update_one(
+            {"session_id": session_id},
+            {
+                "$inc": {"total_page_views": 1},
+                "$set": {"last_activity": datetime.utcnow()}
+            }
+        )
+    elif event_type == "cart_add":
+        await db.visitor_sessions.update_one(
+            {"session_id": session_id},
+            {
+                "$inc": {"items_added_to_cart": 1},
+                "$set": {"last_activity": datetime.utcnow()}
+            }
+        )
+    elif event_type == "checkout_start":
+        await db.visitor_sessions.update_one(
+            {"session_id": session_id},
+            {
+                "$inc": {"checkout_attempts": 1},
+                "$set": {"last_activity": datetime.utcnow()}
+            }
+        )
+    elif event_type == "order_complete":
+        await db.visitor_sessions.update_one(
+            {"session_id": session_id},
+            {
+                "$inc": {"orders_placed": 1, "total_order_value": cart_value or 0},
+                "$set": {
+                    "last_activity": datetime.utcnow(),
+                    "converted_to_customer": True
+                }
+            }
+        )
+    
+    return {"status": "tracked"}
