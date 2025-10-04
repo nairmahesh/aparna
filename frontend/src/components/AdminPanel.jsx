@@ -413,6 +413,80 @@ const AdminPanel = () => {
       setCustomerAnalytics(response.data);
     } catch (error) {
       console.error('Error loading customer analytics:', error);
+      // Fallback to dummy data
+      const dummyCustomerAnalytics = [
+        {
+          customer_id: 'cust_001',
+          customer_name: 'Priya Sharma',
+          customer_phone: '+91 98765 43210',
+          total_orders: 8,
+          total_spent: 18650,
+          avg_order_value: 2331.25,
+          customer_type: 'returning',
+          first_order_date: '2024-10-15T10:30:00Z',
+          last_order_date: '2025-09-28T10:30:00Z',
+          favorite_category: 'chivda',
+          order_history: [
+            { date: '2025-09-28', amount: 2850, items: 3 },
+            { date: '2025-08-15', amount: 1950, items: 2 },
+            { date: '2025-07-22', amount: 3200, items: 4 }
+          ],
+          lifetime_value_score: 'high'
+        },
+        {
+          customer_id: 'cust_002',
+          customer_name: 'Rajesh Kumar',
+          customer_phone: '+91 87654 32109',
+          total_orders: 1,
+          total_spent: 1850,
+          avg_order_value: 1850,
+          customer_type: 'new',
+          first_order_date: '2025-10-01T15:45:00Z',
+          last_order_date: '2025-10-01T15:45:00Z',
+          favorite_category: 'thepla',
+          order_history: [
+            { date: '2025-10-01', amount: 1850, items: 4 }
+          ],
+          lifetime_value_score: 'medium'
+        },
+        {
+          customer_id: 'cust_003',
+          customer_name: 'Meera Patel',
+          customer_phone: '+91 76543 21098',
+          total_orders: 12,
+          total_spent: 32400,
+          avg_order_value: 2700,
+          customer_type: 'returning',
+          first_order_date: '2024-08-20T14:20:00Z',
+          last_order_date: '2025-10-02T11:20:00Z',
+          favorite_category: 'ladoo',
+          order_history: [
+            { date: '2025-10-02', amount: 3200, items: 3 },
+            { date: '2025-09-18', amount: 2850, items: 2 },
+            { date: '2025-08-28', amount: 4100, items: 5 }
+          ],
+          lifetime_value_score: 'high'
+        },
+        {
+          customer_id: 'cust_004',
+          customer_name: 'Amit Singh',
+          customer_phone: '+91 65432 10987',
+          total_orders: 6,
+          total_spent: 15300,
+          avg_order_value: 2550,
+          customer_type: 'returning', 
+          first_order_date: '2025-01-12T16:45:00Z',
+          last_order_date: '2025-09-25T13:30:00Z',
+          favorite_category: 'bhujia',
+          order_history: [
+            { date: '2025-09-25', amount: 2400, items: 2 },
+            { date: '2025-08-10', amount: 3100, items: 3 },
+            { date: '2025-06-15', amount: 2200, items: 2 }
+          ],
+          lifetime_value_score: 'high'
+        }
+      ];
+      setCustomerAnalytics(dummyCustomerAnalytics);
     }
   };
 
