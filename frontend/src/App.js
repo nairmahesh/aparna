@@ -147,7 +147,7 @@ const Home = () => {
         return <GreetingsForm />;
       case 'admin':
         return isAdminLoggedIn ? (
-          <EnhancedAdminPanel />
+          <AdminPanel />
         ) : (
           <AdminLogin onLogin={setIsAdminLoggedIn} />
         );
