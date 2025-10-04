@@ -100,7 +100,11 @@ export const menuCategories = [
         description: 'Classic spiral-shaped snack made from rice flour and spices',
         price: 625,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=300&fit=crop'
+        images: [
+          'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
+          'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg',
+          'https://images.unsplash.com/photo-1621245725986-d794ddc5da5a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxjaGFrbGklMjBzcGlyYWx8ZW58MHx8fHwxNzU5NTgwODE2fDA&ixlib=rb-4.1.0&q=85'
+        ]
       },
       {
         id: 'bhajni-chakli',
@@ -108,7 +112,11 @@ export const menuCategories = [
         description: 'Traditional Maharashtrian chakli with mixed lentil flour',
         price: 700,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=300&fit=crop'
+        images: [
+          'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg',
+          'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
+          'https://images.pexels.com/photos/9832685/pexels-photo-9832685.jpeg'
+        ]
       },
       {
         id: 'jowari-chakli',
@@ -116,7 +124,11 @@ export const menuCategories = [
         description: 'Healthy chakli made from sorghum flour with authentic taste',
         price: 650,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=300&fit=crop'
+        images: [
+          'https://images.unsplash.com/photo-1621245725986-d794ddc5da5a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxjaGFrbGklMjBzcGlyYWx8ZW58MHx8fHwxNzU5NTgwODE2fDA&ixlib=rb-4.1.0&q=85',
+          'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
+          'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg'
+        ]
       }
     ]
   },
