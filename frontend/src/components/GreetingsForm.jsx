@@ -398,104 +398,51 @@ const GreetingsForm = () => {
           <div className="w-full">
             <Card className="border-2 border-orange-300 overflow-hidden shadow-lg w-full">
               <CardContent className="p-0">
-                <div className="relative w-full aspect-[4/5] max-h-[600px]">
-                  {/* Background Image */}
+                {/* Artwork Image - Top Section */}
+                <div className="w-full aspect-[4/3] max-h-[400px]">
                   <img 
                     src={greetingData.selectedArtwork.url} 
-                    alt="Diwali Background" 
+                    alt="Diwali Artwork" 
                     className="w-full h-full object-cover"
                   />
+                </div>
+                
+                {/* Text Section - Bottom Section */}
+                <div className="bg-white p-6 space-y-4">
+                  {/* To Section */}
+                  <div>
+                    <p className="text-orange-600 text-sm font-medium mb-1">To,</p>
+                    <p className="text-lg font-bold text-gray-800 font-serif">
+                      {greetingData.recipientName || '[Recipient Name]'}
+                    </p>
+                  </div>
                   
-                  {/* Overlay for better text readability */}
-                  <div className={`absolute inset-0 ${greetingData.selectedArtwork.overlayColor}`}></div>
-                  
-                  {/* Content Overlay */}
-                  {greetingData.selectedArtwork.isTemplate ? (
-                    // Template-specific layout for built-in placeholders
-                    <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-                      {/* Empty top space for built-in "Happy Diwali" */}
-                      <div className="h-1/3"></div>
+                  {/* Message Section */}
+                  <div className="border-l-4 border-orange-400 pl-4 py-2">
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-line text-base">
+                      {getFinalMessage()}
+                    </p>
+                  </div>
 
-                      {/* Middle section - To and From */}
-                      <div className="flex-1 flex flex-col justify-start space-y-6 pt-8">
-                        {/* To Section - positioned for template */}
-                        <div className="pl-8 md:pl-12">
-                          <p className={`text-base md:text-lg font-bold ${greetingData.selectedArtwork.textColor} font-serif`}>
-                            {greetingData.recipientName || '[Recipient Name]'}
-                          </p>
-                        </div>
+                  {/* From Section */}
+                  <div className="text-right">
+                    <p className="text-orange-600 text-sm font-medium mb-1">From,</p>
+                    <p className="text-lg font-bold text-gray-800 font-serif">
+                      {greetingData.senderName || '[Your Name]'}
+                    </p>
+                  </div>
 
-                        {/* From Section - positioned for template */}
-                        <div className="pl-8 md:pl-12">
-                          <p className={`text-base md:text-lg font-bold ${greetingData.selectedArtwork.textColor} font-serif`}>
-                            {greetingData.senderName || '[Your Name]'}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Bottom section - Message */}
-                      <div className="text-center pb-8">
-                        <p className={`text-sm md:text-base ${greetingData.selectedArtwork.textColor} font-medium leading-relaxed max-w-lg mx-auto`}>
-                          {getFinalMessage()}
-                        </p>
-                      </div>
+                  {/* Footer decoration */}
+                  <div className="text-center pt-4 border-t border-orange-100">
+                    <div className="flex justify-center space-x-4 mb-2">
+                      <span className="text-xl">🎊</span>
+                      <span className="text-xl">🪔</span>
+                      <span className="text-xl">🎊</span>
                     </div>
-                  ) : (
-                    // Regular layout for other artworks
-                    <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-                      {/* Header */}
-                      <div className="text-center">
-                        <div className="text-4xl md:text-5xl mb-3">🪔</div>
-                        <h2 className={`text-2xl md:text-3xl font-bold ${greetingData.selectedArtwork.textColor} mb-4 drop-shadow-2xl font-serif`}>
-                          Happy Diwali!
-                        </h2>
-                      </div>
-
-                      {/* Main Content */}
-                      <div className="flex-1 flex flex-col justify-center space-y-4">
-                        {/* To Section */}
-                        <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg">
-                          <div className="mb-3">
-                            <p className="text-orange-600 text-sm font-medium mb-1">To,</p>
-                            <p className="text-lg md:text-xl font-bold text-gray-800 font-serif">
-                              {greetingData.recipientName || '[Recipient Name]'}
-                            </p>
-                          </div>
-                          
-                          {/* Message */}
-                          <div className="border-l-3 border-orange-400 pl-4">
-                            <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm md:text-base italic">
-                              {getFinalMessage()}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* From Section */}
-                        <div className="text-right">
-                          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 md:p-4 inline-block shadow-lg">
-                            <p className="text-orange-600 text-sm font-medium mb-1">From,</p>
-                            <p className="text-base md:text-lg font-bold text-gray-800 font-serif">
-                              {greetingData.senderName || '[Your Name]'}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Footer */}
-                      <div className="text-center">
-                        <div className="flex justify-center space-x-4 md:space-x-6 mb-3">
-                          <span className="text-xl md:text-2xl">🎊</span>
-                          <span className="text-xl md:text-2xl">🪔</span>
-                          <span className="text-xl md:text-2xl">🎊</span>
-                        </div>
-                        <div className="inline-block bg-gradient-to-r from-orange-400/80 to-amber-400/80 px-3 py-1 md:px-4 md:py-2 rounded-full">
-                          <span className={`text-xs md:text-sm font-semibold ${greetingData.selectedArtwork.textColor} drop-shadow-lg`}>
-                            Wishing you joy & prosperity! ✨
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                    <p className="text-xs text-orange-600 font-medium">
+                      Wishing you joy & prosperity! ✨
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
