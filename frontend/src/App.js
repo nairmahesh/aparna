@@ -124,6 +124,42 @@ const Home = () => {
     setCart([]);
   };
 
+  const handleIncrementQuantity = (item) => {
+    setCart(prev => {
+      const existingItem = prev.find(cartItem => cartItem.id === item.id);
+      if (existingItem) {
+        return prev.map(cartItem => 
+          cartItem.id === item.id 
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        return [...prev, { ...item, quantity: 1 }];
+      }
+    });
+  };
+
+  const handleDecrementQuantity = (item) => {
+    setCart(prev => {
+      const existingItem = prev.find(cartItem => cartItem.id === item.id);
+      if (existingItem && existingItem.quantity > 1) {
+        return prev.map(cartItem => 
+          cartItem.id === item.id 
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        );
+      } else if (existingItem && existingItem.quantity === 1) {
+        return prev.filter(cartItem => cartItem.id !== item.id);
+      }
+      return prev;
+    });
+  };
+
+  const getItemQuantityInCart = (itemId) => {
+    const cartItem = cart.find(item => item.id === itemId);
+    return cartItem ? cartItem.quantity : 0;
+  };
+
   const handleCartClick = () => {
     if (cart.length === 0) {
       toast({
