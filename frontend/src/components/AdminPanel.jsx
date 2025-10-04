@@ -1991,6 +1991,237 @@ const AdminPanel = () => {
               </Card>
             </div>
           </TabsContent>
+          {/* Reviews Management */}
+          <TabsContent value="reviews" className="space-y-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">Reviews & Feedback Management</h2>
+              <Button onClick={loadReviewData} disabled={loading} variant="outline">
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
+
+            {/* Review Statistics */}
+            {reviewStats && (
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Requests Sent</p>
+                        <p className="text-2xl font-bold text-blue-600">{reviewStats.total_requests_sent}</p>
+                      </div>
+                      <Send className="w-8 h-8 text-blue-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Pending Reviews</p>
+                        <p className="text-2xl font-bold text-yellow-600">{reviewStats.pending_reviews}</p>
+                      </div>
+                      <Clock className="w-8 h-8 text-yellow-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Completed Reviews</p>
+                        <p className="text-2xl font-bold text-green-600">{reviewStats.completed_reviews}</p>
+                      </div>
+                      <CheckCircle className="w-8 h-8 text-green-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Response Rate</p>
+                        <p className="text-2xl font-bold text-purple-600">{reviewStats.review_response_rate}%</p>
+                        <p className="text-xs text-gray-500">Avg Rating: {reviewStats.average_overall_rating}★</p>
+                      </div>
+                      <TrendingUp className="w-8 h-8 text-purple-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Send Review Requests Section */}
+            {reviewSummary && (
+              <Card className="mb-6">
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <MessageSquare className="w-5 h-5" />
+                    <span>Send Review Requests</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                      <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="bg-blue-50 p-4 rounded-lg">
+                          <p className="text-sm text-blue-600">Total Orders (30 days)</p>
+                          <p className="text-2xl font-bold text-blue-700">{reviewSummary.total_orders}</p>
+                        </div>
+                        <div className="bg-green-50 p-4 rounded-lg">
+                          <p className="text-sm text-green-600">Requests Sent</p>
+                          <p className="text-2xl font-bold text-green-700">{reviewSummary.orders_with_requests_sent}</p>
+                        </div>
+                        <div className="bg-orange-50 p-4 rounded-lg">
+                          <p className="text-sm text-orange-600">Pending Requests</p>
+                          <p className="text-2xl font-bold text-orange-700">{reviewSummary.orders_pending_requests}</p>
+                        </div>
+                        <div className="bg-purple-50 p-4 rounded-lg">
+                          <p className="text-sm text-purple-600">Reviews Received</p>
+                          <p className="text-2xl font-bold text-purple-700">{reviewSummary.total_reviews_received}</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <Label>Select Request Method</Label>
+                        <Select value={reviewRequestMethod} onValueChange={setReviewRequestMethod}>
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="whatsapp">WhatsApp</SelectItem>
+                            <SelectItem value="sms">SMS</SelectItem>
+                            <SelectItem value="email">Email</SelectItem>
+                          </SelectContent>
+                        </Select>
+
+                        <Button 
+                          onClick={sendReviewRequests} 
+                          disabled={loading || selectedOrders.length === 0}
+                          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+                        >
+                          <Send className="w-4 h-4 mr-2" />
+                          Send Requests ({selectedOrders.length} selected)
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="mb-3 block">Orders Eligible for Review Requests</Label>
+                      <div className="max-h-64 overflow-y-auto space-y-2">
+                        {reviewSummary.orders_eligible_for_requests.map((order) => (
+                          <div 
+                            key={order.order_id} 
+                            className={`p-3 border rounded-lg cursor-pointer transition-colors ${
+                              selectedOrders.includes(order.order_id)
+                                ? 'bg-orange-50 border-orange-300'
+                                : 'bg-gray-50 hover:bg-gray-100'
+                            }`}
+                            onClick={() => {
+                              setSelectedOrders(prev => 
+                                prev.includes(order.order_id)
+                                  ? prev.filter(id => id !== order.order_id)
+                                  : [...prev, order.order_id]
+                              );
+                            }}
+                          >
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <p className="font-medium text-sm">{order.customer_name}</p>
+                                <p className="text-xs text-gray-600">{order.customer_phone}</p>
+                                <p className="text-xs text-gray-500">
+                                  {new Date(order.order_date).toLocaleDateString()}
+                                </p>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-sm font-medium text-green-600">
+                                  ₹{order.total_amount}
+                                </p>
+                                <p className="text-xs text-gray-500">
+                                  {order.items.length} item(s)
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                        
+                        {reviewSummary.orders_eligible_for_requests.length === 0 && (
+                          <div className="text-center py-8 text-gray-500">
+                            <MessageCircle className="w-12 h-12 mx-auto mb-2 opacity-30" />
+                            <p>No orders eligible for review requests</p>
+                            <p className="text-xs">All recent orders already have requests sent</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Review Requests History */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span className="flex items-center space-x-2">
+                    <Clock className="w-5 h-5" />
+                    <span>Review Requests History</span>
+                  </span>
+                  <Badge variant="secondary">{reviewRequests.length} requests</Badge>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {reviewRequests.map((request) => (
+                    <div key={request.id} className="border rounded-lg p-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <p className="font-medium">{request.customer_name}</p>
+                          <p className="text-sm text-gray-600">{request.customer_phone}</p>
+                          <p className="text-xs text-gray-500">Order: {request.order_id}</p>
+                        </div>
+                        <div className="text-right">
+                          <Badge 
+                            className={`mb-2 ${
+                              request.status === 'sent' ? 'bg-blue-100 text-blue-800' :
+                              request.status === 'reviewed' ? 'bg-green-100 text-green-800' :
+                              request.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                              'bg-red-100 text-red-800'
+                            }`}
+                          >
+                            {request.status}
+                          </Badge>
+                          <p className="text-xs text-gray-500">
+                            via {request.request_method}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="text-sm text-gray-600">
+                        <p><strong>Products:</strong> {request.products_ordered.join(', ')}</p>
+                        <p><strong>Request Sent:</strong> {request.request_sent_date ? new Date(request.request_sent_date).toLocaleDateString() : 'Not sent'}</p>
+                        {request.review_submitted && (
+                          <p><strong>Review Submitted:</strong> {new Date(request.review_submitted_date).toLocaleDateString()}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+
+                  {reviewRequests.length === 0 && (
+                    <div className="text-center py-8 text-gray-500">
+                      <MessageSquare className="w-12 h-12 mx-auto mb-2 opacity-30" />
+                      <p>No review requests sent yet</p>
+                      <p className="text-xs">Start by sending requests to recent customers</p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
