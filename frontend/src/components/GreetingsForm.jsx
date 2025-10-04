@@ -479,82 +479,8 @@ const GreetingsForm = () => {
                   {/* Overlay for better text readability */}
                   <div className={`absolute inset-0 ${greetingData.selectedBackground.overlayColor}`}></div>
                   
-                  {/* Content Overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-between p-8">
-                    {/* Header with enhanced styling */}
-                    <div className="text-center">
-                      <div className="relative mb-4">
-                        <div className="text-5xl md:text-6xl mb-4 animate-bounce">🪔</div>
-                        <div className="absolute -top-2 -left-8 text-2xl animate-pulse">✨</div>
-                        <div className="absolute -top-2 -right-8 text-2xl animate-pulse">✨</div>
-                      </div>
-                      <h2 className={`text-3xl md:text-4xl font-bold ${greetingData.selectedBackground.textColor} mb-2 drop-shadow-2xl font-serif`}>
-                        🌟 Happy Diwali! 🌟
-                      </h2>
-                      <div className="flex justify-center space-x-3 mb-6">
-                        <span className="text-2xl animate-pulse">✨</span>
-                        <span className="text-2xl animate-pulse">🎆</span>
-                        <span className="text-2xl animate-pulse">🎇</span>
-                        <span className="text-2xl animate-pulse">✨</span>
-                      </div>
-                    </div>
-
-                    {/* Main Content with enhanced design */}
-                    <div className="flex-1 flex flex-col justify-center">
-                      {/* To Section */}
-                      <div className="bg-gradient-to-br from-white/95 to-orange-50/95 backdrop-blur-sm rounded-2xl p-6 mb-4 shadow-2xl border-2 border-orange-200/50">
-                        <div className="mb-4">
-                          <div className="flex items-center mb-2">
-                            <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full flex items-center justify-center mr-3">
-                              <span className="text-white text-sm font-bold">TO</span>
-                            </div>
-                            <p className="text-xl font-bold text-gray-800 font-serif">
-                              {greetingData.recipientName || 'Dear [Recipient Name]'}
-                            </p>
-                          </div>
-                        </div>
-                        
-                        {/* Message with enhanced styling */}
-                        <div className="mb-4 relative">
-                          <div className="absolute -left-2 -top-2 text-orange-400 text-2xl">"</div>
-                          <p className="text-gray-700 leading-relaxed whitespace-pre-line text-center italic font-medium px-4">
-                            {getFinalMessage()}
-                          </p>
-                          <div className="absolute -right-2 -bottom-2 text-orange-400 text-2xl">"</div>
-                        </div>
-                      </div>
-
-                      {/* From Section with enhanced design */}
-                      <div className="text-right">
-                        <div className="bg-gradient-to-br from-amber-50/95 to-orange-50/95 backdrop-blur-sm rounded-2xl p-4 inline-block shadow-2xl border-2 border-amber-200/50">
-                          <div className="flex items-center justify-end">
-                            <p className="text-lg font-bold text-gray-800 mr-3 font-serif">
-                              {greetingData.senderName || 'From [Your Name]'}
-                            </p>
-                            <div className="w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full flex items-center justify-center">
-                              <span className="text-white text-xs font-bold">FROM</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Footer Decoration with enhanced effects */}
-                    <div className="text-center">
-                      <div className="flex justify-center space-x-6">
-                        <span className="text-3xl animate-pulse">🎊</span>
-                        <span className="text-3xl animate-bounce">🪔</span>
-                        <span className="text-3xl animate-pulse">🎊</span>
-                      </div>
-                      <div className="mt-4 text-center">
-                        <div className="inline-block bg-gradient-to-r from-orange-400/80 to-amber-400/80 px-4 py-2 rounded-full">
-                          <span className={`text-sm font-semibold ${greetingData.selectedBackground.textColor} drop-shadow-lg`}>
-                            Wishing you joy, prosperity & happiness! ✨
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {/* Content Overlay - Template Based */}
+                  {renderTemplateLayout()}
                 </div>
               </CardContent>
             </Card>
