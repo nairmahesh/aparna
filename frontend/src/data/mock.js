@@ -91,7 +91,6 @@ export const menuCategories = [
     id: 'chakli',
     name: 'Chakli Varieties',
     description: 'Spiral-shaped crispy delights made from different grains',
-    icon: '🌀',
     items: [
       {
         id: 'rice-chakli',
