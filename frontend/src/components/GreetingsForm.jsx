@@ -159,6 +159,61 @@ const GreetingsForm = () => {
         </p>
       </div>
 
+      {/* Template Selection */}
+      <Card className="border-orange-200 mb-8">
+        <CardHeader>
+          <CardTitle className="text-2xl text-center text-orange-700 flex items-center justify-center space-x-2">
+            <Sparkles className="w-6 h-6" />
+            <span>Choose Your Template</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {greetingTemplates.map((template) => (
+              <Card 
+                key={template.id} 
+                className={`cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+                  greetingData.selectedTemplate.id === template.id 
+                    ? 'border-orange-500 ring-4 ring-orange-200 shadow-2xl scale-105' 
+                    : 'border-gray-200 hover:border-orange-300'
+                }`}
+                onClick={() => setGreetingData(prev => ({ ...prev, selectedTemplate: template }))}
+              >
+                <CardContent className="p-3">
+                  <div className="relative h-32 rounded-lg overflow-hidden group mb-3">
+                    <img 
+                      src={template.preview} 
+                      alt={template.name} 
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                      <div className="text-center">
+                        {greetingData.selectedTemplate.id === template.id && (
+                          <div className="bg-white/90 rounded-full px-3 py-1">
+                            <span className="text-orange-600 text-xs font-bold">✓ Selected</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    {greetingData.selectedTemplate.id === template.id && (
+                      <div className="absolute top-2 right-2">
+                        <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs">✓</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-center">
+                    <h4 className="font-bold text-gray-800 text-sm">{template.name}</h4>
+                    <p className="text-xs text-gray-600 mt-1">{template.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Live Preview - Left Side */}
         <div>
