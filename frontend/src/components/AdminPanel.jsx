@@ -833,9 +833,175 @@ const AdminPanel = () => {
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-6">
-            {/* Analytics dashboard will go here */}
-            <div className="text-center py-8">
-              <p className="text-gray-500">Analytics dashboard - Implementation continues...</p>
+            {/* Analytics Overview */}
+            {analytics && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Total Products</p>
+                        <p className="text-3xl font-bold text-orange-600">{products.length}</p>
+                      </div>
+                      <Package className="w-8 h-8 text-orange-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Total Contacts</p>
+                        <p className="text-3xl font-bold text-blue-600">{analytics.total_contacts}</p>
+                      </div>
+                      <Users className="w-8 h-8 text-blue-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Personalized Links</p>
+                        <p className="text-3xl font-bold text-green-600">{analytics.total_personalized_links}</p>
+                      </div>
+                      <Link className="w-8 h-8 text-green-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Total Events</p>
+                        <p className="text-3xl font-bold text-purple-600">{analytics.total_tracking_events}</p>
+                      </div>
+                      <BarChart3 className="w-8 h-8 text-purple-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Detailed Analytics */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Link Performance */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <BarChart3 className="w-5 h-5" />
+                    <span>Link Performance</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {linkAnalytics.slice(0, 5).map((analytics) => (
+                      <div key={analytics.link_id} className="border-b pb-4">
+                        <div className="flex justify-between items-center mb-2">
+                          <h4 className="font-medium">{analytics.contact_name}</h4>
+                          <Badge className={analytics.order_placed ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}>
+                            {analytics.order_placed ? 'CONVERTED' : 'NO ORDER'}
+                          </Badge>
+                        </div>
+                        
+                        <div className="grid grid-cols-3 gap-4 text-sm">
+                          <div>
+                            <p className="text-gray-500">Opens</p>
+                            <p className="font-semibold flex items-center">
+                              <Eye className="w-3 h-3 mr-1" />
+                              {analytics.total_opens}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-gray-500">Cart Adds</p>
+                            <p className="font-semibold flex items-center">
+                              <ShoppingCart className="w-3 h-3 mr-1" />
+                              {analytics.items_added_to_cart}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-gray-500">Checkout</p>
+                            <p className="font-semibold">
+                              {analytics.checkout_started ? '✅ Yes' : '❌ No'}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {analytics.pages_viewed.length > 0 && (
+                          <div className="mt-2">
+                            <p className="text-xs text-gray-500">Pages viewed: {analytics.pages_viewed.length}</p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    
+                    {linkAnalytics.length === 0 && (
+                      <div className="text-center py-8 text-gray-500">
+                        <BarChart3 className="w-12 h-12 mx-auto mb-2 opacity-30" />
+                        <p>No analytics data yet</p>
+                        <p className="text-sm">Send some personalized links to see performance data</p>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Recent Activity */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Eye className="w-5 h-5" />
+                    <span>Recent Activity (30 days)</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {analytics && (
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="p-4 bg-blue-50 rounded-lg">
+                          <p className="text-sm text-blue-600">New Links Created</p>
+                          <p className="text-2xl font-bold text-blue-700">{analytics.recent_links_30_days}</p>
+                        </div>
+                        <div className="p-4 bg-green-50 rounded-lg">
+                          <p className="text-sm text-green-600">Total Events</p>
+                          <p className="text-2xl font-bold text-green-700">{analytics.recent_events_30_days}</p>
+                        </div>
+                      </div>
+
+                      {/* Top Performing Links */}
+                      <div>
+                        <h4 className="font-medium mb-3">Top Performing Contacts</h4>
+                        <div className="space-y-2">
+                          {linkAnalytics
+                            .sort((a, b) => b.total_opens - a.total_opens)
+                            .slice(0, 5)
+                            .map((analytics, idx) => (
+                              <div key={analytics.link_id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                                <div className="flex items-center space-x-3">
+                                  <Badge className="w-6 h-6 rounded-full flex items-center justify-center text-xs">
+                                    {idx + 1}
+                                  </Badge>
+                                  <span className="font-medium">{analytics.contact_name}</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <span className="text-sm text-gray-500">{analytics.total_opens} opens</span>
+                                  {analytics.order_placed && <span className="text-green-600">💰</span>}
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+
+                      <div className="text-xs text-gray-500 border-t pt-4">
+                        Last updated: {analytics.last_updated ? new Date(analytics.last_updated).toLocaleString() : 'Never'}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
         </Tabs>
