@@ -394,16 +394,10 @@ const GreetingsForm = () => {
         <div>
           <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Live Preview</h3>
           {/* Greeting Card Preview */}
-          <div className="relative">
-            {/* Decorative elements around the card */}
-            <div className="absolute -top-4 -left-4 text-4xl animate-pulse">✨</div>
-            <div className="absolute -top-4 -right-4 text-4xl animate-pulse">🪔</div>
-            <div className="absolute -bottom-4 -left-4 text-4xl animate-pulse">🎊</div>
-            <div className="absolute -bottom-4 -right-4 text-4xl animate-pulse">🎆</div>
-            
-            <Card className="border-4 border-gradient-to-r from-orange-400 to-amber-400 overflow-hidden shadow-2xl transform transition-all duration-300">
+          <div className="w-full">
+            <Card className="border-2 border-orange-300 overflow-hidden shadow-lg w-full">
               <CardContent className="p-0">
-                <div className="relative h-96 md:h-[500px]">
+                <div className="relative w-full aspect-[4/5] max-h-[600px]">
                   {/* Background Image */}
                   <img 
                     src={greetingData.selectedArtwork.url} 
@@ -411,27 +405,22 @@ const GreetingsForm = () => {
                     className="w-full h-full object-cover"
                   />
                   
-                  {/* Decorative border overlay */}
-                  <div className="absolute inset-0 border-8 border-gradient-to-r from-orange-300/30 to-amber-300/30 rounded-lg"></div>
-                  
                   {/* Overlay for better text readability */}
                   <div className={`absolute inset-0 ${greetingData.selectedArtwork.overlayColor}`}></div>
                   
                   {/* Content Overlay */}
                   <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-                    {/* Header with enhanced styling */}
+                    {/* Header */}
                     <div className="text-center">
-                      <div className="relative mb-3 md:mb-4">
-                        <div className="text-4xl md:text-5xl mb-3 md:mb-4 animate-bounce">🪔</div>
-                      </div>
+                      <div className="text-4xl md:text-5xl mb-3">🪔</div>
                       <h2 className={`text-2xl md:text-3xl font-bold ${greetingData.selectedArtwork.textColor} mb-4 drop-shadow-2xl font-serif`}>
                         Happy Diwali!
                       </h2>
                     </div>
 
-                    {/* Main Content - Clean and Elegant */}
+                    {/* Main Content */}
                     <div className="flex-1 flex flex-col justify-center space-y-4">
-                      {/* To Section - Natural Style */}
+                      {/* To Section */}
                       <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg">
                         <div className="mb-3">
                           <p className="text-orange-600 text-sm font-medium mb-1">To,</p>
@@ -448,7 +437,7 @@ const GreetingsForm = () => {
                         </div>
                       </div>
 
-                      {/* From Section - Natural Style */}
+                      {/* From Section */}
                       <div className="text-right">
                         <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 md:p-4 inline-block shadow-lg">
                           <p className="text-orange-600 text-sm font-medium mb-1">From,</p>
@@ -459,12 +448,12 @@ const GreetingsForm = () => {
                       </div>
                     </div>
 
-                    {/* Footer with decorative elements */}
+                    {/* Footer */}
                     <div className="text-center">
                       <div className="flex justify-center space-x-4 md:space-x-6 mb-3">
-                        <span className="text-xl md:text-2xl animate-pulse">🎊</span>
-                        <span className="text-xl md:text-2xl animate-bounce">🪔</span>
-                        <span className="text-xl md:text-2xl animate-pulse">🎊</span>
+                        <span className="text-xl md:text-2xl">🎊</span>
+                        <span className="text-xl md:text-2xl">🪔</span>
+                        <span className="text-xl md:text-2xl">🎊</span>
                       </div>
                       <div className="inline-block bg-gradient-to-r from-orange-400/80 to-amber-400/80 px-3 py-1 md:px-4 md:py-2 rounded-full">
                         <span className={`text-xs md:text-sm font-semibold ${greetingData.selectedArtwork.textColor} drop-shadow-lg`}>
