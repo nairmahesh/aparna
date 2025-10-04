@@ -83,7 +83,7 @@ const OrderForm = ({ cart, onUpdateCart, onRemoveItem, onClearCart }) => {
         <CardContent>
           <div className="space-y-4">
             {cart.map((item) => (
-              <div key={item.id} className="flex items-center justify-between p-4 bg-orange-50 rounded-lg">
+              <div key={item.id} className="flex items-center justify-between p-4 bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg">
                 <div className="flex-1">
                   <h4 className="font-semibold text-gray-800">{item.name}</h4>
                   <p className="text-sm text-gray-600">₹{item.price} {item.unit}</p>
