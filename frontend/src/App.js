@@ -14,7 +14,7 @@ import { menuCategories, shopInfo } from './data/mock';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Badge } from './components/ui/badge';
-import { Sparkles, Star, Heart, Gift, ShoppingBag, Settings, ShoppingCart, Phone } from 'lucide-react';
+import { Sparkles, Star, Heart, Gift, ShoppingBag, Settings, ShoppingCart, Phone, Share2, Copy, MessageCircle } from 'lucide-react';
 import { useToast } from './hooks/use-toast';
 import { Toaster } from './components/ui/toaster';
 
