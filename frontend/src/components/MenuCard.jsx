@@ -6,7 +6,15 @@ import { ShoppingCart, Star, MessageSquare } from 'lucide-react';
 import ReviewsModal from './ReviewsModal';
 
 const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
+  const [showReviews, setShowReviews] = useState(false);
+
   return (
+    <>
+      <ReviewsModal
+        item={item}
+        isOpen={showReviews}
+        onClose={() => setShowReviews(false)}
+      />
     <Card className={`group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${
       isSpecial 
         ? 'bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-200 hover:border-rose-300 shadow-lg' 
