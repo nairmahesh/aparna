@@ -40,6 +40,11 @@ const AdminPanel = () => {
   const [reviewStats, setReviewStats] = useState(null);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [reviewRequestMethod, setReviewRequestMethod] = useState('whatsapp');
+  const [customContactInfo, setCustomContactInfo] = useState({
+    whatsapp_number: '',
+    email_id: '',
+    mobile_number: ''
+  });
   const [dateRange, setDateRange] = useState({
     from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     to: new Date().toISOString().split('T')[0]
