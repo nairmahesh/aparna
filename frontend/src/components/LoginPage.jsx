@@ -141,6 +141,17 @@ const LoginPage = () => {
 
         <div className="text-center mt-6 text-sm text-gray-500">
           <p>&copy; 2025 {shopInfo.name}. All rights reserved.</p>
+          <p className="mt-2 text-xs">
+            Powered by{' '}
+            <a
+              href="https://www.effybiz.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-orange-600 hover:text-orange-700 font-semibold underline transition-colors"
+            >
+              effyBiz
+            </a>
+          </p>
         </div>
       </div>
     </div>
