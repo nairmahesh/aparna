@@ -229,6 +229,30 @@ frontend:
           agent: "main"
           comment: "Created comprehensive admin review management system with new 'Reviews' tab in admin panel. Features include review statistics dashboard, batch review request sending (WhatsApp/SMS/Email), review request tracking, and customer review history. Added review request summary showing eligible orders."
 
+  - task: "Admin Analytics Dummy Data Population"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/components/AdminPanel.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "Need to populate All Orders & Customer Analytics, Visitor Analytics, Customer Details & Purchase History, and Revenue Analytics & Delivery Costs sections with realistic dummy data to make admin panel fully functional."
+
+  - task: "Powered by effyBiz Footer Branding"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/App.js, /app/frontend/src/components/LoginPage.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "Need to add 'Powered by effyBiz' branding with link to www.effybiz.com in footers of both main website (App.js) and login page (LoginPage.jsx)."
+
 metadata:
   created_by: "testing_agent"
   version: "1.0"
