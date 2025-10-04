@@ -230,16 +230,19 @@ frontend:
           comment: "Created comprehensive admin review management system with new 'Reviews' tab in admin panel. Features include review statistics dashboard, batch review request sending (WhatsApp/SMS/Email), review request tracking, and customer review history. Added review request summary showing eligible orders."
 
   - task: "Admin Analytics Dummy Data Population"
-    implemented: false
+    implemented: true
     working: false
-    file: "/app/frontend/src/components/AdminPanel.jsx"
-    stuck_count: 0
+    file: "/app/backend/routes/admin_routes.py"
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: false
           agent: "main"
           comment: "Need to populate All Orders & Customer Analytics, Visitor Analytics, Customer Details & Purchase History, and Revenue Analytics & Delivery Costs sections with realistic dummy data to make admin panel fully functional."
+        - working: false
+          agent: "testing"
+          comment: "CRITICAL ISSUE FOUND: Analytics endpoints are implemented and working but have field mapping errors. Customer analytics shows $0 spent because it uses 'final_amount' field but orders only have 'total_amount'. Revenue report shows total_revenue: ₹8360 but final_amount: 0. Visitor analytics also uses 'final_amount' causing ₹0 revenue display. NO dummy data fallback mechanism implemented - API returns 500 errors on invalid dates instead of graceful fallback. Real data exists: 9 orders with realistic Diwali products (Special Diwali Mix, Kaju Katli), 3 customers with Indian names (Priya Sharma, Rajesh Kumar, Anita Patel), but revenue calculations are broken due to field mapping issues."
 
   - task: "Powered by effyBiz Footer Branding"
     implemented: false
