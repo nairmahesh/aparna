@@ -349,11 +349,115 @@ const AdminPanel = () => {
       await Promise.all([
         loadReviewSummary(),
         loadReviewRequests(),
-        loadReviewStats()
+        loadReviewStats(),
+        loadAllProductReviews()
       ]);
     } catch (error) {
       console.error('Error loading review data:', error);
     }
+  };
+
+  const loadAllProductReviews = () => {
+    try {
+      // Extract all reviews from all products
+      const allReviews = [];
+      menuCategories.forEach(category => {
+        category.items.forEach(product => {
+          if (product.reviews && product.reviews.length > 0) {
+            product.reviews.forEach(review => {
+              allReviews.push({
+                ...review,
+                productId: product.id,
+                productName: product.name,
+                categoryName: category.name,
+                productRating: product.rating,
+                visible: true
+              });
+            });
+          }
+        });
+      });
+      
+      // Sort by date (newest first)
+      allReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setAllProductReviews(allReviews);
+      
+      // Load hidden reviews from localStorage
+      const hidden = JSON.parse(localStorage.getItem('hiddenReviews') || '[]');
+      setHiddenReviews(new Set(hidden));
+      
+    } catch (error) {
+      console.error('Error loading product reviews:', error);
+    }
+  };
+
+  const handleToggleReviewVisibility = (reviewId, productId) => {
+    const reviewKey = `${productId}-${reviewId}`;
+    setHiddenReviews(prev => {
+      const newHidden = new Set(prev);
+      if (newHidden.has(reviewKey)) {
+        newHidden.delete(reviewKey);
+        toast({
+          title: "Review Shown",
+          description: "Review is now visible to customers.",
+        });
+      } else {
+        newHidden.add(reviewKey);
+        toast({
+          title: "Review Hidden",
+          description: "Review has been hidden from customers.",
+        });
+      }
+      
+      // Save to localStorage
+      localStorage.setItem('hiddenReviews', JSON.stringify(Array.from(newHidden)));
+      return newHidden;
+    });
+  };
+
+  const handleDeleteReview = (reviewId, productId, productName) => {
+    if (!window.confirm('Are you sure you want to permanently delete this review?')) {
+      return;
+    }
+
+    // Update the managed categories to remove this review
+    const updatedCategories = managedCategories.map(category => ({
+      ...category,
+      items: category.items.map(item => 
+        item.id === productId 
+          ? { ...item, reviews: (item.reviews || []).filter(r => r.id !== reviewId) }
+          : item
+      )
+    }));
+    
+    setManagedCategories(updatedCategories);
+    localStorage.setItem('managedCategories', JSON.stringify(updatedCategories));
+    
+    // Refresh the reviews display
+    loadAllProductReviews();
+    
+    toast({
+      title: "Review Deleted",
+      description: `Review has been permanently removed from ${productName}.`,
+    });
+  };
+
+  const generateProductReviewLink = (productId, productName) => {
+    const baseUrl = window.location.origin;
+    const reviewUrl = `${baseUrl}/review?product=${productId}`;
+    
+    const message = `🌟 Hi! How was your experience with ${productName} from Aparna's Diwali Delights?\n\nWe'd love to hear your feedback! Please click the link below to share your review:\n\n👉 ${reviewUrl}\n\nYour feedback helps us serve you better and helps other customers make informed choices.\n\nThank you! 🙏\n\nAparna's Diwali Delights\n📞 ${getWebsiteSettings().contact.phone}`;
+    
+    return {
+      reviewUrl,
+      whatsappUrl: `https://wa.me/?text=${encodeURIComponent(message)}`,
+      message
+    };
+  };
+
+  const handleSendProductReviewRequest = (product) => {
+    setSelectedProduct(product);
+    setShowReviewRequestModal(true);
   };
 
   const loadReviewSummary = async () => {
