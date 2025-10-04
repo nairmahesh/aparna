@@ -42,11 +42,36 @@ export const menuCategories = [
         ]
       },
       {
-        id: 'farali-chivda',
-        name: 'Farali Chivda',
-        description: 'Special fasting-friendly mixture with sabudana and peanuts',
+        id: 'sabudana-chivda',
+        name: 'Sabudana Chivda',
+        description: 'Crispy tapioca pearls with sabudana and peanuts',
         price: 760,
         unit: 'per kg',
+        rating: 4.5,
+        totalReviews: 23,
+        reviews: [
+          {
+            id: 1,
+            customerName: 'Priya S.',
+            rating: 5,
+            comment: 'Amazing taste! Just like my grandmother used to make. Perfect crunch and flavor.',
+            date: '2024-10-01'
+          },
+          {
+            id: 2,
+            customerName: 'Rajesh K.',
+            rating: 4,
+            comment: 'Good quality sabudana chivda. Fresh and crispy. Will order again.',
+            date: '2024-09-28'
+          },
+          {
+            id: 3,
+            customerName: 'Anita M.',
+            rating: 5,
+            comment: 'Excellent product! Great for Diwali celebrations. Family loved it.',
+            date: '2024-09-25'
+          }
+        ],
         images: [
           'https://images.unsplash.com/photo-1627035537702-ddca174d7987?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxzYWJ1ZGFuYXxlbnwwfHx8fDE3NTk1ODA4Mjl8MA&ixlib=rb-4.1.0&q=85',
           'https://images.unsplash.com/photo-1627035537727-96e5d592bbb6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxzYWJ1ZGFuYXxlbnwwfHx8fDE3NTk1ODA4Mjl8MA&ixlib=rb-4.1.0&q=85',
