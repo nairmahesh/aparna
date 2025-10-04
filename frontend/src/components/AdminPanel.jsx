@@ -94,6 +94,21 @@ const AdminPanel = () => {
     const saved = localStorage.getItem('hiddenProducts');
     return new Set(saved ? JSON.parse(saved) : []);
   });
+  
+  // Category Management State
+  const [managedCategories, setManagedCategories] = useState(() => {
+    const saved = localStorage.getItem('managedCategories');
+    return saved ? JSON.parse(saved) : menuCategories;
+  });
+  const [showAddCategory, setShowAddCategory] = useState(false);
+  const [editingCategory, setEditingCategory] = useState(null);
+  const [showEditCategoryModal, setShowEditCategoryModal] = useState(false);
+  const [newCategory, setNewCategory] = useState({
+    id: '',
+    name: '',
+    description: '',
+    items: []
+  });
 
   const categories = [
     { value: 'chivda', label: 'Chivda Collection' },
