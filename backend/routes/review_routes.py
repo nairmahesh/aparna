@@ -299,3 +299,67 @@ async def update_review_request_status(
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error updating review request: {str(e)}")
+
+@router.post("/admin/reviews/generate-custom-links/{order_id}")
+async def generate_custom_review_links(
+    order_id: str,
+    custom_contact: CustomContactInfo,
+    admin_key: str = Depends(verify_admin_key)
+):
+    """Generate WhatsApp, SMS, and email links with custom contact information"""
+    try:
+        # Get order details
+        order = await db.orders.find_one({"id": order_id})
+        if not order:
+            raise HTTPException(status_code=404, detail="Order not found")
+        
+        customer_name = order['customer_name']
+        products = [item['product_name'] for item in order['items']]
+        products_text = ", ".join(products)
+        
+        # Base message template
+        message = f"""🌟 Dear {customer_name},
+
+Thank you for your recent order from Aparna's Diwali Delights!
+
+We hope you enjoyed: {products_text}
+
+We would love to hear your feedback! Your review helps us serve you better and helps other customers make informed choices.
+
+Please rate your experience:
+⭐ Taste & Quality
+⭐ Packaging  
+⭐ Delivery Experience
+⭐ Overall Satisfaction
+
+Share your thoughts with us!
+
+Best regards,
+Aparna's Diwali Delights
+📞 +91 9920632654"""
+        
+        # Generate links with custom contact info
+        whatsapp_message = urllib.parse.quote(message)
+        sms_message = urllib.parse.quote(message.replace("🌟", "").replace("⭐", "*"))
+        email_subject = urllib.parse.quote("Review Request - Aparna's Diwali Delights")
+        email_body = urllib.parse.quote(message.replace("🌟", "").replace("⭐", "*"))
+        
+        # Use custom contact info if provided, otherwise fallback to order info
+        whatsapp_number = custom_contact.whatsapp_number or order['customer_phone']
+        mobile_number = custom_contact.mobile_number or order['customer_phone']
+        email_address = custom_contact.email_id or order.get('customer_email', '')
+        
+        return {
+            "order_id": order_id,
+            "customer_name": customer_name,
+            "custom_contact": custom_contact.dict(),
+            "links": {
+                "whatsapp": f"https://wa.me/{whatsapp_number.replace('+', '')}?text={whatsapp_message}",
+                "sms": f"sms:{mobile_number}?body={sms_message}",
+                "email": f"mailto:{email_address}?subject={email_subject}&body={email_body}"
+            },
+            "message_preview": message
+        }
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating custom review links: {str(e)}")
