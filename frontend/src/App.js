@@ -10,7 +10,9 @@ import AdminLogin from './components/AdminLogin';
 import AdminPanel from './components/AdminPanel';
 import { menuCategories, shopInfo } from './data/mock';
 import { Button } from './components/ui/button';
-import { Sparkles, Star, Heart, Gift, ShoppingBag, Settings } from 'lucide-react';
+import { Card, CardContent } from './components/ui/card';
+import { Badge } from './components/ui/badge';
+import { Sparkles, Star, Heart, Gift, ShoppingBag, Settings, ShoppingCart } from 'lucide-react';
 import { useToast } from './hooks/use-toast';
 import { Toaster } from './components/ui/toaster';
 
