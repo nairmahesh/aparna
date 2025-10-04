@@ -499,11 +499,160 @@ const AdminPanel = () => {
             </div>
           </TabsContent>
 
-          {/* Contacts Tab - I'll continue with this in the next part */}
+          {/* Contacts Tab */}
           <TabsContent value="contacts" className="space-y-6">
-            {/* Contact management interface will go here */}
-            <div className="text-center py-8">
-              <p className="text-gray-500">Contact management interface - Implementation continues...</p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Add New Contact */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Users className="w-5 h-5" />
+                    <span>Add New Contact</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="contact-name">Name *</Label>
+                      <Input
+                        id="contact-name"
+                        value={newContact.name}
+                        onChange={(e) => setNewContact(prev => ({ ...prev, name: e.target.value }))}
+                        placeholder="Contact name"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="contact-phone">Phone Number *</Label>
+                      <Input
+                        id="contact-phone"
+                        value={newContact.phone}
+                        onChange={(e) => setNewContact(prev => ({ ...prev, phone: e.target.value }))}
+                        placeholder="+91 XXXXX XXXXX"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="contact-email">Email (Optional)</Label>
+                      <Input
+                        id="contact-email"
+                        type="email"
+                        value={newContact.email}
+                        onChange={(e) => setNewContact(prev => ({ ...prev, email: e.target.value }))}
+                        placeholder="email@example.com"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="contact-relationship">Relationship</Label>
+                      <Select
+                        value={newContact.relationship}
+                        onValueChange={(value) => setNewContact(prev => ({ ...prev, relationship: value }))}
+                      >
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {relationships.map(rel => (
+                            <SelectItem key={rel.value} value={rel.value}>{rel.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="contact-notes">Notes (Optional)</Label>
+                    <Textarea
+                      id="contact-notes"
+                      value={newContact.notes}
+                      onChange={(e) => setNewContact(prev => ({ ...prev, notes: e.target.value }))}
+                      placeholder="Any additional notes about this contact..."
+                      className="min-h-16"
+                    />
+                  </div>
+
+                  <Button
+                    onClick={handleCreateContact}
+                    disabled={loading || !newContact.name || !newContact.phone}
+                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+                  >
+                    <Users className="w-4 h-4 mr-2" />
+                    {loading ? 'Adding...' : 'Add Contact'}
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Existing Contacts */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center justify-between">
+                    <span>My Contacts ({contacts.length})</span>
+                    <Button variant="outline" onClick={loadContacts}>
+                      <Phone className="w-4 h-4 mr-2" />
+                      Refresh
+                    </Button>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3 max-h-96 overflow-y-auto">
+                    {contacts.map((contact) => (
+                      <div key={contact.id} className="border rounded-lg p-3 hover:bg-orange-50">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-gray-800">{contact.name}</h4>
+                            <p className="text-sm text-gray-600 flex items-center">
+                              <Phone className="w-3 h-3 mr-1" />
+                              {contact.phone}
+                            </p>
+                            {contact.email && (
+                              <p className="text-sm text-gray-500">{contact.email}</p>
+                            )}
+                            <div className="flex items-center space-x-2 mt-2">
+                              <Badge variant="secondary" className="text-xs">
+                                {relationships.find(r => r.value === contact.relationship)?.label}
+                              </Badge>
+                              {contact.last_contacted && (
+                                <span className="text-xs text-gray-400">
+                                  Last contacted: {new Date(contact.last_contacted).toLocaleDateString()}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex space-x-1">
+                            <Button 
+                              variant="ghost" 
+                              size="sm"
+                              onClick={() => {
+                                setSelectedContact(contact.id);
+                                setActiveTab('personalized');
+                              }}
+                              className="text-green-600"
+                            >
+                              <Send className="w-4 h-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="text-red-500">
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </div>
+                        {contact.notes && (
+                          <div className="mt-2 p-2 bg-gray-50 rounded text-sm">
+                            {contact.notes}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    {contacts.length === 0 && (
+                      <div className="text-center py-8 text-gray-500">
+                        <Users className="w-12 h-12 mx-auto mb-2 opacity-30" />
+                        <p>No contacts added yet</p>
+                        <p className="text-sm">Add your first contact to start sending personalized links</p>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
 
