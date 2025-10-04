@@ -155,9 +155,9 @@ const Home = () => {
         return (
           <>
             {/* Hero Section */}
-            <section className="relative py-20 px-4 text-center overflow-hidden">
+            <section className="relative py-12 md:py-20 px-4 text-center overflow-hidden w-full">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400/10 to-amber-400/10"></div>
-              <div className="relative container mx-auto max-w-4xl">
+              <div className="relative container mx-auto max-w-4xl w-full">
                 <div className="mb-4 md:mb-8">
                   <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-3 md:mb-6">
                     <span className="bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
