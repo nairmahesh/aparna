@@ -109,6 +109,11 @@ const AdminPanel = () => {
     description: '',
     items: []
   });
+  
+  // Image Management State
+  const [selectedImageProduct, setSelectedImageProduct] = useState(null);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const categories = [
     { value: 'chivda', label: 'Chivda Collection' },
