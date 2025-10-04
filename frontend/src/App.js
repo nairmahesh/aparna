@@ -683,6 +683,15 @@ const Home = () => {
         isOpen={showReviews}
         onClose={() => setShowReviews(false)}
       />
+
+      {/* Share Modal */}
+      <ShareModal
+        item={selectedShareItem}
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        onWhatsAppShare={handleWhatsAppShare}
+        onCopyLink={handleCopyLink}
+      />
       
       <Toaster />
     </div>
