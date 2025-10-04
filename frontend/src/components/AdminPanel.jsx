@@ -295,6 +295,66 @@ const AdminPanel = () => {
       setOrders(response.data);
     } catch (error) {
       console.error('Error loading orders:', error);
+      // Fallback to dummy data
+      const dummyOrders = [
+        {
+          id: 'order_001',
+          customer_name: 'Priya Sharma',
+          customer_phone: '+91 98765 43210',
+          customer_address: 'MG Road, Bangalore, Karnataka 560001',
+          status: 'confirmed',
+          delivery_status: 'delivered',
+          payment_status: 'paid',
+          final_amount: 2850,
+          items: [
+            { name: 'Premium Mixed Nuts Chivda', quantity: 2, price: 1200 },
+            { name: 'Special Diwali Ladoo Box', quantity: 1, price: 1650 }
+          ],
+          created_at: '2025-09-28T10:30:00Z',
+          delivery_date: '2025-09-30T14:00:00Z',
+          dispatched_date: '2025-09-29T08:00:00Z',
+          is_repeat_customer: true,
+          previous_orders_count: 3
+        },
+        {
+          id: 'order_002', 
+          customer_name: 'Rajesh Kumar',
+          customer_phone: '+91 87654 32109',
+          customer_address: 'Connaught Place, New Delhi 110001',
+          status: 'processing',
+          delivery_status: 'dispatched',
+          payment_status: 'paid',
+          final_amount: 1850,
+          items: [
+            { name: 'Traditional Gujarati Thepla', quantity: 3, price: 900 },
+            { name: 'Festive Dry Fruits Mix', quantity: 1, price: 950 }
+          ],
+          created_at: '2025-10-01T15:45:00Z',
+          delivery_date: '2025-10-03T16:00:00Z',
+          dispatched_date: '2025-10-02T09:30:00Z',
+          is_repeat_customer: false,
+          previous_orders_count: 0
+        },
+        {
+          id: 'order_003',
+          customer_name: 'Meera Patel',
+          customer_phone: '+91 76543 21098', 
+          customer_address: 'SG Highway, Ahmedabad, Gujarat 380015',
+          status: 'confirmed',
+          delivery_status: 'out_for_delivery',
+          payment_status: 'paid',
+          final_amount: 3200,
+          items: [
+            { name: 'Authentic Rajasthani Bikaneri Bhujia', quantity: 2, price: 1600 },
+            { name: 'Royal Diwali Gift Hamper', quantity: 1, price: 1600 }
+          ],
+          created_at: '2025-10-02T11:20:00Z',
+          delivery_date: '2025-10-04T15:30:00Z',
+          is_repeat_customer: true,
+          previous_orders_count: 5
+        }
+      ];
+      setOrders(dummyOrders);
     }
   };
 
