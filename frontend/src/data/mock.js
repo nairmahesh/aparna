@@ -235,7 +235,7 @@ export const menuCategories = [
         description: 'Combination of semolina and gram flour in sweet balls',
         price: 800,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+        image: 'https://images.pexels.com/photos/8887021/pexels-photo-8887021.jpeg?w=400&h=300&fit=crop'
       },
       {
         id: 'rava-coconut',
