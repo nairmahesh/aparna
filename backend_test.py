@@ -708,6 +708,315 @@ class AdminPanelTester:
         except Exception as e:
             self.log_test("Error Handling - Invalid date format", False, f"Exception: {str(e)}")
 
+    def test_review_management_endpoints(self):
+        """Test Review Management Backend System"""
+        print("🧪 Testing Review Management Backend System...")
+        
+        # Test 1: GET /admin/reviews/summary
+        try:
+            response = self.session.get(f"{API_BASE}/reviews/summary", params={"admin_key": ADMIN_KEY})
+            if response.status_code == 200:
+                summary = response.json()
+                required_fields = [
+                    "total_orders", "orders_with_requests_sent", 
+                    "orders_pending_requests", "total_reviews_received", 
+                    "orders_eligible_for_requests"
+                ]
+                
+                missing_fields = [field for field in required_fields if field not in summary]
+                
+                if not missing_fields:
+                    self.log_test(
+                        "GET /admin/reviews/summary - Review summary",
+                        True,
+                        "All required summary fields present",
+                        {
+                            "total_orders": summary.get("total_orders", 0),
+                            "orders_with_requests_sent": summary.get("orders_with_requests_sent", 0),
+                            "orders_pending_requests": summary.get("orders_pending_requests", 0),
+                            "total_reviews_received": summary.get("total_reviews_received", 0)
+                        }
+                    )
+                else:
+                    self.log_test(
+                        "GET /admin/reviews/summary - Review summary",
+                        False,
+                        f"Missing required fields: {missing_fields}",
+                        summary
+                    )
+            else:
+                self.log_test(
+                    "GET /admin/reviews/summary - Review summary",
+                    False,
+                    f"Status: {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test("GET /admin/reviews/summary - Review summary", False, f"Exception: {str(e)}")
+
+        # Test 2: POST /admin/reviews/send-requests
+        try:
+            request_data = {
+                "order_ids": ["test_order_1", "test_order_2"],
+                "request_method": "whatsapp"
+            }
+            response = self.session.post(
+                f"{API_BASE}/reviews/send-requests",
+                params={"admin_key": ADMIN_KEY},
+                json=request_data
+            )
+            if response.status_code == 200:
+                result = response.json()
+                required_fields = ["success", "requests_sent", "failed_orders", "message"]
+                missing_fields = [field for field in required_fields if field not in result]
+                
+                if not missing_fields:
+                    self.log_test(
+                        "POST /admin/reviews/send-requests - Batch review requests",
+                        True,
+                        f"Successfully processed batch request: {result.get('message', '')}",
+                        {
+                            "requests_sent": result.get("requests_sent", 0),
+                            "failed_orders": len(result.get("failed_orders", []))
+                        }
+                    )
+                else:
+                    self.log_test(
+                        "POST /admin/reviews/send-requests - Batch review requests",
+                        False,
+                        f"Missing response fields: {missing_fields}",
+                        result
+                    )
+            else:
+                self.log_test(
+                    "POST /admin/reviews/send-requests - Batch review requests",
+                    False,
+                    f"Status: {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test("POST /admin/reviews/send-requests - Batch review requests", False, f"Exception: {str(e)}")
+
+        # Test 3: GET /admin/reviews/requests
+        try:
+            response = self.session.get(f"{API_BASE}/reviews/requests", params={"admin_key": ADMIN_KEY, "limit": 50})
+            if response.status_code == 200:
+                requests = response.json()
+                self.log_test(
+                    "GET /admin/reviews/requests - Review requests history",
+                    True,
+                    f"Retrieved {len(requests)} review requests",
+                    {"request_count": len(requests)}
+                )
+                
+                # Validate structure if requests exist
+                if requests:
+                    sample_request = requests[0]
+                    required_request_fields = [
+                        "id", "customer_phone", "customer_name", "order_id", 
+                        "order_date", "products_ordered", "status"
+                    ]
+                    missing_request_fields = [field for field in required_request_fields if field not in sample_request]
+                    
+                    if not missing_request_fields:
+                        self.log_test(
+                            "Review request structure validation",
+                            True,
+                            "Review request has all required fields",
+                            {"sample_fields": list(sample_request.keys())}
+                        )
+                    else:
+                        self.log_test(
+                            "Review request structure validation",
+                            False,
+                            f"Missing request fields: {missing_request_fields}",
+                            sample_request
+                        )
+            else:
+                self.log_test(
+                    "GET /admin/reviews/requests - Review requests history",
+                    False,
+                    f"Status: {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test("GET /admin/reviews/requests - Review requests history", False, f"Exception: {str(e)}")
+
+        # Test 4: GET /admin/reviews/stats
+        try:
+            response = self.session.get(f"{API_BASE}/reviews/stats", params={"admin_key": ADMIN_KEY})
+            if response.status_code == 200:
+                stats = response.json()
+                required_stats_fields = [
+                    "total_requests_sent", "pending_reviews", "completed_reviews",
+                    "review_response_rate", "average_overall_rating", "recent_reviews"
+                ]
+                
+                missing_stats_fields = [field for field in required_stats_fields if field not in stats]
+                
+                if not missing_stats_fields:
+                    self.log_test(
+                        "GET /admin/reviews/stats - Review statistics",
+                        True,
+                        "All required statistics fields present",
+                        {
+                            "total_requests_sent": stats.get("total_requests_sent", 0),
+                            "review_response_rate": stats.get("review_response_rate", 0),
+                            "average_overall_rating": stats.get("average_overall_rating", 0),
+                            "recent_reviews_count": len(stats.get("recent_reviews", []))
+                        }
+                    )
+                else:
+                    self.log_test(
+                        "GET /admin/reviews/stats - Review statistics",
+                        False,
+                        f"Missing statistics fields: {missing_stats_fields}",
+                        stats
+                    )
+            else:
+                self.log_test(
+                    "GET /admin/reviews/stats - Review statistics",
+                    False,
+                    f"Status: {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test("GET /admin/reviews/stats - Review statistics", False, f"Exception: {str(e)}")
+
+        # Test 5: GET /admin/reviews/generate-links/{order_id}
+        try:
+            test_order_id = "test_order_123"
+            response = self.session.get(f"{API_BASE}/reviews/generate-links/{test_order_id}", params={"admin_key": ADMIN_KEY})
+            if response.status_code == 404:
+                # Expected for non-existent order
+                self.log_test(
+                    "GET /admin/reviews/generate-links/{order_id} - Generate review links",
+                    True,
+                    "Correctly returned 404 for non-existent order",
+                    {"status_code": 404}
+                )
+            elif response.status_code == 200:
+                links_data = response.json()
+                required_link_fields = ["order_id", "customer_name", "customer_phone", "links", "message_preview"]
+                missing_link_fields = [field for field in required_link_fields if field not in links_data]
+                
+                if not missing_link_fields:
+                    links = links_data.get("links", {})
+                    required_links = ["whatsapp", "sms", "email"]
+                    missing_links = [link for link in required_links if link not in links]
+                    
+                    if not missing_links:
+                        self.log_test(
+                            "GET /admin/reviews/generate-links/{order_id} - Generate review links",
+                            True,
+                            "Successfully generated all review links",
+                            {"links_generated": list(links.keys())}
+                        )
+                    else:
+                        self.log_test(
+                            "GET /admin/reviews/generate-links/{order_id} - Generate review links",
+                            False,
+                            f"Missing link types: {missing_links}",
+                            links_data
+                        )
+                else:
+                    self.log_test(
+                        "GET /admin/reviews/generate-links/{order_id} - Generate review links",
+                        False,
+                        f"Missing response fields: {missing_link_fields}",
+                        links_data
+                    )
+            else:
+                self.log_test(
+                    "GET /admin/reviews/generate-links/{order_id} - Generate review links",
+                    False,
+                    f"Unexpected status: {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test("GET /admin/reviews/generate-links/{order_id} - Generate review links", False, f"Exception: {str(e)}")
+
+        # Test 6: PUT /admin/reviews/requests/{request_id}/status
+        try:
+            test_request_id = "test_request_123"
+            response = self.session.put(
+                f"{API_BASE}/reviews/requests/{test_request_id}/status",
+                params={"status": "reviewed", "admin_key": ADMIN_KEY}
+            )
+            if response.status_code == 404:
+                # Expected for non-existent request
+                self.log_test(
+                    "PUT /admin/reviews/requests/{request_id}/status - Update request status",
+                    True,
+                    "Correctly returned 404 for non-existent request",
+                    {"status_code": 404}
+                )
+            elif response.status_code == 200:
+                result = response.json()
+                if result.get("success") and "message" in result:
+                    self.log_test(
+                        "PUT /admin/reviews/requests/{request_id}/status - Update request status",
+                        True,
+                        f"Successfully updated status: {result.get('message')}",
+                        result
+                    )
+                else:
+                    self.log_test(
+                        "PUT /admin/reviews/requests/{request_id}/status - Update request status",
+                        False,
+                        "Unexpected response format",
+                        result
+                    )
+            else:
+                self.log_test(
+                    "PUT /admin/reviews/requests/{request_id}/status - Update request status",
+                    False,
+                    f"Unexpected status: {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test("PUT /admin/reviews/requests/{request_id}/status - Update request status", False, f"Exception: {str(e)}")
+
+        # Test 7: Authentication test for review endpoints
+        try:
+            response = self.session.get(f"{API_BASE}/reviews/summary")
+            if response.status_code == 422:  # FastAPI validation error for missing query param
+                self.log_test(
+                    "Review endpoints authentication - Missing admin key",
+                    True,
+                    "Correctly rejected request without admin key",
+                    {"status_code": response.status_code}
+                )
+            else:
+                self.log_test(
+                    "Review endpoints authentication - Missing admin key",
+                    False,
+                    f"Expected 422, got {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test("Review endpoints authentication - Missing admin key", False, f"Exception: {str(e)}")
+
+        # Test 8: Wrong admin key for review endpoints
+        try:
+            response = self.session.get(f"{API_BASE}/reviews/summary", params={"admin_key": "wrong_key"})
+            if response.status_code == 403:
+                self.log_test(
+                    "Review endpoints authentication - Wrong admin key",
+                    True,
+                    "Correctly rejected request with wrong admin key",
+                    {"status_code": response.status_code}
+                )
+            else:
+                self.log_test(
+                    "Review endpoints authentication - Wrong admin key",
+                    False,
+                    f"Expected 403, got {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test("Review endpoints authentication - Wrong admin key", False, f"Exception: {str(e)}")
+
     def run_all_tests(self):
         """Run all test suites"""
         print("🚀 Starting Enhanced Admin Panel Backend API Tests")
@@ -721,6 +1030,7 @@ class AdminPanelTester:
         self.test_visitor_analytics_endpoints()
         self.test_visitor_tracking_endpoints()
         self.test_authentication_and_error_handling()
+        self.test_review_management_endpoints()
         
         # Print summary
         self.print_test_summary()
