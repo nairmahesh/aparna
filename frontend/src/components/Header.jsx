@@ -8,12 +8,12 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-orange-100 shadow-sm">
       {/* Top Info Bar */}
-      <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white py-2">
+      <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white py-1 md:py-2">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center text-sm">
-            <div className="flex items-center space-x-6">
+          <div className="flex flex-col md:flex-row justify-between items-center text-xs md:text-sm space-y-1 md:space-y-0">
+            <div className="flex items-center space-x-3 md:space-x-6">
               <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4" />
+                <Phone className="w-3 h-3 md:w-4 md:h-4" />
                 <a 
                   href={`tel:${shopInfo.contact.phone}`}
                   className="hover:text-orange-200 transition-colors cursor-pointer"
@@ -25,11 +25,9 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
                 <span>FSSAI: {shopInfo.contact.fssai}</span>
               </div>
             </div>
-            <div className="hidden md:block">
-              <span className="flex items-center space-x-1">
-                <Sparkles className="w-4 h-4" />
-                <span>Free Delivery on Orders Above ₹500</span>
-              </span>
+            <div className="flex items-center space-x-1">
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
+              <span>Free Delivery on Orders Above ₹500</span>
             </div>
           </div>
         </div>
