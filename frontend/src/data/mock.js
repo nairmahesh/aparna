@@ -1,4 +1,4 @@
-// Mock data for Diwali Menu
+// Mock data for Aparna's Diwali Delights
 export const menuCategories = [
   {
     id: 'chivda',
@@ -122,7 +122,7 @@ export const menuCategories = [
         id: 'ribbon-pakoda',
         name: 'Ribbon Pakoda',
         description: 'Crunchy ribbon-shaped fritters with aromatic spices',
-        price: 540,
+        price: 525,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
       },
@@ -130,7 +130,7 @@ export const menuCategories = [
         id: 'thika-sev',
         name: 'Thika Sev',
         description: 'Fine and crispy gram flour noodles with perfect seasoning',
-        price: 650,
+        price: 540,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
       },
@@ -138,7 +138,7 @@ export const menuCategories = [
         id: 'mathri',
         name: 'Mathri',
         description: 'Flaky and crispy traditional biscuits with ajwain',
-        price: 625,
+        price: 650,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
       },
@@ -146,7 +146,7 @@ export const menuCategories = [
         id: 'thika-shankarpala',
         name: 'Thika Shankarpala',
         description: 'Diamond-shaped crispy snacks with subtle spice blend',
-        price: 675,
+        price: 625,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
       },
@@ -154,7 +154,7 @@ export const menuCategories = [
         id: 'sweet-shankarpala',
         name: 'Sweet Shankarpala',
         description: 'Sweet version of traditional shankarpala with jaggery',
-        price: 1050,
+        price: 675,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
       }
@@ -176,7 +176,7 @@ export const menuCategories = [
       },
       {
         id: 'karanji',
-        name: 'Karanji',
+        name: 'Saada Karanji',
         description: 'Traditional Maharashtrian sweet dumpling with coconut filling',
         price: 28,
         unit: 'per piece',
@@ -194,7 +194,7 @@ export const menuCategories = [
         id: 'besan-laddu',
         name: 'Besan Laddu',
         description: 'Classic gram flour laddus with ghee and cardamom',
-        price: 800,
+        price: 1050,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
       },
@@ -202,7 +202,7 @@ export const menuCategories = [
         id: 'rava-besan',
         name: 'Rava-Besan Laddu',
         description: 'Combination of semolina and gram flour in sweet balls',
-        price: 750,
+        price: 800,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
       },
@@ -210,7 +210,7 @@ export const menuCategories = [
         id: 'rava-coconut',
         name: 'Rava-Coconut Laddu',
         description: 'Semolina laddus with fresh coconut and cardamom',
-        price: 675,
+        price: 750,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
       },
@@ -218,7 +218,7 @@ export const menuCategories = [
         id: 'rava-plain',
         name: 'Rava-Plain Laddu',
         description: 'Simple and delicious semolina laddus',
-        price: 650,
+        price: 675,
         unit: 'per kg',
         image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
       }
@@ -227,12 +227,61 @@ export const menuCategories = [
 ];
 
 export const shopInfo = {
-  name: 'Diwali Delights',
+  name: "Aparna's Diwali Delights",
   tagline: 'Traditional Sweets & Snacks for Your Festival Celebrations',
-  description: 'Authentic homemade delicacies crafted with love for your Diwali festivities',
+  description: 'Authentic homemade delicacies crafted with love by Aparna for your Diwali festivities',
   contact: {
-    phone: '+91 98765 43210',
-    email: 'orders@diwali-delights.com',
-    address: '123 Festival Street, Mumbai, Maharashtra 400001'
+    phone: '+91 9920632654',
+    email: 'aparna.delights@gmail.com',
+    address: 'Borivali (W), Mumbai, Maharashtra',
+    fssai: '21521058000362'
   }
 };
+
+export const greetingMessages = {
+  parents: [
+    "May this Diwali bring endless joy, prosperity, and happiness to our beloved parents. Your love lights up our lives just like these beautiful diyas. Happy Diwali!",
+    "Wishing you both a Diwali filled with sweet moments, bright lights, and the warmth of family love. Thank you for being our guiding light. Happy Diwali!",
+    "May Goddess Lakshmi bless you with health, wealth, and all the happiness in the world. Your blessings are our greatest treasure. Happy Diwali!"
+  ],
+  friends: [
+    "Friendship like ours shines brighter than any Diwali light! Wishing you a festival full of laughter, sweets, and amazing memories. Happy Diwali!",
+    "May this Diwali sparkle with joy and shine with happiness for you and your family. Thanks for being such an amazing friend! Happy Diwali!",
+    "Let's celebrate this Diwali with the same enthusiasm we bring to our friendship - full of light, laughter, and lots of sweets! Happy Diwali!"
+  ],
+  colleagues: [
+    "Wishing you and your family a very Happy Diwali! May this festival of lights bring new opportunities, success, and prosperity in your career and life.",
+    "May the light of Diwali illuminate your path to success and happiness. Looking forward to another year of great teamwork! Happy Diwali!",
+    "Celebrating the festival of lights with wonderful colleagues like you makes it even more special. Wishing you prosperity and joy! Happy Diwali!"
+  ],
+  sister: [
+    "To my wonderful sister, may this Diwali bring you all the happiness, success, and sweet moments you deserve. You light up our family! Happy Diwali!",
+    "Having a sister like you is like having a permanent Diwali in life - full of light, joy, and sweetness. Wishing you the happiest Diwali!",
+    "May Goddess Lakshmi shower you with her choicest blessings, dear sister. Your smile is brighter than any Diwali light! Happy Diwali!"
+  ],
+  brother: [
+    "To my amazing brother, may this Diwali bring you success, happiness, and all your heart's desires. Thanks for always being my protector! Happy Diwali!",
+    "Brothers like you make every festival special! Wishing you a Diwali filled with prosperity, joy, and lots of delicious sweets. Happy Diwali!",
+    "May the festival of lights illuminate your life with endless happiness and success, dear brother. You're the best! Happy Diwali!"
+  ],
+  uncle: [
+    "Wishing my wonderful uncle a very Happy Diwali! May this festival bring you good health, prosperity, and happiness. Your guidance means the world to us.",
+    "May the divine light of Diwali spread peace, prosperity, and happiness in your life, dear uncle. Thank you for all your love and support! Happy Diwali!",
+    "Celebrating Diwali with family is incomplete without your presence, uncle. Wishing you and aunty a festival full of joy and blessings! Happy Diwali!"
+  ],
+  aunty: [
+    "To my lovely aunty, may this Diwali fill your home with happiness, your heart with joy, and your life with prosperity. You're simply wonderful! Happy Diwali!",
+    "Wishing my dear aunty a Diwali as sweet as the sweets you make and as bright as your beautiful smile. May all your dreams come true! Happy Diwali!",
+    "Your love and care make every festival special, dear aunty. May Goddess Lakshmi bless you with health, wealth, and happiness. Happy Diwali!"
+  ]
+};
+
+export const relationshipTypes = [
+  { id: 'parents', name: 'Parents', icon: '👨‍👩‍👧‍👦' },
+  { id: 'friends', name: 'Friends', icon: '👫' },
+  { id: 'colleagues', name: 'Colleagues', icon: '💼' },
+  { id: 'sister', name: 'Sister', icon: '👭' },
+  { id: 'brother', name: 'Brother', icon: '👬' },
+  { id: 'uncle', name: 'Uncle', icon: '👨' },
+  { id: 'aunty', name: 'Aunty', icon: '👩' }
+];

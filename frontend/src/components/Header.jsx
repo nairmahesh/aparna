@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { ShoppingCart, Sparkles, Phone, Mail } from 'lucide-react';
+import { ShoppingCart, Sparkles, Phone, Mail, Gift, Menu } from 'lucide-react';
 import { shopInfo } from '../data/mock';
 
-const Header = ({ cartCount, onCartClick }) => {
+const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-orange-100 shadow-sm">
       {/* Top Info Bar */}
@@ -16,9 +16,8 @@ const Header = ({ cartCount, onCartClick }) => {
                 <Phone className="w-4 h-4" />
                 <span>{shopInfo.contact.phone}</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="w-4 h-4" />
-                <span>{shopInfo.contact.email}</span>
+              <div className="hidden md:flex items-center space-x-2">
+                <span>FSSAI: {shopInfo.contact.fssai}</span>
               </div>
             </div>
             <div className="hidden md:block">
@@ -36,11 +35,13 @@ const Header = ({ cartCount, onCartClick }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg cursor-pointer"
+                   onClick={() => onViewChange('menu')}>
                 🪔
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent cursor-pointer"
+                    onClick={() => onViewChange('menu')}>
                   {shopInfo.name}
                 </h1>
                 <p className="text-sm text-gray-600">{shopInfo.tagline}</p>
@@ -48,6 +49,31 @@ const Header = ({ cartCount, onCartClick }) => {
             </div>
           </div>
           
+          {/* Navigation */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button 
+              variant={currentView === 'menu' ? 'default' : 'ghost'}
+              onClick={() => onViewChange('menu')}
+              className={currentView === 'menu' 
+                ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
+                : 'text-orange-600 hover:bg-orange-50'}
+            >
+              <Menu className="w-4 h-4 mr-2" />
+              Menu
+            </Button>
+            <Button 
+              variant={currentView === 'greetings' ? 'default' : 'ghost'}
+              onClick={() => onViewChange('greetings')}
+              className={currentView === 'greetings' 
+                ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
+                : 'text-orange-600 hover:bg-orange-50'}
+            >
+              <Gift className="w-4 h-4 mr-2" />
+              Send Greetings
+            </Button>
+          </div>
+          
+          {/* Cart Button */}
           <Button 
             onClick={onCartClick}
             variant="outline" 
@@ -60,6 +86,32 @@ const Header = ({ cartCount, onCartClick }) => {
                 {cartCount}
               </Badge>
             )}
+          </Button>
+        </div>
+        
+        {/* Mobile Navigation */}
+        <div className="md:hidden flex justify-center space-x-4 mt-4">
+          <Button 
+            variant={currentView === 'menu' ? 'default' : 'ghost'}
+            onClick={() => onViewChange('menu')}
+            className={currentView === 'menu' 
+              ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
+              : 'text-orange-600 hover:bg-orange-50'}
+            size="sm"
+          >
+            <Menu className="w-4 h-4 mr-2" />
+            Menu
+          </Button>
+          <Button 
+            variant={currentView === 'greetings' ? 'default' : 'ghost'}
+            onClick={() => onViewChange('greetings')}
+            className={currentView === 'greetings' 
+              ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
+              : 'text-orange-600 hover:bg-orange-50'}
+            size="sm"
+          >
+            <Gift className="w-4 h-4 mr-2" />
+            Greetings
           </Button>
         </div>
       </div>
