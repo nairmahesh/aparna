@@ -198,9 +198,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Enhanced Order Management Endpoints"
-    - "Visitor Analytics Endpoints"
-    - "Visitor Tracking Endpoints"
+    - "Greeting Card Layout Redesign"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
