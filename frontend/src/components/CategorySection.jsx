@@ -59,9 +59,22 @@ const CategorySection = ({ category, onAddToCart }) => {
         )}
         
         <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
-          <Badge className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 text-sm">
-            {category.items.length} Varieties Available
-          </Badge>
+          <button 
+            onClick={() => {
+              const categoryGrid = document.getElementById(`${category.id}-grid`);
+              if (categoryGrid) {
+                categoryGrid.scrollIntoView({ behavior: 'smooth' });
+                // Add a highlight effect
+                categoryGrid.classList.add('ring-4', 'ring-orange-300', 'ring-opacity-50');
+                setTimeout(() => {
+                  categoryGrid.classList.remove('ring-4', 'ring-orange-300', 'ring-opacity-50');
+                }, 2000);
+              }
+            }}
+            className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-4 py-2 text-sm rounded-full font-medium transition-all duration-200 transform hover:scale-105 cursor-pointer"
+          >
+            👀 View All {category.items.length} Varieties
+          </button>
           
           {categoryPersonality.buyingTip && (
             <div className="bg-blue-50 border border-blue-200 px-4 py-2 rounded-full">
