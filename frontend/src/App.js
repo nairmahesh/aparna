@@ -18,6 +18,9 @@ const Home = () => {
   const [cart, setCart] = useState([]);
   const [currentView, setCurrentView] = useState('menu'); // 'menu', 'order', 'greetings', 'admin'
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [priceFilter, setPriceFilter] = useState('all');
+  const [sortBy, setSortBy] = useState('name');
   const { toast } = useToast();
 
   const handleAddToCart = (item) => {
