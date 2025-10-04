@@ -11,6 +11,8 @@ import AdminLogin from './components/AdminLogin';
 import AdminPanel from './components/AdminPanel';
 import EnhancedAdminPanel from './components/EnhancedAdminPanel';
 import ReviewsModal from './components/ReviewsModal';
+import LoginPage from './components/LoginPage';
+import AdminPanelPage from './components/AdminPanelPage';
 import { menuCategories, shopInfo } from './data/mock';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
