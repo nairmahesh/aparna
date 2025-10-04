@@ -434,7 +434,7 @@ const GreetingsForm = () => {
                     </div>
                     {greetingData.selectedTemplate.id === template.id && (
                       <div className="absolute top-2 right-2">
-                        <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+                        <div className="w-6 h-6 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center">
                           <span className="text-white text-xs">✓</span>
                         </div>
                       </div>
@@ -658,7 +658,7 @@ const GreetingsForm = () => {
                           </div>
                           {greetingData.selectedBackground.id === bg.id && (
                             <div className="absolute top-2 right-2">
-                              <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+                              <div className="w-6 h-6 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center">
                                 <span className="text-white text-xs">✓</span>
                               </div>
                             </div>
