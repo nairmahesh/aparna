@@ -1535,7 +1535,7 @@ const AdminPanel = () => {
                         {filteredContacts.map(contact => (
                           <div
                             key={contact.id}
-                            className="p-3 hover:bg-orange-50 cursor-pointer border-b last:border-b-0"
+                            className="p-3 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50 cursor-pointer border-b last:border-b-0"
                             onClick={() => handleSelectContact(contact)}
                           >
                             <div className="flex items-center justify-between">
