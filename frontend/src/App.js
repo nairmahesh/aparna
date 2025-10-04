@@ -599,6 +599,17 @@ const Home = () => {
             <p className="text-orange-100">
               © 2025 {getWebsiteSettings().name}. Spreading sweetness and joy this Diwali! 🪔
             </p>
+            <p className="text-orange-200 text-sm mt-2">
+              Powered by{' '}
+              <a
+                href="https://www.effybiz.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-100 hover:text-white font-semibold underline transition-colors"
+              >
+                effyBiz
+              </a>
+            </p>
           </div>
         </div>
       </footer>
