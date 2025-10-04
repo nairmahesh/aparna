@@ -243,7 +243,7 @@ const Home = () => {
                       >
                         All Items ({menuCategories.reduce((total, cat) => total + cat.items.length, 0)})
                       </button>
-                      {menuCategories.map((category) => (
+                      {getManagedCategories().map((category) => (
                         <button
                           key={category.id}
                           onClick={() => setActiveFilter(category.id)}
@@ -329,7 +329,7 @@ const Home = () => {
                       >
                         All
                       </button>
-                      {menuCategories.map((category) => (
+                      {getManagedCategories().map((category) => (
                         <button
                           key={category.id}
                           onClick={() => setActiveFilter(category.id)}
