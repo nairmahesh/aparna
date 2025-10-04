@@ -144,6 +144,19 @@ const Home = () => {
     return saved ? JSON.parse(saved) : menuCategories;
   };
 
+  // Get website settings from localStorage, fallback to shopInfo
+  const getWebsiteSettings = () => {
+    const saved = localStorage.getItem('websiteSettings');
+    return saved ? JSON.parse(saved) : {
+      name: shopInfo.name,
+      tagline: shopInfo.tagline,
+      description: shopInfo.description,
+      heroTitle: 'Welcome to Festival of Flavors',
+      heroSubtitle: 'Discover authentic Diwali sweets and snacks made with traditional recipes',
+      contact: shopInfo.contact
+    };
+  };
+
   // Get all items from all categories
   const allItems = getManagedCategories().flatMap(category => 
     category.items.map(item => ({ ...item, categoryId: category.id, categoryName: category.name }))
