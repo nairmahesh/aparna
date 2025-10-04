@@ -98,6 +98,10 @@ const Home = () => {
   const getFilteredItems = () => {
     let filtered = allItems;
 
+    // Hide products that are marked as hidden by admin
+    const hiddenProducts = JSON.parse(localStorage.getItem('hiddenProducts') || '[]');
+    filtered = filtered.filter(item => !hiddenProducts.includes(item.id));
+
     // Category filter
     if (activeFilter !== 'all') {
       filtered = filtered.filter(item => item.categoryId === activeFilter);
