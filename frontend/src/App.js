@@ -26,6 +26,8 @@ const Home = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [priceFilter, setPriceFilter] = useState('all');
   const [sortBy, setSortBy] = useState('name');
+  const [showReviews, setShowReviews] = useState(false);
+  const [selectedReviewItem, setSelectedReviewItem] = useState(null);
   const { toast } = useToast();
 
   const handleAddToCart = (item) => {
