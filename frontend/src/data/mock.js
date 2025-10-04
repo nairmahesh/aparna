@@ -200,7 +200,11 @@ export const menuCategories = [
         description: 'Crescent-shaped pastry filled with khoya and dry fruits',
         price: 35,
         unit: 'per piece',
-        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+        images: [
+          'https://images.unsplash.com/photo-1677745812171-2b9c871b123c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxndWppeWElMjBzd2VldHxlbnwwfHx8fDE3NTk1ODA4NzN8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1727018427695-35a6048c91e7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxndWppeWElMjBzd2VldHxlbnwwfHx8fDE3NTk1ODA4NzN8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1617622163466-d1d56ec8b127?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwzfHxndWppeWElMjBzd2VldHxlbnwwfHx8fDE3NTk1ODA4NzN8MA&ixlib=rb-4.1.0&q=85'
+        ]
       },
       {
         id: 'karanji',
@@ -208,7 +212,11 @@ export const menuCategories = [
         description: 'Traditional Maharashtrian sweet dumpling with coconut filling',
         price: 28,
         unit: 'per piece',
-        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+        images: [
+          'https://images.unsplash.com/photo-1617622163466-d1d56ec8b127?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwzfHxndWppeWElMjBzd2VldHxlbnwwfHx8fDE3NTk1ODA4NzN8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1677745812171-2b9c871b123c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxndWppeWElMjBzd2VldHxlbnwwfHx8fDE3NTk1ODA4NzN8MA&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1727018427695-35a6048c91e7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxndWppeWElMjBzd2VldHxlbnwwfHx8fDE3NTk1ODA4NzN8MA&ixlib=rb-4.1.0&q=85'
+        ]
       }
     ]
   },
