@@ -10,6 +10,7 @@ import GreetingsForm from './components/GreetingsForm';
 import AdminLogin from './components/AdminLogin';
 import AdminPanel from './components/AdminPanel';
 import EnhancedAdminPanel from './components/EnhancedAdminPanel';
+import ReviewsModal from './components/ReviewsModal';
 import { menuCategories, shopInfo } from './data/mock';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
