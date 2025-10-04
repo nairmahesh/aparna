@@ -2104,6 +2104,66 @@ const AdminPanel = () => {
                           </SelectContent>
                         </Select>
 
+                        {/* Conditional Contact Fields */}
+                        {reviewRequestMethod === 'whatsapp' && (
+                          <div className="space-y-2">
+                            <Label htmlFor="whatsapp_number">WhatsApp Number (Optional)</Label>
+                            <Input
+                              id="whatsapp_number"
+                              placeholder="e.g., +91 9876543210"
+                              value={customContactInfo.whatsapp_number}
+                              onChange={(e) => setCustomContactInfo(prev => ({
+                                ...prev,
+                                whatsapp_number: e.target.value
+                              }))}
+                              className="border-orange-200 focus:border-orange-400"
+                            />
+                            <p className="text-xs text-gray-500">
+                              Leave empty to use phone number from order
+                            </p>
+                          </div>
+                        )}
+
+                        {reviewRequestMethod === 'email' && (
+                          <div className="space-y-2">
+                            <Label htmlFor="email_id">Email ID *</Label>
+                            <Input
+                              id="email_id"
+                              type="email"
+                              placeholder="customer@example.com"
+                              value={customContactInfo.email_id}
+                              onChange={(e) => setCustomContactInfo(prev => ({
+                                ...prev,
+                                email_id: e.target.value
+                              }))}
+                              className="border-orange-200 focus:border-orange-400"
+                              required
+                            />
+                            <p className="text-xs text-gray-500">
+                              Email ID is required for email reviews
+                            </p>
+                          </div>
+                        )}
+
+                        {reviewRequestMethod === 'sms' && (
+                          <div className="space-y-2">
+                            <Label htmlFor="mobile_number">Mobile Number (Optional)</Label>
+                            <Input
+                              id="mobile_number"
+                              placeholder="e.g., +91 9876543210"
+                              value={customContactInfo.mobile_number}
+                              onChange={(e) => setCustomContactInfo(prev => ({
+                                ...prev,
+                                mobile_number: e.target.value
+                              }))}
+                              className="border-orange-200 focus:border-orange-400"
+                            />
+                            <p className="text-xs text-gray-500">
+                              Leave empty to use phone number from order
+                            </p>
+                          </div>
+                        )}
+
                         <Button 
                           onClick={sendReviewRequests} 
                           disabled={loading || selectedOrders.length === 0}
