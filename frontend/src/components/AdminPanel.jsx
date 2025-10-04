@@ -495,22 +495,30 @@ const AdminPanel = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-6 mb-8">
+            <TabsTrigger value="dashboard" className="flex items-center space-x-2">
+              <BarChart3 className="w-4 h-4" />
+              <span>Dashboard</span>
+            </TabsTrigger>
+            <TabsTrigger value="orders" className="flex items-center space-x-2">
+              <ShoppingCart className="w-4 h-4" />
+              <span>Orders</span>
+            </TabsTrigger>
+            <TabsTrigger value="visitors" className="flex items-center space-x-2">
+              <Eye className="w-4 h-4" />
+              <span>Visitors</span>
+            </TabsTrigger>
+            <TabsTrigger value="customers" className="flex items-center space-x-2">
+              <Users className="w-4 h-4" />
+              <span>Customers</span>
+            </TabsTrigger>
+            <TabsTrigger value="revenue" className="flex items-center space-x-2">
+              <TrendingUp className="w-4 h-4" />
+              <span>Revenue</span>
+            </TabsTrigger>
             <TabsTrigger value="products" className="flex items-center space-x-2">
               <Package className="w-4 h-4" />
               <span>Products</span>
-            </TabsTrigger>
-            <TabsTrigger value="contacts" className="flex items-center space-x-2">
-              <Users className="w-4 h-4" />
-              <span>Contacts</span>
-            </TabsTrigger>
-            <TabsTrigger value="personalized" className="flex items-center space-x-2">
-              <MessageCircle className="w-4 h-4" />
-              <span>Personalized Links</span>
-            </TabsTrigger>
-            <TabsTrigger value="analytics" className="flex items-center space-x-2">
-              <BarChart3 className="w-4 h-4" />
-              <span>Analytics</span>
             </TabsTrigger>
           </TabsList>
 
