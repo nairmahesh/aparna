@@ -24,7 +24,16 @@ const AdminPanel = () => {
   const [contacts, setContacts] = useState([]);
   const [analytics, setAnalytics] = useState(null);
   const [linkAnalytics, setLinkAnalytics] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [visitorAnalytics, setVisitorAnalytics] = useState(null);
+  const [customerAnalytics, setCustomerAnalytics] = useState([]);
+  const [cartAbandonments, setCartAbandonments] = useState([]);
+  const [revenueReport, setRevenueReport] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [dateRange, setDateRange] = useState({
+    from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    to: new Date().toISOString().split('T')[0]
+  });
   const { toast } = useToast();
 
   // Product Management State
