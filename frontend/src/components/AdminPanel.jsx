@@ -425,15 +425,6 @@ const AdminPanel = () => {
     return newProduct.offer_price || newProduct.base_price || 0;
   };
 
-  const handleImageUpload = (file) => {
-    // For demo purposes, we'll create a temporary URL
-    const imageUrl = URL.createObjectURL(file);
-    setNewProduct(prev => ({
-      ...prev,
-      images: [...(prev.images || []), imageUrl]
-    }));
-  };
-
   const getStatusBadge = (status, type = 'order') => {
     const statusConfig = type === 'order' ? orderStatuses : 
                        type === 'delivery' ? deliveryStatuses : paymentStatuses;
