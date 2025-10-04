@@ -657,9 +657,178 @@ const AdminPanel = () => {
           </TabsContent>
 
           <TabsContent value="personalized" className="space-y-6">
-            {/* Personalized links interface will go here */}
-            <div className="text-center py-8">
-              <p className="text-gray-500">Personalized links interface - Implementation continues...</p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Send Personalized Message */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Send Personalized Link</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="select-contact">To: Select Contact *</Label>
+                    <Select
+                      value={selectedContact}
+                      onValueChange={setSelectedContact}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Choose a contact to send message" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {contacts.map(contact => (
+                          <SelectItem key={contact.id} value={contact.id}>
+                            <div className="flex items-center space-x-2">
+                              <span>{contact.name}</span>
+                              <span className="text-sm text-gray-500">({contact.phone})</span>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {selectedContact && (
+                    <div className="p-3 bg-orange-50 rounded-lg border border-orange-200">
+                      {(() => {
+                        const contact = contacts.find(c => c.id === selectedContact);
+                        return contact ? (
+                          <div>
+                            <p className="font-medium text-orange-700">Sending to:</p>
+                            <p className="text-lg font-semibold">{contact.name}</p>
+                            <p className="text-sm text-gray-600 flex items-center">
+                              <Phone className="w-3 h-3 mr-1" />
+                              {contact.phone}
+                            </p>
+                            <Badge className="mt-1 bg-orange-200 text-orange-700">
+                              {relationships.find(r => r.value === contact.relationship)?.label}
+                            </Badge>
+                          </div>
+                        ) : null;
+                      })()}
+                    </div>
+                  )}
+
+                  <div>
+                    <Label htmlFor="message-template">Message Template</Label>
+                    <div className="space-y-2">
+                      <div className="grid grid-cols-1 gap-2">
+                        {messageTemplates.map((template, idx) => (
+                          <Button
+                            key={idx}
+                            variant="outline"
+                            onClick={() => setMessageTemplate(template.message)}
+                            className="text-left h-auto p-3 border-orange-200 hover:bg-orange-50"
+                          >
+                            <div>
+                              <p className="font-medium text-sm">{template.name}</p>
+                              <p className="text-xs text-gray-600 mt-1">{template.message.substring(0, 100)}...</p>
+                            </div>
+                          </Button>
+                        ))}
+                      </div>
+                      
+                      <div className="mt-4">
+                        <Label htmlFor="custom-message">Or write custom message:</Label>
+                        <Textarea
+                          id="custom-message"
+                          value={messageTemplate}
+                          onChange={(e) => setMessageTemplate(e.target.value)}
+                          placeholder="Hi {name}! I have some special Diwali treats for you. Check them out: {link}"
+                          className="min-h-24"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Use {'{name}'} for contact name and {'{link}'} for personalized link
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={handleSendPersonalizedMessage}
+                    disabled={loading || !selectedContact || !messageTemplate}
+                    className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white"
+                  >
+                    <Send className="w-4 h-4 mr-2" />
+                    {loading ? 'Creating Link...' : 'Generate Personalized Link'}
+                  </Button>
+                  
+                  {personalizedLinks.length > 0 && (
+                    <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                      <h4 className="font-semibold text-green-700 mb-2">Ready to Send!</h4>
+                      <div className="space-y-2">
+                        {personalizedLinks.slice(-3).map((link, idx) => (
+                          <div key={idx} className="text-sm">
+                            <p><strong>To:</strong> {link.contact_name} ({link.contact_phone})</p>
+                            <p className="text-green-600 break-all">{link.message}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Recent Personalized Links */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center justify-between">
+                    <span>Recent Links</span>
+                    <Button variant="outline" onClick={loadAnalytics}>
+                      <Link className="w-4 h-4 mr-2" />
+                      Refresh
+                    </Button>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3 max-h-96 overflow-y-auto">
+                    {linkAnalytics.slice(0, 10).map((analytics) => (
+                      <div key={analytics.link_id} className="border rounded-lg p-3">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <h4 className="font-semibold">{analytics.contact_name}</h4>
+                            <p className="text-sm text-gray-600 flex items-center">
+                              <Phone className="w-3 h-3 mr-1" />
+                              {analytics.contact_phone}
+                            </p>
+                            <div className="flex items-center space-x-4 mt-2">
+                              <div className="flex items-center space-x-1">
+                                <Eye className="w-3 h-3" />
+                                <span className="text-xs">{analytics.total_opens} opens</span>
+                              </div>
+                              <div className="flex items-center space-x-1">
+                                <ShoppingCart className="w-3 h-3" />
+                                <span className="text-xs">{analytics.items_added_to_cart} items</span>
+                              </div>
+                              {analytics.order_placed && (
+                                <Badge className="text-xs bg-green-100 text-green-700">
+                                  ORDER PLACED ✓
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <Badge variant={analytics.link_status === 'active' ? 'default' : 'secondary'}>
+                              {analytics.link_status}
+                            </Badge>
+                            <p className="text-xs text-gray-500 mt-1">
+                              {new Date(analytics.created_at).toLocaleDateString()}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    {linkAnalytics.length === 0 && (
+                      <div className="text-center py-8 text-gray-500">
+                        <Link className="w-12 h-12 mx-auto mb-2 opacity-30" />
+                        <p>No personalized links yet</p>
+                        <p className="text-sm">Create your first personalized link to start tracking</p>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
 
