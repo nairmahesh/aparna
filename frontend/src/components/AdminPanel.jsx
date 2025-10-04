@@ -177,9 +177,26 @@ const AdminPanel = () => {
 
   const loadProducts = async () => {
     try {
-      const response = await axios.get(`${BACKEND_URL}/admin/products?admin_key=${ADMIN_KEY}`);
-      setProducts(response.data);
+      // Transform frontend products data to admin panel format
+      const transformedProducts = menuCategories.flatMap(category => 
+        category.items.map(item => ({
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          category: category.name,
+          final_price: item.price,
+          unit: item.unit,
+          status: 'active',
+          has_offer: item.price > 1000,
+          rating: item.rating || 0,
+          total_reviews: item.totalReviews || 0,
+          images: item.images || [item.image],
+          note_from_aparna: item.rating > 4.5 ? "One of my personal favorites! ❤️" : null
+        }))
+      );
+      setProducts(transformedProducts);
     } catch (error) {
+      console.error('Error loading products:', error);
       toast({ title: 'Error loading products', variant: 'destructive' });
     }
   };
