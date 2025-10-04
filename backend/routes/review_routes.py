@@ -5,7 +5,7 @@ import os
 from motor.motor_asyncio import AsyncIOMotorClient
 from models.review_models import (
     ReviewRequest, CustomerReview, ReviewRequestCreate, 
-    ReviewRequestBatch, ReviewStats, ReviewRequestSummary
+    ReviewRequestBatch, ReviewStats, ReviewRequestSummary, CustomContactInfo
 )
 import urllib.parse
 
