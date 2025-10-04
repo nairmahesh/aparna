@@ -14,8 +14,8 @@ import { useToast } from '../hooks/use-toast';
 const greetingArtworks = [
   {
     id: 1,
-    name: 'Golden Diyas',
-    url: 'https://images.unsplash.com/photo-1636619773834-c7e0762ddfe1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
+    name: 'Traditional Diwali Design',
+    url: 'https://customer-assets.emergentagent.com/job_visual-preview-10/artifacts/attdwhwf_image.png',
     textColor: 'text-white',
     overlayColor: 'bg-black/30',
     category: 'traditional'
@@ -30,19 +30,19 @@ const greetingArtworks = [
   },
   {
     id: 3,
+    name: 'Golden Diyas',
+    url: 'https://images.unsplash.com/photo-1636619773834-c7e0762ddfe1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/30',
+    category: 'traditional'
+  },
+  {
+    id: 4,
     name: 'Warm Bokeh Lights',
     url: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc1OTU3NDU3Mnww&ixlib=rb-4.1.0&q=85&w=800&h=600',
     textColor: 'text-white',
     overlayColor: 'bg-black/40',
     category: 'elegant'
-  },
-  {
-    id: 4,
-    name: 'Festive Sparklers',
-    url: 'https://images.pexels.com/photos/288478/pexels-photo-288478.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
-    textColor: 'text-white',
-    overlayColor: 'bg-black/50',
-    category: 'celebration'
   },
   {
     id: 5,
