@@ -2701,6 +2701,236 @@ const AdminPanel = () => {
             </div>
           </div>
         )}
+
+        {/* Edit Product Modal */}
+        {showEditModal && editingProduct && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Edit Product: {editingProduct.name}</h3>
+                <Button variant="ghost" size="sm" onClick={() => setShowEditModal(false)}>
+                  ×
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="edit-name">Product Name</Label>
+                    <Input
+                      id="edit-name"
+                      value={editingProduct.name}
+                      onChange={(e) => setEditingProduct(prev => ({ ...prev, name: e.target.value }))}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="edit-category">Category</Label>
+                    <Input
+                      id="edit-category"
+                      value={editingProduct.category}
+                      onChange={(e) => setEditingProduct(prev => ({ ...prev, category: e.target.value }))}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="edit-description">Description</Label>
+                  <Textarea
+                    id="edit-description"
+                    value={editingProduct.description}
+                    onChange={(e) => setEditingProduct(prev => ({ ...prev, description: e.target.value }))}
+                    className="min-h-20"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="edit-price">Price (₹)</Label>
+                    <Input
+                      id="edit-price"
+                      type="number"
+                      value={editingProduct.final_price}
+                      onChange={(e) => setEditingProduct(prev => ({ ...prev, final_price: parseFloat(e.target.value) || 0 }))}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="edit-unit">Unit</Label>
+                    <Input
+                      id="edit-unit"
+                      value={editingProduct.unit}
+                      onChange={(e) => setEditingProduct(prev => ({ ...prev, unit: e.target.value }))}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="edit-note">Personal Note from Aparna</Label>
+                  <Textarea
+                    id="edit-note"
+                    value={editingProduct.note_from_aparna || ''}
+                    onChange={(e) => setEditingProduct(prev => ({ ...prev, note_from_aparna: e.target.value }))}
+                    placeholder="Add a personal touch..."
+                    className="min-h-16"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="edit-status">Status</Label>
+                  <Select
+                    value={editingProduct.status}
+                    onValueChange={(value) => setEditingProduct(prev => ({ ...prev, status: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="inactive">Inactive</SelectItem>
+                      <SelectItem value="out_of_stock">Out of Stock</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="flex space-x-2 pt-4">
+                  <Button 
+                    onClick={handleUpdateProduct}
+                    disabled={loading}
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+                  >
+                    <Edit className="w-4 h-4 mr-2" />
+                    Update Product
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowEditModal(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Analytics Modal */}
+        {showAnalyticsModal && selectedProductAnalytics && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Analytics: {selectedProductAnalytics.name}</h3>
+                <Button variant="ghost" size="sm" onClick={() => setShowAnalyticsModal(false)}>
+                  ×
+                </Button>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Est. Orders</p>
+                        <p className="text-2xl font-bold text-blue-600">{selectedProductAnalytics.analytics.estimatedOrders}</p>
+                      </div>
+                      <ShoppingCart className="w-8 h-8 text-blue-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Est. Revenue</p>
+                        <p className="text-2xl font-bold text-green-600">₹{selectedProductAnalytics.analytics.estimatedRevenue.toLocaleString()}</p>
+                      </div>
+                      <TrendingUp className="w-8 h-8 text-green-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Conversion Rate</p>
+                        <p className="text-2xl font-bold text-orange-600">{selectedProductAnalytics.analytics.conversionRate}%</p>
+                      </div>
+                      <BarChart3 className="w-8 h-8 text-orange-400" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Product Performance</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Views (Last Month)</span>
+                        <span className="font-semibold">{selectedProductAnalytics.analytics.viewsLastMonth}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Wishlist Adds</span>
+                        <span className="font-semibold">{selectedProductAnalytics.analytics.wishlistAdds}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Returning Customers</span>
+                        <span className="font-semibold">{selectedProductAnalytics.analytics.returningCustomers}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Average Order Value</span>
+                        <span className="font-semibold">₹{selectedProductAnalytics.analytics.averageOrderValue}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Business Metrics</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Rating</span>
+                        <span className="font-semibold">{selectedProductAnalytics.rating}⭐ ({selectedProductAnalytics.total_reviews} reviews)</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Profit Margin</span>
+                        <span className="font-semibold text-green-600">{selectedProductAnalytics.analytics.profitMargin}%</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Status</span>
+                        <Badge className={selectedProductAnalytics.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}>
+                          {selectedProductAnalytics.status}
+                        </Badge>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Visibility</span>
+                        <Badge className={hiddenProducts.has(selectedProductAnalytics.id) ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}>
+                          {hiddenProducts.has(selectedProductAnalytics.id) ? 'Hidden' : 'Visible'}
+                        </Badge>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="flex justify-end pt-4">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowAnalyticsModal(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
