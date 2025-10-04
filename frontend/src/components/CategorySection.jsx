@@ -119,7 +119,7 @@ const CategorySection = ({ category, onAddToCart }) => {
       
       {/* Show count after viewing */}
       <div className="text-center mt-6">
-        <div className="inline-block bg-orange-50 border border-orange-200 px-4 py-2 rounded-full">
+        <div className="inline-block bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 px-4 py-2 rounded-full">
           <span className="text-orange-600 text-sm font-medium">
             ✨ Showing all {category.items.length} {category.name.toLowerCase()} varieties ✨
           </span>
