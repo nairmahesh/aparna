@@ -532,16 +532,15 @@ class AdminPanelTester:
 
         # Test 3: POST /admin/track/visitor-event (cart add)
         try:
-            cart_event_data = {
+            cart_event_params = {
                 "session_id": session_id,
                 "event_type": "cart_add",
                 "page_url": "/products/kaju-katli",
                 "product_id": str(uuid.uuid4()),
                 "product_name": "Kaju Katli Premium",
-                "cart_value": 800.0,
-                "order_id": None
+                "cart_value": 800.0
             }
-            response = self.session.post(f"{API_BASE}/track/visitor-event", json=cart_event_data)
+            response = self.session.post(f"{API_BASE}/track/visitor-event", params=cart_event_params)
             if response.status_code == 200:
                 cart_response = response.json()
                 if cart_response.get("status") == "tracked":
