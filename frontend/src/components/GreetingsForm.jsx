@@ -97,15 +97,20 @@ const GreetingsForm = () => {
     });
   };
 
-  const handleShareGreeting = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: 'Diwali Greetings',
-        text: getFinalMessage(),
-      });
-    } else {
-      handleCopyGreeting();
-    }
+  const handleShareWhatsApp = () => {
+    const message = encodeURIComponent(`🪔 *Happy Diwali!* 🪔\n\n*To: ${greetingData.recipientName}*\n\n${getFinalMessage()}\n\n*From: ${greetingData.senderName}*\n\n✨ Wishing you joy, prosperity & happiness! ✨`);
+    window.open(`https://wa.me/?text=${message}`, '_blank');
+  };
+
+  const handleShareSMS = () => {
+    const message = encodeURIComponent(`Happy Diwali!\n\nTo: ${greetingData.recipientName}\n\n${getFinalMessage()}\n\nFrom: ${greetingData.senderName}`);
+    window.open(`sms:?body=${message}`, '_blank');
+  };
+
+  const handleShareEmail = () => {
+    const subject = encodeURIComponent('🪔 Happy Diwali Greetings! 🪔');
+    const body = encodeURIComponent(`Dear ${greetingData.recipientName},\n\n${getFinalMessage()}\n\nWishing you joy, prosperity & happiness this Diwali!\n\nWith love,\n${greetingData.senderName}\n\n✨🪔✨`);
+    window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
   };
 
   return (
