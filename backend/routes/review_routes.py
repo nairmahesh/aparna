@@ -106,7 +106,7 @@ async def send_review_requests(
                     continue
                 
                 # Extract product names
-                product_names = [item['name'] for item in order['items']]
+                product_names = [item['product_name'] for item in order['items']]
                 
                 # Create review request
                 review_request = ReviewRequest(
