@@ -178,7 +178,17 @@ backend:
           comment: "Customer analytics working perfectly. Successfully aggregates customer data showing total orders, total spent, avg order value, customer type classification (new/returning), and order history. Tested with sample data showing 2 customers with proper analytics calculations."
 
 frontend:
-  # No frontend testing performed as per instructions
+  - task: "Greeting Card Layout Redesign"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/components/GreetingsForm.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "Redesigned greeting card preview layout as requested by user. Changed from complex overlay text positioning to simple layout: artwork image at top, clean text section below with 'To:', message, and 'From:' fields. Removed all absolute positioning attempts. User reported placeholders for names and messages not showing correctly in previous implementation. New layout should be much cleaner and more readable."
 
 metadata:
   created_by: "testing_agent"
