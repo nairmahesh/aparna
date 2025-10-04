@@ -46,10 +46,14 @@ const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
         </div>
         <Button 
           onClick={() => onAddToCart(item)}
-          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-medium transition-all duration-200 transform hover:scale-105"
+          className={`w-full font-medium transition-all duration-200 transform hover:scale-105 ${
+            isSpecial
+              ? 'bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white shadow-lg'
+              : 'bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white'
+          }`}
         >
           <ShoppingCart className="w-4 h-4 mr-2" />
-          Add to Cart
+          {isSpecial ? 'Add Aparna\'s Special!' : 'Add to Cart'}
         </Button>
       </CardContent>
     </Card>
