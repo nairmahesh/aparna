@@ -367,7 +367,8 @@ const GreetingsForm = () => {
                     senderName: greetingData.senderName, // Keep sender name
                     relationship: '',
                     selectedMessage: '',
-                    customMessage: ''
+                    customMessage: '',
+                    selectedBackground: greetingData.selectedBackground // Keep selected background
                   });
                   setShowPreview(false);
                 }}
