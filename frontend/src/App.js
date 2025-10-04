@@ -489,17 +489,6 @@ const Home = () => {
         onViewChange={setCurrentView}
       />
       
-      {/* Free Delivery Banner */}
-      <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-4 text-center shadow-lg">
-        <div className="container mx-auto">
-          <p className="text-sm md:text-base font-semibold flex items-center justify-center space-x-2">
-            <Truck className="w-4 h-4 md:w-5 md:h-5" />
-            <span>🚚 Free Delivery on Orders Above ₹2500</span>
-            <Truck className="w-4 h-4 md:w-5 md:h-5" />
-          </p>
-        </div>
-      </div>
-      
       <div className="pt-4">
         {renderContent()}
       </div>
