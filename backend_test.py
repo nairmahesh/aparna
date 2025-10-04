@@ -498,16 +498,12 @@ class AdminPanelTester:
 
         # Test 2: POST /admin/track/visitor-event (page view)
         try:
-            event_data = {
+            event_params = {
                 "session_id": session_id,
                 "event_type": "page_view",
-                "page_url": "/products/diwali-special",
-                "product_id": None,
-                "product_name": None,
-                "cart_value": None,
-                "order_id": None
+                "page_url": "/products/diwali-special"
             }
-            response = self.session.post(f"{API_BASE}/track/visitor-event", json=event_data)
+            response = self.session.post(f"{API_BASE}/track/visitor-event", params=event_params)
             if response.status_code == 200:
                 event_response = response.json()
                 if event_response.get("status") == "tracked":
