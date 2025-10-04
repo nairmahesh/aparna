@@ -504,7 +504,7 @@ const Home = () => {
           </div>
           <div className="border-t border-orange-400 pt-6">
             <p className="text-orange-100">
-              © 2024 {shopInfo.name}. Spreading sweetness and joy this Diwali! 🪔
+              © 2025 {shopInfo.name}. Spreading sweetness and joy this Diwali! 🪔
             </p>
           </div>
         </div>
