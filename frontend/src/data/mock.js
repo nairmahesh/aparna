@@ -227,7 +227,7 @@ export const menuCategories = [
         description: 'Classic gram flour laddus with ghee and cardamom',
         price: 1050,
         unit: 'per kg',
-        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+        image: 'https://images.pexels.com/photos/8887055/pexels-photo-8887055.jpeg?w=400&h=300&fit=crop'
       },
       {
         id: 'rava-besan',
