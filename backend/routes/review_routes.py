@@ -113,7 +113,7 @@ async def send_review_requests(
                     customer_phone=order['customer_phone'],
                     customer_name=order['customer_name'],
                     order_id=order_id,
-                    order_date=order['order_date'],
+                    order_date=order['created_at'],
                     products_ordered=product_names,
                     request_sent_date=datetime.now(),
                     request_method=request_data.request_method,
