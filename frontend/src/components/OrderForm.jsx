@@ -304,7 +304,7 @@ const OrderForm = ({ cart, onUpdateCart, onRemoveItem, onClearCart }) => {
               <Button 
                 variant="outline"
                 onClick={() => setShowPayment(false)}
-                className="w-full border-orange-300 text-orange-600 hover:bg-orange-50"
+                className="w-full border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50"
               >
                 ← Back to Edit Details
               </Button>
