@@ -14,7 +14,7 @@ import {
   Package, Image, IndianRupee, Percent, Phone, User,
   TrendingUp, Clock, MapPin, Truck, CreditCard,
   AlertCircle, CheckCircle, XCircle, Calendar,
-  RefreshCw, Search, Filter, Download, Mail, MessageSquare, LogOut
+  RefreshCw, Search, Filter, Download, Mail, MessageSquare, LogOut, Settings
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 import { menuCategories } from '../data/mock';
