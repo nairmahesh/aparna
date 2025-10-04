@@ -58,16 +58,16 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
-# Include the router in the main app
-app.include_router(api_router)
-
-# Include admin routes
+# Include admin routes in api_router
 from routes.admin_routes import router as admin_router
-app.include_router(admin_router)
+api_router.include_router(admin_router)
 
 # Include review routes
 from routes.review_routes import router as review_router
 app.include_router(review_router)
+
+# Include the router in the main app
+app.include_router(api_router)
 
 app.add_middleware(
     CORSMiddleware,
