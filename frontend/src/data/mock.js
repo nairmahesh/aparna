@@ -4,7 +4,6 @@ export const menuCategories = [
     id: 'chivda',
     name: 'Chivda Collection',
     description: 'Crispy and flavorful traditional snacks perfect for Diwali celebrations',
-    icon: '🥜',
     items: [
       {
         id: 'poha-chivda',
