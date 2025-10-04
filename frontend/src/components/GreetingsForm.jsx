@@ -207,6 +207,41 @@ const GreetingsForm = () => {
               </p>
             </div>
 
+            <div className="space-y-4">
+              <Label className="flex items-center space-x-2">
+                <Palette className="w-4 h-4" />
+                <span>Choose Background Design</span>
+              </Label>
+              <div className="grid grid-cols-2 gap-4">
+                {greetingBackgrounds.map((bg) => (
+                  <Card 
+                    key={bg.id} 
+                    className={`cursor-pointer transition-all hover:border-orange-300 ${
+                      greetingData.selectedBackground.id === bg.id 
+                        ? 'border-orange-500 ring-2 ring-orange-200' 
+                        : 'border-gray-200'
+                    }`}
+                    onClick={() => setGreetingData(prev => ({ ...prev, selectedBackground: bg }))}
+                  >
+                    <CardContent className="p-2">
+                      <div className="relative h-24 rounded-md overflow-hidden">
+                        <img 
+                          src={bg.url} 
+                          alt={bg.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className={`absolute inset-0 ${bg.overlayColor} flex items-center justify-center`}>
+                          <span className={`text-xs font-medium ${bg.textColor}`}>
+                            {bg.name}
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
             <Button 
               onClick={handleCreateGreeting}
               className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white py-6 text-lg"
