@@ -385,7 +385,7 @@ export const menuCategories = [
             customerName: 'Nikhil J.',
             rating: 4,
             comment: 'Traditional recipe done right. Had this during last Diwali and loved it.',
-            date: '2025-10-09'
+            date: '2025-10-04'
           }
         ],
         images: [
@@ -422,7 +422,7 @@ export const menuCategories = [
             customerName: 'Pallavi N.',
             rating: 5,
             comment: 'Excellent healthy option! My diabetic father loved it. Will order again.',
-            date: '2025-10-09'
+            date: '2025-10-04'
           }
         ],
         images: [
@@ -532,7 +532,7 @@ export const menuCategories = [
             customerName: 'Dilip G.',
             rating: 4,
             comment: 'Traditional sev. Good quality and fresh. Will use for Diwali preparations.',
-            date: '2025-10-09'
+            date: '2025-10-04'
           }
         ],
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
@@ -671,7 +671,7 @@ export const menuCategories = [
             customerName: 'Narayan S.',
             rating: 4,
             comment: 'Traditional gujjia. Good for festivals and puja offerings.',
-            date: '2025-10-09'
+            date: '2025-10-04'
           }
         ],
         images: [
@@ -825,7 +825,7 @@ export const menuCategories = [
             customerName: 'Varsha M.',
             rating: 4,
             comment: 'Traditional rava-coconut laddu. Ordered last year and liked it.',
-            date: '2025-10-09'
+            date: '2025-10-04'
           }
         ],
         image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
