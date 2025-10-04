@@ -1564,6 +1564,47 @@ const AdminPanel = () => {
                               </div>
                             </td>
                             <td className="py-3 px-2">
+                              <div className="flex items-center space-x-2">
+                                {product.images && product.images.length > 0 ? (
+                                  <>
+                                    <img 
+                                      src={product.images[0]} 
+                                      alt={product.name}
+                                      className="w-12 h-12 object-cover rounded-lg border"
+                                      onError={(e) => {
+                                        e.target.src = 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop';
+                                      }}
+                                    />
+                                    <div>
+                                      <p className="text-xs font-medium">{product.images.length} image{product.images.length > 1 ? 's' : ''}</p>
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        className="text-xs text-blue-600 hover:text-blue-700 p-0 h-auto"
+                                        onClick={() => setSelectedImageProduct(product)}
+                                      >
+                                        Manage
+                                      </Button>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <div className="flex items-center space-x-2">
+                                    <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                      <Image className="w-6 h-6 text-gray-400" />
+                                    </div>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className="text-xs text-orange-600 hover:text-orange-700 p-0 h-auto"
+                                      onClick={() => setSelectedImageProduct(product)}
+                                    >
+                                      Add Images
+                                    </Button>
+                                  </div>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-3 px-2">
                               <Badge variant="outline" className="text-xs">
                                 {product.category}
                               </Badge>
