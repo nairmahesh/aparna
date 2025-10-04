@@ -499,7 +499,12 @@ const Home = () => {
             <p className="text-orange-100 mb-4">{shopInfo.tagline}</p>
             <div className="text-orange-100 space-y-1">
               <p>{shopInfo.contact.address}</p>
-              <p>📞 {shopInfo.contact.phone}</p>
+              <p>📞 <a 
+                href={`tel:${shopInfo.contact.phone}`}
+                className="hover:text-orange-200 transition-colors cursor-pointer"
+              >
+                {shopInfo.contact.phone}
+              </a></p>
               <p className="text-sm">FSSAI License: {shopInfo.contact.fssai}</p>
             </div>
           </div>
