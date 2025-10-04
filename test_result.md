@@ -288,8 +288,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Admin Analytics Dummy Data Population"
-    - "Powered by effyBiz Footer Branding"
+    - "Enhanced Add to Cart Quantity Controls"
+    - "Share & Recommend Modal Implementation"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
