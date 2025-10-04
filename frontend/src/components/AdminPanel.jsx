@@ -602,6 +602,94 @@ const AdminPanel = () => {
     });
   };
 
+  // Image Management Functions
+  const handleAddImageToProduct = async (file) => {
+    try {
+      setUploadingImage(true);
+      
+      // For demo purposes, create a URL from the file
+      const imageUrl = URL.createObjectURL(file);
+      
+      // Update the product in the products array
+      setProducts(prev => prev.map(p => 
+        p.id === selectedImageProduct.id 
+          ? { ...p, images: [...(p.images || []), imageUrl] }
+          : p
+      ));
+      
+      // Update managedCategories as well to keep data in sync
+      const updatedCategories = managedCategories.map(category => ({
+        ...category,
+        items: category.items.map(item => 
+          item.id === selectedImageProduct.id 
+            ? { ...item, images: [...(item.images || [item.image].filter(Boolean)), imageUrl] }
+            : item
+        )
+      }));
+      
+      setManagedCategories(updatedCategories);
+      localStorage.setItem('managedCategories', JSON.stringify(updatedCategories));
+      
+      // Update selectedImageProduct to reflect new images
+      setSelectedImageProduct(prev => ({
+        ...prev,
+        images: [...(prev.images || []), imageUrl]
+      }));
+      
+      toast({
+        title: "Image Added",
+        description: "Image has been added to the product successfully.",
+      });
+      
+    } catch (error) {
+      toast({
+        title: "Error adding image",
+        variant: "destructive",
+        description: error.message
+      });
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleRemoveImageFromProduct = (imageIndex) => {
+    // Update products array
+    setProducts(prev => prev.map(p => 
+      p.id === selectedImageProduct.id 
+        ? { ...p, images: p.images.filter((_, index) => index !== imageIndex) }
+        : p
+    ));
+    
+    // Update managedCategories
+    const updatedCategories = managedCategories.map(category => ({
+      ...category,
+      items: category.items.map(item => 
+        item.id === selectedImageProduct.id 
+          ? { ...item, images: (item.images || []).filter((_, index) => index !== imageIndex) }
+          : item
+      )
+    }));
+    
+    setManagedCategories(updatedCategories);
+    localStorage.setItem('managedCategories', JSON.stringify(updatedCategories));
+    
+    // Update selectedImageProduct
+    setSelectedImageProduct(prev => ({
+      ...prev,
+      images: prev.images.filter((_, index) => index !== imageIndex)
+    }));
+    
+    toast({
+      title: "Image Removed",
+      description: "Image has been removed from the product.",
+    });
+  };
+
+  const handleCloseImageModal = () => {
+    setShowImageModal(false);
+    setSelectedImageProduct(null);
+  };
+
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
