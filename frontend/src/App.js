@@ -56,6 +56,53 @@ const Home = () => {
     setShowReviews(true);
   };
 
+  const handleShareProduct = (item) => {
+    setSelectedShareItem(item);
+    setShowShareModal(true);
+  };
+
+  const handleWhatsAppShare = (item) => {
+    const productUrl = `${window.location.origin}/?product=${item.id}`;
+    const message = `🪔 Check out this delicious ${item.name} from Aparna's Diwali Delights!\n\n${item.description}\n\n💰 Price: ₹${item.price} ${item.unit}\n⭐ Rating: ${item.rating || 'New'} ${item.totalReviews ? `(${item.totalReviews} reviews)` : ''}\n\n🛒 Order now: ${productUrl}\n\n#DiwaliTreats #AparnaDelights`;
+    
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    
+    toast({
+      title: "WhatsApp Share",
+      description: "WhatsApp opened with product details!",
+    });
+    
+    setShowShareModal(false);
+  };
+
+  const handleCopyLink = (item) => {
+    const productUrl = `${window.location.origin}/?product=${item.id}`;
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(productUrl).then(() => {
+      toast({
+        title: "Link Copied!",
+        description: "Product link copied to clipboard. Share it anywhere!",
+      });
+    }).catch(() => {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = productUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      toast({
+        title: "Link Copied!",
+        description: "Product link copied to clipboard. Share it anywhere!",
+      });
+    });
+    
+    setShowShareModal(false);
+  };
+
   const handleUpdateCart = (itemId, newQuantity) => {
     setCart(prev => 
       prev.map(item => 
