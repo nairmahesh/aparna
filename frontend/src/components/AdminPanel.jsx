@@ -3423,6 +3423,120 @@ const AdminPanel = () => {
             </div>
           </div>
         )}
+
+        {/* Image Management Modal */}
+        {showImageModal && selectedImageProduct && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Manage Images: {selectedImageProduct.name}</h3>
+                <Button variant="ghost" size="sm" onClick={handleCloseImageModal}>
+                  ×
+                </Button>
+              </div>
+              
+              <div className="space-y-6">
+                {/* Current Images */}
+                <div>
+                  <h4 className="text-md font-medium mb-3">Current Images ({selectedImageProduct.images?.length || 0})</h4>
+                  {selectedImageProduct.images && selectedImageProduct.images.length > 0 ? (
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                      {selectedImageProduct.images.map((image, index) => (
+                        <div key={index} className="relative group">
+                          <img 
+                            src={image} 
+                            alt={`${selectedImageProduct.name} - ${index + 1}`}
+                            className="w-full h-32 object-cover rounded-lg border shadow-sm"
+                            onError={(e) => {
+                              e.target.src = 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop';
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-200 rounded-lg flex items-center justify-center">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="opacity-0 group-hover:opacity-100 bg-red-500 hover:bg-red-600 text-white"
+                              onClick={() => handleRemoveImageFromProduct(index)}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                          <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                            #{index + 1}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8 text-gray-500 border-2 border-dashed border-gray-200 rounded-lg">
+                      <Image className="w-12 h-12 mx-auto mb-2 opacity-30" />
+                      <p>No images added yet</p>
+                      <p className="text-xs">Add images to showcase this product</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Add New Images */}
+                <div>
+                  <h4 className="text-md font-medium mb-3">Add New Images</h4>
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={(e) => {
+                        Array.from(e.target.files).forEach(file => {
+                          handleAddImageToProduct(file);
+                        });
+                        e.target.value = '';
+                      }}
+                      className="hidden"
+                      id="add-product-images"
+                      disabled={uploadingImage}
+                    />
+                    <label htmlFor="add-product-images" className="cursor-pointer">
+                      <div className="text-center">
+                        {uploadingImage ? (
+                          <div className="flex items-center justify-center space-x-2">
+                            <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                            <span className="text-orange-600">Uploading...</span>
+                          </div>
+                        ) : (
+                          <>
+                            <Upload className="mx-auto h-12 w-12 text-gray-400 mb-2" />
+                            <p className="text-sm text-gray-600">Click to upload images</p>
+                            <p className="text-xs text-gray-500 mt-1">PNG, JPG, JPEG up to 10MB each</p>
+                          </>
+                        )}
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Tips */}
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h5 className="text-sm font-medium text-blue-800 mb-2">💡 Image Tips:</h5>
+                  <ul className="text-xs text-blue-700 space-y-1">
+                    <li>• First image will be used as the main product image</li>
+                    <li>• Use high-quality images (minimum 400x300 pixels)</li>
+                    <li>• Show the product from different angles</li>
+                    <li>• Keep file sizes reasonable for faster loading</li>
+                  </ul>
+                </div>
+
+                {/* Actions */}
+                <div className="flex justify-end pt-4">
+                  <Button 
+                    variant="outline" 
+                    onClick={handleCloseImageModal}
+                  >
+                    Done
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
