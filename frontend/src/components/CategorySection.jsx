@@ -35,7 +35,7 @@ const CategorySection = ({ category, onAddToCart }) => {
   return (
     <section className="mb-20">
       <div className="text-center mb-12">
-        <!-- Icon removed as requested -->
+        {/* Icon removed as requested */}
         <h2 className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-4">
           {category.name}
         </h2>
