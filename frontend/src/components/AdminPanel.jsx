@@ -19,7 +19,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const ADMIN_KEY = 'aparna_admin_2025';
 
 const AdminPanel = () => {
-  const [activeTab, setActiveTab] = useState('products');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [products, setProducts] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [analytics, setAnalytics] = useState(null);
