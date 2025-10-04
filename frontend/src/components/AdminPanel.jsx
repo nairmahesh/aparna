@@ -752,26 +752,75 @@ const AdminPanel = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div>
-                    <Label htmlFor="select-contact">To: Select Contact *</Label>
-                    <Select
-                      value={selectedContact}
-                      onValueChange={setSelectedContact}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Choose a contact to send message" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {contacts.map(contact => (
-                          <SelectItem key={contact.id} value={contact.id}>
-                            <div className="flex items-center space-x-2">
-                              <span>{contact.name}</span>
-                              <span className="text-sm text-gray-500">({contact.phone})</span>
+                  <div className="relative">
+                    <Label htmlFor="contact-search">To: Search or Add Contact *</Label>
+                    <Input
+                      id="contact-search"
+                      value={contactSearchQuery}
+                      onChange={(e) => handleContactSearch(e.target.value)}
+                      placeholder="Type contact name to search or add new..."
+                      className="border-orange-200 focus:border-orange-400"
+                      onFocus={() => {
+                        if (contactSearchQuery && filteredContacts.length > 0) {
+                          setShowContactSuggestions(true);
+                        }
+                      }}
+                    />
+                    
+                    {/* Contact Suggestions Dropdown */}
+                    {(showContactSuggestions || showAddContactOption) && (
+                      <div className="absolute top-full left-0 right-0 bg-white border border-orange-200 rounded-md shadow-lg z-10 max-h-48 overflow-y-auto">
+                        {/* Existing contacts */}
+                        {filteredContacts.map(contact => (
+                          <div
+                            key={contact.id}
+                            className="p-3 hover:bg-orange-50 cursor-pointer border-b last:border-b-0"
+                            onClick={() => handleSelectContact(contact)}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="font-medium text-gray-800">{contact.name}</p>
+                                <p className="text-sm text-gray-500 flex items-center">
+                                  <Phone className="w-3 h-3 mr-1" />
+                                  {contact.phone}
+                                </p>
+                              </div>
+                              <Badge variant="secondary" className="text-xs">
+                                {relationships.find(r => r.value === contact.relationship)?.label}
+                              </Badge>
                             </div>
-                          </SelectItem>
+                          </div>
                         ))}
-                      </SelectContent>
-                    </Select>
+                        
+                        {/* Add new contact option */}
+                        {showAddContactOption && (
+                          <div
+                            className="p-3 hover:bg-green-50 cursor-pointer border-t border-green-200 bg-green-25"
+                            onClick={() => handleQuickAddContact(contactSearchQuery)}
+                          >
+                            <div className="flex items-center space-x-2">
+                              <Plus className="w-4 h-4 text-green-600" />
+                              <div>
+                                <p className="font-medium text-green-700">
+                                  Add "{contactSearchQuery}" as new contact
+                                </p>
+                                <p className="text-xs text-green-600">
+                                  Click to add this person to your contact list
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {/* No results */}
+                        {!showContactSuggestions && !showAddContactOption && contactSearchQuery && (
+                          <div className="p-3 text-center text-gray-500">
+                            <p>No contacts found</p>
+                            <p className="text-xs">Try typing at least 3 characters to add new contact</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {selectedContact && (
