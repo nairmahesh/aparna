@@ -51,6 +51,11 @@ const Home = () => {
     });
   };
 
+  const handleShowReviews = (item) => {
+    setSelectedReviewItem(item);
+    setShowReviews(true);
+  };
+
   const handleUpdateCart = (itemId, newQuantity) => {
     setCart(prev => 
       prev.map(item => 
