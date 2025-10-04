@@ -107,14 +107,6 @@ const greetingArtworks = [
     textColor: 'text-white',
     overlayColor: 'bg-black/35',
     category: 'modern'
-  },
-  {
-    id: 13,
-    name: 'Traditional Diwali Design',
-    url: 'https://customer-assets.emergentagent.com/job_visual-preview-10/artifacts/attdwhwf_image.png',
-    textColor: 'text-white',
-    overlayColor: 'bg-black/30',
-    category: 'traditional'
   }
 ];
 
