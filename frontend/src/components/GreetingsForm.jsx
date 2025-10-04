@@ -519,7 +519,7 @@ const GreetingsForm = () => {
                   <Button 
                     onClick={handleCopyGreeting}
                     variant="outline"
-                    className="border-orange-300 text-orange-600 hover:bg-orange-50 p-3 rounded-full w-12 h-12 flex items-center justify-center"
+                    className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50 p-3 rounded-full w-12 h-12 flex items-center justify-center"
                     title="Copy to Clipboard"
                   >
                     <Copy className="w-5 h-5" />
