@@ -4,7 +4,13 @@ import { Badge } from './ui/badge';
 import { ShoppingCart, Sparkles, Phone, Mail, Gift, Menu } from 'lucide-react';
 import { shopInfo } from '../data/mock';
 
-const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
+const Header = ({ cartCount, onCartClick, currentView, onViewChange, websiteSettings }) => {
+  // Use websiteSettings if provided, otherwise fallback to shopInfo
+  const settings = websiteSettings || {
+    name: shopInfo.name,
+    tagline: shopInfo.tagline,
+    contact: shopInfo.contact
+  };
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-orange-100 shadow-sm">
       {/* Top Info Bar */}
