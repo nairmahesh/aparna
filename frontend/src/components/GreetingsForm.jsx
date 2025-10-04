@@ -321,7 +321,7 @@ const GreetingsForm = () => {
               className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white py-6 text-lg"
             >
               <Sparkles className="w-5 h-5 mr-2" />
-              Create My Greeting
+              Generate Sharing Options
             </Button>
           </CardContent>
         </Card>
