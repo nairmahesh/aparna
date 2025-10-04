@@ -220,7 +220,6 @@ export const menuCategories = [
     id: 'laddus',
     name: 'Laddu Collection',
     description: 'Round balls of sweetness in various flavors',
-    icon: '⚫',
     items: [
       {
         id: 'besan-laddu',
