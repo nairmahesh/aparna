@@ -48,6 +48,12 @@ const AdminPanel = () => {
     email_id: '',
     mobile_number: ''
   });
+  
+  // Product Reviews Management State
+  const [allProductReviews, setAllProductReviews] = useState([]);
+  const [hiddenReviews, setHiddenReviews] = useState(new Set());
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showReviewRequestModal, setShowReviewRequestModal] = useState(false);
   const [dateRange, setDateRange] = useState({
     from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     to: new Date().toISOString().split('T')[0]
