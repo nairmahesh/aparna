@@ -270,13 +270,28 @@ const OrderForm = ({ cart, onUpdateCart, onRemoveItem, onClearCart }) => {
               </div>
               
               <div className="text-sm text-gray-600 bg-amber-50 p-4 rounded-lg">
-                <p className="font-semibold mb-2">Payment Instructions:</p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>Scan the QR code using any UPI app</li>
-                  <li>Enter the amount: ₹{totalAmount}</li>
-                  <li>Complete the payment</li>
-                  <li>Click "Order Placed" after successful payment</li>
-                </ul>
+                <p className="font-semibold mb-2">Payment Options:</p>
+                <div className="space-y-3">
+                  <div>
+                    <p className="font-medium text-orange-700 mb-1">Option 1: QR Code Payment</p>
+                    <ul className="list-disc list-inside space-y-1 ml-4">
+                      <li>Scan the QR code above using any UPI app</li>
+                      <li>Enter amount: ₹{totalAmount}</li>
+                      <li>Complete the payment</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-medium text-orange-700 mb-1">Option 2: Direct UPI Payment</p>
+                    <ul className="list-disc list-inside space-y-1 ml-4">
+                      <li>Open GPay/PhonePe/Paytm</li>
+                      <li>Send ₹{totalAmount} to: {shopInfo.contact.phone}</li>
+                      <li>Add note: "Diwali Order - [Your Name]"</li>
+                    </ul>
+                  </div>
+                  <p className="text-center font-medium text-green-700 mt-3">
+                    Click "Order Placed" after successful payment
+                  </p>
+                </div>
               </div>
               
               <Button 
