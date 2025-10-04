@@ -38,11 +38,12 @@ const greetingArtworks = [
   },
   {
     id: 4,
-    name: 'Warm Bokeh Lights',
-    url: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc1OTU3NDU3Mnww&ixlib=rb-4.1.0&q=85&w=800&h=600',
-    textColor: 'text-white',
-    overlayColor: 'bg-black/40',
-    category: 'elegant'
+    name: 'Traditional Template',
+    url: 'https://customer-assets.emergentagent.com/job_visual-preview-10/artifacts/n8ssbdc3_image.png',
+    textColor: 'text-purple-800',
+    overlayColor: 'bg-transparent',
+    category: 'traditional',
+    isTemplate: true
   },
   {
     id: 5,
