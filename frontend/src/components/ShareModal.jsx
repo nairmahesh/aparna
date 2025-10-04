@@ -27,11 +27,17 @@ const ShareModal = ({ item, isOpen, onClose, onWhatsAppShare, onCopyLink }) => {
         <CardContent className="space-y-4">
           {/* Product Info */}
           <div className="text-center border-b pb-4">
-            <img 
-              src={item.images[0]} 
-              alt={item.name}
-              className="w-20 h-20 object-cover rounded-xl mx-auto mb-3 shadow-lg"
-            />
+            {item.images && item.images.length > 0 ? (
+              <img 
+                src={item.images[0]} 
+                alt={item.name}
+                className="w-20 h-20 object-cover rounded-xl mx-auto mb-3 shadow-lg"
+              />
+            ) : (
+              <div className="w-20 h-20 bg-gradient-to-br from-orange-200 to-amber-200 rounded-xl mx-auto mb-3 shadow-lg flex items-center justify-center">
+                <Heart className="w-8 h-8 text-orange-600" />
+              </div>
+            )}
             <h3 className="font-semibold text-lg text-gray-800">{item.name}</h3>
             <p className="text-orange-600 font-bold">₹{item.price} {item.unit}</p>
             {item.rating && (
