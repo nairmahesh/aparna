@@ -414,40 +414,38 @@ const Home = () => {
                                 <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">{item.description}</p>
                               </div>
                               
-                              <div className="flex items-end justify-between mb-4">
-                                <div>
-                                  <div className="flex items-baseline space-x-1">
-                                    <span className="text-2xl font-bold text-gray-900">₹{item.price}</span>
-                                    <span className="text-sm text-gray-500 font-medium">{item.unit}</span>
+                              {/* Price Section */}
+                              <div className="mb-3">
+                                <div className="flex items-baseline space-x-1">
+                                  <span className="text-2xl font-bold text-gray-900">₹{item.price}</span>
+                                  <span className="text-sm text-gray-500 font-medium">{item.unit}</span>
+                                </div>
+                                {item.price > 1000 && (
+                                  <div className="flex items-center mt-1">
+                                    <span className="text-xs text-gray-400 line-through mr-2">₹{Math.floor(item.price * 1.2)}</span>
+                                    <span className="text-xs text-green-600 font-semibold bg-green-50 px-2 py-0.5 rounded">Save ₹{Math.floor(item.price * 0.2)}</span>
                                   </div>
-                                  {item.price > 1000 && (
-                                    <div className="flex items-center mt-1">
-                                      <span className="text-xs text-gray-400 line-through mr-2">₹{Math.floor(item.price * 1.2)}</span>
-                                      <span className="text-xs text-green-600 font-semibold bg-green-50 px-2 py-0.5 rounded">Save ₹{Math.floor(item.price * 0.2)}</span>
+                                )}
+                              </div>
+                              
+                              {/* Rating Section */}
+                              <div className="mb-4">
+                                {item.rating && (
+                                  <div className="flex items-center justify-center space-x-2">
+                                    <div className="flex space-x-0.5">
+                                      {[...Array(5)].map((_, i) => (
+                                        <span key={i} className={`text-sm ${
+                                          i < Math.floor(item.rating) ? 'text-amber-400' : 'text-gray-300'
+                                        }`}>★</span>
+                                      ))}
                                     </div>
-                                  )}
-                                </div>
-                                
-                                {/* Rating Stars */}
-                                <div className="text-right">
-                                  {item.rating && (
-                                    <>
-                                      <div className="flex items-center space-x-1 mb-1 justify-end">
-                                        <div className="flex space-x-0.5">
-                                          {[...Array(5)].map((_, i) => (
-                                            <span key={i} className={`text-sm ${
-                                              i < Math.floor(item.rating) ? 'text-amber-400' : 'text-gray-300'
-                                            }`}>★</span>
-                                          ))}
-                                        </div>
-                                      </div>
-                                      <p className="text-xs text-gray-500">{item.rating} ({item.totalReviews}+ reviews)</p>
-                                    </>
-                                  )}
-                                  {!item.rating && (
-                                    <p className="text-xs text-gray-400">New Product</p>
-                                  )}
-                                </div>
+                                    <span className="text-sm font-medium text-gray-700">{item.rating}</span>
+                                    <span className="text-xs text-gray-500">({item.totalReviews} reviews)</span>
+                                  </div>
+                                )}
+                                {!item.rating && (
+                                  <p className="text-xs text-center text-gray-400">New Product</p>
+                                )}
                               </div>
                               
                               <div className="space-y-2">
