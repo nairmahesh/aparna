@@ -8,6 +8,7 @@ import ProductImageCarousel from './components/ProductImageCarousel';
 import OrderForm from './components/OrderForm';
 import GreetingsForm from './components/GreetingsForm';
 import AdminLogin from './components/AdminLogin';
+import AdminPanel from './components/AdminPanel';
 import EnhancedAdminPanel from './components/EnhancedAdminPanel';
 import { menuCategories, shopInfo } from './data/mock';
 import { Button } from './components/ui/button';
