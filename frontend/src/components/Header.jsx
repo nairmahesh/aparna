@@ -14,7 +14,12 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
-                <span>{shopInfo.contact.phone}</span>
+                <a 
+                  href={`tel:${shopInfo.contact.phone}`}
+                  className="hover:text-orange-200 transition-colors cursor-pointer"
+                >
+                  {shopInfo.contact.phone}
+                </a>
               </div>
               <div className="hidden md:flex items-center space-x-2">
                 <span>FSSAI: {shopInfo.contact.fssai}</span>
