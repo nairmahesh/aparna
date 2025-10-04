@@ -318,34 +318,53 @@ const GreetingsForm = () => {
               </p>
             </div>
 
-            <div className="space-y-4">
-              <Label className="flex items-center space-x-2">
-                <Palette className="w-4 h-4" />
-                <span>Choose Background Design</span>
-              </Label>
-              <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-6">
+              <div className="text-center">
+                <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-100 to-amber-100 px-4 py-2 rounded-full">
+                  <Palette className="w-5 h-5 text-orange-600" />
+                  <span className="font-semibold text-orange-700">Choose Your Perfect Background</span>
+                </div>
+                <p className="text-sm text-gray-600 mt-2">Select a beautiful Diwali theme for your greeting card</p>
+              </div>
+              <div className="grid grid-cols-2 gap-6">
                 {greetingBackgrounds.map((bg) => (
                   <Card 
                     key={bg.id} 
-                    className={`cursor-pointer transition-all hover:border-orange-300 ${
+                    className={`cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 ${
                       greetingData.selectedBackground.id === bg.id 
-                        ? 'border-orange-500 ring-2 ring-orange-200' 
-                        : 'border-gray-200'
+                        ? 'border-orange-500 ring-4 ring-orange-200 shadow-2xl scale-105' 
+                        : 'border-gray-200 hover:border-orange-300'
                     }`}
                     onClick={() => setGreetingData(prev => ({ ...prev, selectedBackground: bg }))}
                   >
-                    <CardContent className="p-2">
-                      <div className="relative h-24 rounded-md overflow-hidden">
+                    <CardContent className="p-3">
+                      <div className="relative h-32 rounded-lg overflow-hidden group">
                         <img 
                           src={bg.url} 
                           alt={bg.name} 
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         />
-                        <div className={`absolute inset-0 ${bg.overlayColor} flex items-center justify-center`}>
-                          <span className={`text-xs font-medium ${bg.textColor}`}>
-                            {bg.name}
-                          </span>
+                        <div className={`absolute inset-0 ${bg.overlayColor} flex items-center justify-center transition-opacity duration-300`}>
+                          <div className="text-center">
+                            <span className={`text-sm font-bold ${bg.textColor} drop-shadow-lg`}>
+                              {bg.name}
+                            </span>
+                            {greetingData.selectedBackground.id === bg.id && (
+                              <div className="mt-2">
+                                <div className="inline-block bg-white/90 rounded-full px-3 py-1">
+                                  <span className="text-orange-600 text-xs font-bold">✓ Selected</span>
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         </div>
+                        {greetingData.selectedBackground.id === bg.id && (
+                          <div className="absolute top-2 right-2">
+                            <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+                              <span className="text-white text-xs">✓</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
