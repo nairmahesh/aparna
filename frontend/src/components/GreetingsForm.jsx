@@ -6,9 +6,40 @@ import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Heart, Share2, Copy, Download, Sparkles, Send } from 'lucide-react';
+import { Heart, Share2, Copy, Download, Sparkles, Send, Palette } from 'lucide-react';
 import { relationshipTypes, greetingMessages } from '../data/mock';
 import { useToast } from '../hooks/use-toast';
+
+const greetingBackgrounds = [
+  {
+    id: 1,
+    name: 'Colorful String Lights',
+    url: 'https://images.unsplash.com/photo-1557932541-016894d7b7f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/40'
+  },
+  {
+    id: 2,
+    name: 'Traditional Diyas',
+    url: 'https://images.unsplash.com/photo-1636619773834-c7e0762ddfe1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/30'
+  },
+  {
+    id: 3,
+    name: 'Warm Bokeh Lights',
+    url: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc1OTU3NDU3Mnww&ixlib=rb-4.1.0&q=85&w=800&h=600',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/40'
+  },
+  {
+    id: 4,
+    name: 'Festive Sparklers',
+    url: 'https://images.pexels.com/photos/288478/pexels-photo-288478.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/50'
+  }
+];
 
 const GreetingsForm = () => {
   const [greetingData, setGreetingData] = useState({
