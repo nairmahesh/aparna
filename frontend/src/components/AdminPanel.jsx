@@ -309,12 +309,36 @@ const AdminPanel = () => {
       return;
     }
 
+    // Validation for required fields based on method
+    if (reviewRequestMethod === 'email' && !customContactInfo.email_id.trim()) {
+      toast({ 
+        title: 'Email ID Required', 
+        description: 'Please enter an email ID for email review requests',
+        variant: 'destructive' 
+      });
+      return;
+    }
+
     try {
       setLoading(true);
-      const response = await axios.post(`${BACKEND_URL}/admin/reviews/send-requests?admin_key=${ADMIN_KEY}`, {
+      const requestPayload = {
         order_ids: selectedOrders,
-        request_method: reviewRequestMethod
-      });
+        request_method: reviewRequestMethod,
+        custom_contact: {}
+      };
+
+      // Add custom contact info based on method
+      if (reviewRequestMethod === 'whatsapp' && customContactInfo.whatsapp_number.trim()) {
+        requestPayload.custom_contact.whatsapp_number = customContactInfo.whatsapp_number.trim();
+      }
+      if (reviewRequestMethod === 'email' && customContactInfo.email_id.trim()) {
+        requestPayload.custom_contact.email_id = customContactInfo.email_id.trim();
+      }
+      if (reviewRequestMethod === 'sms' && customContactInfo.mobile_number.trim()) {
+        requestPayload.custom_contact.mobile_number = customContactInfo.mobile_number.trim();
+      }
+
+      const response = await axios.post(`${BACKEND_URL}/admin/reviews/send-requests?admin_key=${ADMIN_KEY}`, requestPayload);
       
       toast({ 
         title: `Review requests sent successfully!`,
@@ -322,6 +346,12 @@ const AdminPanel = () => {
       });
       
       setSelectedOrders([]);
+      // Clear custom contact info after successful send
+      setCustomContactInfo({
+        whatsapp_number: '',
+        email_id: '',
+        mobile_number: ''
+      });
       await loadReviewData();
     } catch (error) {
       toast({ title: 'Error sending review requests', variant: 'destructive' });
