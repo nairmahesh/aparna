@@ -23,8 +23,7 @@ import { Toaster } from './components/ui/toaster';
 
 const Home = () => {
   const [cart, setCart] = useState([]);
-  const [currentView, setCurrentView] = useState('menu'); // 'menu', 'order', 'greetings', 'admin'
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [currentView, setCurrentView] = useState('menu'); // 'menu', 'order', 'greetings'
   const [activeFilter, setActiveFilter] = useState('all');
   const [priceFilter, setPriceFilter] = useState('all');
   const [sortBy, setSortBy] = useState('name');
