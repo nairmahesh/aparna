@@ -75,7 +75,7 @@ const AdminPanel = () => {
     { value: 'chivda', label: 'Chivda Collection' },
     { value: 'chakli', label: 'Chakli Varieties' },
     { value: 'savory', label: 'Savory Delights' },
-    { value: 'sweets', label: 'Festival Sweets' },
+    { value: 'sweets', label: 'Karanji' },
     { value: 'laddus', label: 'Laddu Collection' }
   ];
 
