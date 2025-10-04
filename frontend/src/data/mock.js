@@ -114,7 +114,7 @@ export const menuCategories = [
             customerName: 'Rashmi V.',
             rating: 5,
             comment: 'Worth the price! Cashews and almonds are fresh. Best corn chivda I have tasted.',
-            date: '2025-10-06'
+            date: '2025-10-01'
           },
           {
             id: 4,
