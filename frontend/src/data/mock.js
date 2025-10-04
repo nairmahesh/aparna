@@ -302,6 +302,31 @@ export const menuCategories = [
         description: 'Classic gram flour laddus with ghee and cardamom',
         price: 1050,
         unit: 'per kg',
+        rating: 4.7,
+        totalReviews: 35,
+        reviews: [
+          {
+            id: 1,
+            customerName: 'Sharada B.',
+            rating: 5,
+            comment: 'Absolutely divine! Pure ghee and perfectly sweetened. Best besan laddu in the city.',
+            date: '2024-10-04'
+          },
+          {
+            id: 2,
+            customerName: 'Ramesh N.',
+            rating: 5,
+            comment: 'Melts in mouth! Traditional recipe done right. Ordered for Diwali celebrations.',
+            date: '2024-10-01'
+          },
+          {
+            id: 3,
+            customerName: 'Laxmi G.',
+            rating: 4,
+            comment: 'Very good quality and authentic taste. Fresh and well-made.',
+            date: '2024-09-28'
+          }
+        ],
         image: 'https://images.pexels.com/photos/8887055/pexels-photo-8887055.jpeg?w=400&h=300&fit=crop'
       },
       {
