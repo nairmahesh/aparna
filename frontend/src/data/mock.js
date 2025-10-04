@@ -202,7 +202,7 @@ export const menuCategories = [
             customerName: 'Meera J.',
             rating: 4,
             comment: 'Good quality and taste. Packaging was excellent last year. Recommended!',
-            date: '2025-10-07'
+            date: '2025-10-04'
           }
         ],
         image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&h=300&fit=crop'
