@@ -155,20 +155,202 @@ const Home = () => {
             <main id="menu" className="container mx-auto px-4 py-16">
               <div className="text-center mb-16">
                 <h2 className="text-5xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-4">
-                  Festival Menu
+                  Aparna's Diwali Collection
                 </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  Choose from our wide selection of traditional sweets and savory snacks
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
+                  Fresh homemade delicacies crafted with love - each recipe passed down through generations
                 </p>
+                <div className="flex justify-center space-x-4 mb-8">
+                  <div className="flex items-center space-x-2 bg-green-100 px-4 py-2 rounded-full">
+                    <span className="text-green-600 text-sm font-medium">✓ Made Fresh Daily</span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-orange-100 px-4 py-2 rounded-full">
+                    <span className="text-orange-600 text-sm font-medium">🏆 Family Recipes</span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-blue-100 px-4 py-2 rounded-full">
+                    <span className="text-blue-600 text-sm font-medium">📦 Free Delivery ₹500+</span>
+                  </div>
+                </div>
               </div>
-              
-              {menuCategories.map((category) => (
-                <CategorySection 
-                  key={category.id} 
-                  category={category} 
-                  onAddToCart={handleAddToCart}
-                />
+
+              {/* Aparna's Specials - Featured Items */}
+              <section className="mb-16">
+                <div className="text-center mb-8">
+                  <div className="inline-block bg-gradient-to-r from-pink-100 to-rose-100 px-6 py-3 rounded-full border-2 border-pink-200 mb-4">
+                    <h3 className="text-2xl font-bold text-pink-700 flex items-center justify-center space-x-2">
+                      <span>💝</span>
+                      <span>Aparna's Personal Favorites</span>
+                      <span>💝</span>
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 italic">"These are the recipes I'm most proud of - perfect for gifting!"</p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                  {/* Featured Items from different categories */}
+                  <div className="relative group">
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-full text-sm font-bold z-10">
+                      Aparna's #1 Pick! ⭐
+                    </div>
+                    <MenuCard 
+                      item={{
+                        id: 'besan-laddu',
+                        name: 'Premium Besan Laddu',
+                        description: 'My grandmother\'s secret recipe with pure ghee and love. The texture is perfectly crumbly!',
+                        price: 1050,
+                        unit: 'per kg',
+                        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+                      }}
+                      onAddToCart={handleAddToCart}
+                      isSpecial={true}
+                    />
+                  </div>
+
+                  <div className="relative group">
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-1 rounded-full text-sm font-bold z-10">
+                      Most Popular! 🔥
+                    </div>
+                    <MenuCard 
+                      item={{
+                        id: 'corn-chivda-dry-fruits',
+                        name: 'Special Corn Chivda',
+                        description: 'Crunchy corn with premium dry fruits - our customers\' absolute favorite for gifting!',
+                        price: 750,
+                        unit: 'per kg',
+                        image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop'
+                      }}
+                      onAddToCart={handleAddToCart}
+                      isSpecial={true}
+                    />
+                  </div>
+
+                  <div className="relative group">
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold z-10">
+                      Festive Special! ✨
+                    </div>
+                    <MenuCard 
+                      item={{
+                        id: 'gujjia',
+                        name: 'Fresh Gujjia',
+                        description: 'Made fresh this morning! Flaky pastry with rich khoya filling - pure Diwali magic!',
+                        price: 35,
+                        unit: 'per piece',
+                        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+                      }}
+                      onAddToCart={handleAddToCart}
+                      isSpecial={true}
+                    />
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-2xl border-2 border-orange-200">
+                    <p className="text-lg font-medium text-gray-700 mb-2">
+                      🎁 <span className="text-orange-600">Perfect Diwali Gift Combo:</span> Order all 3 favorites together!
+                    </p>
+                    <p className="text-sm text-gray-600">Mix & match any items above for the perfect festival hamper</p>
+                  </div>
+                </div>
+              </section>
+
+              {/* Quick Browse by Mood */}
+              <section className="mb-16">
+                <div className="text-center mb-8">
+                  <h3 className="text-3xl font-bold text-gray-800 mb-4">What are you in the mood for?</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <button 
+                      onClick={() => document.getElementById('chivda').scrollIntoView({ behavior: 'smooth' })}
+                      className="bg-gradient-to-br from-yellow-100 to-orange-100 hover:from-yellow-200 hover:to-orange-200 p-6 rounded-xl border-2 border-yellow-200 hover:border-yellow-300 transition-all group"
+                    >
+                      <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🍿</div>
+                      <p className="font-semibold text-orange-700">Crunchy Snacks</p>
+                      <p className="text-xs text-gray-600">Chivda & More</p>
+                    </button>
+                    
+                    <button 
+                      onClick={() => document.getElementById('sweets').scrollIntoView({ behavior: 'smooth' })}
+                      className="bg-gradient-to-br from-pink-100 to-rose-100 hover:from-pink-200 hover:to-rose-200 p-6 rounded-xl border-2 border-pink-200 hover:border-pink-300 transition-all group"
+                    >
+                      <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🍬</div>
+                      <p className="font-semibold text-pink-700">Sweet Treats</p>
+                      <p className="text-xs text-gray-600">Laddus & Sweets</p>
+                    </button>
+                    
+                    <button 
+                      onClick={() => document.getElementById('chakli').scrollIntoView({ behavior: 'smooth' })}
+                      className="bg-gradient-to-br from-green-100 to-emerald-100 hover:from-green-200 hover:to-emerald-200 p-6 rounded-xl border-2 border-green-200 hover:border-green-300 transition-all group"
+                    >
+                      <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌀</div>
+                      <p className="font-semibold text-green-700">Traditional</p>
+                      <p className="text-xs text-gray-600">Chakli Varieties</p>
+                    </button>
+                    
+                    <button 
+                      onClick={() => document.getElementById('savory').scrollIntoView({ behavior: 'smooth' })}
+                      className="bg-gradient-to-br from-purple-100 to-indigo-100 hover:from-purple-200 hover:to-indigo-200 p-6 rounded-xl border-2 border-purple-200 hover:border-purple-300 transition-all group"
+                    >
+                      <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🥨</div>
+                      <p className="font-semibold text-purple-700">Savory Mix</p>
+                      <p className="text-xs text-gray-600">Mathri & More</p>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              {/* Full Menu Categories with better spacing and cross-selling */}
+              {menuCategories.map((category, index) => (
+                <div key={category.id} id={category.id}>
+                  <CategorySection 
+                    category={category} 
+                    onAddToCart={handleAddToCart}
+                  />
+                  
+                  {/* Add cross-selling suggestions between sections */}
+                  {index < menuCategories.length - 1 && (
+                    <div className="my-12 text-center">
+                      <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-6 rounded-xl border border-amber-200 max-w-2xl mx-auto">
+                        <p className="text-lg font-medium text-amber-700 mb-2">
+                          💡 <span className="text-gray-700">Aparna's Tip:</span> {category.name} pairs perfectly with items from our next section!
+                        </p>
+                        <p className="text-sm text-gray-600">Create the perfect festival mix for your family & friends</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
+
+              {/* Order Motivation Section */}
+              <section className="mt-16 text-center">
+                <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white p-8 rounded-2xl shadow-2xl">
+                  <h3 className="text-3xl font-bold mb-4">Ready to Make This Diwali Special? 🪔</h3>
+                  <p className="text-xl mb-6 opacity-90">
+                    Join 500+ happy families who trust Aparna's homemade delicacies for their celebrations
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                      <div className="text-2xl mb-2">⚡</div>
+                      <p className="font-semibold">Same Day Delivery</p>
+                      <p className="text-sm opacity-80">Order by 2 PM</p>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                      <div className="text-2xl mb-2">💝</div>
+                      <p className="font-semibold">Perfect Packaging</p>
+                      <p className="text-sm opacity-80">Gift-ready presentation</p>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                      <div className="text-2xl mb-2">🏆</div>
+                      <p className="font-semibold">100% Fresh Guarantee</p>
+                      <p className="text-sm opacity-80">Made with love, delivered fresh</p>
+                    </div>
+                  </div>
+                  <Button 
+                    onClick={handleCartClick}
+                    className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 text-lg font-bold rounded-full shadow-lg"
+                  >
+                    {cartCount > 0 ? `View My Cart (${cartCount} items)` : 'Start Your Order'} →
+                  </Button>
+                </div>
+              </section>
             </main>
           </>
         );
