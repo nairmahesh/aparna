@@ -3,7 +3,7 @@ from typing import List, Optional
 from datetime import datetime, timedelta
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
-from ..models.review_models import (
+from models.review_models import (
     ReviewRequest, CustomerReview, ReviewRequestCreate, 
     ReviewRequestBatch, ReviewStats, ReviewRequestSummary
 )
