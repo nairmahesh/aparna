@@ -3168,6 +3168,119 @@ const AdminPanel = () => {
             </div>
           </div>
         )}
+
+        {/* Add Category Modal */}
+        {showAddCategory && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Add New Category</h3>
+                <Button variant="ghost" size="sm" onClick={() => setShowAddCategory(false)}>
+                  ×
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="category-name">Category Name</Label>
+                  <Input
+                    id="category-name"
+                    value={newCategory.name}
+                    onChange={(e) => setNewCategory(prev => ({ ...prev, name: e.target.value }))}
+                    placeholder="e.g., Premium Sweets"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="category-description">Description</Label>
+                  <Textarea
+                    id="category-description"
+                    value={newCategory.description}
+                    onChange={(e) => setNewCategory(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder="Describe this category..."
+                    className="min-h-20"
+                  />
+                </div>
+
+                <div className="flex space-x-2 pt-4">
+                  <Button 
+                    onClick={handleAddCategory}
+                    disabled={!newCategory.name.trim()}
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Category
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowAddCategory(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Edit Category Modal */}
+        {showEditCategoryModal && editingCategory && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Edit Category: {editingCategory.name}</h3>
+                <Button variant="ghost" size="sm" onClick={() => setShowEditCategoryModal(false)}>
+                  ×
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="edit-category-name">Category Name</Label>
+                  <Input
+                    id="edit-category-name"
+                    value={editingCategory.name}
+                    onChange={(e) => setEditingCategory(prev => ({ ...prev, name: e.target.value }))}
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="edit-category-description">Description</Label>
+                  <Textarea
+                    id="edit-category-description"
+                    value={editingCategory.description}
+                    onChange={(e) => setEditingCategory(prev => ({ ...prev, description: e.target.value }))}
+                    className="min-h-20"
+                  />
+                </div>
+
+                <div className="bg-gray-50 p-3 rounded">
+                  <p className="text-sm text-gray-600 mb-1">Category ID: <code>{editingCategory.id}</code></p>
+                  <p className="text-sm text-gray-600">Products: {editingCategory.items?.length || 0}</p>
+                </div>
+
+                <div className="flex space-x-2 pt-4">
+                  <Button 
+                    onClick={handleUpdateCategory}
+                    disabled={!editingCategory.name.trim()}
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+                  >
+                    <Edit className="w-4 h-4 mr-2" />
+                    Update Category
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowEditCategoryModal(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
