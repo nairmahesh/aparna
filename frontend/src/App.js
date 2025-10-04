@@ -568,6 +568,7 @@ const Home = () => {
         onCartClick={handleCartClick}
         currentView={currentView}
         onViewChange={setCurrentView}
+        websiteSettings={getWebsiteSettings()}
       />
       
       <div className="pt-4">
