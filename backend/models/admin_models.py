@@ -224,7 +224,7 @@ class OrderEnhanced(BaseModel):
     admin_notes: Optional[str] = None
     
     @property
-    def final_amount(self):
+    def final_amount(self) -> float:
         return self.total_amount + self.delivery_cost
 
 # Visitor Tracking Models
