@@ -9,7 +9,7 @@ from models.review_models import (
 )
 import urllib.parse
 
-router = APIRouter()
+router = APIRouter(prefix="/api", tags=["reviews"])
 
 # MongoDB connection
 MONGO_URL = os.environ.get('MONGO_URL')
