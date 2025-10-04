@@ -368,22 +368,54 @@ const GreetingsForm = () => {
           {/* Action Buttons */}
           <Card>
             <CardContent className="p-6">
-              <div className="flex flex-wrap gap-4 justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <Button 
-                  onClick={handleShareGreeting}
-                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white"
+                  onClick={handleShareWhatsApp}
+                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium"
                 >
-                  <Share2 className="w-4 h-4 mr-2" />
-                  Share Greeting
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 mr-2 bg-white rounded-full flex items-center justify-center">
+                      <span className="text-green-600 text-xs font-bold">📱</span>
+                    </div>
+                    WhatsApp
+                  </div>
                 </Button>
+                
+                <Button 
+                  onClick={handleShareSMS}
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium"
+                >
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 mr-2 bg-white rounded-full flex items-center justify-center">
+                      <span className="text-blue-600 text-xs font-bold">💬</span>
+                    </div>
+                    SMS
+                  </div>
+                </Button>
+                
+                <Button 
+                  onClick={handleShareEmail}
+                  className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-medium"
+                >
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 mr-2 bg-white rounded-full flex items-center justify-center">
+                      <span className="text-purple-600 text-xs font-bold">📧</span>
+                    </div>
+                    Email
+                  </div>
+                </Button>
+                
                 <Button 
                   onClick={handleCopyGreeting}
                   variant="outline"
-                  className="border-orange-300 text-orange-600 hover:bg-orange-50"
+                  className="border-orange-300 text-orange-600 hover:bg-orange-50 font-medium"
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   Copy Text
                 </Button>
+              </div>
+              
+              <div className="flex justify-center mt-4">
                 <Button 
                   onClick={() => setShowPreview(false)}
                   variant="outline"
