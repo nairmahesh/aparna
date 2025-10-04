@@ -85,6 +85,7 @@ const AdminPanel = () => {
   const [showAddContactOption, setShowAddContactOption] = useState(false);
   const [messageTemplate, setMessageTemplate] = useState('');
   const [personalizedLinks, setPersonalizedLinks] = useState([]);
+  const [showAddProduct, setShowAddProduct] = useState(false);
 
   const categories = [
     { value: 'chivda', label: 'Chivda Collection' },
