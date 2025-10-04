@@ -238,7 +238,7 @@ export const menuCategories = [
             date: '2025-10-09'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop'
+        image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&h=300&fit=crop'
       },
       {
         id: 'kurmura-chivda',
