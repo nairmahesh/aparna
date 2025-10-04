@@ -889,7 +889,7 @@ const AdminPanel = () => {
                           </p>
                         </div>
 
-                        <div className="p-4 bg-orange-50 rounded-lg">
+                        <div className="p-4 bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg">
                           <p className="text-sm text-orange-600">Avg Session Duration</p>
                           <p className="text-lg font-bold text-orange-700">
                             {Math.round(visitorAnalytics.avg_session_duration / 60)}m {Math.round(visitorAnalytics.avg_session_duration % 60)}s
