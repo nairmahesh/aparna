@@ -94,7 +94,7 @@ async def send_review_requests(
         for order_id in request_data.order_ids:
             try:
                 # Get order details
-                order = await db.orders.find_one({"_id": order_id})
+                order = await db.orders.find_one({"id": order_id})
                 if not order:
                     failed_orders.append({"order_id": order_id, "reason": "Order not found"})
                     continue
