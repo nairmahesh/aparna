@@ -207,7 +207,7 @@ async def generate_review_links(
             raise HTTPException(status_code=404, detail="Order not found")
         
         customer_name = order['customer_name']
-        products = [item['name'] for item in order['items']]
+        products = [item['product_name'] for item in order['items']]
         products_text = ", ".join(products)
         
         # Base message template
