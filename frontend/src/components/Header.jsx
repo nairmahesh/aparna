@@ -71,7 +71,7 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
               }}
               className={currentView === 'menu' 
                 ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
-                : 'text-orange-600 hover:bg-orange-50'}
+                : 'text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50'}
             >
               <Menu className="w-4 h-4 mr-2" />
               Menu
@@ -81,7 +81,7 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
               onClick={() => onViewChange('greetings')}
               className={currentView === 'greetings' 
                 ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
-                : 'text-orange-600 hover:bg-orange-50'}
+                : 'text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50'}
             >
               <Gift className="w-4 h-4 mr-2" />
               Send Greetings
@@ -94,7 +94,7 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
               onClick={() => onViewChange('admin')}
               variant="ghost"
               size="sm"
-              className="text-gray-500 hover:text-orange-600 hover:bg-orange-50"
+              className="text-gray-500 hover:text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50"
               title="Admin Panel"
             >
               <Settings className="w-4 h-4" />
@@ -133,7 +133,7 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
             }}
             className={currentView === 'menu' 
               ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
-              : 'text-orange-600 hover:bg-orange-50'}
+              : 'text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50'}
             size="sm"
           >
             <Menu className="w-4 h-4 mr-2" />
@@ -144,7 +144,7 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
             onClick={() => onViewChange('greetings')}
             className={currentView === 'greetings' 
               ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
-              : 'text-orange-600 hover:bg-orange-50'}
+              : 'text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50'}
             size="sm"
           >
             <Gift className="w-4 h-4 mr-2" />
