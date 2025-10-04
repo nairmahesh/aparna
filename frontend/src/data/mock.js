@@ -301,7 +301,7 @@ export const menuCategories = [
             customerName: 'Sachin B.',
             rating: 4,
             comment: 'Nice taste and texture. Good for Diwali celebrations.',
-            date: '2025-10-08'
+            date: '2025-10-03'
           }
         ],
         image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&h=300&fit=crop'
@@ -378,7 +378,7 @@ export const menuCategories = [
             customerName: 'Manisha K.',
             rating: 5,
             comment: 'Excellent bhajni chakli! Crispy and well-spiced. Highly recommended for festivals.',
-            date: '2025-10-08'
+            date: '2025-10-03'
           },
           {
             id: 4,
@@ -499,7 +499,7 @@ export const menuCategories = [
             customerName: 'Pravin M.',
             rating: 4,
             comment: 'Nice ribbon pakoda. Fresh and crispy. Will order again.',
-            date: '2025-10-08'
+            date: '2025-10-03'
           }
         ],
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
@@ -624,7 +624,7 @@ export const menuCategories = [
             customerName: 'Shraddha R.',
             rating: 4,
             comment: 'Nice alternative to regular sweets. Good for health-conscious people.',
-            date: '2025-10-08'
+            date: '2025-10-03'
           }
         ],
         image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
@@ -759,7 +759,7 @@ export const menuCategories = [
             customerName: 'Chandrakant P.',
             rating: 5,
             comment: 'Premium quality besan laddu! Rich ghee taste and perfect texture.',
-            date: '2025-10-08'
+            date: '2025-10-03'
           }
         ],
         image: 'https://images.pexels.com/photos/8887055/pexels-photo-8887055.jpeg?w=400&h=300&fit=crop'
@@ -858,7 +858,7 @@ export const menuCategories = [
             customerName: 'Mahendra K.',
             rating: 5,
             comment: 'Perfect plain rava laddu! Not too sweet, just right.',
-            date: '2025-10-08'
+            date: '2025-10-03'
           }
         ],
         image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
