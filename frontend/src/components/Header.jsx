@@ -102,7 +102,16 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
         <div className="md:hidden flex justify-center space-x-4 mt-4">
           <Button 
             variant={currentView === 'menu' ? 'default' : 'ghost'}
-            onClick={() => onViewChange('menu')}
+            onClick={() => {
+              onViewChange('menu');
+              // Scroll to menu section after a brief delay to ensure content is loaded
+              setTimeout(() => {
+                const menuElement = document.getElementById('menu');
+                if (menuElement) {
+                  menuElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 100);
+            }}
             className={currentView === 'menu' 
               ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
               : 'text-orange-600 hover:bg-orange-50'}
