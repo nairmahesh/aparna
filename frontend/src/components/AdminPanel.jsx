@@ -968,6 +968,10 @@ const AdminPanel = () => {
               <Package className="w-4 h-4" />
               <span>Categories</span>
             </TabsTrigger>
+            <TabsTrigger value="settings" className="flex items-center space-x-2">
+              <Settings className="w-4 h-4" />
+              <span>Settings</span>
+            </TabsTrigger>
           </TabsList>
 
           {/* Dashboard Overview */}
