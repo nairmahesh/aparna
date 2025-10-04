@@ -171,18 +171,18 @@ const Home = () => {
                   </p>
                 </div>
                 
-                <div className="flex flex-wrap justify-center gap-4 mb-12">
-                  <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-sm">
-                    <Star className="w-5 h-5 text-amber-500 fill-current" />
-                    <span className="text-gray-700 font-medium">Premium Quality</span>
+                <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12">
+                  <div className="flex items-center space-x-1 md:space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-3 py-2 md:px-6 md:py-3 shadow-sm">
+                    <Star className="w-4 h-4 md:w-5 md:h-5 text-amber-500 fill-current" />
+                    <span className="text-gray-700 font-medium text-xs md:text-base">Premium Quality</span>
                   </div>
-                  <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-sm">
-                    <Heart className="w-5 h-5 text-orange-500 fill-current" />
-                    <span className="text-gray-700 font-medium">Made with Love</span>
+                  <div className="flex items-center space-x-1 md:space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-3 py-2 md:px-6 md:py-3 shadow-sm">
+                    <Heart className="w-4 h-4 md:w-5 md:h-5 text-orange-500 fill-current" />
+                    <span className="text-gray-700 font-medium text-xs md:text-base">Made with Love</span>
                   </div>
-                  <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-sm">
-                    <Sparkles className="w-5 h-5 text-purple-500" />
-                    <span className="text-gray-700 font-medium">Fresh Daily</span>
+                  <div className="flex items-center space-x-1 md:space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-3 py-2 md:px-6 md:py-3 shadow-sm">
+                    <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-purple-500" />
+                    <span className="text-gray-700 font-medium text-xs md:text-base">Fresh Daily</span>
                   </div>
                 </div>
                 
