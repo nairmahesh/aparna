@@ -462,14 +462,14 @@ class AdminPanelTester:
         
         # Test 1: POST /admin/track/visitor-session
         try:
-            session_data = {
+            session_params = {
                 "session_id": session_id,
                 "visitor_type": "identified",
                 "referral_link_token": str(uuid.uuid4().hex),
                 "ip_address": "192.168.1.100",
                 "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
             }
-            response = self.session.post(f"{API_BASE}/track/visitor-session", json=session_data)
+            response = self.session.post(f"{API_BASE}/track/visitor-session", params=session_params)
             if response.status_code == 200:
                 track_response = response.json()
                 if track_response.get("status") == "tracked":
