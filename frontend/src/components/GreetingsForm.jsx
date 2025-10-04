@@ -47,7 +47,8 @@ const GreetingsForm = () => {
     senderName: '',
     relationship: '',
     selectedMessage: '',
-    customMessage: ''
+    customMessage: '',
+    selectedBackground: greetingBackgrounds[0]
   });
   const [showPreview, setShowPreview] = useState(false);
   const { toast } = useToast();
