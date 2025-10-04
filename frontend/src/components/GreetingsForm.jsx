@@ -77,15 +77,15 @@ const GreetingsForm = () => {
     if (!greetingData.recipientName || !greetingData.senderName || !greetingData.relationship) {
       toast({
         title: "Missing Information",
-        description: "Please fill in all required fields.",
+        description: "Please fill in all required fields to generate sharing options.",
         variant: "destructive"
       });
       return;
     }
     setShowPreview(true);
     toast({
-      title: "Greeting Created!",
-      description: "Your personalized Diwali greeting is ready to share.",
+      title: "Ready to Share!",
+      description: "Your personalized Diwali greeting is ready to share with your loved ones.",
     });
   };
 
