@@ -627,7 +627,7 @@ export const menuCategories = [
             date: '2025-10-03'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=16'
       }
     ]
   },
@@ -828,7 +828,7 @@ export const menuCategories = [
             date: '2025-10-04'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=16'
       },
       {
         id: 'rava-plain',
@@ -861,7 +861,7 @@ export const menuCategories = [
             date: '2025-10-03'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=16'
       }
     ]
   }
