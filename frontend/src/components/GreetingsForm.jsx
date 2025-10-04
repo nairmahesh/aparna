@@ -407,47 +407,65 @@ const GreetingsForm = () => {
           </div>
           
           {/* Sharing Options - Always visible when names are filled */}
-          {greetingData.recipientName && greetingData.senderName && (
-            <Card className="mt-6 border-orange-200">
-              <CardContent className="p-6">
-                <h4 className="text-lg font-semibold text-gray-800 mb-4 text-center">Share Your Greeting</h4>
-                <div className="flex justify-center space-x-4">
-                  <Button 
-                    onClick={handleShareWhatsApp}
-                    className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center"
-                    title="Share on WhatsApp"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                  </Button>
-                  
-                  <Button 
-                    onClick={handleShareSMS}
-                    className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center"
-                    title="Share via SMS"
-                  >
-                    <Phone className="w-5 h-5" />
-                  </Button>
-                  
-                  <Button 
-                    onClick={handleShareEmail}
-                    className="bg-purple-500 hover:bg-purple-600 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center"
-                    title="Share via Email"
-                  >
-                    <Mail className="w-5 h-5" />
-                  </Button>
-                  
-                  <Button 
-                    onClick={handleCopyGreeting}
-                    variant="outline"
-                    className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50 p-3 rounded-full w-12 h-12 flex items-center justify-center"
-                    title="Copy to Clipboard"
-                  >
-                    <Copy className="w-5 h-5" />
-                  </Button>
+          {/* Share Options - Always Visible */}
+          <Card className="mt-6 border-orange-200 bg-gradient-to-br from-orange-50 to-amber-50">
+            <CardContent className="p-6">
+              <h4 className="text-xl font-bold text-orange-700 mb-2 text-center flex items-center justify-center space-x-2">
+                <Share2 className="w-5 h-5" />
+                <span>Share Your Greeting</span>
+              </h4>
+              <p className="text-gray-600 text-sm text-center mb-4">
+                Choose how you'd like to share your personalized Diwali greeting
+              </p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Button 
+                  onClick={handleShareWhatsApp}
+                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-4 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                  title="Share on WhatsApp"
+                >
+                  <MessageCircle className="w-6 h-6" />
+                  <span className="text-xs font-medium">WhatsApp</span>
+                </Button>
+                
+                <Button 
+                  onClick={handleShareSMS}
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-4 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                  title="Share via SMS"
+                >
+                  <Phone className="w-6 h-6" />
+                  <span className="text-xs font-medium">SMS</span>
+                </Button>
+                
+                <Button 
+                  onClick={handleShareEmail}
+                  className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white p-4 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                  title="Share via Email"
+                >
+                  <Mail className="w-6 h-6" />
+                  <span className="text-xs font-medium">Email</span>
+                </Button>
+                
+                <Button 
+                  onClick={handleCopyGreeting}
+                  variant="outline"
+                  className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-100 hover:to-amber-100 p-4 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                  title="Copy to Clipboard"
+                >
+                  <Copy className="w-6 h-6" />
+                  <span className="text-xs font-medium">Copy</span>
+                </Button>
+              </div>
+              
+              {(!greetingData.recipientName || !greetingData.senderName) && (
+                <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <p className="text-yellow-800 text-sm text-center">
+                    💡 Fill in recipient and sender names above to personalize your greeting before sharing!
+                  </p>
                 </div>
-              </CardContent>
-            </Card>
-          )}
+              )}
+            </CardContent>
+          </Card>
         </div>
 
         {/* Personalization Form - Right Side */}
