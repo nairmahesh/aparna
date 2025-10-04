@@ -579,25 +579,25 @@ const Home = () => {
       <footer className="bg-gradient-to-r from-orange-600 to-amber-600 text-white py-12 mt-16">
         <div className="container mx-auto px-4 text-center">
           <div className="mb-6">
-            <h3 className="text-2xl font-bold mb-2">{shopInfo.name}</h3>
-            <p className="text-orange-100 mb-4">{shopInfo.tagline}</p>
+            <h3 className="text-2xl font-bold mb-2">{getWebsiteSettings().name}</h3>
+            <p className="text-orange-100 mb-4">{getWebsiteSettings().tagline}</p>
             <div className="text-orange-100 space-y-1">
-              <p>{shopInfo.contact.address}</p>
+              <p>{getWebsiteSettings().contact.address}</p>
               <p className="flex items-center justify-center space-x-2">
                 <Phone className="w-4 h-4 text-white" />
                 <a 
-                  href={`tel:${shopInfo.contact.phone}`}
+                  href={`tel:${getWebsiteSettings().contact.phone}`}
                   className="hover:text-orange-200 transition-colors cursor-pointer"
                 >
-                  {shopInfo.contact.phone}
+                  {getWebsiteSettings().contact.phone}
                 </a>
               </p>
-              <p className="text-sm">FSSAI License: {shopInfo.contact.fssai}</p>
+              <p className="text-sm">FSSAI License: {getWebsiteSettings().contact.fssai}</p>
             </div>
           </div>
           <div className="border-t border-orange-400 pt-6">
             <p className="text-orange-100">
-              © 2025 {shopInfo.name}. Spreading sweetness and joy this Diwali! 🪔
+              © 2025 {getWebsiteSettings().name}. Spreading sweetness and joy this Diwali! 🪔
             </p>
           </div>
         </div>
