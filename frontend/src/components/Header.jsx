@@ -98,8 +98,8 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
               variant="outline" 
               className="relative border-orange-200 hover:border-orange-300 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50"
             >
-              <ShoppingCart className="w-5 h-5 mr-2 text-orange-600" />
-              <span className="text-orange-600">Cart</span>
+              <ShoppingCart className="w-5 h-5 md:mr-2 text-orange-600" />
+              <span className="hidden md:inline text-orange-600">Cart</span>
               {cartCount > 0 && (
                 <Badge className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs flex items-center justify-center">
                   {cartCount}
