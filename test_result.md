@@ -206,3 +206,5 @@ test_plan:
 agent_communication:
     - agent: "testing"
       message: "Comprehensive testing completed for enhanced admin panel backend functionality. All 21 tests passed with 100% success rate. Fixed one critical Pydantic serialization issue with OrderEnhanced model. All endpoints working correctly with proper authentication, error handling, and data validation. Created comprehensive test suite in backend_test.py and tested with sample data. Ready for production use."
+    - agent: "main"
+      message: "Implemented new greeting card layout as requested by user. Changed from complex overlay positioning to simple layout: artwork at top, clean text section below. Need to test that the new layout displays correctly and shows proper formatting for To/From/Message sections. User reported previous implementation not showing placeholders correctly."
