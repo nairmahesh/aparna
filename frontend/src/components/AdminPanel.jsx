@@ -86,6 +86,11 @@ const AdminPanel = () => {
   const [messageTemplate, setMessageTemplate] = useState('');
   const [personalizedLinks, setPersonalizedLinks] = useState([]);
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAnalyticsModal, setShowAnalyticsModal] = useState(false);
+  const [selectedProductAnalytics, setSelectedProductAnalytics] = useState(null);
+  const [hiddenProducts, setHiddenProducts] = useState(new Set());
 
   const categories = [
     { value: 'chivda', label: 'Chivda Collection' },
