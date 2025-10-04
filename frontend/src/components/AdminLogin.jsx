@@ -96,7 +96,7 @@ const AdminLogin = ({ onLogin }) => {
             <p className="text-sm text-orange-700 text-center">
               <strong>Demo Credentials:</strong><br />
               Username: aparna<br />
-              Password: diwali2024
+              Password: diwali2025
             </p>
           </div>
         </CardContent>
