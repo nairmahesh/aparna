@@ -569,16 +569,13 @@ class AdminPanelTester:
 
         # Test 4: POST /admin/track/visitor-event (checkout start)
         try:
-            checkout_event_data = {
+            checkout_event_params = {
                 "session_id": session_id,
                 "event_type": "checkout_start",
                 "page_url": "/checkout",
-                "product_id": None,
-                "product_name": None,
-                "cart_value": 1250.0,
-                "order_id": None
+                "cart_value": 1250.0
             }
-            response = self.session.post(f"{API_BASE}/track/visitor-event", json=checkout_event_data)
+            response = self.session.post(f"{API_BASE}/track/visitor-event", params=checkout_event_params)
             if response.status_code == 200:
                 checkout_response = response.json()
                 if checkout_response.get("status") == "tracked":
