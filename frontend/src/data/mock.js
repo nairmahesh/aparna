@@ -271,7 +271,7 @@ export const menuCategories = [
             date: '2025-10-02'
           }
         ],
-        image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop'
+        image: 'https://picsum.photos/400/300?random=13'
       },
       {
         id: 'fried-poha-chivda',
