@@ -153,127 +153,213 @@ const Home = () => {
             </section>
 
             {/* Menu Section */}
-            <main id="menu" className="container mx-auto px-4 py-16">
-              <div className="text-center mb-16">
-                <h2 className="text-5xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-4">
-                  Aparna's Diwali Collection
-                </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
-                  Fresh homemade delicacies crafted with love - each recipe passed down through generations
-                </p>
-                <div className="flex justify-center space-x-4 mb-8">
-                  <div className="flex items-center space-x-2 bg-green-100 px-4 py-2 rounded-full">
-                    <span className="text-green-600 text-sm font-medium">✓ Made Fresh Daily</span>
-                  </div>
-                  <div className="flex items-center space-x-2 bg-orange-100 px-4 py-2 rounded-full">
-                    <span className="text-orange-600 text-sm font-medium">🏆 Family Recipes</span>
-                  </div>
-                  <div className="flex items-center space-x-2 bg-blue-100 px-4 py-2 rounded-full">
-                    <span className="text-blue-600 text-sm font-medium">📦 Free Delivery ₹500+</span>
-                  </div>
-                </div>
+            <main id="menu" className="container mx-auto px-4 py-8">
+              {/* Clean Header */}
+              <div className="text-center mb-8">
+                <h2 className="text-4xl font-bold text-gray-800 mb-2">Diwali Delights Menu</h2>
+                <p className="text-gray-600">Fresh homemade delicacies • {menuCategories.reduce((total, cat) => total + cat.items.length, 0)} items available</p>
               </div>
 
-              {/* Quick Category Overview */}
-              <section className="mb-16">
-                <div className="text-center mb-8">
-                  <h3 className="text-3xl font-bold text-gray-800 mb-6">Browse Our Complete Collection</h3>
-                  <p className="text-gray-600 mb-8">Click on any category to see all available varieties</p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-6xl mx-auto">
-                    {menuCategories.map((category) => (
+              {/* E-commerce Style Layout */}
+              <div className="flex gap-8">
+                {/* Sidebar Filters */}
+                <aside className="w-64 flex-shrink-0 hidden lg:block">
+                  <div className="bg-white rounded-lg border border-gray-200 p-6 sticky top-4">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Categories</h3>
+                    <div className="space-y-2">
                       <button
-                        key={category.id}
-                        onClick={() => {
-                          document.getElementById(category.id).scrollIntoView({ behavior: 'smooth' });
-                          // Trigger the category grid highlight
-                          setTimeout(() => {
-                            const categoryGrid = document.getElementById(`${category.id}-grid`);
-                            if (categoryGrid) {
-                              categoryGrid.classList.add('ring-4', 'ring-orange-300', 'ring-opacity-50');
-                              setTimeout(() => {
-                                categoryGrid.classList.remove('ring-4', 'ring-orange-300', 'ring-opacity-50');
-                              }, 2000);
-                            }
-                          }, 500);
-                        }}
-                        className="bg-gradient-to-br from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 p-6 rounded-xl border-2 border-orange-200 hover:border-orange-300 transition-all transform hover:scale-105 group"
+                        onClick={() => setActiveFilter('all')}
+                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                          activeFilter === 'all' 
+                            ? 'bg-orange-500 text-white' 
+                            : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                        }`}
                       >
-                        <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{category.icon}</div>
-                        <h4 className="font-bold text-orange-700 mb-2">{category.name}</h4>
-                        <p className="text-sm text-gray-600 mb-3 leading-relaxed">{category.description}</p>
-                        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                          View All {category.items.length} Items →
-                        </div>
+                        All Items ({menuCategories.reduce((total, cat) => total + cat.items.length, 0)})
                       </button>
+                      {menuCategories.map((category) => (
+                        <button
+                          key={category.id}
+                          onClick={() => setActiveFilter(category.id)}
+                          className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                            activeFilter === category.id
+                              ? 'bg-orange-500 text-white'
+                              : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                          }`}
+                        >
+                          {category.icon} {category.name.replace(' Collection', '').replace(' Varieties', '').replace(' Delights', '')} ({category.items.length})
+                        </button>
+                      ))}
+                    </div>
+
+                    <hr className="my-6" />
+                    
+                    <h4 className="font-semibold text-gray-800 mb-3">Price Range</h4>
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => setPriceFilter('all')}
+                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                          priceFilter === 'all' 
+                            ? 'bg-orange-500 text-white' 
+                            : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        All Prices
+                      </button>
+                      <button
+                        onClick={() => setPriceFilter('under500')}
+                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                          priceFilter === 'under500'
+                            ? 'bg-orange-500 text-white'
+                            : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        Under ₹500
+                      </button>
+                      <button
+                        onClick={() => setPriceFilter('500to1000')}
+                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                          priceFilter === '500to1000'
+                            ? 'bg-orange-500 text-white'
+                            : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        ₹500 - ₹1000
+                      </button>
+                      <button
+                        onClick={() => setPriceFilter('above1000')}
+                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                          priceFilter === 'above1000'
+                            ? 'bg-orange-500 text-white'
+                            : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        Above ₹1000
+                      </button>
+                    </div>
+
+                    <hr className="my-6" />
+                    
+                    <div className="bg-orange-50 p-4 rounded-lg">
+                      <p className="text-sm font-medium text-orange-700 mb-1">✓ Fresh Daily</p>
+                      <p className="text-sm font-medium text-orange-700 mb-1">✓ Free Delivery ₹500+</p>
+                      <p className="text-sm font-medium text-orange-700">✓ Family Recipes</p>
+                    </div>
+                  </div>
+                </aside>
+
+                {/* Main Product Grid */}
+                <div className="flex-1">
+                  {/* Mobile Filter Buttons */}
+                  <div className="lg:hidden mb-6">
+                    <div className="flex space-x-2 overflow-x-auto pb-2">
+                      <button
+                        onClick={() => setActiveFilter('all')}
+                        className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium ${
+                          activeFilter === 'all' 
+                            ? 'bg-orange-500 text-white' 
+                            : 'bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        All
+                      </button>
+                      {menuCategories.map((category) => (
+                        <button
+                          key={category.id}
+                          onClick={() => setActiveFilter(category.id)}
+                          className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium ${
+                            activeFilter === category.id
+                              ? 'bg-orange-500 text-white'
+                              : 'bg-gray-100 text-gray-700'
+                          }`}
+                        >
+                          {category.icon} {category.name.split(' ')[0]}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Results Header */}
+                  <div className="flex justify-between items-center mb-6">
+                    <p className="text-gray-600">
+                      Showing {getFilteredItems().length} items
+                      {activeFilter !== 'all' && (
+                        <span className="ml-2">
+                          in {menuCategories.find(cat => cat.id === activeFilter)?.name}
+                        </span>
+                      )}
+                    </p>
+                    <select 
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white"
+                    >
+                      <option value="name">Sort by Name</option>
+                      <option value="price-low">Price: Low to High</option>
+                      <option value="price-high">Price: High to Low</option>
+                      <option value="popular">Most Popular</option>
+                    </select>
+                  </div>
+
+                  {/* Product Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {getFilteredItems().map((item) => (
+                      <Card key={item.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200 hover:border-orange-300">
+                        <CardContent className="p-0">
+                          {/* Product Image */}
+                          <div className="aspect-square overflow-hidden rounded-t-lg bg-gray-100">
+                            <img 
+                              src={item.image} 
+                              alt={item.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          
+                          {/* Product Info */}
+                          <div className="p-4">
+                            <h3 className="font-semibold text-gray-800 mb-1 line-clamp-2">{item.name}</h3>
+                            <p className="text-sm text-gray-500 mb-3 line-clamp-2">{item.description}</p>
+                            
+                            <div className="flex items-center justify-between mb-3">
+                              <div>
+                                <span className="text-xl font-bold text-gray-900">₹{item.price}</span>
+                                <span className="text-sm text-gray-500 ml-1">{item.unit}</span>
+                              </div>
+                              <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs">
+                                Fresh
+                              </Badge>
+                            </div>
+                            
+                            <Button 
+                              onClick={() => handleAddToCart(item)}
+                              className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                            >
+                              <ShoppingCart className="w-4 h-4 mr-2" />
+                              Add to Cart
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
                     ))}
                   </div>
-                </div>
-                
-                <div className="text-center">
-                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-2xl border-2 border-orange-200 max-w-2xl mx-auto">
-                    <p className="text-lg font-medium text-gray-700 mb-2">
-                      🎁 <span className="text-orange-600">Perfect for Diwali:</span> Mix & match from different categories!
-                    </p>
-                    <p className="text-sm text-gray-600">Create your own custom hamper with varieties from each section</p>
-                  </div>
-                </div>
-              </section>
 
-              {/* Full Menu Categories with better spacing and cross-selling */}
-              {menuCategories.map((category, index) => (
-                <div key={category.id} id={category.id}>
-                  <CategorySection 
-                    category={category} 
-                    onAddToCart={handleAddToCart}
-                  />
-                  
-                  {/* Add cross-selling suggestions between sections */}
-                  {index < menuCategories.length - 1 && (
-                    <div className="my-12 text-center">
-                      <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-6 rounded-xl border border-amber-200 max-w-2xl mx-auto">
-                        <p className="text-lg font-medium text-amber-700 mb-2">
-                          💡 <span className="text-gray-700">Aparna's Tip:</span> {category.name} pairs perfectly with items from our next section!
-                        </p>
-                        <p className="text-sm text-gray-600">Create the perfect festival mix for your family & friends</p>
-                      </div>
+                  {getFilteredItems().length === 0 && (
+                    <div className="text-center py-12">
+                      <p className="text-gray-500 text-lg">No items found matching your filters</p>
+                      <Button 
+                        onClick={() => {
+                          setActiveFilter('all');
+                          setPriceFilter('all');
+                        }}
+                        variant="outline" 
+                        className="mt-4"
+                      >
+                        Clear Filters
+                      </Button>
                     </div>
                   )}
                 </div>
-              ))}
-
-              {/* Order Motivation Section */}
-              <section className="mt-16 text-center">
-                <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white p-8 rounded-2xl shadow-2xl">
-                  <h3 className="text-3xl font-bold mb-4">Ready to Make This Diwali Special? 🪔</h3>
-                  <p className="text-xl mb-6 opacity-90">
-                    Join 500+ happy families who trust Aparna's homemade delicacies for their celebrations
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                      <div className="text-2xl mb-2">⚡</div>
-                      <p className="font-semibold">Same Day Delivery</p>
-                      <p className="text-sm opacity-80">Order by 2 PM</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                      <div className="text-2xl mb-2">💝</div>
-                      <p className="font-semibold">Perfect Packaging</p>
-                      <p className="text-sm opacity-80">Gift-ready presentation</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                      <div className="text-2xl mb-2">🏆</div>
-                      <p className="font-semibold">100% Fresh Guarantee</p>
-                      <p className="text-sm opacity-80">Made with love, delivered fresh</p>
-                    </div>
-                  </div>
-                  <Button 
-                    onClick={handleCartClick}
-                    className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 text-lg font-bold rounded-full shadow-lg"
-                  >
-                    {cartCount > 0 ? `View My Cart (${cartCount} items)` : 'Start Your Order'} →
-                  </Button>
-                </div>
-              </section>
+              </div>
             </main>
           </>
         );
