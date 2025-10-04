@@ -18,7 +18,7 @@ import sys
 # Configuration
 BACKEND_URL = "https://diwali-delights-3.preview.emergentagent.com"  # From frontend/.env REACT_APP_BACKEND_URL
 ADMIN_KEY = "aparna_admin_2025"
-API_BASE = f"{BACKEND_URL}/admin"
+API_BASE = f"{BACKEND_URL}/api/admin"
 
 class AdminPanelTester:
     def __init__(self):
