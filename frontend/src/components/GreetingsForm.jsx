@@ -14,31 +14,99 @@ import { useToast } from '../hooks/use-toast';
 const greetingArtworks = [
   {
     id: 1,
-    name: 'Colorful String Lights',
-    url: 'https://images.unsplash.com/photo-1557932541-016894d7b7f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
+    name: 'Golden Diyas',
+    url: 'https://images.unsplash.com/photo-1636619773834-c7e0762ddfe1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
     textColor: 'text-white',
-    overlayColor: 'bg-black/40'
+    overlayColor: 'bg-black/30',
+    category: 'traditional'
   },
   {
     id: 2,
-    name: 'Traditional Diyas',
-    url: 'https://images.unsplash.com/photo-1636619773834-c7e0762ddfe1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
+    name: 'Colorful String Lights',
+    url: 'https://images.unsplash.com/photo-1557932541-016894d7b7f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NTc0NTc4fDA&ixlib=rb-4.1.0&q=85&w=800&h=600',
     textColor: 'text-white',
-    overlayColor: 'bg-black/30'
+    overlayColor: 'bg-black/40',
+    category: 'modern'
   },
   {
     id: 3,
     name: 'Warm Bokeh Lights',
     url: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxkaXdhbGklMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc1OTU3NDU3Mnww&ixlib=rb-4.1.0&q=85&w=800&h=600',
     textColor: 'text-white',
-    overlayColor: 'bg-black/40'
+    overlayColor: 'bg-black/40',
+    category: 'elegant'
   },
   {
     id: 4,
     name: 'Festive Sparklers',
     url: 'https://images.pexels.com/photos/288478/pexels-photo-288478.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
     textColor: 'text-white',
-    overlayColor: 'bg-black/50'
+    overlayColor: 'bg-black/50',
+    category: 'celebration'
+  },
+  {
+    id: 5,
+    name: 'Palace Rangoli',
+    url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/35',
+    category: 'traditional'
+  },
+  {
+    id: 6,
+    name: 'Marigold Flowers',
+    url: 'https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?w=800&h=600&fit=crop',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/30',
+    category: 'nature'
+  },
+  {
+    id: 7,
+    name: 'Fireworks Night',
+    url: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=800&h=600&fit=crop',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/45',
+    category: 'celebration'
+  },
+  {
+    id: 8,
+    name: 'Elegant Candles',
+    url: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&h=600&fit=crop',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/40',
+    category: 'elegant'
+  },
+  {
+    id: 9,
+    name: 'Golden Mandala',
+    url: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&h=600&fit=crop',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/35',
+    category: 'traditional'
+  },
+  {
+    id: 10,
+    name: 'Lotus Petals',
+    url: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&h=600&fit=crop',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/30',
+    category: 'nature'
+  },
+  {
+    id: 11,
+    name: 'Peacock Feathers',
+    url: 'https://images.unsplash.com/photo-1517137685593-78935a695925?w=800&h=600&fit=crop',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/40',
+    category: 'nature'
+  },
+  {
+    id: 12,
+    name: 'Glowing Lanterns',
+    url: 'https://images.unsplash.com/photo-1520637836862-4d197d17c89a?w=800&h=600&fit=crop',
+    textColor: 'text-white',
+    overlayColor: 'bg-black/35',
+    category: 'modern'
   }
 ];
 
