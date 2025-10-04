@@ -18,7 +18,7 @@ from server import db
 # Authentication middleware (simple admin check)
 async def verify_admin(admin_key: str = Query(...)):
     # Simple admin authentication - in production use proper JWT
-    if admin_key != "aparna_admin_2024":
+    if admin_key != "aparna_admin_2025":
         raise HTTPException(status_code=403, detail="Admin access required")
     return True
 
