@@ -833,7 +833,7 @@ const AdminPanel = () => {
           {/* Visitor Analytics */}
           <TabsContent value="visitors" className="space-y-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Visitor Analytics - Who Came & What They Did</h2>
+              <h2 className="text-2xl font-bold text-gray-800">Visitor Analytics</h2>
               <Button onClick={loadVisitorAnalytics} disabled={loading} variant="outline">
                 <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
                 Refresh
