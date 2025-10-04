@@ -186,8 +186,111 @@ const AdminPanel = () => {
       setAnalytics(summaryRes.data);
       setLinkAnalytics(linksRes.data);
     } catch (error) {
-      toast({ title: 'Error loading analytics', variant: 'destructive' });
+      console.error('Error loading analytics:', error);
     }
+  };
+
+  const loadOrders = async () => {
+    try {
+      const params = new URLSearchParams({ admin_key: ADMIN_KEY });
+      if (orderFilters.status) params.append('status', orderFilters.status);
+      if (orderFilters.delivery_status) params.append('delivery_status', orderFilters.delivery_status);
+      if (orderFilters.date_from) params.append('date_from', orderFilters.date_from);
+      if (orderFilters.date_to) params.append('date_to', orderFilters.date_to);
+      
+      const response = await axios.get(`${BACKEND_URL}/admin/orders?${params}`);
+      setOrders(response.data);
+    } catch (error) {
+      console.error('Error loading orders:', error);
+    }
+  };
+
+  const loadVisitorAnalytics = async () => {
+    try {
+      const params = new URLSearchParams({
+        admin_key: ADMIN_KEY,
+        date_from: dateRange.from,
+        date_to: dateRange.to
+      });
+      const response = await axios.get(`${BACKEND_URL}/admin/analytics/visitors?${params}`);
+      setVisitorAnalytics(response.data);
+    } catch (error) {
+      console.error('Error loading visitor analytics:', error);
+    }
+  };
+
+  const loadCustomerAnalytics = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/admin/analytics/customers?admin_key=${ADMIN_KEY}`);
+      setCustomerAnalytics(response.data);
+    } catch (error) {
+      console.error('Error loading customer analytics:', error);
+    }
+  };
+
+  const loadCartAbandonments = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/admin/analytics/cart-abandonment?admin_key=${ADMIN_KEY}`);
+      setCartAbandonments(response.data);
+    } catch (error) {
+      console.error('Error loading cart abandonments:', error);
+    }
+  };
+
+  const loadRevenueReport = async () => {
+    try {
+      const params = new URLSearchParams({
+        admin_key: ADMIN_KEY,
+        date_from: dateRange.from,
+        date_to: dateRange.to
+      });
+      const response = await axios.get(`${BACKEND_URL}/admin/analytics/revenue-report?${params}`);
+      setRevenueReport(response.data);
+    } catch (error) {
+      console.error('Error loading revenue report:', error);
+    }
+  };
+
+  const updateOrderStatus = async (orderId, updates) => {
+    try {
+      setLoading(true);
+      await axios.put(
+        `${BACKEND_URL}/admin/orders/${orderId}?admin_key=${ADMIN_KEY}`,
+        updates
+      );
+      toast({ title: 'Order updated successfully!' });
+      await loadOrders();
+    } catch (error) {
+      toast({ title: 'Error updating order', variant: 'destructive' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      minimumFractionDigits: 0
+    }).format(amount);
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleString('en-IN');
+  };
+
+  const getStatusBadge = (status, type = 'order') => {
+    const statusConfig = type === 'order' ? orderStatuses : 
+                       type === 'delivery' ? deliveryStatuses : paymentStatuses;
+    const config = statusConfig.find(s => s.value === status);
+    
+    if (!config) return <Badge variant="secondary">{status}</Badge>;
+    
+    return (
+      <Badge className={config.color}>
+        {config.label}
+      </Badge>
+    );
   };
 
   const handleCreateProduct = async () => {
