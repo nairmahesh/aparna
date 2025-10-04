@@ -159,3 +159,208 @@ class OrderCreate(BaseModel):
     notes: Optional[str] = None
 
 import uuid
+
+# Enhanced Order Management Models
+class DeliveryStatus(str, Enum):
+    PENDING = "pending"
+    DISPATCHED = "dispatched"
+    OUT_FOR_DELIVERY = "out_for_delivery"
+    DELIVERED = "delivered"
+    FAILED = "failed"
+
+class PaymentStatus(str, Enum):
+    PENDING = "pending"
+    PAID = "paid"
+    FAILED = "failed"
+    REFUNDED = "refunded"
+
+class CustomerType(str, Enum):
+    NEW = "new"
+    RETURNING = "returning"
+
+class OrderUpdate(BaseModel):
+    status: Optional[OrderStatus] = None
+    delivery_date: Optional[datetime] = None
+    dispatched_date: Optional[datetime] = None
+    delivery_cost: Optional[float] = None
+    delivery_status: Optional[DeliveryStatus] = None
+    payment_status: Optional[PaymentStatus] = None
+    notes: Optional[str] = None
+
+# Enhanced Order Model
+class OrderEnhanced(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    customer_name: str
+    customer_phone: str
+    customer_email: Optional[str] = None
+    customer_address: str
+    customer_type: CustomerType = CustomerType.NEW
+    is_repeat_customer: bool = False
+    previous_orders_count: int = 0
+    
+    # Order details
+    items: List[OrderItem]
+    total_amount: float
+    delivery_cost: float = 0.0
+    final_amount: float = Field(computed=True)
+    
+    # Dates
+    delivery_date: datetime
+    dispatched_date: Optional[datetime] = None
+    delivered_date: Optional[datetime] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    # Status
+    status: OrderStatus = OrderStatus.PENDING
+    delivery_status: DeliveryStatus = DeliveryStatus.PENDING
+    payment_status: PaymentStatus = PaymentStatus.PENDING
+    
+    # Tracking
+    visitor_session_id: Optional[str] = None
+    referral_link_token: Optional[str] = None
+    
+    # Notes
+    notes: Optional[str] = None
+    admin_notes: Optional[str] = None
+    
+    @property
+    def final_amount(self):
+        return self.total_amount + self.delivery_cost
+
+# Visitor Tracking Models
+class VisitorType(str, Enum):
+    ANONYMOUS = "anonymous"
+    IDENTIFIED = "identified"
+    CUSTOMER = "customer"
+
+class VisitorSession(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    session_id: str = Field(default_factory=lambda: str(uuid.uuid4().hex))
+    visitor_type: VisitorType = VisitorType.ANONYMOUS
+    
+    # Visitor identification
+    customer_id: Optional[str] = None  # If known customer
+    customer_name: Optional[str] = None
+    customer_phone: Optional[str] = None
+    
+    # Session details
+    ip_address: Optional[str] = None
+    user_agent: Optional[str] = None
+    referral_source: Optional[str] = None
+    referral_link_token: Optional[str] = None
+    
+    # Tracking data
+    first_visit: datetime = Field(default_factory=datetime.utcnow)
+    last_activity: datetime = Field(default_factory=datetime.utcnow)
+    total_page_views: int = 0
+    total_time_spent: int = 0  # in seconds
+    
+    # E-commerce tracking
+    products_viewed: List[str] = []
+    items_added_to_cart: int = 0
+    cart_abandonment_count: int = 0
+    checkout_attempts: int = 0
+    orders_placed: int = 0
+    total_order_value: float = 0.0
+    
+    # Status
+    is_active: bool = True
+    converted_to_customer: bool = False
+
+class VisitorEvent(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    session_id: str
+    event_type: str  # 'page_view', 'product_view', 'cart_add', 'cart_remove', 'checkout_start', 'order_complete', etc.
+    
+    # Event details
+    page_url: Optional[str] = None
+    product_id: Optional[str] = None
+    product_name: Optional[str] = None
+    cart_value: Optional[float] = None
+    order_id: Optional[str] = None
+    
+    # Metadata
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    properties: Optional[dict] = {}
+
+# Cart Abandonment Tracking
+class CartAbandonmentSession(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    session_id: str
+    customer_name: Optional[str] = None
+    customer_phone: Optional[str] = None
+    customer_email: Optional[str] = None
+    
+    # Cart details
+    cart_items: List[OrderItem]
+    cart_total: float
+    abandonment_stage: str  # 'cart', 'shipping', 'payment', 'confirmation'
+    
+    # Timing
+    cart_created_at: datetime = Field(default_factory=datetime.utcnow)
+    last_activity: datetime = Field(default_factory=datetime.utcnow)
+    abandoned_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    # Follow-up
+    recovery_attempts: int = 0
+    recovered: bool = False
+    recovery_order_id: Optional[str] = None
+
+# Analytics Summary Models
+class DashboardAnalytics(BaseModel):
+    # Time range
+    date_range: str
+    last_updated: datetime = Field(default_factory=datetime.utcnow)
+    
+    # Visitor metrics
+    total_visitors: int = 0
+    unique_visitors: int = 0
+    returning_visitors: int = 0
+    new_visitors: int = 0
+    
+    # Engagement metrics
+    avg_session_duration: float = 0.0
+    bounce_rate: float = 0.0
+    pages_per_session: float = 0.0
+    
+    # E-commerce metrics
+    total_orders: int = 0
+    total_revenue: float = 0.0
+    avg_order_value: float = 0.0
+    conversion_rate: float = 0.0
+    
+    # Cart metrics
+    cart_abandonment_rate: float = 0.0
+    abandoned_carts: int = 0
+    recovered_carts: int = 0
+    
+    # Product metrics
+    top_products: List[dict] = []
+    most_viewed_products: List[dict] = []
+
+class CustomerAnalytics(BaseModel):
+    customer_id: str
+    customer_name: str
+    customer_phone: str
+    customer_type: CustomerType
+    
+    # Order history
+    total_orders: int = 0
+    total_spent: float = 0.0
+    avg_order_value: float = 0.0
+    first_order_date: Optional[datetime] = None
+    last_order_date: Optional[datetime] = None
+    
+    # Engagement
+    total_visits: int = 0
+    last_visit_date: Optional[datetime] = None
+    avg_time_between_orders: Optional[float] = None  # in days
+    
+    # Preferences
+    favorite_categories: List[str] = []
+    favorite_products: List[str] = []
+    
+    # Status
+    is_active: bool = True
+    risk_level: str = "low"  # low, medium, high (based on activity)
