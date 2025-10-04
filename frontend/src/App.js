@@ -550,13 +550,39 @@ const Home = () => {
                               </div>
                               
                               <div className="space-y-3">
-                                <Button 
-                                  onClick={() => handleAddToCart(item)}
-                                  className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-                                >
-                                  <ShoppingCart className="w-4 h-4 mr-2" />
-                                  Add to Cart
-                                </Button>
+                                {getItemQuantityInCart(item.id) === 0 ? (
+                                  <Button 
+                                    onClick={() => handleAddToCart(item)}
+                                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                                  >
+                                    <ShoppingCart className="w-4 h-4 mr-2" />
+                                    Add to Cart
+                                  </Button>
+                                ) : (
+                                  <div className="flex items-center justify-between bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl p-2">
+                                    <Button
+                                      onClick={() => handleDecrementQuantity(item)}
+                                      variant="ghost"
+                                      size="sm"
+                                      className="h-8 w-8 rounded-lg hover:bg-white/20 text-white p-0"
+                                    >
+                                      <Minus className="w-4 h-4" />
+                                    </Button>
+                                    
+                                    <span className="font-semibold px-3">
+                                      {getItemQuantityInCart(item.id)}
+                                    </span>
+                                    
+                                    <Button
+                                      onClick={() => handleIncrementQuantity(item)}
+                                      variant="ghost"
+                                      size="sm"
+                                      className="h-8 w-8 rounded-lg hover:bg-white/20 text-white p-0"
+                                    >
+                                      <Plus className="w-4 h-4" />
+                                    </Button>
+                                  </div>
+                                )}
                                 
                                 <Button 
                                   onClick={() => handleShareProduct(item)}
