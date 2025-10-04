@@ -6,7 +6,7 @@ import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Heart, Share2, Copy, Download, Sparkles, Send, Palette, MessageCircle, Mail, Phone } from 'lucide-react';
+import { Heart, Share2, Copy, Download, Sparkles, Send, MessageCircle, Mail, Phone } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { relationshipTypes, greetingMessages } from '../data/mock';
 import { useToast } from '../hooks/use-toast';
