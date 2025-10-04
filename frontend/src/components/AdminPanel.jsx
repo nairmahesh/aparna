@@ -2938,6 +2938,228 @@ const AdminPanel = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          {/* Website Settings */}
+          <TabsContent value="settings" className="space-y-6">
+            {/* Header */}
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-800">Website Settings</h2>
+              <div className="flex space-x-2">
+                <Button 
+                  onClick={handleResetWebsiteSettings}
+                  variant="outline"
+                  className="border-red-200 text-red-600 hover:bg-red-50"
+                >
+                  <RefreshCw className="w-4 h-4 mr-2" />
+                  Reset to Defaults
+                </Button>
+                <Button 
+                  onClick={handleSaveWebsiteSettings}
+                  className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+                >
+                  <CheckCircle className="w-4 h-4 mr-2" />
+                  Save Changes
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Branding Settings */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Settings className="w-5 h-5" />
+                    <span>Branding & Identity</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="website-name">Website Name</Label>
+                    <Input
+                      id="website-name"
+                      value={websiteSettings.name}
+                      onChange={(e) => setWebsiteSettings(prev => ({ ...prev, name: e.target.value }))}
+                      placeholder="Your Business Name"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">This appears in the header and throughout the site</p>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="website-tagline">Tagline</Label>
+                    <Input
+                      id="website-tagline"
+                      value={websiteSettings.tagline}
+                      onChange={(e) => setWebsiteSettings(prev => ({ ...prev, tagline: e.target.value }))}
+                      placeholder="Your business tagline"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Short catchy phrase describing your business</p>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="website-description">Description</Label>
+                    <Textarea
+                      id="website-description"
+                      value={websiteSettings.description}
+                      onChange={(e) => setWebsiteSettings(prev => ({ ...prev, description: e.target.value }))}
+                      placeholder="Describe your business"
+                      className="min-h-20"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Detailed description for footer and about section</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Hero Section Settings */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Eye className="w-5 h-5" />
+                    <span>Hero Banner Content</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="hero-title">Hero Title</Label>
+                    <Input
+                      id="hero-title"
+                      value={websiteSettings.heroTitle}
+                      onChange={(e) => setWebsiteSettings(prev => ({ ...prev, heroTitle: e.target.value }))}
+                      placeholder="Main banner title"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Large title text shown on homepage hero section</p>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="hero-subtitle">Hero Subtitle</Label>
+                    <Textarea
+                      id="hero-subtitle"
+                      value={websiteSettings.heroSubtitle}
+                      onChange={(e) => setWebsiteSettings(prev => ({ ...prev, heroSubtitle: e.target.value }))}
+                      placeholder="Supporting text for hero section"
+                      className="min-h-16"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Supporting text below the main title</p>
+                  </div>
+
+                  <div className="bg-orange-50 p-4 rounded-lg">
+                    <h5 className="text-sm font-medium text-orange-800 mb-2">🎨 Preview:</h5>
+                    <div className="bg-white p-4 rounded border">
+                      <h3 className="text-lg font-bold text-gray-900">{websiteSettings.heroTitle}</h3>
+                      <p className="text-sm text-gray-600 mt-1">{websiteSettings.heroSubtitle}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contact Information */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Phone className="w-5 h-5" />
+                    <span>Contact Information</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="contact-phone">Phone Number</Label>
+                    <Input
+                      id="contact-phone"
+                      value={websiteSettings.contact.phone}
+                      onChange={(e) => setWebsiteSettings(prev => ({ 
+                        ...prev, 
+                        contact: { ...prev.contact, phone: e.target.value }
+                      }))}
+                      placeholder="+91 XXXXXXXXXX"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="contact-email">Email Address</Label>
+                    <Input
+                      id="contact-email"
+                      type="email"
+                      value={websiteSettings.contact.email}
+                      onChange={(e) => setWebsiteSettings(prev => ({ 
+                        ...prev, 
+                        contact: { ...prev.contact, email: e.target.value }
+                      }))}
+                      placeholder="your@email.com"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="contact-address">Address</Label>
+                    <Textarea
+                      id="contact-address"
+                      value={websiteSettings.contact.address}
+                      onChange={(e) => setWebsiteSettings(prev => ({ 
+                        ...prev, 
+                        contact: { ...prev.contact, address: e.target.value }
+                      }))}
+                      placeholder="Your business address"
+                      className="min-h-16"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="contact-fssai">FSSAI Number</Label>
+                    <Input
+                      id="contact-fssai"
+                      value={websiteSettings.contact.fssai}
+                      onChange={(e) => setWebsiteSettings(prev => ({ 
+                        ...prev, 
+                        contact: { ...prev.contact, fssai: e.target.value }
+                      }))}
+                      placeholder="FSSAI License Number"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Quick Actions */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Settings className="w-5 h-5" />
+                    <span>Quick Actions</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 gap-3">
+                    <Button 
+                      onClick={handleSaveWebsiteSettings}
+                      className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
+                    >
+                      <CheckCircle className="w-4 h-4 mr-2" />
+                      Save All Changes
+                    </Button>
+                    
+                    <Button 
+                      onClick={() => {
+                        const newWindow = window.open('/', '_blank');
+                        if (newWindow) newWindow.focus();
+                      }}
+                      variant="outline"
+                      className="w-full"
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      Preview Website
+                    </Button>
+                  </div>
+
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <h5 className="text-sm font-medium text-blue-800 mb-2">💡 Tips:</h5>
+                    <ul className="text-xs text-blue-700 space-y-1">
+                      <li>• Save changes to see them on the website</li>
+                      <li>• Keep titles concise and engaging</li>
+                      <li>• Update contact info if you move or change numbers</li>
+                      <li>• Use preview to check how changes look</li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
         </Tabs>
 
         {/* Add Product Modal */}
