@@ -95,10 +95,10 @@ const Home = () => {
                 <div className="mb-8">
                   <h1 className="text-6xl md:text-7xl font-bold mb-6">
                     <span className="bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
-                      Aparna's
+                      Festival of
                     </span>
                     <br />
-                    <span className="text-gray-800">Diwali Delights</span>
+                    <span className="text-gray-800">Lights & Flavors</span>
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed max-w-3xl mx-auto">
                     {shopInfo.description}
