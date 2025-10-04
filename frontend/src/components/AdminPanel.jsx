@@ -765,6 +765,13 @@ const AdminPanel = () => {
                           setShowContactSuggestions(true);
                         }
                       }}
+                      onBlur={() => {
+                        // Delay hiding to allow click on suggestions
+                        setTimeout(() => {
+                          setShowContactSuggestions(false);
+                          setShowAddContactOption(false);
+                        }, 200);
+                      }}
                     />
                     
                     {/* Contact Suggestions Dropdown */}
