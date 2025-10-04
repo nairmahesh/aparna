@@ -148,6 +148,31 @@ export const menuCategories = [
         description: 'Classic spiral-shaped snack made from rice flour and spices',
         price: 625,
         unit: 'per kg',
+        rating: 4.3,
+        totalReviews: 18,
+        reviews: [
+          {
+            id: 1,
+            customerName: 'Kavita R.',
+            rating: 4,
+            comment: 'Traditional taste and good crunch. Reminds me of homemade chakli.',
+            date: '2024-10-02'
+          },
+          {
+            id: 2,
+            customerName: 'Anil S.',
+            rating: 5,
+            comment: 'Perfectly spiced rice chakli. Great for tea time snacking.',
+            date: '2024-09-29'
+          },
+          {
+            id: 3,
+            customerName: 'Deepa T.',
+            rating: 4,
+            comment: 'Nice crispy texture. Could be a bit more spicy but overall good.',
+            date: '2024-09-26'
+          }
+        ],
         images: [
           'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
           'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg',
