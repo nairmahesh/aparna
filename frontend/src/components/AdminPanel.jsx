@@ -411,6 +411,88 @@ const AdminPanel = () => {
     navigate('/login');
   };
 
+  const handleEditProduct = (product) => {
+    setEditingProduct({ ...product });
+    setShowEditModal(true);
+  };
+
+  const handleUpdateProduct = async () => {
+    try {
+      setLoading(true);
+      // Update the product in the local state (since we're using mock data)
+      setProducts(prev => prev.map(p => 
+        p.id === editingProduct.id ? editingProduct : p
+      ));
+      
+      toast({
+        title: "Product Updated",
+        description: `${editingProduct.name} has been updated successfully.`,
+      });
+      
+      setShowEditModal(false);
+      setEditingProduct(null);
+    } catch (error) {
+      toast({ 
+        title: 'Error updating product', 
+        variant: 'destructive',
+        description: error.message 
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleShowAnalytics = (product) => {
+    const estimatedOrders = product.total_reviews * 0.8;
+    const estimatedRevenue = product.final_price * estimatedOrders;
+    const conversionRate = ((product.total_reviews / 100) * 100).toFixed(1); // Mock conversion rate
+    
+    setSelectedProductAnalytics({
+      ...product,
+      analytics: {
+        estimatedOrders: Math.round(estimatedOrders),
+        estimatedRevenue: Math.round(estimatedRevenue),
+        conversionRate: conversionRate,
+        viewsLastMonth: Math.round(estimatedOrders * 5), // Mock views
+        wishlistAdds: Math.round(estimatedOrders * 0.3), // Mock wishlist
+        returningCustomers: Math.round(estimatedOrders * 0.4), // Mock returning customers
+        averageOrderValue: product.final_price,
+        profitMargin: ((product.final_price * 0.6) / product.final_price * 100).toFixed(1) // Mock 60% cost
+      }
+    });
+    setShowAnalyticsModal(true);
+  };
+
+  const handleToggleProductVisibility = (productId) => {
+    setHiddenProducts(prev => {
+      const newHidden = new Set(prev);
+      if (newHidden.has(productId)) {
+        newHidden.delete(productId);
+        toast({
+          title: "Product Shown",
+          description: "Product is now visible to customers.",
+        });
+      } else {
+        newHidden.add(productId);
+        toast({
+          title: "Product Hidden",
+          description: "Product is now hidden from customers.",
+        });
+      }
+      return newHidden;
+    });
+  };
+
+  const handleDeleteProduct = (productId, productName) => {
+    if (window.confirm(`Are you sure you want to delete "${productName}"? This action cannot be undone.`)) {
+      setProducts(prev => prev.filter(p => p.id !== productId));
+      toast({
+        title: "Product Deleted",
+        description: `${productName} has been removed successfully.`,
+      });
+    }
+  };
+
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
