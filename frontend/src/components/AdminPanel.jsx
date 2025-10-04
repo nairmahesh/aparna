@@ -516,6 +516,80 @@ const AdminPanel = () => {
     }
   };
 
+  // Category Management Functions
+  const handleAddCategory = () => {
+    if (!newCategory.name.trim()) {
+      toast({
+        title: "Category name required",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const categoryId = newCategory.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const category = {
+      ...newCategory,
+      id: categoryId
+    };
+
+    const updatedCategories = [...managedCategories, category];
+    setManagedCategories(updatedCategories);
+    localStorage.setItem('managedCategories', JSON.stringify(updatedCategories));
+    
+    toast({
+      title: "Category Added",
+      description: `${newCategory.name} has been added successfully.`,
+    });
+
+    setNewCategory({ id: '', name: '', description: '', items: [] });
+    setShowAddCategory(false);
+  };
+
+  const handleEditCategory = (category) => {
+    setEditingCategory({ ...category });
+    setShowEditCategoryModal(true);
+  };
+
+  const handleUpdateCategory = () => {
+    const updatedCategories = managedCategories.map(cat =>
+      cat.id === editingCategory.id ? editingCategory : cat
+    );
+    
+    setManagedCategories(updatedCategories);
+    localStorage.setItem('managedCategories', JSON.stringify(updatedCategories));
+    
+    toast({
+      title: "Category Updated",
+      description: `${editingCategory.name} has been updated successfully.`,
+    });
+
+    setShowEditCategoryModal(false);
+    setEditingCategory(null);
+  };
+
+  const handleDeleteCategory = (categoryId, categoryName) => {
+    const category = managedCategories.find(c => c.id === categoryId);
+    const productCount = category?.items?.length || 0;
+    
+    if (productCount > 0) {
+      if (!window.confirm(`This category contains ${productCount} products. Deleting it will also remove all products. Are you sure?`)) {
+        return;
+      }
+    }
+
+    const updatedCategories = managedCategories.filter(c => c.id !== categoryId);
+    setManagedCategories(updatedCategories);
+    localStorage.setItem('managedCategories', JSON.stringify(updatedCategories));
+    
+    // Also update products to remove any from this category
+    setProducts(prev => prev.filter(p => p.category !== categoryName));
+    
+    toast({
+      title: "Category Deleted",
+      description: `${categoryName} has been removed successfully.`,
+    });
+  };
+
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
