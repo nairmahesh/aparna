@@ -77,15 +77,19 @@ const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
           </div>
         )}
 
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex flex-col">
-            <span className="text-2xl font-bold text-orange-600">₹{item.price}</span>
-            <span className="text-sm text-gray-500">{item.unit}</span>
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold text-orange-600">₹{item.price}</span>
+              <span className="text-sm text-gray-500">{item.unit}</span>
+            </div>
           </div>
-          <Badge variant="secondary" className="bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-700 hover:bg-amber-200">
-            <Star className="w-3 h-3 mr-1 fill-current" />
-            Premium
-          </Badge>
+          <div className="flex justify-center">
+            <Badge variant="secondary" className="bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-700 hover:bg-amber-200">
+              <Star className="w-3 h-3 mr-1 fill-current" />
+              Premium
+            </Badge>
+          </div>
         </div>
         <Button 
           onClick={() => onAddToCart(item)}
