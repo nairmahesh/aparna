@@ -499,7 +499,7 @@ const Home = () => {
             <p className="text-orange-100 mb-4">{shopInfo.tagline}</p>
             <div className="text-orange-100 space-y-1">
               <p>{shopInfo.contact.address}</p>
-              <p className="flex items-center space-x-2">
+              <p className="flex items-center justify-center space-x-2">
                 <Phone className="w-4 h-4 text-white" />
                 <a 
                   href={`tel:${shopInfo.contact.phone}`}
