@@ -157,7 +157,8 @@ const AdminPanel = () => {
         loadVisitorAnalytics(),
         loadCustomerAnalytics(),
         loadCartAbandonments(),
-        loadRevenueReport()
+        loadRevenueReport(),
+        loadReviewData()
       ]);
     } catch (error) {
       toast({ title: 'Error loading dashboard data', variant: 'destructive' });
