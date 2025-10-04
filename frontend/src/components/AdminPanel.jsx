@@ -1784,6 +1784,83 @@ const AdminPanel = () => {
                 </Card>
               </div>
             )}
+
+            {/* Additional Visitor Analytics Sections */}
+            {visitorAnalytics && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Device & Traffic Source Breakdown */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Device & Traffic Sources</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-medium mb-3">Device Breakdown</h4>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Mobile</span>
+                            <span className="font-bold text-blue-600">{visitorAnalytics.device_breakdown.mobile}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Desktop</span>
+                            <span className="font-bold text-green-600">{visitorAnalytics.device_breakdown.desktop}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Tablet</span>
+                            <span className="font-bold text-purple-600">{visitorAnalytics.device_breakdown.tablet}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-medium mb-3">Traffic Sources</h4>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Direct</span>
+                            <span className="font-bold">{visitorAnalytics.traffic_sources.direct}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Social Media</span>
+                            <span className="font-bold">{visitorAnalytics.traffic_sources.social_media}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Search Engines</span>
+                            <span className="font-bold">{visitorAnalytics.traffic_sources.search_engines}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Referrals</span>
+                            <span className="font-bold">{visitorAnalytics.traffic_sources.referrals}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Top Pages Performance */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Top Pages Performance</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {visitorAnalytics.top_pages.map((page, index) => (
+                        <div key={page.path} className="border-b pb-3">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-medium">{page.path === '/' ? 'Home' : page.path.replace('/', '')}</span>
+                            <Badge variant="outline">{page.views} views</Badge>
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            Bounce rate: {page.bounce_rate}%
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </TabsContent>
 
           {/* Customer Analytics */}
