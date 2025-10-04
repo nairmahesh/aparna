@@ -3829,6 +3829,103 @@ const AdminPanel = () => {
             </div>
           </div>
         )}
+
+        {/* Product Review Request Modal */}
+        {showReviewRequestModal && selectedProduct && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Generate Review Request: {selectedProduct.name}</h3>
+                <Button variant="ghost" size="sm" onClick={() => setShowReviewRequestModal(false)}>
+                  ×
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                {/* Product Info */}
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-medium mb-2">{selectedProduct.name}</h4>
+                  <p className="text-sm text-gray-600 mb-1">{selectedProduct.description}</p>
+                  <div className="flex items-center space-x-4 text-sm">
+                    <span className="text-orange-600 font-medium">₹{selectedProduct.final_price} {selectedProduct.unit}</span>
+                    <span className="text-gray-500">{selectedProduct.category}</span>
+                    {selectedProduct.rating && (
+                      <span className="text-amber-600">{selectedProduct.rating}⭐</span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Review Links */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-sm">WhatsApp Review Request</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-xs text-gray-600 mb-3">Send via WhatsApp with review link</p>
+                      <Button
+                        onClick={() => {
+                          const { whatsappUrl } = generateProductReviewLink(selectedProduct.id, selectedProduct.name);
+                          window.open(whatsappUrl, '_blank');
+                          toast({ title: "WhatsApp opened with review request!" });
+                        }}
+                        className="w-full bg-green-500 hover:bg-green-600 text-white"
+                      >
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        Open WhatsApp
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-sm">Copy Review Link</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-xs text-gray-600 mb-3">Copy link to share anywhere</p>
+                      <Button
+                        onClick={() => {
+                          const { reviewUrl } = generateProductReviewLink(selectedProduct.id, selectedProduct.name);
+                          navigator.clipboard.writeText(reviewUrl);
+                          toast({ title: "Review link copied to clipboard!" });
+                        }}
+                        variant="outline"
+                        className="w-full"
+                      >
+                        <Copy className="w-4 h-4 mr-2" />
+                        Copy Link
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Message Preview */}
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h5 className="text-sm font-medium text-blue-800 mb-2">📱 Message Preview:</h5>
+                  <div className="bg-white p-3 rounded border text-sm">
+                    <p>🌟 Hi! How was your experience with <strong>{selectedProduct.name}</strong> from Aparna's Diwali Delights?</p>
+                    <br />
+                    <p>We'd love to hear your feedback! Please click the link below to share your review:</p>
+                    <br />
+                    <p className="text-blue-600">👉 {generateProductReviewLink(selectedProduct.id, selectedProduct.name).reviewUrl}</p>
+                    <br />
+                    <p className="text-xs text-gray-600">Your feedback helps us serve you better and helps other customers make informed choices.</p>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex justify-end pt-4">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowReviewRequestModal(false)}
+                  >
+                    Close
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
