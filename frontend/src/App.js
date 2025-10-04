@@ -15,7 +15,8 @@ import { Toaster } from './components/ui/toaster';
 
 const Home = () => {
   const [cart, setCart] = useState([]);
-  const [currentView, setCurrentView] = useState('menu'); // 'menu', 'order', 'greetings'
+  const [currentView, setCurrentView] = useState('menu'); // 'menu', 'order', 'greetings', 'admin'
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const { toast } = useToast();
 
   const handleAddToCart = (item) => {
