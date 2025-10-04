@@ -708,6 +708,40 @@ const AdminPanel = () => {
     setSelectedImageProduct(null);
   };
 
+  // Website Settings Functions
+  const handleSaveWebsiteSettings = () => {
+    localStorage.setItem('websiteSettings', JSON.stringify(websiteSettings));
+    
+    toast({
+      title: "Settings Saved",
+      description: "Website settings have been updated successfully!",
+    });
+  };
+
+  const handleResetWebsiteSettings = () => {
+    const defaultSettings = {
+      name: "Aparna's Diwali Delights",
+      tagline: 'Traditional Sweets & Snacks for Your Festival Celebrations',
+      description: 'Authentic homemade delicacies crafted with love by Aparna for your Diwali festivities',
+      heroTitle: 'Welcome to Festival of Flavors',
+      heroSubtitle: 'Discover authentic Diwali sweets and snacks made with traditional recipes',
+      contact: {
+        phone: '+91 9920632654',
+        email: 'aparna.delights@gmail.com',
+        address: 'Borivali (W), Mumbai, Maharashtra',
+        fssai: '21521058000362'
+      }
+    };
+    
+    setWebsiteSettings(defaultSettings);
+    localStorage.setItem('websiteSettings', JSON.stringify(defaultSettings));
+    
+    toast({
+      title: "Settings Reset",
+      description: "Website settings have been reset to defaults.",
+    });
+  };
+
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
