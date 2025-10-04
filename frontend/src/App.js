@@ -540,6 +540,13 @@ const Home = () => {
         </div>
       </footer>
       
+      {/* Reviews Modal */}
+      <ReviewsModal
+        item={selectedReviewItem}
+        isOpen={showReviews}
+        onClose={() => setShowReviews(false)}
+      />
+      
       <Toaster />
     </div>
   );
