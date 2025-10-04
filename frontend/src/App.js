@@ -357,43 +357,103 @@ const Home = () => {
 
                   {/* Product Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {getFilteredItems().map((item) => (
-                      <Card key={item.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200 hover:border-orange-300">
-                        <CardContent className="p-0">
-                          {/* Product Image */}
-                          <div className="aspect-square overflow-hidden rounded-t-lg bg-gray-100">
-                            <img 
-                              src={item.image} 
-                              alt={item.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
+                    {getFilteredItems().map((item, index) => (
+                      <div key={item.id} className="group relative">
+                        {/* Special Badges */}
+                        {index === 0 && (
+                          <div className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 py-1 rounded-full text-xs font-bold z-10 shadow-lg">
+                            🔥 Popular
                           </div>
-                          
-                          {/* Product Info */}
-                          <div className="p-4">
-                            <h3 className="font-semibold text-gray-800 mb-1 line-clamp-2">{item.name}</h3>
-                            <p className="text-sm text-gray-500 mb-3 line-clamp-2">{item.description}</p>
-                            
-                            <div className="flex items-center justify-between mb-3">
-                              <div>
-                                <span className="text-xl font-bold text-gray-900">₹{item.price}</span>
-                                <span className="text-sm text-gray-500 ml-1">{item.unit}</span>
+                        )}
+                        {item.price < 100 && (
+                          <div className="absolute top-3 right-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-1 rounded-full text-xs font-bold z-10 shadow-lg">
+                            ₹ Great Deal
+                          </div>
+                        )}
+                        
+                        <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white rounded-2xl">
+                          <CardContent className="p-0">
+                            {/* Product Image with Overlay */}
+                            <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-orange-100 to-amber-100">
+                              <img 
+                                src={item.image} 
+                                alt={item.name}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                              />
+                              
+                              {/* Gradient Overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              
+                              {/* Fresh Badge */}
+                              <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm text-green-600 px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                                ✓ Fresh Today
                               </div>
-                              <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs">
-                                Fresh
-                              </Badge>
+                              
+                              {/* Quick Add Button (appears on hover) */}
+                              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <Button 
+                                  onClick={() => handleAddToCart(item)}
+                                  className="bg-white text-orange-600 hover:bg-orange-50 shadow-xl rounded-full px-6 py-2 font-semibold transform scale-95 group-hover:scale-100 transition-transform"
+                                >
+                                  <ShoppingCart className="w-4 h-4 mr-2" />
+                                  Quick Add
+                                </Button>
+                              </div>
                             </div>
                             
-                            <Button 
-                              onClick={() => handleAddToCart(item)}
-                              className="w-full bg-orange-500 hover:bg-orange-600 text-white"
-                            >
-                              <ShoppingCart className="w-4 h-4 mr-2" />
-                              Add to Cart
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
+                            {/* Product Info */}
+                            <div className="p-5">
+                              <div className="mb-3">
+                                <h3 className="font-bold text-gray-800 text-lg mb-1 leading-tight">{item.name}</h3>
+                                <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">{item.description}</p>
+                              </div>
+                              
+                              <div className="flex items-end justify-between mb-4">
+                                <div>
+                                  <div className="flex items-baseline space-x-1">
+                                    <span className="text-2xl font-bold text-gray-900">₹{item.price}</span>
+                                    <span className="text-sm text-gray-500 font-medium">{item.unit}</span>
+                                  </div>
+                                  {item.price > 1000 && (
+                                    <div className="flex items-center mt-1">
+                                      <span className="text-xs text-gray-400 line-through mr-2">₹{Math.floor(item.price * 1.2)}</span>
+                                      <span className="text-xs text-green-600 font-semibold bg-green-50 px-2 py-0.5 rounded">Save ₹{Math.floor(item.price * 0.2)}</span>
+                                    </div>
+                                  )}
+                                </div>
+                                
+                                {/* Rating Stars */}
+                                <div className="text-right">
+                                  <div className="flex items-center space-x-1 mb-1">
+                                    <div className="flex space-x-0.5">
+                                      {[...Array(5)].map((_, i) => (
+                                        <span key={i} className="text-amber-400 text-sm">★</span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                  <p className="text-xs text-gray-500">4.8 (120+ reviews)</p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex space-x-2">
+                                <Button 
+                                  onClick={() => handleAddToCart(item)}
+                                  className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                                >
+                                  <ShoppingCart className="w-4 h-4 mr-2" />
+                                  Add to Cart
+                                </Button>
+                                <Button 
+                                  variant="outline"
+                                  className="px-3 py-2.5 border-orange-200 hover:border-orange-300 hover:bg-orange-50 rounded-xl"
+                                >
+                                  <Heart className="w-4 h-4 text-gray-400 hover:text-red-500" />
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </div>
                     ))}
                   </div>
 
