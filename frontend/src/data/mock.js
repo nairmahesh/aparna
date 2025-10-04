@@ -121,7 +121,7 @@ export const menuCategories = [
             customerName: 'Deepak B.',
             rating: 4,
             comment: 'Very good quality. Ordered during last Diwali season and quality was consistent.',
-            date: '2025-10-07'
+            date: '2025-10-02'
           }
         ],
         images: [
