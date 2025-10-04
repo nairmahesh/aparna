@@ -100,6 +100,7 @@ const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
         </Button>
       </CardContent>
     </Card>
+    </>
   );
 };
 
