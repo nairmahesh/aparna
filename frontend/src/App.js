@@ -453,13 +453,24 @@ const Home = () => {
                                 )}
                               </div>
                               
-                              <Button 
-                                onClick={() => handleAddToCart(item)}
-                                className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-                              >
-                                <ShoppingCart className="w-4 h-4 mr-2" />
-                                Add to Cart
-                              </Button>
+                              <div className="space-y-3">
+                                <Button 
+                                  onClick={() => handleAddToCart(item)}
+                                  className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                                >
+                                  <ShoppingCart className="w-4 h-4 mr-2" />
+                                  Add to Cart
+                                </Button>
+                                
+                                <Button 
+                                  onClick={() => handleShareProduct(item)}
+                                  variant="outline"
+                                  className="w-full border-orange-200 hover:border-orange-300 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50 text-orange-600 hover:text-orange-700 py-2.5 rounded-xl"
+                                >
+                                  <Heart className="w-4 h-4 mr-2" />
+                                  Share & Recommend
+                                </Button>
+                              </div>
                             </div>
                           </CardContent>
                         </Card>
