@@ -34,12 +34,35 @@ const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
       </CardHeader>
       <CardContent className="pt-0">
         <p className="text-sm text-gray-600 mb-3 leading-relaxed">{item.description}</p>
+        
+        {/* Rating Section */}
+        {item.rating && (
+          <div className="flex items-center space-x-2 mb-3">
+            <div className="flex items-center space-x-1">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-4 h-4 ${
+                    i < Math.floor(item.rating)
+                      ? 'text-yellow-400 fill-current'
+                      : i < item.rating
+                      ? 'text-yellow-400 fill-current opacity-50'
+                      : 'text-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-sm font-medium text-gray-700">{item.rating}</span>
+            <span className="text-xs text-gray-500">({item.totalReviews} reviews)</span>
+          </div>
+        )}
+
         <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
             <span className="text-2xl font-bold text-orange-600">₹{item.price}</span>
             <span className="text-sm text-gray-500">{item.unit}</span>
           </div>
-          <Badge variant="secondary" className="bg-amber-100 text-amber-700 hover:bg-amber-200">
+          <Badge variant="secondary" className="bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-700 hover:bg-amber-200">
             <Star className="w-3 h-3 mr-1 fill-current" />
             Premium
           </Badge>
