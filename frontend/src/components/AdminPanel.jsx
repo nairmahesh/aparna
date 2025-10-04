@@ -1436,7 +1436,7 @@ const AdminPanel = () => {
                 <CardContent>
                   <div className="space-y-3 max-h-96 overflow-y-auto">
                     {contacts.map((contact) => (
-                      <div key={contact.id} className="border rounded-lg p-3 hover:bg-orange-50">
+                      <div key={contact.id} className="border rounded-lg p-3 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50">
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
                             <h4 className="font-semibold text-gray-800">{contact.name}</h4>
