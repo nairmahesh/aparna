@@ -227,7 +227,7 @@ const Home = () => {
                         onClick={() => setActiveFilter('all')}
                         className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                           activeFilter === 'all' 
-                            ? 'bg-orange-500 text-white' 
+                            ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
                             : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                         }`}
                       >
@@ -239,7 +239,7 @@ const Home = () => {
                           onClick={() => setActiveFilter(category.id)}
                           className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                             activeFilter === category.id
-                              ? 'bg-orange-500 text-white'
+                              ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white'
                               : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                           }`}
                         >
@@ -256,7 +256,7 @@ const Home = () => {
                         onClick={() => setPriceFilter('all')}
                         className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                           priceFilter === 'all' 
-                            ? 'bg-orange-500 text-white' 
+                            ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
                             : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                         }`}
                       >
@@ -266,7 +266,7 @@ const Home = () => {
                         onClick={() => setPriceFilter('under500')}
                         className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                           priceFilter === 'under500'
-                            ? 'bg-orange-500 text-white'
+                            ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white'
                             : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                         }`}
                       >
@@ -276,7 +276,7 @@ const Home = () => {
                         onClick={() => setPriceFilter('500to1000')}
                         className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                           priceFilter === '500to1000'
-                            ? 'bg-orange-500 text-white'
+                            ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white'
                             : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                         }`}
                       >
@@ -286,7 +286,7 @@ const Home = () => {
                         onClick={() => setPriceFilter('above1000')}
                         className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                           priceFilter === 'above1000'
-                            ? 'bg-orange-500 text-white'
+                            ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white'
                             : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                         }`}
                       >
@@ -313,7 +313,7 @@ const Home = () => {
                         onClick={() => setActiveFilter('all')}
                         className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium ${
                           activeFilter === 'all' 
-                            ? 'bg-orange-500 text-white' 
+                            ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
                             : 'bg-gray-100 text-gray-700'
                         }`}
                       >
@@ -325,7 +325,7 @@ const Home = () => {
                           onClick={() => setActiveFilter(category.id)}
                           className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium ${
                             activeFilter === category.id
-                              ? 'bg-orange-500 text-white'
+                              ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white'
                               : 'bg-gray-100 text-gray-700'
                           }`}
                         >
