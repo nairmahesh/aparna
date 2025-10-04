@@ -445,7 +445,7 @@ const Home = () => {
                                   variant="outline"
                                   className="px-3 py-2.5 border-orange-200 hover:border-orange-300 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50 rounded-xl"
                                 >
-                                  <Heart className="w-4 h-4 text-gray-400 hover:text-red-500" />
+                                  <Heart className="w-4 h-4 text-gray-400 hover:text-orange-500" />
                                 </Button>
                               </div>
                             </div>
