@@ -120,4 +120,42 @@ class MessageTemplate(BaseModel):
     variables: List[str] = []  # Available variables like {name}, {link}, etc.
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
+# Order Management Models
+class OrderItem(BaseModel):
+    product_id: str
+    product_name: str
+    price: float
+    quantity: int
+    unit: str
+
+class OrderStatus(str, Enum):
+    PENDING = "pending"
+    CONFIRMED = "confirmed"
+    PREPARING = "preparing"
+    READY = "ready"
+    DELIVERED = "delivered"
+    CANCELLED = "cancelled"
+
+class Order(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    customer_name: str
+    customer_phone: str
+    customer_address: str
+    delivery_date: datetime
+    items: List[OrderItem]
+    total_amount: float
+    status: OrderStatus = OrderStatus.PENDING
+    notes: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class OrderCreate(BaseModel):
+    customer_name: str
+    customer_phone: str
+    customer_address: str
+    delivery_date: datetime
+    items: List[OrderItem]
+    total_amount: float
+    notes: Optional[str] = None
+
 import uuid
