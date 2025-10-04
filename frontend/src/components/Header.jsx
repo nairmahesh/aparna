@@ -92,17 +92,6 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange }) => {
           </div>
           
           <div className="flex items-center space-x-2">
-            {/* Admin Button */}
-            <Button 
-              onClick={() => onViewChange('admin')}
-              variant="ghost"
-              size="sm"
-              className="text-gray-500 hover:text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50"
-              title="Admin Panel"
-            >
-              <Settings className="w-4 h-4" />
-            </Button>
-            
             {/* Cart Button */}
             <Button 
               onClick={onCartClick}
