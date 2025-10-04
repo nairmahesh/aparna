@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { ShoppingCart, Star } from 'lucide-react';
+import { ShoppingCart, Star, MessageSquare } from 'lucide-react';
+import ReviewsModal from './ReviewsModal';
 
 const MenuCard = ({ item, onAddToCart, isSpecial = false }) => {
   return (
