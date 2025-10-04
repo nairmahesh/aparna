@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { 
   Plus, Upload, Edit, Trash2, Users, MessageCircle, 
   BarChart3, Eye, ShoppingCart, Link, Send,
-  Package, Image, IndianRupee, Percent, Phone
+  Package, Image, IndianRupee, Percent, Phone, User
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 import axios from 'axios';
