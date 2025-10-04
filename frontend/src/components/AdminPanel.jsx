@@ -378,6 +378,15 @@ const AdminPanel = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAdminLoggedIn');
+    toast({
+      title: "Logged Out",
+      description: "You have been successfully logged out.",
+    });
+    navigate('/login');
+  };
+
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
