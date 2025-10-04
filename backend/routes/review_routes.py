@@ -60,9 +60,9 @@ async def get_review_summary(admin_key: str = Depends(verify_admin_key)):
         # Calculate eligible orders (delivered orders without review requests)
         eligible_orders = []
         for order in orders:
-            if order['_id'] not in orders_with_requests and order['status'] == 'delivered':
+            if order['id'] not in orders_with_requests and order['status'] == 'delivered':
                 eligible_orders.append({
-                    'order_id': order['_id'],
+                    'order_id': order['id'],
                     'customer_name': order['customer_name'],
                     'customer_phone': order['customer_phone'],
                     'order_date': order['order_date'],
