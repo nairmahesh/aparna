@@ -271,6 +271,18 @@ frontend:
           agent: "testing"
           comment: "✅ COMPREHENSIVE TESTING PASSED: Add to cart quantity controls working perfectly. Verified: 1) 'Add to Cart' button transforms to quantity controls (- [quantity] +) after clicking, 2) Plus button increments quantity correctly, 3) Minus button decrements quantity correctly, 4) When quantity reaches 0, reverts back to 'Add to Cart' button, 5) Cart icon in header updates with correct item count. All functionality working as expected with proper state management."
 
+  - task: "Greetings Layout Fix - Text Below Artwork"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/GreetingsForm.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Fixed greetings section layout as requested. Changed artwork section from aspect-[4/3] max-h-[400px] to fixed h-64 to make room for text section. Added min-h-[200px] to text section and max-h-[600px] with scroll to preview container. Now the greeting displays artwork at top and text (TO, Message, FROM) in dedicated white space below the artwork instead of overlaying on it."
+
   - task: "Share & Recommend Modal Implementation"
     implemented: true
     working: true
