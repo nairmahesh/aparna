@@ -253,6 +253,39 @@ const GreetingsForm = () => {
     window.location.href = emailUrl;
   };
 
+  // Helper function to wait for images to load
+  const waitForImages = (element) => {
+    return new Promise((resolve) => {
+      const images = element.querySelectorAll('img');
+      let loadedCount = 0;
+      
+      if (images.length === 0) {
+        resolve();
+        return;
+      }
+
+      const checkComplete = () => {
+        loadedCount++;
+        if (loadedCount === images.length) {
+          resolve();
+        }
+      };
+
+      images.forEach(img => {
+        if (img.complete && img.naturalHeight !== 0) {
+          checkComplete();
+        } else {
+          img.onload = checkComplete;
+          img.onerror = checkComplete;
+          // Force reload if image src is set
+          if (img.src) {
+            img.src = img.src;
+          }
+        }
+      });
+    });
+  };
+
   const handleDownloadCard = async () => {
     if (!greetingCardRef.current) {
       toast({
@@ -266,36 +299,61 @@ const GreetingsForm = () => {
     try {
       toast({
         title: "Generating Card...",
-        description: "Please wait while we create your greeting card image.",
+        description: "Please wait while we create your greeting card image. This may take a few seconds...",
       });
 
-      // Wait a moment to ensure images are fully loaded
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Wait for all images in the card to fully load
+      await waitForImages(greetingCardRef.current);
+      
+      // Additional delay to ensure everything is rendered
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       const canvas = await html2canvas(greetingCardRef.current, {
         useCORS: true,
-        allowTaint: true, // Allow cross-origin images
-        scale: 2, // Reduced scale for better compatibility
+        allowTaint: true,
+        scale: 3, // Higher scale for better quality
         backgroundColor: '#ffffff',
-        foreignObjectRendering: false, // Disable for better compatibility
-        logging: true, // Enable logging to debug issues
+        foreignObjectRendering: false,
+        logging: false, // Disable logging for cleaner output
         width: greetingCardRef.current.offsetWidth,
         height: greetingCardRef.current.offsetHeight,
         scrollX: 0,
         scrollY: 0,
-        imageTimeout: 15000 // Wait longer for images to load
+        imageTimeout: 30000, // Extended timeout for images
+        onclone: (clonedDoc) => {
+          // Ensure all images in the cloned document are loaded
+          const clonedImages = clonedDoc.querySelectorAll('img');
+          clonedImages.forEach(img => {
+            img.crossOrigin = 'anonymous';
+            // Force image to display
+            img.style.display = 'block';
+            img.style.opacity = '1';
+          });
+        }
       });
 
-      // Check if canvas is not empty
+      // Verify canvas has content
       if (canvas.width === 0 || canvas.height === 0) {
-        throw new Error('Canvas is empty');
+        throw new Error('Canvas is empty - please try again');
+      }
+
+      // Check if canvas has actual content (not just white space)
+      const ctx = canvas.getContext('2d');
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const hasContent = imageData.data.some((pixel, index) => {
+        // Check if it's not just white pixels (255, 255, 255)
+        if (index % 4 === 3) return false; // Skip alpha channel
+        return pixel !== 255;
+      });
+
+      if (!hasContent) {
+        throw new Error('Generated image appears to be blank - please check if the artwork is loading properly');
       }
 
       const image = canvas.toDataURL('image/png', 1.0);
       
-      // Check if image data is valid
-      if (image === 'data:,') {
-        throw new Error('Generated image is empty');
+      if (image === 'data:,' || image.length < 1000) {
+        throw new Error('Generated image is invalid or too small');
       }
         
       // Create download link
@@ -307,14 +365,14 @@ const GreetingsForm = () => {
       document.body.removeChild(link);
 
       toast({
-        title: "Card Downloaded! 🎉",
-        description: "Your greeting card has been saved. You can now share it via WhatsApp or any platform!",
+        title: "Card Downloaded Successfully! 🎉",
+        description: "Your greeting card with artwork has been saved. Check your downloads folder!",
       });
     } catch (error) {
       console.error('Error generating card:', error);
       toast({
         title: "Download Failed",
-        description: `Sorry, we couldn't generate your card: ${error.message}. Please try again.`,
+        description: `${error.message}. Please ensure the artwork has loaded and try again.`,
         variant: "destructive"
       });
     }
