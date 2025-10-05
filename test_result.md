@@ -205,6 +205,18 @@ frontend:
           agent: "testing"
           comment: "Successfully tested the new greeting card layout implementation. Layout verification passed with artwork image at top and clean text section below. Text formatting verified with proper 'To,' and 'From,' labels. Message section with left border styling working correctly. Footer decoration properly positioned. All form inputs functional and live preview updates correctly. Previous overlay issues resolved with new simple layout."
 
+  - task: "Greeting Card Download Functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/GreetingsForm.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Implemented comprehensive greeting card download functionality using html2canvas. Features include: 1) Download Card button that generates high-quality PNG images (scale: 3), 2) Updated WhatsApp share flow with helpful tip about downloading card first, 3) Download progress toast notifications, 4) Error handling for download failures, 5) Complete share flow with both text and visual greeting options. Card contains artwork at top and personalized text (TO, Message, FROM) below."
+
   - task: "Comprehensive Product Reviews and Ratings System"
     implemented: true
     working: false
