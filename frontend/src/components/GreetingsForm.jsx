@@ -837,7 +837,6 @@ const GreetingsForm = () => {
         greetingData={greetingData}
         isOpen={showShareModal}
         onClose={() => setShowShareModal(false)}
-        onDownload={handleDownloadCard}
       />
     </div>
   );
