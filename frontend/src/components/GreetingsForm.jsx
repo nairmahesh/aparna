@@ -299,10 +299,10 @@ const GreetingsForm = () => {
   };
 
   const handleDownloadCard = async () => {
-    if (!greetingCardRef.current) {
+    if (!greetingCardRef.current || !greetingData.selectedArtwork) {
       toast({
         title: "Card not ready",
-        description: "Please wait for the greeting card to load completely.",
+        description: "Please select an artwork and fill all details first.",
         variant: "destructive"
       });
       return;
@@ -311,51 +311,143 @@ const GreetingsForm = () => {
     try {
       toast({
         title: "Generating Card...",
-        description: "Please wait while we create your greeting card image. This may take a few seconds...",
+        description: "Creating your greeting card with artwork. Please wait...",
       });
 
-      // Convert images to data URLs and wait for them to load
-      await prepareImagesForCapture(greetingCardRef.current);
-      
-      // Additional delay to ensure everything is rendered
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      const canvas = await html2canvas(greetingCardRef.current, {
-        useCORS: false, // Not needed since using data URLs
-        allowTaint: false, // Not needed since using data URLs
-        scale: 2, // Good balance of quality and performance
-        backgroundColor: '#ffffff',
-        foreignObjectRendering: false,
-        logging: false,
-        width: greetingCardRef.current.offsetWidth,
-        height: greetingCardRef.current.offsetHeight,
-        scrollX: 0,
-        scrollY: 0,
-        imageTimeout: 0 // Not needed since images are data URLs
-      });
-
-      // Verify canvas has content
-      if (canvas.width === 0 || canvas.height === 0) {
-        throw new Error('Canvas is empty - please try again');
-      }
-
-      // Check if canvas has actual content (not just white space)
+      // Create a new canvas to manually draw the greeting card
+      const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const hasContent = imageData.data.some((pixel, index) => {
-        // Check if it's not just white pixels (255, 255, 255)
-        if (index % 4 === 3) return false; // Skip alpha channel
-        return pixel !== 255;
+      
+      // Set canvas size (standard greeting card dimensions)
+      const canvasWidth = 800;
+      const canvasHeight = 1000;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+
+      // Fill background with white
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      // Load and draw the artwork image
+      const artworkImg = new Image();
+      artworkImg.crossOrigin = 'anonymous';
+      
+      await new Promise((resolve, reject) => {
+        artworkImg.onload = resolve;
+        artworkImg.onerror = () => {
+          // If direct loading fails, try fetch approach
+          fetch(greetingData.selectedArtwork.url)
+            .then(response => response.blob())
+            .then(blob => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                artworkImg.src = reader.result;
+              };
+              reader.readAsDataURL(blob);
+            })
+            .catch(reject);
+        };
+        artworkImg.src = greetingData.selectedArtwork.url;
+        
+        // Timeout after 10 seconds
+        setTimeout(() => reject(new Error('Image loading timeout')), 10000);
       });
 
-      if (!hasContent) {
-        throw new Error('Generated image appears to be blank - please check if the artwork is loading properly');
-      }
+      // Calculate artwork dimensions to fit in the top portion
+      const artworkHeight = 400; // Reserve 400px for artwork
+      const artworkWidth = canvasWidth - 40; // 20px padding on each side
+      
+      // Calculate scaling to fit artwork
+      const scaleX = artworkWidth / artworkImg.width;
+      const scaleY = artworkHeight / artworkImg.height;
+      const scale = Math.min(scaleX, scaleY);
+      
+      const scaledWidth = artworkImg.width * scale;
+      const scaledHeight = artworkImg.height * scale;
+      
+      // Center the artwork
+      const artworkX = (canvasWidth - scaledWidth) / 2;
+      const artworkY = 20;
+      
+      // Draw the artwork
+      ctx.drawImage(artworkImg, artworkX, artworkY, scaledWidth, scaledHeight);
 
+      // Add text content below the artwork
+      const textStartY = artworkY + scaledHeight + 40;
+      
+      // Set up text styles
+      ctx.fillStyle = '#1f2937'; // Dark gray text
+      ctx.textAlign = 'left';
+      
+      // Draw "To:" section
+      let currentY = textStartY;
+      ctx.font = 'bold 24px Arial';
+      ctx.fillStyle = '#ea580c'; // Orange color
+      ctx.fillText('To:', 40, currentY);
+      
+      ctx.font = '24px Arial';
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(greetingData.recipientName || '[Recipient Name]', 80, currentY);
+      
+      // Draw message section with border
+      currentY += 50;
+      const messageX = 40;
+      const messageWidth = canvasWidth - 80;
+      
+      // Draw left border (orange line)
+      ctx.fillStyle = '#fb923c';
+      ctx.fillRect(messageX, currentY - 20, 4, 120);
+      
+      // Draw message text (word wrapped)
+      const message = getFinalMessage();
+      ctx.font = '20px Arial';
+      ctx.fillStyle = '#1f2937';
+      const words = message.split(' ');
+      const maxWidth = messageWidth - 30;
+      let line = '';
+      let lineY = currentY;
+      
+      for (let i = 0; i < words.length; i++) {
+        const testLine = line + words[i] + ' ';
+        const metrics = ctx.measureText(testLine);
+        
+        if (metrics.width > maxWidth && i > 0) {
+          ctx.fillText(line, messageX + 20, lineY);
+          line = words[i] + ' ';
+          lineY += 25;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, messageX + 20, lineY);
+      
+      // Draw "From:" section
+      currentY = lineY + 60;
+      ctx.font = 'bold 24px Arial';
+      ctx.fillStyle = '#ea580c';
+      ctx.textAlign = 'right';
+      ctx.fillText('From:', canvasWidth - 120, currentY);
+      
+      ctx.font = '24px Arial';
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(greetingData.senderName || '[Your Name]', canvasWidth - 40, currentY);
+      
+      // Draw footer decoration
+      currentY += 60;
+      ctx.textAlign = 'center';
+      ctx.font = '18px Arial';
+      ctx.fillStyle = '#ea580c';
+      ctx.fillText('✨ Wishing you joy & prosperity! ✨', canvasWidth / 2, currentY);
+      
+      currentY += 30;
+      ctx.font = '24px Arial';
+      ctx.fillText('🪔 ❤️ 🪔', canvasWidth / 2, currentY);
+
+      // Convert canvas to image and download
       const image = canvas.toDataURL('image/png', 1.0);
       
       if (image === 'data:,' || image.length < 1000) {
-        throw new Error('Generated image is invalid or too small');
+        throw new Error('Generated image is invalid');
       }
         
       // Create download link
@@ -368,13 +460,13 @@ const GreetingsForm = () => {
 
       toast({
         title: "Card Downloaded Successfully! 🎉",
-        description: "Your greeting card with artwork has been saved. Check your downloads folder!",
+        description: "Your complete greeting card with artwork has been saved!",
       });
     } catch (error) {
       console.error('Error generating card:', error);
       toast({
         title: "Download Failed",
-        description: `${error.message}. Please ensure the artwork has loaded and try again.`,
+        description: `Failed to create greeting card: ${error.message}. Please try again.`,
         variant: "destructive"
       });
     }
