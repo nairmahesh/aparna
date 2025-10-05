@@ -347,7 +347,7 @@ export const menuCategories = [
         images: [
           'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
           'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg',
-          'https://picsum.photos/400/300?random=14'
+          'https://images.unsplash.com/photo-1683533678033-f5d60f0a3437'
         ]
       },
       {
@@ -426,7 +426,7 @@ export const menuCategories = [
           }
         ],
         images: [
-          'https://picsum.photos/400/300?random=14',
+          'https://images.unsplash.com/photo-1683533678033-f5d60f0a3437',
           'https://images.pexels.com/photos/9832636/pexels-photo-9832636.jpeg',
           'https://images.pexels.com/photos/5992272/pexels-photo-5992272.jpeg'
         ]
