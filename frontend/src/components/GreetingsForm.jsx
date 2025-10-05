@@ -314,11 +314,11 @@ const GreetingsForm = () => {
         description: "Please wait while we create your greeting card image. This may take a few seconds...",
       });
 
-      // Wait for all images in the card to fully load
-      await waitForImages(greetingCardRef.current);
+      // Convert images to data URLs and wait for them to load
+      await prepareImagesForCapture(greetingCardRef.current);
       
       // Additional delay to ensure everything is rendered
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       const canvas = await html2canvas(greetingCardRef.current, {
         useCORS: true,
