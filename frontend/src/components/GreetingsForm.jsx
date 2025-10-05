@@ -614,7 +614,7 @@ const GreetingsForm = () => {
                   </p>
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
                     <p className="text-blue-700 text-xs text-center">
-                      💡 <strong>Tip:</strong> Download the card first, then share the image via WhatsApp for the complete visual greeting!
+                      🎉 <strong>New:</strong> Share links now include a beautiful card preview! Recipients will see your greeting card image automatically in WhatsApp, SMS, and email.
                     </p>
                   </div>
                   
