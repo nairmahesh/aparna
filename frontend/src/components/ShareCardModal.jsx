@@ -269,7 +269,7 @@ const ShareCardModal = ({ greetingData, isOpen, onClose }) => {
         {/* Action Buttons */}
         <div className="p-6 border-t bg-gray-50 grid grid-cols-3 gap-3">
           <Button
-            onClick={onDownload}
+            onClick={handleDownloadFromModal}
             className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white"
           >
             <Download className="w-4 h-4 mr-2" />
