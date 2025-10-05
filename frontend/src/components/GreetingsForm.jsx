@@ -395,7 +395,7 @@ const GreetingsForm = () => {
         <div>
           <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Live Preview</h3>
           {/* Greeting Card Preview */}
-          <div className="w-full max-h-[600px] overflow-y-auto">
+          <div className="w-full max-h-[800px] overflow-y-auto">
             <Card className="border-2 border-orange-300 overflow-hidden shadow-lg w-full">
               <CardContent className="p-0">
                 {/* Artwork Image - Top Section */}
