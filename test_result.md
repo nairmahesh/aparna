@@ -375,7 +375,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Shareable Greeting Card Link Functionality"
+    - "ShareCard Modal Download Functionality Testing Complete"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
