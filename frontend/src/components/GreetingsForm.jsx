@@ -150,7 +150,7 @@ const GreetingsForm = () => {
   const isGreetingDetailsComplete = () => {
     return greetingData.recipientName && 
            greetingData.senderName && 
-           (greetingData.customMessage || greetingData.selectedMessage);
+           (greetingData.customMessage || greetingData.selectedMessage || getFinalMessage());
   };
 
   const handleCreateGreeting = () => {
