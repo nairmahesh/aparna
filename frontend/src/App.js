@@ -324,7 +324,7 @@ const Home = () => {
               </div>
 
               {/* E-commerce Style Layout */}
-              <div className="flex gap-8">
+              <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
                 {/* Sidebar Filters */}
                 <aside className="w-64 flex-shrink-0 hidden lg:block">
                   <div className="bg-white rounded-lg border border-gray-200 p-6 sticky top-4">
