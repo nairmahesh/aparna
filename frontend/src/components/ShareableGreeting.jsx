@@ -22,17 +22,25 @@ const ShareableGreeting = () => {
 
       console.log('URL Parameters:', { recipientName, senderName, message, artworkUrl });
 
-    if (recipientName && senderName && message && artworkUrl) {
-      const greeting = {
-        recipientName: decodeURIComponent(recipientName),
-        senderName: decodeURIComponent(senderName),
-        message: decodeURIComponent(message),
-        artworkUrl: decodeURIComponent(artworkUrl)
-      };
-      setGreetingData(greeting);
+      if (recipientName && senderName && message && artworkUrl) {
+        const greeting = {
+          recipientName: decodeURIComponent(recipientName),
+          senderName: decodeURIComponent(senderName),
+          message: decodeURIComponent(message),
+          artworkUrl: decodeURIComponent(artworkUrl)
+        };
+        console.log('Parsed greeting data:', greeting);
+        setGreetingData(greeting);
 
-      // Update meta tags for sharing
-      updateMetaTags(greeting);
+        // Update meta tags for sharing
+        updateMetaTags(greeting);
+      } else {
+        console.log('Missing required parameters');
+        setError('Missing greeting parameters');
+      }
+    } catch (err) {
+      console.error('Error in ShareableGreeting:', err);
+      setError(err.message);
     }
   }, [id]);
 
