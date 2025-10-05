@@ -588,10 +588,10 @@ const Home = () => {
                                 <Button 
                                   onClick={() => handleShareProduct(item)}
                                   variant="outline"
-                                  className="w-full border-orange-200 hover:border-orange-300 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50 text-orange-600 hover:text-orange-700 py-2.5 rounded-xl"
+                                  className="w-full border-orange-200 hover:border-orange-300 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50 text-orange-600 hover:text-orange-700 py-2.5 rounded-xl text-sm sm:text-base"
                                 >
-                                  <Heart className="w-4 h-4 mr-2" />
-                                  Share & Recommend
+                                  <Heart className="w-4 h-4 mr-1 sm:mr-2" />
+                                  <span className="truncate">Share & Recommend</span>
                                 </Button>
                               </div>
                             </div>
