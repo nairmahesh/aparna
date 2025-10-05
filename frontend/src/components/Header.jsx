@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { ShoppingCart, Sparkles, Phone, Mail, Gift, Menu } from 'lucide-react';
+import { ShoppingCart, Sparkles, Phone, Mail, Menu } from 'lucide-react';
 import { shopInfo } from '../data/mock';
 
 const Header = ({ cartCount, onCartClick, currentView, onViewChange, websiteSettings }) => {
