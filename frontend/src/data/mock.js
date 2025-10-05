@@ -469,7 +469,7 @@ export const menuCategories = [
             date: '2025-10-02'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=15'
+        image: 'https://images.pexels.com/photos/8887196/pexels-photo-8887196.jpeg'
       },
       {
         id: 'ribbon-pakoda',
@@ -502,7 +502,7 @@ export const menuCategories = [
             date: '2025-10-03'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=15'
+        image: 'https://images.pexels.com/photos/8887196/pexels-photo-8887196.jpeg'
       },
       {
         id: 'thika-sev',
@@ -535,7 +535,7 @@ export const menuCategories = [
             date: '2025-10-04'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=15'
+        image: 'https://images.pexels.com/photos/8887196/pexels-photo-8887196.jpeg'
       },
       {
         id: 'mathri',
@@ -568,7 +568,7 @@ export const menuCategories = [
             date: '2025-10-02'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=15'
+        image: 'https://images.pexels.com/photos/8887196/pexels-photo-8887196.jpeg'
       },
       {
         id: 'thika-shankarpala',
@@ -594,7 +594,7 @@ export const menuCategories = [
             date: '2025-10-05'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=15'
+        image: 'https://images.pexels.com/photos/8887196/pexels-photo-8887196.jpeg'
       },
       {
         id: 'sweet-shankarpala',
