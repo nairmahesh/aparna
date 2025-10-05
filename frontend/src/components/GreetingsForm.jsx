@@ -253,50 +253,7 @@ const GreetingsForm = () => {
     window.location.href = emailUrl;
   };
 
-  // Helper function to convert image to data URL (bypasses CORS)
-  const toDataURL = async (src) => {
-    try {
-      const response = await fetch(src, { mode: 'cors' });
-      const blob = await response.blob();
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-    } catch (error) {
-      console.error('Error converting image to data URL:', error);
-      return src; // Fallback to original src
-    }
-  };
-
-  // Helper function to wait for images to load and convert them to data URLs
-  const prepareImagesForCapture = async (element) => {
-    const images = element.querySelectorAll('img');
-    
-    if (images.length === 0) {
-      return;
-    }
-
-    // Convert all images to data URLs to bypass CORS
-    for (let img of images) {
-      if (img.src && !img.src.startsWith('data:')) {
-        try {
-          const dataURL = await toDataURL(img.src);
-          img.src = dataURL;
-          // Wait for the new data URL to load
-          await new Promise((resolve) => {
-            img.onload = resolve;
-            img.onerror = resolve;
-            // If already loaded, resolve immediately
-            if (img.complete) resolve();
-          });
-        } catch (error) {
-          console.error('Failed to convert image to data URL:', error);
-        }
-      }
-    }
-  };
+  // Manual canvas drawing approach - no html2canvas needed for complex CORS handling
 
   const handleDownloadCard = async () => {
     if (!greetingCardRef.current || !greetingData.selectedArtwork) {
