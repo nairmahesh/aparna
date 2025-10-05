@@ -54,15 +54,6 @@ const ShareModal = ({ item, isOpen, onClose, onWhatsAppShare, onCopyLink }) => {
               <MessageCircle className="w-5 h-5" />
               <span>Share on WhatsApp</span>
             </Button>
-            
-            <Button
-              onClick={() => onCopyLink(item)}
-              variant="outline"
-              className="w-full border-2 border-orange-200 hover:border-orange-300 hover:bg-orange-50 text-orange-600 hover:text-orange-700 font-semibold py-3 rounded-xl flex items-center justify-center space-x-2"
-            >
-              <Copy className="w-5 h-5" />
-              <span>Copy Link</span>
-            </Button>
           </div>
 
           {/* Help Text */}
