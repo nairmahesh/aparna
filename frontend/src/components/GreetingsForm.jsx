@@ -349,30 +349,16 @@ const GreetingsForm = () => {
       return;
     }
 
-    // First open the shareable card to test if it works
-    const shareableLink = openShareableCard();
-    
-    if (!shareableLink) {
-      toast({
-        title: "Error creating shareable link",
-        description: "Unable to create greeting link. Please try again.",
-        variant: "destructive"
-      });
-      return;
-    }
+    // Open WhatsApp with text message
+    const message = encodeURIComponent(`🪔 *Happy Diwali!* 🪔\n\n*Dear ${greetingData.recipientName},*\n\n${getFinalMessage()}\n\n*With love and warm wishes,*\n*${greetingData.senderName}*\n\n✨ _Wishing you joy, prosperity & happiness!_ ✨`);
+    const whatsappUrl = `https://wa.me/?text=${message}`;
+    window.open(whatsappUrl, '_blank');
 
-    // Then share via WhatsApp
-    setTimeout(() => {
-      const message = encodeURIComponent(`🪔 *Happy Diwali!* 🪔\n\n*Dear ${greetingData.recipientName},*\n\nI've created a special Diwali greeting card for you! 💌\n\nView your personalized card here: ${shareableLink}\n\n*With love and warm wishes,*\n*${greetingData.senderName}*\n\n✨ _Wishing you joy, prosperity & happiness!_ ✨`);
-      const whatsappUrl = `https://wa.me/?text=${message}`;
-      window.open(whatsappUrl, '_blank');
-
-      toast({
-        title: "Card Link Shared! 🎉",
-        description: "Your greeting card link has been shared via WhatsApp. Check the preview in the new tab!",
-        duration: 4000
-      });
-    }, 1000);
+    toast({
+      title: "Shared via WhatsApp! 🎉",
+      description: "Your Diwali greeting has been shared. You can also download the card image to send as a photo!",
+      duration: 4000
+    });
   };
 
   // Template rendering function removed - now using simple artwork selection
