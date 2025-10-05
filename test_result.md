@@ -315,15 +315,18 @@ frontend:
 
   - task: "Shareable Greeting Card Link Functionality"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/components/GreetingsForm.jsx, /app/frontend/src/components/ShareableGreeting.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "main"
           comment: "Implemented comprehensive shareable greeting card link functionality to solve WhatsApp image sharing issue. Features include: 1) Shareable link generation with URL parameters (to, from, message, artwork), 2) WhatsApp share with link-based approach instead of just text, 3) Dedicated ShareableGreeting component for /greeting/:id route, 4) Cross-platform sharing (SMS, Email, Copy) with shareable links, 5) OG meta tags for proper link previews, 6) Updated UI with 3-column grid layout for share buttons, 7) New instruction text about card preview functionality. This replaces the previous text-only sharing approach with proper link previews that show the greeting card image."
+        - working: false
+          agent: "testing"
+          comment: "CRITICAL ISSUE FOUND: Shareable greeting URLs are not working correctly - they redirect back to the home page instead of displaying the ShareableGreeting component. The /greeting/:id route is not functioning properly. All other functionality works: ✅ 3-button layout (Download, Preview, Copy Link) verified, ✅ 3-column share buttons (WhatsApp, SMS, Email) working, ✅ Download functionality working (though CORS issues with some artwork images), ✅ Form completion and validation working, ✅ URL generation with parameters working. However, the core shareable link functionality fails because the routing doesn't work - when users click shareable links, they get redirected to home page instead of seeing the greeting card. This breaks the entire share functionality purpose."
 
   - task: "Share & Recommend Modal Implementation"
     implemented: true
