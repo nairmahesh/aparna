@@ -665,23 +665,33 @@ const GreetingsForm = () => {
                     </p>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="grid grid-cols-3 gap-2 mb-4">
                     <Button 
                       onClick={handleDownloadCard}
-                      className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                      className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white p-3 rounded-xl flex flex-col items-center space-y-1 h-auto"
                       title="Download Card Image"
                     >
-                      <Download className="w-5 h-5" />
-                      <span className="text-xs font-medium">Download Card</span>
+                      <Download className="w-4 h-4" />
+                      <span className="text-xs font-medium">Download</span>
+                    </Button>
+                    
+                    <Button 
+                      onClick={openShareableCard}
+                      variant="outline"
+                      className="border-purple-300 text-purple-600 hover:bg-gradient-to-br hover:from-purple-100 hover:to-purple-200 p-3 rounded-xl flex flex-col items-center space-y-1 h-auto"
+                      title="Preview shareable card in new tab"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      <span className="text-xs font-medium">Preview</span>
                     </Button>
                     
                     <Button 
                       onClick={handleCopyGreeting}
                       variant="outline"
-                      className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-100 hover:to-amber-100 p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                      title="Copy shareable link with card preview"
+                      className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-100 hover:to-amber-100 p-3 rounded-xl flex flex-col items-center space-y-1 h-auto"
+                      title="Copy shareable link"
                     >
-                      <Copy className="w-5 h-5" />
+                      <Copy className="w-4 h-4" />
                       <span className="text-xs font-medium">Copy Link</span>
                     </Button>
                   </div>
