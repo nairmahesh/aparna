@@ -223,9 +223,7 @@ const GreetingsForm = () => {
   };
 
   const handleShareSMS = () => {
-    const shareableLink = generateShareableLink();
-    
-    if (!shareableLink) {
+    if (!isGreetingDetailsComplete()) {
       toast({
         title: "Complete the greeting first!",
         description: "Please fill in all required fields before sharing.",
@@ -234,15 +232,13 @@ const GreetingsForm = () => {
       return;
     }
 
-    const message = encodeURIComponent(`🪔 Happy Diwali! 🪔\n\nDear ${greetingData.recipientName},\n\nI've created a special Diwali greeting card for you!\n\nView here: ${shareableLink}\n\nWith love,\n${greetingData.senderName}`);
+    const message = encodeURIComponent(`🪔 Happy Diwali! 🪔\n\nDear ${greetingData.recipientName},\n\n${getFinalMessage()}\n\nWith love,\n${greetingData.senderName}`);
     const smsUrl = `sms:?body=${message}`;
     window.location.href = smsUrl;
   };
 
   const handleShareEmail = () => {
-    const shareableLink = generateShareableLink();
-    
-    if (!shareableLink) {
+    if (!isGreetingDetailsComplete()) {
       toast({
         title: "Complete the greeting first!",
         description: "Please fill in all required fields before sharing.",
@@ -252,7 +248,7 @@ const GreetingsForm = () => {
     }
 
     const subject = encodeURIComponent('🪔 Happy Diwali Greetings! 🪔');
-    const body = encodeURIComponent(`Dear ${greetingData.recipientName},\n\nI hope this message finds you in great spirits!\n\nI've created a special personalized Diwali greeting card just for you. Please click the link below to view your beautiful greeting:\n\n${shareableLink}\n\n${getFinalMessage()}\n\nWishing you and your family a very Happy Diwali filled with joy, prosperity, and happiness!\n\nWith warm regards,\n${greetingData.senderName}\n\n✨🪔✨`);
+    const body = encodeURIComponent(`Dear ${greetingData.recipientName},\n\n${getFinalMessage()}\n\nWishing you and your family a very Happy Diwali filled with joy, prosperity, and happiness!\n\nWith warm regards,\n${greetingData.senderName}\n\n✨🪔✨`);
     const emailUrl = `mailto:?subject=${subject}&body=${body}`;
     window.location.href = emailUrl;
   };
