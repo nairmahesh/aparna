@@ -168,14 +168,25 @@ const GreetingsForm = () => {
   };
 
   const handleCopyGreeting = async () => {
-    const fullMessage = `🪔 Happy Diwali! 🪔\n\nDear ${greetingData.recipientName || '[Recipient Name]'},\n\n${getFinalMessage()}\n\nWith love and warm wishes,\n${greetingData.senderName || '[Your Name]'}\n\n✨ Wishing you joy, prosperity & happiness! ✨`;
+    const shareableLink = generateShareableLink();
+    
+    if (!shareableLink) {
+      toast({
+        title: "Complete the greeting first!",
+        description: "Please fill in all required fields before sharing.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const fullMessage = `🪔 Happy Diwali! 🪔\n\nDear ${greetingData.recipientName},\n\nI've created a special Diwali greeting card for you!\n\nView your personalized card here: ${shareableLink}\n\nWith love and warm wishes,\n${greetingData.senderName}\n\n✨ Wishing you joy, prosperity & happiness! ✨`;
     
     try {
       // Try modern Clipboard API first
       await navigator.clipboard.writeText(fullMessage);
       toast({
-        title: "Copied to Clipboard!",
-        description: "Your Diwali greeting has been copied. You can now paste it anywhere.",
+        title: "Greeting Link Copied! 🎉",
+        description: "Your greeting card link has been copied. Recipients will see the beautiful card image!",
       });
     } catch (err) {
       // Fallback to older method if Clipboard API is blocked
@@ -191,14 +202,14 @@ const GreetingsForm = () => {
         document.body.removeChild(textArea);
         
         toast({
-          title: "Copied to Clipboard!",
-          description: "Your Diwali greeting has been copied. You can now paste it anywhere.",
+          title: "Greeting Link Copied! 🎉",
+          description: "Your greeting card link has been copied. Recipients will see the beautiful card image!",
         });
       } catch (fallbackErr) {
         // If both methods fail, show the text to copy manually
         toast({
           title: "Copy Failed",
-          description: "Please copy the text from the preview manually.",
+          description: "Please copy the link from the preview manually.",
           variant: "destructive"
         });
       }
