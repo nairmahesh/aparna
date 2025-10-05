@@ -142,6 +142,13 @@ const GreetingsForm = () => {
     return message || 'May this Diwali bring endless joy, prosperity, and happiness to your life. Wishing you a festival filled with light, love, and sweet moments!';
   };
 
+  // Check if greeting details are filled
+  const isGreetingDetailsComplete = () => {
+    return greetingData.recipientName && 
+           greetingData.senderName && 
+           (greetingData.customMessage || greetingData.selectedMessage);
+  };
+
   const handleCreateGreeting = () => {
     if (!greetingData.recipientName || !greetingData.senderName || !greetingData.relationship) {
       toast({
@@ -158,13 +165,42 @@ const GreetingsForm = () => {
     });
   };
 
-  const handleCopyGreeting = () => {
+  const handleCopyGreeting = async () => {
     const fullMessage = `🪔 Happy Diwali! 🪔\n\nDear ${greetingData.recipientName || '[Recipient Name]'},\n\n${getFinalMessage()}\n\nWith love and warm wishes,\n${greetingData.senderName || '[Your Name]'}\n\n✨ Wishing you joy, prosperity & happiness! ✨`;
-    navigator.clipboard.writeText(fullMessage);
-    toast({
-      title: "Copied to Clipboard!",
-      description: "Your Diwali greeting has been copied. You can now paste it anywhere.",
-    });
+    
+    try {
+      // Try modern Clipboard API first
+      await navigator.clipboard.writeText(fullMessage);
+      toast({
+        title: "Copied to Clipboard!",
+        description: "Your Diwali greeting has been copied. You can now paste it anywhere.",
+      });
+    } catch (err) {
+      // Fallback to older method if Clipboard API is blocked
+      try {
+        const textArea = document.createElement('textarea');
+        textArea.value = fullMessage;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        textArea.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        toast({
+          title: "Copied to Clipboard!",
+          description: "Your Diwali greeting has been copied. You can now paste it anywhere.",
+        });
+      } catch (fallbackErr) {
+        // If both methods fail, show the text to copy manually
+        toast({
+          title: "Copy Failed",
+          description: "Please copy the text from the preview manually.",
+          variant: "destructive"
+        });
+      }
+    }
   };
 
   const handleShareWhatsApp = () => {
