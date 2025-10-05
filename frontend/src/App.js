@@ -705,6 +705,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/greeting/:id" element={<ShareableGreeting />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPanelPage />} />
         </Routes>
