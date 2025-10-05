@@ -266,19 +266,42 @@ const GreetingsForm = () => {
     }
   };
 
-  const handleShareWhatsAppWithCard = () => {
-    toast({
-      title: "Download Card First! 📱",
-      description: "Click 'Download Card' button, then share the downloaded image via WhatsApp for the complete visual greeting!",
-      duration: 5000
+  const generateShareableLink = () => {
+    if (!isGreetingDetailsComplete()) return null;
+    
+    const baseUrl = window.location.origin;
+    const greetingId = Date.now(); // Simple ID generation
+    const params = new URLSearchParams({
+      to: greetingData.recipientName,
+      from: greetingData.senderName,
+      message: getFinalMessage(),
+      artwork: greetingData.selectedArtwork.url
     });
     
-    // Still provide text option
-    setTimeout(() => {
-      const message = encodeURIComponent(`🪔 *Happy Diwali!* 🪔\n\n*Dear ${greetingData.recipientName || '[Recipient Name]'},*\n\n${getFinalMessage()}\n\n*With love and warm wishes,*\n*${greetingData.senderName || '[Your Name]'}*\n\n✨ _Wishing you joy, prosperity & happiness!_ ✨\n\n💌 _I've created a beautiful greeting card for you! Please check the downloaded image._`);
-      const whatsappUrl = `https://wa.me/?text=${message}`;
-      window.open(whatsappUrl, '_blank');
-    }, 1000);
+    return `${baseUrl}/greeting/${greetingId}?${params.toString()}`;
+  };
+
+  const handleShareWhatsAppWithCard = () => {
+    const shareableLink = generateShareableLink();
+    
+    if (!shareableLink) {
+      toast({
+        title: "Complete the greeting first!",
+        description: "Please fill in all required fields before sharing.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const message = encodeURIComponent(`🪔 *Happy Diwali!* 🪔\n\n*Dear ${greetingData.recipientName},*\n\nI've created a special Diwali greeting card for you! 💌\n\nView your personalized card here: ${shareableLink}\n\n*With love and warm wishes,*\n*${greetingData.senderName}*\n\n✨ _Wishing you joy, prosperity & happiness!_ ✨`);
+    const whatsappUrl = `https://wa.me/?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+
+    toast({
+      title: "Card Link Shared! 🎉",
+      description: "Your greeting card link has been shared via WhatsApp. The recipient will see the beautiful card image as a preview!",
+      duration: 4000
+    });
   };
 
   // Template rendering function removed - now using simple artwork selection
