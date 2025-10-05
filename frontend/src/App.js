@@ -412,7 +412,7 @@ const Home = () => {
                 </aside>
 
                 {/* Main Product Grid */}
-                <div className="flex-1">
+                <div className="flex-1 min-w-0 w-full">
                   {/* Mobile Filter Buttons */}
                   <div className="lg:hidden mb-6">
                     <div className="flex space-x-2 overflow-x-auto pb-2 -mx-2 px-2">
