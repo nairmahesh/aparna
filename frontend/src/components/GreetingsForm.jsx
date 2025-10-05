@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Heart, Share2, Copy, Download, Sparkles, Send, MessageCircle, Mail, Phone } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import html2canvas from 'html2canvas';
+import ShareCardModal from './ShareCardModal';
 import { relationshipTypes, greetingMessages } from '../data/mock';
 import { useToast } from '../hooks/use-toast';
 
