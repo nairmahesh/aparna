@@ -40,22 +40,43 @@ const ShareCardModal = ({ greetingData, isOpen, onClose }) => {
       await new Promise((resolve, reject) => {
         artworkImg.onload = resolve;
         artworkImg.onerror = () => {
-          // If direct loading fails, try fetch approach
-          fetch(artworkUrl)
-            .then(response => response.blob())
+          console.log('Direct image load failed, trying fetch approach...');
+          // If direct loading fails, try fetch approach with no-cors mode
+          fetch(artworkUrl, { 
+            mode: 'no-cors',
+            cache: 'force-cache'
+          })
+            .then(response => {
+              if (!response.ok && response.type !== 'opaque') {
+                throw new Error('Fetch failed');
+              }
+              return response.blob();
+            })
             .then(blob => {
               const reader = new FileReader();
               reader.onload = () => {
                 artworkImg.src = reader.result;
               };
+              reader.onerror = () => reject(new Error('FileReader failed'));
               reader.readAsDataURL(blob);
             })
-            .catch(reject);
+            .catch((fetchError) => {
+              console.log('Fetch approach failed:', fetchError);
+              // If all else fails, try a CORS-friendly placeholder
+              artworkImg.src = 'https://via.placeholder.com/400x300/FF6B35/FFFFFF?text=Diwali+Artwork';
+            });
         };
+        
+        // Set crossorigin to try anonymous first
+        artworkImg.crossOrigin = 'anonymous';
         artworkImg.src = artworkUrl;
         
-        // Timeout after 10 seconds
-        setTimeout(() => reject(new Error('Image loading timeout')), 10000);
+        // Timeout after 15 seconds
+        setTimeout(() => {
+          console.log('Image loading timeout, using placeholder');
+          artworkImg.src = 'https://via.placeholder.com/400x300/FF6B35/FFFFFF?text=Diwali+Artwork';
+          setTimeout(resolve, 1000); // Give placeholder time to load
+        }, 15000);
       });
 
       // Calculate artwork dimensions to fit in the top portion
