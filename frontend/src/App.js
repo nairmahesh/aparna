@@ -509,7 +509,7 @@ const Home = () => {
                             {/* Product Info */}
                             <div className="p-3 sm:p-5">
                               <div className="mb-3">
-                                <h3 className="font-bold text-gray-800 text-lg mb-1 leading-tight">{item.name}</h3>
+                                <h3 className="font-bold text-gray-800 text-base sm:text-lg mb-1 leading-tight break-words">{item.name}</h3>
                                 <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">{item.description}</p>
                               </div>
                               
