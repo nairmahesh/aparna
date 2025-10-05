@@ -316,7 +316,7 @@ const Home = () => {
             </section>
 
             {/* Menu Section */}
-            <main id="menu" className="container mx-auto px-4 py-8">
+            <main id="menu" className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
               {/* Clean Header */}
               <div className="text-center mb-8">
                 <h2 className="text-4xl font-bold text-gray-800 mb-2">Diwali Delights Menu</h2>
