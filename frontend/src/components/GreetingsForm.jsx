@@ -484,55 +484,72 @@ const GreetingsForm = () => {
             </Card>
           </div>
           
-          {/* Share Options - Always Visible */}
+          {/* Share Options - Conditional Visibility */}
           <Card className="mt-6 border-orange-200 bg-gradient-to-br from-orange-50 to-amber-50">
             <CardContent className="p-6">
               <h4 className="text-xl font-bold text-orange-700 mb-2 text-center flex items-center justify-center space-x-2">
                 <Share2 className="w-5 h-5" />
                 <span>Share Your Greeting</span>
               </h4>
-              <p className="text-gray-600 text-sm text-center mb-4">
-                Choose how you'd like to share your personalized Diwali greeting
-              </p>
               
-              <div className="grid grid-cols-2 gap-3">
-                <Button 
-                  onClick={handleShareWhatsApp}
-                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                  title="Share on WhatsApp"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  <span className="text-xs font-medium">WhatsApp</span>
-                </Button>
-                
-                <Button 
-                  onClick={handleShareSMS}
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                  title="Share via SMS"
-                >
-                  <Phone className="w-5 h-5" />
-                  <span className="text-xs font-medium">SMS</span>
-                </Button>
-                
-                <Button 
-                  onClick={handleShareEmail}
-                  className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                  title="Share via Email"
-                >
-                  <Mail className="w-5 h-5" />
-                  <span className="text-xs font-medium">Email</span>
-                </Button>
-                
-                <Button 
-                  onClick={handleCopyGreeting}
-                  variant="outline"
-                  className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-100 hover:to-amber-100 p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                  title="Copy to Clipboard"
-                >
-                  <Copy className="w-5 h-5" />
-                  <span className="text-xs font-medium">Copy</span>
-                </Button>
-              </div>
+              {isGreetingDetailsComplete() ? (
+                <>
+                  <p className="text-gray-600 text-sm text-center mb-4">
+                    Choose how you'd like to share your personalized Diwali greeting
+                  </p>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button 
+                      onClick={handleShareWhatsApp}
+                      className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                      title="Share on WhatsApp"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                      <span className="text-xs font-medium">WhatsApp</span>
+                    </Button>
+                    
+                    <Button 
+                      onClick={handleShareSMS}
+                      className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                      title="Share via SMS"
+                    >
+                      <Phone className="w-5 h-5" />
+                      <span className="text-xs font-medium">SMS</span>
+                    </Button>
+                    
+                    <Button 
+                      onClick={handleShareEmail}
+                      className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                      title="Share via Email"
+                    >
+                      <Mail className="w-5 h-5" />
+                      <span className="text-xs font-medium">Email</span>
+                    </Button>
+                    
+                    <Button 
+                      onClick={handleCopyGreeting}
+                      variant="outline"
+                      className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-100 hover:to-amber-100 p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                      title="Copy to Clipboard"
+                    >
+                      <Copy className="w-5 h-5" />
+                      <span className="text-xs font-medium">Copy</span>
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <div className="text-center py-6">
+                  <p className="text-gray-500 text-sm mb-3">
+                    📝 Fill in all the greeting details to enable sharing options
+                  </p>
+                  <div className="text-xs text-gray-400 space-y-1">
+                    <p>✓ Recipient Name {greetingData.recipientName ? '✅' : '❌'}</p>
+                    <p>✓ Your Name {greetingData.senderName ? '✅' : '❌'}</p>
+                    <p>✓ Message {(greetingData.customMessage || greetingData.selectedTemplate) ? '✅' : '❌'}</p>
+                  </div>
+                </div>
+              )}
+            </CardContent>
               
               {(!greetingData.recipientName || !greetingData.senderName) && (
                 <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
