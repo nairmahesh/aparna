@@ -85,16 +85,6 @@ const Header = ({ cartCount, onCartClick, currentView, onViewChange, websiteSett
               <Menu className="w-4 h-4 mr-2" />
               Menu
             </Button>
-            <Button 
-              variant={currentView === 'greetings' ? 'default' : 'ghost'}
-              onClick={() => onViewChange('greetings')}
-              className={currentView === 'greetings' 
-                ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white' 
-                : 'text-orange-600 hover:bg-gradient-to-br hover:from-orange-50 hover:to-amber-50'}
-            >
-              <Gift className="w-4 h-4 mr-2" />
-              Send Greetings
-            </Button>
           </div>
           
           <div className="flex items-center space-x-2">
