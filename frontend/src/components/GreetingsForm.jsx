@@ -557,15 +557,27 @@ const GreetingsForm = () => {
                     Choose how you'd like to share your personalized Diwali greeting
                   </p>
                   
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-3 mb-4">
                     <Button 
-                      onClick={handleShareWhatsApp}
+                      onClick={handleDownloadCard}
+                      className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                      title="Download Card Image"
+                    >
+                      <Download className="w-5 h-5" />
+                      <span className="text-xs font-medium">Download Card</span>
+                    </Button>
+                    
+                    <Button 
+                      onClick={handleShareWhatsAppWithCard}
                       className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                      title="Share on WhatsApp"
+                      title="Share on WhatsApp (Download card first for image)"
                     >
                       <MessageCircle className="w-5 h-5" />
                       <span className="text-xs font-medium">WhatsApp</span>
                     </Button>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3">
                     
                     <Button 
                       onClick={handleShareSMS}
