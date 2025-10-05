@@ -301,7 +301,7 @@ const Home = () => {
                     onClick={() => document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })}
                   >
                     <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-                    Explore Our Menu
+                    Menu
                   </Button>
                   <Button 
                     size="lg" 
