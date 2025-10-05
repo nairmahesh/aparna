@@ -549,7 +549,6 @@ const GreetingsForm = () => {
                   </div>
                 </div>
               )}
-            </CardContent>
               
               {(!greetingData.recipientName || !greetingData.senderName) && (
                 <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
