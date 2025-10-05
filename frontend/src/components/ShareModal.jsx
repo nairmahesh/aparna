@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { X, Share2, MessageCircle, Copy, Heart } from 'lucide-react';
 
-const ShareModal = ({ item, isOpen, onClose, onWhatsAppShare, onCopyLink }) => {
+const ShareModal = ({ item, isOpen, onClose, onWhatsAppShare }) => {
   if (!isOpen || !item) return null;
 
   return (
