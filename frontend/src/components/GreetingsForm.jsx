@@ -256,10 +256,10 @@ const GreetingsForm = () => {
   // Manual canvas drawing approach - no html2canvas needed for complex CORS handling
 
   const handleDownloadCard = async () => {
-    if (!greetingCardRef.current || !greetingData.selectedArtwork) {
+    if (!greetingCardRef.current || !greetingData.selectedArtwork || !greetingData.recipientName || !greetingData.senderName) {
       toast({
         title: "Card not ready",
-        description: "Please select an artwork and fill all details first.",
+        description: "Please select an artwork, recipient name, and sender name first.",
         variant: "destructive"
       });
       return;
