@@ -639,12 +639,20 @@ const GreetingsForm = () => {
                     </Button>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-3 gap-3">
+                    <Button 
+                      onClick={handleShareWhatsAppWithCard}
+                      className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                      title="Share on WhatsApp with card preview"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                      <span className="text-xs font-medium">WhatsApp</span>
+                    </Button>
                     
                     <Button 
                       onClick={handleShareSMS}
                       className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                      title="Share via SMS"
+                      title="Share via SMS with card link"
                     >
                       <Phone className="w-5 h-5" />
                       <span className="text-xs font-medium">SMS</span>
@@ -653,20 +661,10 @@ const GreetingsForm = () => {
                     <Button 
                       onClick={handleShareEmail}
                       className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                      title="Share via Email"
+                      title="Share via Email with card link"
                     >
                       <Mail className="w-5 h-5" />
                       <span className="text-xs font-medium">Email</span>
-                    </Button>
-                    
-                    <Button 
-                      onClick={handleCopyGreeting}
-                      variant="outline"
-                      className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-100 hover:to-amber-100 p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                      title="Copy to Clipboard"
-                    >
-                      <Copy className="w-5 h-5" />
-                      <span className="text-xs font-medium">Copy</span>
                     </Button>
                   </div>
                 </>
