@@ -399,7 +399,7 @@ const GreetingsForm = () => {
             <Card className="border-2 border-orange-300 overflow-hidden shadow-lg w-full">
               <CardContent className="p-0">
                 {/* Artwork Image - Top Section */}
-                <div className="w-full aspect-[4/3] max-h-[400px]">
+                <div className="w-full h-64">
                   <img 
                     src={greetingData.selectedArtwork.url} 
                     alt="Diwali Artwork" 
