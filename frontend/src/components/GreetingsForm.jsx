@@ -629,12 +629,13 @@ const GreetingsForm = () => {
                     </Button>
                     
                     <Button 
-                      onClick={handleShareWhatsAppWithCard}
-                      className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
-                      title="Share on WhatsApp (Download card first for image)"
+                      onClick={handleCopyGreeting}
+                      variant="outline"
+                      className="border-orange-300 text-orange-600 hover:bg-gradient-to-br hover:from-orange-100 hover:to-amber-100 p-3 rounded-xl flex flex-col items-center space-y-2 h-auto"
+                      title="Copy shareable link with card preview"
                     >
-                      <MessageCircle className="w-5 h-5" />
-                      <span className="text-xs font-medium">WhatsApp</span>
+                      <Copy className="w-5 h-5" />
+                      <span className="text-xs font-medium">Copy Link</span>
                     </Button>
                   </div>
                   
