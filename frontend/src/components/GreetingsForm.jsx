@@ -126,6 +126,7 @@ const GreetingsForm = () => {
   const [showPreview, setShowPreview] = useState(false);
   const { toast } = useToast();
   const greetingCardRef = useRef(null);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const handleRelationshipChange = (relationship) => {
     setGreetingData(prev => ({
