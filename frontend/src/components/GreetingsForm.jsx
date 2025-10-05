@@ -545,7 +545,7 @@ const GreetingsForm = () => {
                   <div className="text-xs text-gray-400 space-y-1">
                     <p>✓ Recipient Name {greetingData.recipientName ? '✅' : '❌'}</p>
                     <p>✓ Your Name {greetingData.senderName ? '✅' : '❌'}</p>
-                    <p>✓ Message {(greetingData.customMessage || greetingData.selectedTemplate) ? '✅' : '❌'}</p>
+                    <p>✓ Message {(greetingData.customMessage || greetingData.selectedMessage) ? '✅' : '❌'}</p>
                   </div>
                 </div>
               )}
