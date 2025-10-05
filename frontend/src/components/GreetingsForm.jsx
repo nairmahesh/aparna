@@ -221,11 +221,11 @@ const GreetingsForm = () => {
                 onClick={() => setGreetingData(prev => ({ ...prev, selectedArtwork: artwork }))}
               >
                 <CardContent className="p-2">
-                  <div className="relative h-24 md:h-32 rounded-lg overflow-hidden group">
+                  <div className="relative aspect-square rounded-lg overflow-hidden group bg-gray-100">
                     <img 
                       src={artwork.url} 
                       alt={artwork.name} 
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
                     />
                     <div className={`absolute inset-0 ${artwork.overlayColor} flex items-center justify-center`}>
                       {greetingData.selectedArtwork.id === artwork.id && (
