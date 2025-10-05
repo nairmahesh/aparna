@@ -15,6 +15,11 @@ const ShareCardModal = ({ greetingData, isOpen, onClose }) => {
       alert('Please select an artwork first.');
       return;
     }
+    
+    if (!greetingData.recipientName || !greetingData.senderName) {
+      alert('Please fill in both recipient name and sender name.');
+      return;
+    }
 
     try {
       // Create a new canvas to manually draw the greeting card
