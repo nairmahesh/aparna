@@ -330,13 +330,22 @@ const GreetingsForm = () => {
     const baseUrl = window.location.origin;
     const greetingId = Date.now(); // Simple ID generation
     const params = new URLSearchParams({
-      to: greetingData.recipientName,
-      from: greetingData.senderName,
-      message: getFinalMessage(),
-      artwork: greetingData.selectedArtwork.url
+      to: encodeURIComponent(greetingData.recipientName),
+      from: encodeURIComponent(greetingData.senderName),
+      message: encodeURIComponent(getFinalMessage()),
+      artwork: encodeURIComponent(greetingData.selectedArtwork.url)
     });
     
     return `${baseUrl}/greeting/${greetingId}?${params.toString()}`;
+  };
+
+  const openShareableCard = () => {
+    const shareableLink = generateShareableLink();
+    if (shareableLink) {
+      window.open(shareableLink, '_blank');
+      return shareableLink;
+    }
+    return null;
   };
 
   const handleShareWhatsAppWithCard = () => {
