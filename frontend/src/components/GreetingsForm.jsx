@@ -124,6 +124,7 @@ const GreetingsForm = () => {
   const [showMoreArtworks, setShowMoreArtworks] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const { toast } = useToast();
+  const greetingCardRef = useRef(null);
 
   const handleRelationshipChange = (relationship) => {
     setGreetingData(prev => ({
