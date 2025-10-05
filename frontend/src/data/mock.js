@@ -627,7 +627,7 @@ export const menuCategories = [
             date: '2025-10-03'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=16'
+        image: 'https://images.pexels.com/photos/8887052/pexels-photo-8887052.jpeg'
       }
     ]
   },
@@ -828,7 +828,7 @@ export const menuCategories = [
             date: '2025-10-04'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=16'
+        image: 'https://images.pexels.com/photos/8887052/pexels-photo-8887052.jpeg'
       },
       {
         id: 'rava-plain',
@@ -861,7 +861,7 @@ export const menuCategories = [
             date: '2025-10-03'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=16'
+        image: 'https://images.pexels.com/photos/8887052/pexels-photo-8887052.jpeg'
       }
     ]
   }
