@@ -6,14 +6,21 @@ import { Heart } from 'lucide-react';
 const ShareableGreeting = () => {
   const { id } = useParams();
   const [greetingData, setGreetingData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Try to load greeting data from URL parameters or localStorage
-    const urlParams = new URLSearchParams(window.location.search);
-    const recipientName = urlParams.get('to');
-    const senderName = urlParams.get('from');
-    const message = urlParams.get('message');
-    const artworkUrl = urlParams.get('artwork');
+    try {
+      console.log('ShareableGreeting mounted with ID:', id);
+      console.log('Current URL:', window.location.href);
+      
+      // Try to load greeting data from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const recipientName = urlParams.get('to');
+      const senderName = urlParams.get('from');
+      const message = urlParams.get('message');
+      const artworkUrl = urlParams.get('artwork');
+
+      console.log('URL Parameters:', { recipientName, senderName, message, artworkUrl });
 
     if (recipientName && senderName && message && artworkUrl) {
       const greeting = {
