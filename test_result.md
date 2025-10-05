@@ -207,9 +207,9 @@ frontend:
 
   - task: "Greeting Card Download Functionality"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/components/GreetingsForm.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
@@ -219,6 +219,9 @@ frontend:
         - working: true
           agent: "testing"
           comment: "✅ COMPREHENSIVE GREETING CARD DOWNLOAD FUNCTIONALITY TESTING COMPLETED SUCCESSFULLY! All critical areas tested and working perfectly: 1) Card Download Functionality: Download Card button generates high-quality PNG images (diwali-greeting-[name].png) with artwork at top and personalized text below (TO, Message, FROM). 2) Updated WhatsApp Share Flow: WhatsApp button shows helpful tip 'Download Card First!' with instruction toast, then opens WhatsApp with text message including note about downloaded image. 3) User Experience Improvements: Blue tip section visible with text 'Download the card first, then share the image via WhatsApp for the complete visual greeting!', download progress toasts working correctly. 4) Image Quality Verification: High-resolution images generated using html2canvas with scale: 3, all text readable, artwork appears correctly without distortion. 5) Complete Share Flow: Download then share workflow working perfectly. 6) Mobile Responsiveness: All functionality works perfectly on mobile (390x844), buttons accessible, layout responsive. 7) All Share Options: SMS, Email, Copy buttons all functional with proper toast notifications. Ready for production use."
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUES FOUND WITH GREETING CARD DOWNLOAD FUNCTIONALITY: 1) CORS Policy Blocking: Multiple artwork images blocked by CORS policy (customer-assets.emergentagent.com), preventing proper image capture in downloads. Console shows 'Access-Control-Allow-Origin' header missing. 2) Download Button Accessibility: Download button not visible/accessible in share section - found 0 download buttons during testing. Form completion doesn't enable download functionality as expected. 3) Image Loading Failures: Default artwork (Traditional Diwali Design) fails to load due to CORS restrictions, affecting download quality. 4) Form State Issues: Relationship selection dropdown not functioning properly, preventing complete form submission. 5) Share Section Visibility: Share options not properly enabled even after filling required fields (recipient name, sender name, custom message). The enhanced error handling and crossOrigin='anonymous' implementation is present in code but CORS issues persist with external image sources. Download functionality is fundamentally broken due to these image loading and UI accessibility issues."
 
   - task: "Comprehensive Product Reviews and Ratings System"
     implemented: true
