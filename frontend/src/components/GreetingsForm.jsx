@@ -349,9 +349,7 @@ const GreetingsForm = () => {
   };
 
   const handleShareWhatsAppWithCard = () => {
-    const shareableLink = generateShareableLink();
-    
-    if (!shareableLink) {
+    if (!isGreetingDetailsComplete()) {
       toast({
         title: "Complete the greeting first!",
         description: "Please fill in all required fields before sharing.",
@@ -360,15 +358,30 @@ const GreetingsForm = () => {
       return;
     }
 
-    const message = encodeURIComponent(`🪔 *Happy Diwali!* 🪔\n\n*Dear ${greetingData.recipientName},*\n\nI've created a special Diwali greeting card for you! 💌\n\nView your personalized card here: ${shareableLink}\n\n*With love and warm wishes,*\n*${greetingData.senderName}*\n\n✨ _Wishing you joy, prosperity & happiness!_ ✨`);
-    const whatsappUrl = `https://wa.me/?text=${message}`;
-    window.open(whatsappUrl, '_blank');
+    // First open the shareable card to test if it works
+    const shareableLink = openShareableCard();
+    
+    if (!shareableLink) {
+      toast({
+        title: "Error creating shareable link",
+        description: "Unable to create greeting link. Please try again.",
+        variant: "destructive"
+      });
+      return;
+    }
 
-    toast({
-      title: "Card Link Shared! 🎉",
-      description: "Your greeting card link has been shared via WhatsApp. The recipient will see the beautiful card image as a preview!",
-      duration: 4000
-    });
+    // Then share via WhatsApp
+    setTimeout(() => {
+      const message = encodeURIComponent(`🪔 *Happy Diwali!* 🪔\n\n*Dear ${greetingData.recipientName},*\n\nI've created a special Diwali greeting card for you! 💌\n\nView your personalized card here: ${shareableLink}\n\n*With love and warm wishes,*\n*${greetingData.senderName}*\n\n✨ _Wishing you joy, prosperity & happiness!_ ✨`);
+      const whatsappUrl = `https://wa.me/?text=${message}`;
+      window.open(whatsappUrl, '_blank');
+
+      toast({
+        title: "Card Link Shared! 🎉",
+        description: "Your greeting card link has been shared via WhatsApp. Check the preview in the new tab!",
+        duration: 4000
+      });
+    }, 1000);
   };
 
   // Template rendering function removed - now using simple artwork selection
