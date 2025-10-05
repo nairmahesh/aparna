@@ -553,9 +553,14 @@ const GreetingsForm = () => {
               
               {isGreetingDetailsComplete() ? (
                 <>
-                  <p className="text-gray-600 text-sm text-center mb-4">
+                  <p className="text-gray-600 text-sm text-center mb-2">
                     Choose how you'd like to share your personalized Diwali greeting
                   </p>
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                    <p className="text-blue-700 text-xs text-center">
+                      💡 <strong>Tip:</strong> Download the card first, then share the image via WhatsApp for the complete visual greeting!
+                    </p>
+                  </div>
                   
                   <div className="grid grid-cols-2 gap-3 mb-4">
                     <Button 
