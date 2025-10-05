@@ -72,12 +72,28 @@ const ShareableGreeting = () => {
     updateMetaTag('twitter:image', greeting.artworkUrl);
   };
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Error Loading Greeting</h1>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <p className="text-sm text-gray-500">Current URL: {window.location.href}</p>
+          <a href="/" className="text-orange-600 hover:text-orange-700 underline">
+            Go back to create a new greeting →
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   if (!greetingData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Loading Diwali Greeting...</h1>
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto"></div>
+          <p className="text-sm text-gray-500 mt-4">URL: {window.location.href}</p>
         </div>
       </div>
     );
