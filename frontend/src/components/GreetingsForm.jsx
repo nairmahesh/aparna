@@ -258,44 +258,69 @@ const GreetingsForm = () => {
   };
 
   const handleDownloadCard = async () => {
-    if (greetingCardRef.current) {
-      try {
-        toast({
-          title: "Generating Card...",
-          description: "Please wait while we create your greeting card image.",
-        });
+    if (!greetingCardRef.current) {
+      toast({
+        title: "Card not ready",
+        description: "Please wait for the greeting card to load completely.",
+        variant: "destructive"
+      });
+      return;
+    }
 
-        const canvas = await html2canvas(greetingCardRef.current, {
-          useCORS: true,
-          scale: 3, // High quality for crisp image
-          backgroundColor: '#ffffff',
-          allowTaint: false,
-          foreignObjectRendering: true,
-          logging: false
-        });
+    try {
+      toast({
+        title: "Generating Card...",
+        description: "Please wait while we create your greeting card image.",
+      });
 
-        const image = canvas.toDataURL('image/png', 1.0);
-        
-        // Create download link
-        const link = document.createElement('a');
-        link.href = image;
-        link.download = `diwali-greeting-${greetingData.recipientName || 'card'}.png`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      // Wait a moment to ensure images are fully loaded
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-        toast({
-          title: "Card Downloaded! 🎉",
-          description: "Your greeting card has been saved. You can now share it via WhatsApp or any platform!",
-        });
-      } catch (error) {
-        console.error('Error generating card:', error);
-        toast({
-          title: "Download Failed",
-          description: "Sorry, we couldn't generate your card. Please try again.",
-          variant: "destructive"
-        });
+      const canvas = await html2canvas(greetingCardRef.current, {
+        useCORS: true,
+        allowTaint: true, // Allow cross-origin images
+        scale: 2, // Reduced scale for better compatibility
+        backgroundColor: '#ffffff',
+        foreignObjectRendering: false, // Disable for better compatibility
+        logging: true, // Enable logging to debug issues
+        width: greetingCardRef.current.offsetWidth,
+        height: greetingCardRef.current.offsetHeight,
+        scrollX: 0,
+        scrollY: 0,
+        imageTimeout: 15000 // Wait longer for images to load
+      });
+
+      // Check if canvas is not empty
+      if (canvas.width === 0 || canvas.height === 0) {
+        throw new Error('Canvas is empty');
       }
+
+      const image = canvas.toDataURL('image/png', 1.0);
+      
+      // Check if image data is valid
+      if (image === 'data:,') {
+        throw new Error('Generated image is empty');
+      }
+        
+      // Create download link
+      const link = document.createElement('a');
+      link.href = image;
+      link.download = `diwali-greeting-${greetingData.recipientName?.replace(/[^a-zA-Z0-9]/g, '') || 'card'}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      toast({
+        title: "Card Downloaded! 🎉",
+        description: "Your greeting card has been saved. You can now share it via WhatsApp or any platform!",
+      });
+    } catch (error) {
+      console.error('Error generating card:', error);
+      toast({
+        title: "Download Failed",
+        description: `Sorry, we couldn't generate your card: ${error.message}. Please try again.`,
+        variant: "destructive"
+      });
     }
   };
 
