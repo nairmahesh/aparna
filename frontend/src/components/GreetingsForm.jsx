@@ -408,7 +408,7 @@ const GreetingsForm = () => {
                 </div>
                 
                 {/* Text Section - Bottom Section */}
-                <div className="bg-white p-6 space-y-4">
+                <div className="bg-white p-6 space-y-4 min-h-[200px]">
                   {/* To Section */}
                   <div>
                     <p className="text-orange-600 text-sm font-medium mb-1">To,</p>
