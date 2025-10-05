@@ -321,27 +321,17 @@ const GreetingsForm = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       const canvas = await html2canvas(greetingCardRef.current, {
-        useCORS: true,
-        allowTaint: true,
-        scale: 3, // Higher scale for better quality
+        useCORS: false, // Not needed since using data URLs
+        allowTaint: false, // Not needed since using data URLs
+        scale: 2, // Good balance of quality and performance
         backgroundColor: '#ffffff',
         foreignObjectRendering: false,
-        logging: false, // Disable logging for cleaner output
+        logging: false,
         width: greetingCardRef.current.offsetWidth,
         height: greetingCardRef.current.offsetHeight,
         scrollX: 0,
         scrollY: 0,
-        imageTimeout: 30000, // Extended timeout for images
-        onclone: (clonedDoc) => {
-          // Ensure all images in the cloned document are loaded
-          const clonedImages = clonedDoc.querySelectorAll('img');
-          clonedImages.forEach(img => {
-            img.crossOrigin = 'anonymous';
-            // Force image to display
-            img.style.display = 'block';
-            img.style.opacity = '1';
-          });
-        }
+        imageTimeout: 0 // Not needed since images are data URLs
       });
 
       // Verify canvas has content
