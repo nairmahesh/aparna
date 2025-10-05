@@ -415,7 +415,7 @@ const Home = () => {
                 <div className="flex-1">
                   {/* Mobile Filter Buttons */}
                   <div className="lg:hidden mb-6">
-                    <div className="flex space-x-2 overflow-x-auto pb-2">
+                    <div className="flex space-x-2 overflow-x-auto pb-2 -mx-2 px-2">
                       <button
                         onClick={() => setActiveFilter('all')}
                         className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium ${
