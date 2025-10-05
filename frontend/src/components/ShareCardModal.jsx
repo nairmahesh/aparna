@@ -3,11 +3,171 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { X, Heart, Download } from 'lucide-react';
 
-const ShareCardModal = ({ greetingData, isOpen, onClose, onDownload }) => {
+const ShareCardModal = ({ greetingData, isOpen, onClose }) => {
   if (!isOpen || !greetingData) return null;
 
   const getFinalMessage = () => {
     return greetingData.customMessage || greetingData.selectedMessage || greetingData.message || 'May this Diwali bring endless joy, prosperity, and happiness to your life. Wishing you a festival filled with light, love, and sweet moments!';
+  };
+
+  const handleDownloadFromModal = async () => {
+    if (!greetingData.selectedArtwork && !greetingData.artworkUrl) {
+      alert('Please select an artwork first.');
+      return;
+    }
+
+    try {
+      // Create a new canvas to manually draw the greeting card
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas size (standard greeting card dimensions)
+      const canvasWidth = 800;
+      const canvasHeight = 1000;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+
+      // Fill background with white
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      // Load and draw the artwork image
+      const artworkImg = new Image();
+      artworkImg.crossOrigin = 'anonymous';
+      
+      const artworkUrl = greetingData.selectedArtwork?.url || greetingData.artworkUrl;
+      
+      await new Promise((resolve, reject) => {
+        artworkImg.onload = resolve;
+        artworkImg.onerror = () => {
+          // If direct loading fails, try fetch approach
+          fetch(artworkUrl)
+            .then(response => response.blob())
+            .then(blob => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                artworkImg.src = reader.result;
+              };
+              reader.readAsDataURL(blob);
+            })
+            .catch(reject);
+        };
+        artworkImg.src = artworkUrl;
+        
+        // Timeout after 10 seconds
+        setTimeout(() => reject(new Error('Image loading timeout')), 10000);
+      });
+
+      // Calculate artwork dimensions to fit in the top portion
+      const artworkHeight = 400; // Reserve 400px for artwork
+      const artworkWidth = canvasWidth - 40; // 20px padding on each side
+      
+      // Calculate scaling to fit artwork
+      const scaleX = artworkWidth / artworkImg.width;
+      const scaleY = artworkHeight / artworkImg.height;
+      const scale = Math.min(scaleX, scaleY);
+      
+      const scaledWidth = artworkImg.width * scale;
+      const scaledHeight = artworkImg.height * scale;
+      
+      // Center the artwork
+      const artworkX = (canvasWidth - scaledWidth) / 2;
+      const artworkY = 20;
+      
+      // Draw the artwork
+      ctx.drawImage(artworkImg, artworkX, artworkY, scaledWidth, scaledHeight);
+
+      // Add text content below the artwork
+      const textStartY = artworkY + scaledHeight + 40;
+      
+      // Set up text styles
+      ctx.fillStyle = '#1f2937'; // Dark gray text
+      ctx.textAlign = 'left';
+      
+      // Draw "To:" section
+      let currentY = textStartY;
+      ctx.font = 'bold 24px Arial';
+      ctx.fillStyle = '#ea580c'; // Orange color
+      ctx.fillText('To:', 40, currentY);
+      
+      ctx.font = '24px Arial';
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(greetingData.recipientName || '[Recipient Name]', 80, currentY);
+      
+      // Draw message section with border
+      currentY += 50;
+      const messageX = 40;
+      const messageWidth = canvasWidth - 80;
+      
+      // Draw left border (orange line)
+      ctx.fillStyle = '#fb923c';
+      ctx.fillRect(messageX, currentY - 20, 4, 120);
+      
+      // Draw message text (word wrapped)
+      const message = getFinalMessage();
+      ctx.font = '20px Arial';
+      ctx.fillStyle = '#1f2937';
+      const words = message.split(' ');
+      const maxWidth = messageWidth - 30;
+      let line = '';
+      let lineY = currentY;
+      
+      for (let i = 0; i < words.length; i++) {
+        const testLine = line + words[i] + ' ';
+        const metrics = ctx.measureText(testLine);
+        
+        if (metrics.width > maxWidth && i > 0) {
+          ctx.fillText(line, messageX + 20, lineY);
+          line = words[i] + ' ';
+          lineY += 25;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, messageX + 20, lineY);
+      
+      // Draw "From:" section
+      currentY = lineY + 60;
+      ctx.font = 'bold 24px Arial';
+      ctx.fillStyle = '#ea580c';
+      ctx.textAlign = 'right';
+      ctx.fillText('From:', canvasWidth - 120, currentY);
+      
+      ctx.font = '24px Arial';
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(greetingData.senderName || '[Your Name]', canvasWidth - 40, currentY);
+      
+      // Draw footer decoration
+      currentY += 60;
+      ctx.textAlign = 'center';
+      ctx.font = '18px Arial';
+      ctx.fillStyle = '#ea580c';
+      ctx.fillText('✨ Wishing you joy & prosperity! ✨', canvasWidth / 2, currentY);
+      
+      currentY += 30;
+      ctx.font = '24px Arial';
+      ctx.fillText('🪔 ❤️ 🪔', canvasWidth / 2, currentY);
+
+      // Convert canvas to image and download
+      const image = canvas.toDataURL('image/png', 1.0);
+      
+      if (image === 'data:,' || image.length < 1000) {
+        throw new Error('Generated image is invalid');
+      }
+        
+      // Create download link
+      const link = document.createElement('a');
+      link.href = image;
+      link.download = `diwali-greeting-${greetingData.recipientName?.replace(/[^a-zA-Z0-9]/g, '') || 'card'}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      alert('Card Downloaded Successfully! 🎉');
+    } catch (error) {
+      console.error('Error generating card:', error);
+      alert(`Download Failed: ${error.message}. Please try again.`);
+    }
   };
 
   const handleCopyLink = async () => {
