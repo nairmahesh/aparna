@@ -224,6 +224,63 @@ const GreetingsForm = () => {
     window.location.href = emailUrl;
   };
 
+  const handleDownloadCard = async () => {
+    if (greetingCardRef.current) {
+      try {
+        toast({
+          title: "Generating Card...",
+          description: "Please wait while we create your greeting card image.",
+        });
+
+        const canvas = await html2canvas(greetingCardRef.current, {
+          useCORS: true,
+          scale: 3, // High quality for crisp image
+          backgroundColor: '#ffffff',
+          allowTaint: false,
+          foreignObjectRendering: true,
+          logging: false
+        });
+
+        const image = canvas.toDataURL('image/png', 1.0);
+        
+        // Create download link
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = `diwali-greeting-${greetingData.recipientName || 'card'}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        toast({
+          title: "Card Downloaded! 🎉",
+          description: "Your greeting card has been saved. You can now share it via WhatsApp or any platform!",
+        });
+      } catch (error) {
+        console.error('Error generating card:', error);
+        toast({
+          title: "Download Failed",
+          description: "Sorry, we couldn't generate your card. Please try again.",
+          variant: "destructive"
+        });
+      }
+    }
+  };
+
+  const handleShareWhatsAppWithCard = () => {
+    toast({
+      title: "Download Card First! 📱",
+      description: "Click 'Download Card' button, then share the downloaded image via WhatsApp for the complete visual greeting!",
+      duration: 5000
+    });
+    
+    // Still provide text option
+    setTimeout(() => {
+      const message = encodeURIComponent(`🪔 *Happy Diwali!* 🪔\n\n*Dear ${greetingData.recipientName || '[Recipient Name]'},*\n\n${getFinalMessage()}\n\n*With love and warm wishes,*\n*${greetingData.senderName || '[Your Name]'}*\n\n✨ _Wishing you joy, prosperity & happiness!_ ✨\n\n💌 _I've created a beautiful greeting card for you! Please check the downloaded image._`);
+      const whatsappUrl = `https://wa.me/?text=${message}`;
+      window.open(whatsappUrl, '_blank');
+    }, 1000);
+  };
+
   // Template rendering function removed - now using simple artwork selection
 
   return (
