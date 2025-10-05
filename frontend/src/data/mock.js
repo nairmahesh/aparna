@@ -205,7 +205,7 @@ export const menuCategories = [
             date: '2025-10-04'
           }
         ],
-        image: 'https://picsum.photos/400/300?random=12'
+        image: 'https://images.unsplash.com/photo-1589786742305-f24d19eedbe5'
       },
       {
         id: 'makhana-chivda-dry-fruits',
