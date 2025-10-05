@@ -631,6 +631,9 @@ const GreetingsForm = () => {
                     src={greetingData.selectedArtwork.url} 
                     alt="Diwali Artwork" 
                     className="max-w-full max-h-80 object-contain"
+                    crossOrigin="anonymous"
+                    onLoad={() => console.log('Artwork loaded successfully')}
+                    onError={(e) => console.error('Artwork failed to load:', e)}
                   />
                 </div>
                 
