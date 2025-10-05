@@ -169,9 +169,9 @@ export const menuCategories = [
           }
         ],
         images: [
-          'https://picsum.photos/400/300?random=9',
-          'https://picsum.photos/400/300?random=10',
-          'https://picsum.photos/400/300?random=11'
+          'https://images.unsplash.com/photo-1683533678033-f5d60f0a3437',
+          'https://images.pexels.com/photos/5835026/pexels-photo-5835026.jpeg',
+          'https://images.unsplash.com/photo-1613764816537-a43baeb559c1'
         ]
       },
       {
