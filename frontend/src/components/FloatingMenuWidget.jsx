@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
-import { Menu, ChevronUp } from 'lucide-react';
+import { Menu } from 'lucide-react';
+import { menuCategories } from '../data/mock';
 
-const FloatingMenuWidget = ({ onMenuClick }) => {
+const FloatingMenuWidget = ({ onCategoryClick }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // Get main categories for the widget
+  const mainCategories = menuCategories.slice(0, 5); // First 5 categories
 
   useEffect(() => {
     const handleScroll = () => {
