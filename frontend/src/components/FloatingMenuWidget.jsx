@@ -98,22 +98,29 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
 
       {/* Desktop View - Category Buttons */}
       <div className="hidden md:block">
-        <div className="bg-white rounded-2xl shadow-xl p-4 border border-orange-200 min-w-[320px]">
-          <h3 className="text-lg font-bold text-orange-600 mb-4 text-center flex items-center justify-center">
+        <div className="bg-white rounded-2xl shadow-xl p-5 border border-orange-200 min-w-[380px]">
+          <h3 className="text-xl font-bold text-orange-600 mb-5 text-center flex items-center justify-center">
             <Menu className="w-5 h-5 mr-2" />
             Menu Categories
           </h3>
-          <div className="grid grid-cols-1 gap-2">
-            {mainCategories.map((category) => (
-              <Button
-                key={category.id}
-                onClick={() => handleCategoryClick(category.id)}
-                className="justify-start bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 text-orange-700 border border-orange-200 rounded-lg font-medium transition-all hover:shadow-md"
-                variant="outline"
-              >
-                {category.name}
-              </Button>
-            ))}
+          <div className="grid grid-cols-1 gap-3">
+            {mainCategories.map((category) => {
+              const IconComponent = category.icon;
+              return (
+                <Button
+                  key={category.id}
+                  onClick={() => handleCategoryClick(category.id)}
+                  className="justify-start bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 text-orange-700 border border-orange-200 rounded-lg font-medium py-4 px-4 transition-all hover:shadow-lg hover:scale-[1.02]"
+                  variant="outline"
+                >
+                  <IconComponent className="w-5 h-5 mr-4 text-orange-600" />
+                  <div className="text-left flex-1">
+                    <div className="font-bold text-orange-800 text-base">{category.displayName}</div>
+                    <div className="text-sm text-orange-600 mt-1">{category.description.slice(0, 45)}...</div>
+                  </div>
+                </Button>
+              );
+            })}
           </div>
         </div>
       </div>
