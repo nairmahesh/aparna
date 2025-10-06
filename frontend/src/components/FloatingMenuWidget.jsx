@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
-import { Menu, Star, Cookie, ShoppingBag, Utensils, Heart } from 'lucide-react';
+import { Menu, Star, Cookie, ShoppingBag, Utensils, Heart, X } from 'lucide-react';
 import { menuCategories } from '../data/mock';
 
 const FloatingMenuWidget = ({ onCategoryClick }) => {
