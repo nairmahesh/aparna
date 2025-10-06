@@ -695,6 +695,9 @@ const Home = () => {
         onCopyLink={handleCopyLink}
       />
       
+      {/* Floating Menu Widget - Appears on scroll */}
+      <FloatingMenuWidget onMenuClick={() => setCurrentView('menu')} />
+      
       <Toaster />
     </div>
   );
