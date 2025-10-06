@@ -710,9 +710,6 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPanelPage />} />
         </Routes>
-
-        {/* Floating Menu Widget - Appears on scroll */}
-        <FloatingMenuWidget onMenuClick={() => setCurrentView('menu')} />
       </BrowserRouter>
     </div>
   );
