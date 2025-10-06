@@ -134,7 +134,17 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
               );
             })}
           </div>
-        </div>
+          </div>
+        )}
+        
+        {/* Desktop Toggle Button */}
+        <Button
+          onClick={toggleExpanded}
+          className="w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white"
+          title="View Categories"
+        >
+          <Menu className="w-6 h-6" />
+        </Button>
       </div>
     </div>
   );
