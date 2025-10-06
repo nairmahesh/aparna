@@ -83,7 +83,7 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
               ? 'bg-gray-600 hover:bg-gray-700 text-white' 
               : 'bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white'
           }`}
-          title={isExpanded ? "Close Menu" : "Quick Actions"}
+          title={isExpanded ? "Close Categories" : "View Categories"}
         >
           {isExpanded ? (
             <div className="w-6 h-6 relative">
