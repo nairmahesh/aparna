@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
-import { Menu } from 'lucide-react';
+import { Menu, Star, Cookie, ShoppingBag, Utensils, Heart } from 'lucide-react';
 import { menuCategories } from '../data/mock';
 
 const FloatingMenuWidget = ({ onCategoryClick }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Get main categories for the widget
-  const mainCategories = menuCategories.slice(0, 5); // First 5 categories
+  // Get main categories with icons for better UX
+  const mainCategories = menuCategories.slice(0, 5).map((category, index) => {
+    const icons = [Star, Cookie, ShoppingBag, Utensils, Heart];
+    return {
+      ...category,
+      icon: icons[index % icons.length],
+      displayName: category.name.replace(' Collection', '').replace(' Varieties', '').replace(' Delights', '')
+    };
+  });
 
   useEffect(() => {
     const handleScroll = () => {
