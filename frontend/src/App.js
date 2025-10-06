@@ -10,6 +10,7 @@ import GreetingsForm from './components/GreetingsForm';
 import ReviewsModal from './components/ReviewsModal';
 import ShareModal from './components/ShareModal';
 import ShareableGreeting from './components/ShareableGreeting';
+import FloatingMenuWidget from './components/FloatingMenuWidget';
 import LoginPage from './components/LoginPage';
 import AdminPanelPage from './components/AdminPanelPage';
 import { menuCategories, shopInfo } from './data/mock';
