@@ -79,27 +79,26 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
         </Button>
       </div>
 
-      {/* Desktop View - Side by Side Buttons */}
-      <div className="hidden md:flex space-x-3">
-        {/* Menu Button */}
-        <Button
-          onClick={handleMenuClick}
-          className="h-14 px-6 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg hover:shadow-xl transition-all flex items-center space-x-2"
-          title="View Menu"
-        >
-          <Menu className="w-5 h-5" />
-          <span className="font-semibold">Menu</span>
-        </Button>
-        
-        {/* Scroll to Top Button */}
-        <Button
-          onClick={scrollToTop}
-          variant="outline"
-          className="w-14 h-14 rounded-full border-2 border-orange-500 text-orange-600 hover:bg-orange-50 shadow-lg hover:shadow-xl transition-all flex items-center justify-center bg-white"
-          title="Scroll to Top"
-        >
-          <ChevronUp className="w-5 h-5" />
-        </Button>
+      {/* Desktop View - Category Buttons */}
+      <div className="hidden md:block">
+        <div className="bg-white rounded-2xl shadow-xl p-4 border border-orange-200 min-w-[320px]">
+          <h3 className="text-lg font-bold text-orange-600 mb-4 text-center flex items-center justify-center">
+            <Menu className="w-5 h-5 mr-2" />
+            Menu Categories
+          </h3>
+          <div className="grid grid-cols-1 gap-2">
+            {mainCategories.map((category) => (
+              <Button
+                key={category.id}
+                onClick={() => handleCategoryClick(category.id)}
+                className="justify-start bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 text-orange-700 border border-orange-200 rounded-lg font-medium transition-all hover:shadow-md"
+                variant="outline"
+              >
+                {category.name}
+              </Button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
