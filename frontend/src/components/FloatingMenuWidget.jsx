@@ -89,21 +89,10 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
         {/* Main Toggle Button */}
         <Button
           onClick={toggleExpanded}
-          className={`w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center ${
-            isExpanded 
-              ? 'bg-gray-600 hover:bg-gray-700 text-white' 
-              : 'bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white'
-          }`}
-          title={isExpanded ? "Close Categories" : "View Categories"}
+          className="w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white"
+          title="View Categories"
         >
-          {isExpanded ? (
-            <div className="w-6 h-6 relative">
-              <div className="absolute top-1/2 left-1/2 w-4 h-0.5 bg-white rotate-45 transform -translate-x-1/2 -translate-y-1/2"></div>
-              <div className="absolute top-1/2 left-1/2 w-4 h-0.5 bg-white -rotate-45 transform -translate-x-1/2 -translate-y-1/2"></div>
-            </div>
-          ) : (
-            <Menu className="w-7 h-7" />
-          )}
+          <Menu className="w-7 h-7" />
         </Button>
       </div>
 
