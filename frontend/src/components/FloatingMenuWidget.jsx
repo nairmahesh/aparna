@@ -40,26 +40,21 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
       <div className="block md:hidden">
         <div className={`transition-all duration-300 ${isExpanded ? 'mb-3 space-y-2' : ''}`}>
           {isExpanded && (
-            <>
-              {/* Menu Button */}
-              <Button
-                onClick={handleMenuClick}
-                className="w-14 h-14 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg hover:shadow-xl transition-all flex items-center justify-center"
-                title="View Menu"
-              >
-                <Menu className="w-6 h-6" />
-              </Button>
-              
-              {/* Scroll to Top Button */}
-              <Button
-                onClick={scrollToTop}
-                variant="outline"
-                className="w-14 h-14 rounded-full border-2 border-orange-500 text-orange-600 hover:bg-orange-50 shadow-lg hover:shadow-xl transition-all flex items-center justify-center bg-white"
-                title="Scroll to Top"
-              >
-                <ChevronUp className="w-6 h-6" />
-              </Button>
-            </>
+            <div className="bg-white rounded-2xl shadow-xl p-4 border border-orange-200 min-w-[280px]">
+              <h3 className="text-lg font-bold text-orange-600 mb-3 text-center">Menu Categories</h3>
+              <div className="space-y-2">
+                {mainCategories.map((category) => (
+                  <Button
+                    key={category.id}
+                    onClick={() => handleCategoryClick(category.id)}
+                    className="w-full justify-start bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 text-orange-700 border border-orange-200 rounded-lg text-sm font-medium"
+                    variant="outline"
+                  >
+                    {category.name}
+                  </Button>
+                ))}
+              </div>
+            </div>
           )}
         </div>
         
