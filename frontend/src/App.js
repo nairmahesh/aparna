@@ -696,7 +696,17 @@ const Home = () => {
       />
       
       {/* Floating Menu Widget - Appears on scroll */}
-      <FloatingMenuWidget onMenuClick={() => setCurrentView('menu')} />
+      <FloatingMenuWidget onCategoryClick={(categoryId) => {
+        setCurrentView('menu');
+        setActiveFilter(categoryId);
+        // Scroll to menu section after state update
+        setTimeout(() => {
+          const menuElement = document.getElementById('menu');
+          if (menuElement) {
+            menuElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }} />
       
       <Toaster />
     </div>
