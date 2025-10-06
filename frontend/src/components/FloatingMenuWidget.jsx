@@ -98,7 +98,8 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
 
       {/* Desktop View - Category Buttons */}
       <div className="hidden md:block">
-        <div className="bg-white rounded-2xl shadow-xl p-5 border border-orange-200 min-w-[380px] relative">
+        {isExpanded && (
+          <div className="bg-white rounded-2xl shadow-xl p-5 border border-orange-200 min-w-[380px] relative mb-4">
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-xl font-bold text-orange-600 flex items-center">
               <Menu className="w-5 h-5 mr-2" />
