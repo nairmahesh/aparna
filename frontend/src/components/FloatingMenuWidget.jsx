@@ -21,21 +21,11 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleMenuClick = () => {
-    if (onMenuClick) {
-      onMenuClick();
-      // Scroll to menu section
-      setTimeout(() => {
-        const menuElement = document.getElementById('menu');
-        if (menuElement) {
-          menuElement.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+  const handleCategoryClick = (categoryId) => {
+    if (onCategoryClick) {
+      onCategoryClick(categoryId);
     }
+    setIsExpanded(false); // Close mobile menu after selection
   };
 
   const toggleExpanded = () => {
