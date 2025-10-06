@@ -47,19 +47,29 @@ const FloatingMenuWidget = ({ onCategoryClick }) => {
       <div className="block md:hidden">
         <div className={`transition-all duration-300 ${isExpanded ? 'mb-3 space-y-2' : ''}`}>
           {isExpanded && (
-            <div className="bg-white rounded-2xl shadow-xl p-4 border border-orange-200 min-w-[280px]">
-              <h3 className="text-lg font-bold text-orange-600 mb-3 text-center">Menu Categories</h3>
-              <div className="space-y-2">
-                {mainCategories.map((category) => (
-                  <Button
-                    key={category.id}
-                    onClick={() => handleCategoryClick(category.id)}
-                    className="w-full justify-start bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 text-orange-700 border border-orange-200 rounded-lg text-sm font-medium"
-                    variant="outline"
-                  >
-                    {category.name}
-                  </Button>
-                ))}
+            <div className="bg-white rounded-2xl shadow-xl p-4 border border-orange-200 min-w-[300px]">
+              <h3 className="text-lg font-bold text-orange-600 mb-4 text-center flex items-center justify-center">
+                <Menu className="w-5 h-5 mr-2" />
+                Menu Categories
+              </h3>
+              <div className="space-y-3">
+                {mainCategories.map((category) => {
+                  const IconComponent = category.icon;
+                  return (
+                    <Button
+                      key={category.id}
+                      onClick={() => handleCategoryClick(category.id)}
+                      className="w-full justify-start bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 text-orange-700 border border-orange-200 rounded-lg font-medium py-3 transition-all hover:shadow-md"
+                      variant="outline"
+                    >
+                      <IconComponent className="w-4 h-4 mr-3 text-orange-600" />
+                      <div className="text-left">
+                        <div className="font-semibold text-orange-800">{category.displayName}</div>
+                        <div className="text-xs text-orange-600">{category.description.slice(0, 35)}...</div>
+                      </div>
+                    </Button>
+                  );
+                })}
               </div>
             </div>
           )}
